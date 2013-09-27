@@ -1,0 +1,5 @@
+.sass-cache
+.tmp
+node_modules
+src/libs/components
+dist
