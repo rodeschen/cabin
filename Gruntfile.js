@@ -477,6 +477,7 @@ module.exports = function (grunt) {
   grunt.registerTask('capDevWatch', [
     'clean:cap',
     'copy:capDev',
+    'compass:capDist',
     'symlink:capDevLink',
     'concurrent:capWatch'
   ]);
