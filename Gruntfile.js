@@ -52,8 +52,9 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+          //'{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          '{.tmp,<%= yeoman.app %>}/libs/**/*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
@@ -85,7 +86,8 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
+        //hostname: 'localhost'
+        hostname: '0.0.0.0'
       },
       livereload: {
         options: {
@@ -151,8 +153,8 @@ module.exports = function (grunt) {
             var files = fs.readdirSync(yeomanConfig.app).map(function(files){
               return yeomanConfig.capDist + '/' + files ;
             });
-            
-            return files;//.concat(ignoreCleanFiles);
+            var files = [yeomanConfig.capDist + '/images/generated'].concat(files);
+            return files;
           })()
         }]
       }
@@ -197,7 +199,7 @@ module.exports = function (grunt) {
     },
     compass: {
       options: {
-        require: 'susy',
+        require: ['susy','animate'],
         sassDir: '<%= yeoman.app %>/styles',
         cssDir: '.tmp/styles',
         generatedImagesDir: '.tmp/images/generated',
@@ -208,7 +210,9 @@ module.exports = function (grunt) {
         httpImagesPath: '/images',
         httpGeneratedImagesPath: '/images/generated',
         httpFontsPath: '/styles/fonts',
-        relativeAssets: false
+        line_comments:false,
+       // config: '<%= yeoman.app %>/styles/config/config.rb',
+        relativeAssets: true
       },
       dist: {},
       server: {
@@ -218,7 +222,8 @@ module.exports = function (grunt) {
       },
       capDist:{
         options: {
-          cssDir: '<%= yeoman.capDist %>/styles'
+          cssDir: '<%= yeoman.capDist %>/styles',
+          generatedImagesDir: '<%= yeoman.capDist %>/images/generated',
         }
       }
     },
@@ -476,9 +481,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('capDevWatch', [
     'clean:cap',
+    'symlink:capDevLink',
     'copy:capDev',
     'compass:capDist',
-    'symlink:capDevLink',
     'concurrent:capWatch'
   ]);
 

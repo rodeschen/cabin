@@ -3,7 +3,7 @@
 <!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="zh-tw"> <![endif]-->
 <!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9>" lang="zh-tw"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<html class="no-js" lang="zh-tw" ng-app>
+<html class="no-js" lang="zh-tw">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--<![endif]-->
 <head>
@@ -29,12 +29,20 @@
 				<ul class="nav navbar-nav">
 		            <li class="active"><a href="#1">功能1</a></li>
 		            <li><a href="#2">功能2</a></li>
-		            <li><a href="#3">功能3</a></li>
+		            <li><a href="#3">功能43</a></li>
           		</ul>
 			</nav>
 		</div>
 	</header>
-	<div class="page container">
-		dddeeee
+	<div class="page container" ng-controller="cabinCtrl">
+		<label><input type="radio" ng-model="type" value="error" /> error </label>
+		<label><input type="radio" ng-model="type" value="normal" /> normal</label>
+		<label><input type="radio" ng-model="type" value="warn" /> warn</label>
+		<input ng-model="data" />
+		<button type="button" ng-click="send(data)">send</button>
+
+		<div cb-notify>
+	
+		</div>
 	</div>
 </body>

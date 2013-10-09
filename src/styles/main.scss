@@ -1,12 +1,15 @@
 @import 'compass/reset';
-@import "bootstrap-sass/lib/bootstrap";
-@import "susy";
-
+@import 'bootstrap-sass/lib/bootstrap';
+@import 'susy';
+@import 'font-awesome/scss/font-awesome';
+@import "animate";
+@import 'modules/cabin-notify';
 //$grid-columns:              12;
 //$grid-gutter-width:         30px;
 //$grid-float-breakpoint:     768px;
 
-
 .page{
 	padding-top:70px;
 }
+
+

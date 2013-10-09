@@ -1,0 +1,40 @@
+@import "animate";
+@import "compass";
+@mixin animate-flash-color($name, $attribute, $form-bg-color, $end-bg-color) {
+	@include keyframes($name) {
+		0%, 100% {
+			#{$attribute}: $form-bg-color;
+			#{$attribute}: $form-bg-color;	  	
+			#{$attribute}: $form-bg-color;
+		}
+		40% , 60% {
+			#{$attribute}: $end-bg-color;
+		}
+	}
+}
+
+//新增一個mixin，名稱為box-longShadow，並且新增兩個變數。  
+@mixin box-longShadow($lenght: 20,$rgb: #000)  {
+	//先準備一個空的變數  
+    $all: () ; 
+    //利用for 迴圈決定長度
+    @for $i from 1 through $lenght{
+    	//將陰影的效果利用迴圈的方式不斷的增加到$all    
+        $all: append($all, append(#{$i}px #{$i}px 0 ,rgba(darken($rgb,10%),1/$i)),comma);
+    }
+	//將$all的變數增加到box-shadow裡
+    @include box-shadow($all);
+}
+
+//新增一個mixin，名稱為box-longShadow，並且新增兩個變數。  
+@mixin text-longShadow($lenght: 20,$rgb: #000)  {
+	//先準備一個空的變數  
+    $all: () ; 
+    //利用for 迴圈決定長度
+    @for $i from 1 through $lenght{
+    	//將陰影的效果利用迴圈的方式不斷的增加到$all    
+        $all: append($all, append(#{$i}px #{$i}px 0 ,rgba(darken($rgb,10%),1/$i)),comma);
+    }
+	//將$all的變數增加到box-shadow裡
+    @include text-shadow($all);
+}
