@@ -92,22 +92,22 @@
 		&.msg-type-normal{
 			background-color: #FFFFFF;
 			color: #000;
-			@include text-longShadow(10,#AAA - #777);
+			//@include text-longShadow(10,#AAA - #777);
 			//@include box-longShadow(1,#AAA - #777);
 		}
 
 		&.msg-type-error{
 			background-color: #C0402A;
 			color: #FFF;
-		//	@include box-longShadow(1,#C0402A - #777);
-		@include text-longShadow(10,#C0402A - #777);
+			//	@include box-longShadow(1,#C0402A - #777);
+			//@include text-longShadow(10,#C0402A - #777);
 		}
 
 		&.msg-type-warn{
 			background-color: #FAFAAA;
 			color: #000;
-		//	@include box-longShadow(1,#FAFAAA - #777);
-		@include text-longShadow(10,#FAFAAA - #777);
+			//	@include box-longShadow(1,#FAFAAA - #777);
+			//@include text-longShadow(10,#FAFAAA - #777);
 		}
 	}
 }

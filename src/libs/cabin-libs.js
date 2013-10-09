@@ -1,13 +1,11 @@
 require.config({
-    paths : {
-      'libs': 'libs/libs',
-      'cabin-notify': 'libs/modules/cabin-notify/cabin-notify'
+    paths: {
+        'cabin-notify': 'libs/modules/directives/cabin-notify'
     },
-    shim : {
-      'cabin-notify' : ['libs']
+    shim: {
+        'cabin-notify': ['libs', 'cabin']
     }
 });
-
-define('cabin-libs', ['libs','cabin-notify'], function() {
-    console.log('cabin-libs init');
+define('cabin-libs', ['libs', 'cabin'].concat(properties.useCabinLibs), function() {
+    console.log("cabin-libs Initialized");
 });

@@ -21,5 +21,5 @@ require.config({
 });
 
 define('libs', ['jquery', 'socket-io', 'angular', 'angular-animate', 'angular-sanitize', 'angular-resource', 'angular-ui-router', 'angular-socket-io'], function() {
-    console.log('lib init');
+    console.log('libs Initialized');
 });
