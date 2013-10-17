@@ -3,11 +3,11 @@
 @include animate-flash-color(notify-flash, background, #333, #800);
 
 .msg-area{
-	position: fixed;
+	position: absolute;
 	bottom: 0px;
 	height: auto;
 	color:#FFF;
-	right:15%;
+	right:5%;
 	vertical-align: middle;
 	border-right:  #DDD 0px solid; 
 	z-index: 1040px;

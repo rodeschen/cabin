@@ -1,19 +1,13 @@
 'use strict';
-
-
 var properties = {
+    contentRoot : '/',
     useCabinLibs: [
-        'cabin-notify'
-    ]
+        'cabin-notify',
+        'cabin-txnRouterLoaderService'
+    ],
+    cabinModuleTemplatePath: 'libs/modules/templates/',
+    viewsTemplatePath: '/views/'
 };
-
-
-
-
-
-
-
-
 
 require.config({
     urlArgs: 'cache=' + parseInt(Math.random() * 1000, 10),
@@ -38,11 +32,11 @@ require(['libs', 'cabin', 'cabin-libs', 'app'], function() {
     cabin.controller('cabinCtrl', ['$scope',
         function($scope) {
             $scope.send = function(data) {
-                $scope.$emit("broadcast", {
+                $scope.$emit('broadcast', {
                     'event': 'notify',
                     'type': $scope.type,
                     'message': data + 'SSS',
-                    'time': new Date
+                    'time': new Date()
                 });
             };
 

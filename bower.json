@@ -2,14 +2,16 @@
   "name": "cabin",
   "version": "0.0.1",
   "dependencies": {
-      "angular": "~1.2.0-rc.2",
-      "angular-animate": "~1.2.0-rc.2",
-      "angular-mocks": "~1.2.0-rc.2",
-      "angular-resource": "~1.2.0-rc.2",
-      "angular-route": "~1.2.0-rc.2",
-      "angular-loader": "~1.2.0-rc.2",
-      "angular-sanitize": "~1.2.0-rc.2",
+      "angular": "~1.2.0-rc.3",
+      "angular-animate": "~1.2.0-rc.3",
+      "angular-mocks": "~1.2.0-rc.3",
+      "angular-resource": "~1.2.0-rc.3",
+      "angular-route": "~1.2.0-rc.3",
+      "angular-loader": "~1.2.0-rc.3",
+      "angular-sanitize": "~1.2.0-rc.3",
+      "angular-bootstrap" : "0.6.0",
       "angular-ui-router": "~0.2.0",
+      "angular-ui-utils" : "~0.0.4",
       "bootstrap-sass": "~3.0.0",
       "html5shiv": "~3.6.2",
       "json3": "~3.2.5",
@@ -21,7 +23,7 @@
       "font-awesome" : "~3.2.1"
   },
   "devDependencies": {
-      "angular-mocks": "1.2.0-rc.2",
-      "angular-scenario": "1.2.0-rc.2"
+      "angular-mocks": "1.2.0-rc.3",
+      "angular-scenario": "1.2.0-rc.3"
     }
 }

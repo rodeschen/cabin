@@ -1,0 +1,15 @@
+<div class="msg-area msg-{{ isOpen?'open':'close' }}" ng-click="hasNotify = false">
+    <div class="msg-title  {{hasNotify && 'msg-notify'}}" ng-click="toggleNotify()">Message&nbsp;
+        <i class="msg-close-btn {{isOpen?'icon-double-angle-down':'icon-double-angle-up'}} icon-large"></i>
+    </div>
+    <div id="msg-body" class="msg-body">
+        <div class="msg-wrapper">
+            <div class="msg msg-type-{{event.type}}" ng-repeat="event in events">
+                <i ng-class="addIcon(event.type)"></i> 
+                <span class="msg-event-title"></span>
+                <span class="msg-event-time">{{event.time}}</span>:
+                <div class="msg-event-message" ng-bind-html="event.message"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,8 +4,6 @@
 	@include keyframes($name) {
 		0%, 100% {
 			#{$attribute}: $form-bg-color;
-			#{$attribute}: $form-bg-color;	  	
-			#{$attribute}: $form-bg-color;
 		}
 		40% , 60% {
 			#{$attribute}: $end-bg-color;

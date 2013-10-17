@@ -52,9 +52,12 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
+          '<%= yeoman.app %>/libs/**/*.html',
           //'{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '{.tmp,<%= yeoman.app %>}/libs/**/*.js',
+          //'{.tmp,<%= yeoman.app %>}/libs/**/*.js',
+          '{.tmp,<%= yeoman.app %>}/libs/*.js',
+          '{.tmp,<%= yeoman.app %>}/libs/modules/**/*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
