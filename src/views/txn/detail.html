@@ -1,0 +1,10 @@
+<div ng-controller="sampleCtrl">
+    <label>
+        <input type="radio" ng-model="type" value="error" />error</label>
+    <label>
+        <input type="radio" ng-model="type" value="normal" />normal</label>
+    <label>
+        <input type="radio" ng-model="type" value="warn" />warn</label>
+    <input ng-model="data" />
+    <button type="button" ng-click="send(data)">send</button>
+</div>
