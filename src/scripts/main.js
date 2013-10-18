@@ -1,8 +1,9 @@
 'use strict';
 var properties = {
-    contentRoot : '/',
+    contentRoot: '/',
     useCabinLibs: [
-        'cabin-notify',
+        'cbNotify',
+        //'cabin-notify',
         'cabin-txnRouterLoaderService'
     ],
     cabinModuleTemplatePath: 'libs/modules/templates/',

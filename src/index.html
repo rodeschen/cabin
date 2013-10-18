@@ -1,5 +1,4 @@
-
-<!--[if IE 7 ]>		 
+<!--[if IE 7 ]>      
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-tw"> <![endif]-->
 <!--[if IE 8 ]>
@@ -12,6 +11,7 @@
 <!doctype html>
 <html class="no-js" lang="zh-tw">
 <!--<![endif]-->
+
 <head>
     <base href="{{baseUrl}}" target="_blank" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <!--[if lt IE 9]>
-		<script src="libs/components/html5shiv/dist/html5shiv.js"></script>
-		<script src="libs/components/json3/lib/json3.min.js"></script>
-		<script src="libs/components/respond/respond.min.js"></script>
+        <script src="libs/components/html5shiv/dist/html5shiv.js"></script>
+        <script src="libs/components/json3/lib/json3.min.js"></script>
+        <script src="libs/components/respond/respond.min.js"></script>
     <![endif]-->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="libs/components/requirejs/require.js"></script>
@@ -32,25 +32,12 @@
 </head>
 
 <body>
-    <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <nav>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#txn/detail">功能1</a>
-                    </li>
-                    <li><a href="#txn">功能2</a>
-                    </li>
-                    <li><a href="#txn/sample/detail">功能43</a>
-                    </li>
-                    <li><a href="#txn/sample/sample">功能43</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div cb-module="cbTopMenuBar"></div> 
+
+    <div cb-module="cbNotify" cb-event="notify" ></div>
     <div class="page container" ng-controller="cabinCtrl">
         <div ui-view>asdfas</div>
-        <div cb-notify="notify">
-    </div>
+       <!--<div cb-notify="notify">-->
+        </div>
 
 </body>

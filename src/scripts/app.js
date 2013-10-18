@@ -7,9 +7,18 @@ define('app', ['cabin'], function(cabin) {
             });
             $rootScope.baseUrl = ('http://' + $window.location.host + properties.contentRoot).replace(/\/$/, '');
         }
-    ]).config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', 'cbTxnRouterLoaderServiceProvider',
-        function($stateProvider, $urlRouterProvider, $controllerProvider, txnRouterLoaderSrv) {
+    ]).config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'cbLazyRegisterProvider', 'cbTxnRouterLoaderServiceProvider',
+        function($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, cbLazyRegisterProvider, txnRouterLoaderSrv) {
             txnRouterLoaderSrv.setControllerProvider($controllerProvider);
+
+            cbLazyRegisterProvider.setRegisters({
+                controller: $controllerProvider.register,
+                directive: $compileProvider.directive,
+                filter: $filterProvider.register,
+                factory: $provide.factory,
+                service: $provide.service
+            });
+
             $urlRouterProvider.otherwise('/index');
             $stateProvider
                 .state('index', {
