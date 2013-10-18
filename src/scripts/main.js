@@ -1,9 +1,8 @@
 'use strict';
 var properties = {
+    testMode: true,
     contentRoot: '/',
     useCabinLibs: [
-        'cbNotify',
-        //'cabin-notify',
         'cabin-txnRouterLoaderService'
     ],
     cabinModuleTemplatePath: 'libs/modules/templates/',
@@ -17,33 +16,18 @@ require.config({
         'libs': 'libs/libs',
         'cabin': 'libs/cabin',
         'cabin-libs': 'libs/cabin-libs',
-        'app': 'scripts/app'
-
-
+        'app': 'scripts/app',
+        '_http-test': '../_httpTest/define'
     },
     shim: {
         'cabin-libs': ['libs'],
-        'app': ['libs', 'cabin', 'cabin-libs']
+        'app': ['libs', 'cabin', 'cabin-libs'],
+        '_http-test': ['libs', 'cabin', 'cabin-libs', 'app']
     }
 });
 
-require(['libs', 'cabin', 'cabin-libs', 'app'], function() {
+require(['libs', 'cabin', 'cabin-libs', 'app'].concat(properties.testMode ? ['_http-test'] : []), function() {
     var cabin = arguments[arguments.length - 1];
-
-    cabin.controller('cabinCtrl', ['$scope',
-        function($scope) {
-            $scope.send = function(data) {
-                $scope.$emit('broadcast', {
-                    'event': 'notify',
-                    'type': $scope.type,
-                    'message': data + 'SSS',
-                    'time': new Date()
-                });
-            };
-
-        }
-    ]);
-
     angular.bootstrap(window.document, ['cabin']);
     console.log('app Initialized');
 });
