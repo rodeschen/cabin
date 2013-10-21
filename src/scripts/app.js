@@ -8,10 +8,8 @@ define('app', ['cabin'], function(cabin) {
             $rootScope.baseUrl = ('http://' + $window.location.host + properties.contentRoot).replace(/\/$/, '');
         }
     ]).config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'cbLazyRegisterProvider', 'cbTxnRouterLoaderServiceProvider',
-        function($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, cbLazyRegisterProvider, txnRouterLoaderSrv) {
-            txnRouterLoaderSrv.setControllerProvider($controllerProvider);
-
-            cbLazyRegisterProvider.setRegisters({
+        function($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, lazyRegisterProvider, txnRouterLoaderSrv) {
+            lazyRegisterProvider.setRegisters({
                 controller: $controllerProvider.register,
                 directive: $compileProvider.directive,
                 filter: $filterProvider.register,
@@ -25,15 +23,10 @@ define('app', ['cabin'], function(cabin) {
                     url: '/index',
                     template: 'index index'
                 })
-                .state('txn', txnRouterLoaderSrv.setRoute('/txn', {
-                    'default': 'index'
+                .state('group', txnRouterLoaderSrv.setRoute('/:group', {
+                    abstract: true
                 }))
-                .state('txn.group', txnRouterLoaderSrv.setRoute('/:group', {
-                    'base': '/txn'
-                }))
-                .state('txn.groupAndPage', txnRouterLoaderSrv.setRoute('/:group/:page', {
-                    'base': '/txn'
-                }));
+                .state('groupAndPage', txnRouterLoaderSrv.setRoute('/:group/:page'));
 
         }
     ]);

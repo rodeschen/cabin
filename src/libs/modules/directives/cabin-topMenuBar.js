@@ -8,18 +8,24 @@ define(['cabin'], function(cabin) {
                 'cbTopMenuBar': '@'
             },
             link: function(scope, iElement) {
-                //datas
                 scope.pages = [];
-                //test 
-
+                var currentPage;
                 $http.get('basehandler/queryMenu').success(function(data) {
                     scope.pages = data;
                 });
                 scope.navClass = function(page) {
-                    return page.url == $location.path() ? 'active' : ''
+                    if (currentPage === page) {
+                        return 'active';
+                    }
+                    return '';
                 };
 
                 scope.routeTo = function(page) {
+                    scope.$emit("broadcast", {
+                        'event': 'sideBar',
+                        'menus': page || {}
+                    });
+                    currentPage = page;
                     $location.path(page.url);
                 }
             }
