@@ -3,8 +3,7 @@ var properties = {
     testMode: true,
     contentRoot: '/',
     useCabinLibs: [
-        'cbSplitter',
-        'cbTxnRouterLoaderService'
+        'cabin-txnRouterLoaderService'
     ],
     cabinModuleTemplatePath: 'libs/modules/templates/',
     viewsTemplatePath: '/views/'
