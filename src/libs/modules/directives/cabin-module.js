@@ -12,9 +12,11 @@ define(['cabin'], function(cabin) {
                     var module = scope.cbModule.replace(/[A-Z]/g, function(value) {
                         return "-" + value.toLocaleLowerCase();
                     });
-                    var subElement = angular.element("<div />");
+                    var subElement = iElement;//angular.element("<div />");
                     subElement.attr(module, scope.cbEvent || scope.cbModule);
-                    iElement.append(subElement);
+                    //iElement.append(subElement);
+                    iElement.removeAttr('cb-module');
+                    iElement.removeAttr('cb-event')
                     require([scope.cbModule], function(directive) {
                         cbLazyRegister.directive(scope.cbModule, directive);
                         $compile(subElement)(scope);

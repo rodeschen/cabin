@@ -1,15 +1,37 @@
+@import 'define';
 @import 'compass/reset';
 @import 'bootstrap-sass/lib/bootstrap';
-@import 'susy';
+//@import 'susy';
 @import 'font-awesome/scss/font-awesome';
 @import "animate";
 @import 'modules/cabin-notify';
-//$grid-columns:              12;
-//$grid-gutter-width:         30px;
-//$grid-float-breakpoint:     768px;
+@import 'modules/cabin-splitter';
 
-.page{
+//hide unready
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+body{
 	padding-top:70px;
+}
+
+
+
+
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 70px 0 0 0;
+	height: 100%;
+	.main-body{
+		position: relative;
+		margin: auto;
+		padding : 0;
+		min-height: 100%;
+	}
 }
 
 

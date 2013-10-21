@@ -32,12 +32,28 @@
 </head>
 
 <body>
-    <div cb-module="cbTopMenuBar"></div> 
+    <div cb-module="cbTopMenuBar"></div>
+    <div class="main-body ng-cloak">
+        <div class="flexbox-content flexbox flex column" style="border:1px #AAA solid;">
+            <div class="flexbox flex">
+                <div cb-module="cbSideBar" cb-event="sideBar" style="width:200px">sideba</div>
+                <div cb-module="cbSplitter" direction="left"></div>
+                <div class="flexbox column flex">
+                    <div class="flex">top</div>
+                    <div cb-module="cbSplitter" direction="down"></div>
+                    <div style="height:100px">down</div>
+                </div>
+                <div cb-module="cbSplitter" direction="right"></div>
+                <div class="flexbox column" style="width:300px">
+                    <div class="flex">top</div>
+                    <div cb-module="cbSplitter" direction="down"></div>
+                    <div style="height:100px">down</div>
+                </div>
+            </div>
 
-    <div cb-module="cbNotify" cb-event="notify" ></div>
-    <div class="page container" >
-        <div ui-view>asdfas</div>
-       <!--<div cb-notify="notify">-->
+            <div cb-module="cbSplitter" direction="down" fixed="fixed"></div>
+            <div>xxxx</div>
         </div>
-
+        <div cb-module="cbNotify" cb-event="notify"></div>
+    </div>
 </body>
