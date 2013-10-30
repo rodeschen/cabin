@@ -1,11 +1,12 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$timeout', '$document', 'cabinModuleTemplatePath', function($timeout, $document, templatePath) {
+    return ['$timeout', '$window', 'cabinModuleTemplatePath', function($timeout, $window, templatePath) {
         return {
             templateUrl: templatePath + 'notify/notify.html',
             restrict: 'A',
             scope: {
-                'cbNotify': "@"
+                'cbNotify': "@",
+                'receiveEvent' : '@'
             },
             link: function(scope, iElement) {
                 scope.events = [];
@@ -34,7 +35,7 @@ define(['cabin'], function(cabin) {
                 //init
                 iElement.css('zIndex', 1040);
                 // action event
-                scope.$on(scope.cbNotify, function(ev, data) {
+                scope.$on(scope.receiveEvent || 'notify', function(ev, data) {
                     data.type = data.type || 'normal';
                     scope.events.push(data);
                     scope.hasNotify = true;
@@ -50,7 +51,7 @@ define(['cabin'], function(cabin) {
                 var wrap = body.children('.msg-wrapper');
                 var resizeAndScrollBody = function() {
                     if (scope.isOpen) {
-                        body.height($document.height() < 450 ? ($document.height() - 100) : 350);
+                        body.height($($window).innerHeight() < 450 ? ($($window).innerHeight() - 100) : 350);
                         $timeout(function() {
                             if (wrap.height() > body.height() && body.height() > 10) {
                                 wrap.css('position', 'static');

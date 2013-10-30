@@ -27,16 +27,39 @@
     <![endif]-->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="libs/components/requirejs/require.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="sample-normal/scripts/main.js"></script>
     <!-- endbuild -->
 </head>
 
-<body>
-    
-    <!-- <div ng-include="'_title.html'" ng-init="$active='index'" class="sample-title"></div> -->
-    <div class="main-body page-content ng-cloak">
-        <ui-view ng-animate="'wave'"></ui-view>
-        <div cb-module="cbNotify" cb-event="notify"></div>
+<body ng-controller="appCtrl" class="ng-cloak">
+    <header>
+        <div class="top-menu page-content">
+            <nav class="top">
+                <ul>
+                    <li ng-repeat="page in pages" ng-class="navClass(page)" ng-click="routeTo(page.url)">
+                        <a>{{page.name || page.url}}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="main-body ng-cloak page-content">
+        <aside>
+            <nav>
+                <div class="title">
+                    <span>{{current.name}}</span>
+                </div>
+                <ul class="links">
+                    <li ng-repeat="page in current.child" ng-click="routeTo(page.url)" class="scale-fade-in">
+                        <a>{{page.name}}</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </aside>
+        <section ui-view></section>
     </div>
-    <div ng-include="'_title.html'" ng-init="$active='index'"></div>
+    <div ng-include="'_title.html'" ng-init="$active='normal'"></div>
 </body>

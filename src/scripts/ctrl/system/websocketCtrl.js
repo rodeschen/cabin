@@ -1,11 +1,11 @@
 'use strict';
 define([], function(cabin) {
-    return ['$scope', 'properties', function sample2Ctrl($scope, properties) {
+    return ['$scope', function($scope) {
         $scope.send = function(data) {
             $scope.$emit("broadcast", {
                 'event': 'notify',
                 'type': $scope.type,
-                'message': data,
+                'message': data + 'SSS',
                 'time': new Date
             });
         };

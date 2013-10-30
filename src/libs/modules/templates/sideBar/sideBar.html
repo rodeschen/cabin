@@ -1,7 +1,13 @@
-<div>
-    <ul>
-        <li ng-repeat="menu in menus">
-            <a ng-click="click(menu)">{{menu.name}}</a>
-        </li>
-    </ul>
-</div>
+<aside>
+    <nav>
+        <div class="title">
+            <span>{{currentGroup.name}}</span>
+        </div>
+        <ul class="links">
+            <li ng-repeat="page in pages" class="slide-down" ng-class="navAndTrigger(page)" ng-click="routeTo(page.url)">
+                <a>{{page.name}}</a>
+            </li>
+        </ul>
+    </nav>
+
+</aside>

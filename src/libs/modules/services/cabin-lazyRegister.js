@@ -49,6 +49,8 @@ define(['cabin'], function(cabin) {
             }
         });
 
+
+
         this.$get = function() {
             return this;
         }

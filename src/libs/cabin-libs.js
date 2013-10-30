@@ -7,7 +7,7 @@ require.config({
         'cbLazyRegister': 'libs/modules/services/cabin-lazyRegister',
         'cbTopMenuBar' : 'libs/modules/directives/cabin-topMenuBar',
         'cbSideBar' : 'libs/modules/directives/cabin-sideBar',
-        //'cabin-notify': 'libs/modules/directives/cabin-notify',
+        'cbPageViewer' : 'libs/modules/directives/cabin-pageViewer',
         'cbTxnRouterLoaderService': 'libs/modules/services/cabin-txnRouterLoaderService'
     },
     'shim': {
@@ -16,6 +16,8 @@ require.config({
         'cbModule': ['libs', 'cabin'],
         'cbLazyRegister': ['libs', 'cabin'],
         'cbTopMenuBar' : ['libs', 'cabin'],
+        'cbPageViewer' : ['libs', 'cabin'],
+        'cbSideBar' : ['libs', 'cabin'],
         'cbTxnRouterLoaderService': ['libs', 'cabin']
     }
 });

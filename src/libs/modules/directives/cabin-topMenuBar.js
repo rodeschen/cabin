@@ -1,32 +1,36 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$location', 'cabinModuleTemplatePath', '$http', function($location, templatePath, $http) {
+    return ['$location', 'cabinModuleTemplatePath', '$http', '$rootScope', function($location, templatePath, $http, $rootScope) {
         return {
             templateUrl: templatePath + 'topMenuBar/topMenuBar.html',
             restrict: 'A',
             scope: {
-                'cbTopMenuBar': '@'
+                'cbTopMenuBar': '@',
+                'reciveEvent' : '@',
+                'emitEvent' : '@'
             },
             link: function(scope, iElement) {
+                scope.current;
                 scope.pages = [];
-                var currentPage;
-                $http.get('basehandler/queryMenu').success(function(data) {
-                    scope.pages = data;
+                scope.$on(scope.reciveEvent || 'topMenuBar', function(event, data) {
+                    scope.pages = data.menus;
                 });
-                scope.navClass = function(page) {
-                    if (currentPage === page) {
+
+                scope.navAndTrigger = function(page) {
+                    if (new RegExp("^" + page.url +"(/|$)").test($location.path())) {
+                        scope.current = page;
                         return 'active';
                     }
                     return '';
                 };
-
-                scope.routeTo = function(page) {
-                    scope.$emit("broadcast", {
-                        'event': 'sideBar',
+                scope.$watchCollection("current", function(page) {
+                    page && scope.$emit("broadcast", {
+                        'event': scope.emitEvent || 'slideBar',
                         'menus': page || {}
                     });
-                    currentPage = page;
-                    $location.path(page.url);
+                })
+                scope.routeTo = function(url) {
+                    $location.path(url);
                 }
             }
         };

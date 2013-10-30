@@ -32,11 +32,29 @@
 </head>
 
 <body>
-    
-    <!-- <div ng-include="'_title.html'" ng-init="$active='index'" class="sample-title"></div> -->
-    <div class="main-body page-content ng-cloak">
-        <ui-view ng-animate="'wave'"></ui-view>
-        <div cb-module="cbNotify" cb-event="notify"></div>
+    <div ng-include="'_title.html'" ng-init="$active='fs'"></div>
+    <div class="main-body ng-cloak" style="padding-top:5px">
+        <div class="flexbox-content flexbox flex column" style="border:4px #AAA solid;">
+            <div class="flexbox flex">
+                <div style="width:200px">left</div>
+                <div cb-module="cbSplitter" direction="left" gutter="50"></div>
+                <div class="flexbox column flex">
+                    <div class="flex">main</div>
+                    <div cb-module="cbSplitter" direction="down"></div>
+                    <div style="height:100px">down</div>
+                </div>
+                <div cb-module="cbSplitter" direction="right"></div>
+                <div class="flexbox column" style="width:300px">
+                    <div class="flex">top</div>
+                    <div cb-module="cbSplitter" direction="down"></div>
+                    <div style="height:300px">down</div>
+                </div>
+            </div>
+
+            <div cb-module="cbSplitter" direction="down" fixed="fixed"></div>
+            <div style="height:100px">fotter</div>
+        </div>
+
     </div>
-    <div ng-include="'_title.html'" ng-init="$active='index'"></div>
+    <div ng-include="'_title.html'" ng-init="$active='fs'"></div>
 </body>

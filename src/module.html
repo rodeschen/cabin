@@ -31,12 +31,14 @@
     <!-- endbuild -->
 </head>
 
-<body>
-    
-    <!-- <div ng-include="'_title.html'" ng-init="$active='index'" class="sample-title"></div> -->
-    <div class="main-body page-content ng-cloak">
-        <ui-view ng-animate="'wave'"></ui-view>
-        <div cb-module="cbNotify" cb-event="notify"></div>
+<body ng-controller="appCtrl">
+    <header cb-module="cbTopMenuBar" receive-event="topMenuBar" emit-event="slideBar">
+    </header>
+
+    <div class="main-body ng-cloak page-content">
+        <div cb-module="cbSideBar" receive-event="slideBar" emit-event="pageViewer"></div>
+        <div cb-module="cbPageViewer" receive-event="pageViewer"></div>
     </div>
-    <div ng-include="'_title.html'" ng-init="$active='index'"></div>
+    <div ng-include="'_title.html'" ng-init="$active='module'"></div>
+    <div cb-module="cbNotify"></div>
 </body>

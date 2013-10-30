@@ -6,7 +6,7 @@ require.config({
 });
 
 define('cabin', ['libs'], function() {
-    var otherModule = ['ngResource', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ui.utils'];
+    var otherModule = ['ngAnimate', 'ui.router', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'ui.utils'];
     if (properties.testMode) {
         otherModule = otherModule.concat(['ngMockE2E']);
     }

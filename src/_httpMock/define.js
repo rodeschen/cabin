@@ -1,8 +1,8 @@
 'use strict';
 require.config({
     'paths': {
-        'last': '../_httpTest/last',
-        'queryMenu': '../_httpTest/queryMenu'
+        'last': '../_httpMock/last',
+        'queryMenu': '../_httpMock/queryMenu'
     },
     'shim': {
         'last': ['cabin', 'app', 'queryMenu']
