@@ -8,8 +8,8 @@ var properties = {
         'cbSplitter',
         'cbTxnRouterLoaderService'
     ],
-    cabinModulePath: 'libs/modules/directives/',
-    viewsTemplatePath: 'views/'
+    cabinModulePath: 'libs/modules/',
+    viewsTemplatePath: 'sample-normal/views/'
 };
 
 require.config({
@@ -19,10 +19,9 @@ require.config({
         'libs': 'libs/libs',
         'cabin': 'libs/cabin',
         'cabin-libs': 'libs/cabin-libs',
-        'app': 'scripts/app',
-        'http-mock': '../_httpMock/define',
-        //customize
-        'appCtrl': 'scripts/ctrl/appCtrl'
+        'appCtrl': 'sample-normal/scripts/ctrl/appCtrl',
+        'app': 'sample-normal/scripts/app',
+        'http-mock': '../_httpMock/define'
     },
     shim: {
         'cabin-libs': ['libs'],

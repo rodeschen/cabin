@@ -1,1 +1,45 @@
-codeType.html
+<div class="page-context">
+    <form>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">語系</span>
+            </div>
+            <div class="col-3">
+                <input type="text" ng-model="data.locale" />
+            </div>
+        </div>
+        <div ng-show="data.locale =='111'" class="toggle">
+            <div class="row">
+                <div class="col-2">
+                    <span class="title">字典種類</span>
+                </div>
+                <div class="col-3">
+                    <input type="text" ng-model="data.codeType" />
+                </div>
+                <div class="col-3">
+                    <span class="title">值</span>
+                </div>
+                <div class="col-2">
+                    <input type="text" ng-model="data.codeValue" class="medium" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <span class="title">值描述</span>
+                </div>
+                <div class="col-3">
+                    <input type="text" ng-model="data.codeDesc" class="extra-large" />
+                </div>
+                <div class="col-3">
+                    <span class="title">排序</span>
+                </div>
+                <div class="col-2">
+                    <input type="text" ng-model="data.codeOrder" class="extra-small" />
+                </div>
+            </div>
+        </div>
+        <button ng-click="update(data)">xx</button>
+
+    </form>
+    <div>{{updated}}</div>
+</div>

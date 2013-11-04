@@ -1,6 +1,8 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$scope', function($scope) {
+    return ['controller', 'appCtrl', ['$scope',
+        function($scope) {
 
-    }];
+        }
+    ]];
 });

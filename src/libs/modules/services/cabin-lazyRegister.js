@@ -1,6 +1,6 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return cabin.provider('cbLazyRegister', function() {
+    return ['provider', 'cbLazyRegister', function() {
         var register = {
             'controller': undefined,
             'directive': undefined,
@@ -8,6 +8,8 @@ define(['cabin'], function(cabin) {
             'factory': undefined,
             'service': undefined
         };
+
+        var registered = {};
 
         angular.extend(this, {
             setRegisters: function(allRegisters) {
@@ -44,16 +46,18 @@ define(['cabin'], function(cabin) {
                 return this.register('service', name, item);
             },
             register: function(type, name, item) {
-                register[type](name, item);
+                var collection = registered[type] || (registered[type] = {}) && registered[type];
+                !collection[name] && register[type](name, item);
                 return this;
+            },
+            isRegistered: function(type, name) {
+                return !!(registered[type] && registered[type][name])
             }
         });
-
-
 
         this.$get = function() {
             return this;
         }
 
-    });
+    }];
 });

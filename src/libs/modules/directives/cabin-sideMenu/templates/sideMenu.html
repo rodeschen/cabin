@@ -4,7 +4,7 @@
             <span>{{currentGroup.name}}</span>
         </div>
         <ul class="links">
-            <li ng-repeat="page in pages" class="slide-down" ng-class="navAndTrigger(page)" ng-click="routeTo(page.url)">
+            <li ng-repeat="page in pages" class="slide-down" ng-class="navAndTrigger(page)" ng-click="routeTo(page)">
                 <a>{{page.name}}</a>
             </li>
         </ul>

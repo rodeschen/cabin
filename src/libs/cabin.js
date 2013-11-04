@@ -11,7 +11,7 @@ define('cabin', ['libs'], function() {
         otherModule = otherModule.concat(['ngMockE2E']);
     }
     var cabin = angular.module('cabin', otherModule);
-    cabin.value("cabinModuleTemplatePath", properties.cabinModuleTemplatePath || "");
+    cabin.value("cabinModulePath", properties.cabinModulePath || "");
     cabin.value("properties", properties || {});
     console.log('cabin Initialized');
     return cabin;

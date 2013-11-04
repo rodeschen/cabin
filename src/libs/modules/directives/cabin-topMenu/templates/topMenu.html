@@ -1,7 +1,7 @@
 <div class="top-menu page-content">
     <nav class="top">
         <ul>
-            <li ng-repeat="page in pages" ng-class="navAndTrigger(page)" ng-click="routeTo(page.url)">
+            <li ng-repeat="page in pages" ng-class="navAndTrigger(page)" ng-click="routeTo(page)">
                 <a>{{page.name || page.url}}</a>
             </li>
         </ul>

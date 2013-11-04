@@ -32,11 +32,11 @@
 </head>
 
 <body ng-controller="appCtrl">
-    <header cb-module="cbTopMenuBar" receive-event="topMenuBar" emit-event="slideBar">
+    <header cb-module="cbTopMenu" receive-event="topMenuBar" emit-event="sideBar">
     </header>
 
     <div class="main-body ng-cloak page-content">
-        <div cb-module="cbSideBar" receive-event="slideBar" emit-event="pageViewer"></div>
+        <div cb-module="cbSideMenu" receive-event="sideBar" emit-event="pageViewer"></div>
         <div cb-module="cbPageViewer" receive-event="pageViewer"></div>
     </div>
     <div ng-include="'_title.html'" ng-init="$active='module'"></div>

@@ -1,9 +1,9 @@
-@import "cabin-animate";
+@import "modules/cabin-animate";
 
 @include animate-flash-color(notify-flash, background, #333, #800);
 
 .msg-area{
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	height: auto;
 	color:#FFF;

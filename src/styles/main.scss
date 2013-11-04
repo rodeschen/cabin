@@ -1,18 +1,13 @@
-@import 'define';
 @import 'compass/reset';
-//@import 'bootstrap-sass/lib/bootstrap';
+@import 'define';
+//@import 'components/bootstrap-sass/lib/bootstrap';
 @import 'susy';
 @import 'components/font-awesome/scss/font-awesome';
 //@import "animate";
-@import 'components/animate.css/animate';
-@import 'modules/cabin-animation';
 //@import 'components/angular-animate.css/angular-animate';
-@import 'modules/directives/cabin-notify';
-@import 'modules/directives/cabin-splitter';
-@import 'modules/directives/cabin-topMenu';
-@import 'modules/directives/cabin-slidebar';
-@import 'modules/directives/cabin-pageViewer';
+@import 'components/animate.css/animate';
 @import 'modules/ng-animation';
+@import 'modules';
 
 /*
  Keep in mind that you want to combine both CSS
@@ -26,7 +21,7 @@
 
 .page-content{
 	@include container( $total-columns, $mobile, $pad, $pc );
-	//@include susy-grid-background;
+//	@include susy-grid-background;
 }
 
 
@@ -41,15 +36,17 @@ html {
 	height: 100%;
 }
 body {
-	font-family: 'Lato', Helvetica, Arial, sans-serif;
+  	line-height: 1.231;
+  	background-color: #16A085;
+	font-family: "Lato", sans-serif;
 	@include at-breakpoint($mobile){
 		font-size:12px
 	}
 	font-size:14px;
 	margin: 0;
 	//padding: 50px 0 0 0;
-    padding:0px;
-	height: 100%;
+    padding:0;
+	
 	.main-body{
 		position: relative;
 		margin: auto;
@@ -57,7 +54,7 @@ body {
 		min-height: 100%;
 	}
 	//padding-top:70px;
-	
+	padding-bottom: 40px;
 }
 
 
@@ -139,5 +136,7 @@ $sample-navbar-hdie-left: -146px;
 		@include span-columns(8);
 		@include isolate(4);
 	}
+	height: 100%;
+	padding-bottom: 60px;
 }
 

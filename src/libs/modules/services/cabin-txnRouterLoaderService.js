@@ -1,6 +1,6 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return cabin.provider('cbTxnRouterLoaderService', [
+    return ['provider', 'cbTxnRouterLoaderService', [
         function() {
             var lazyRegisterProvider;
             this.$get = function() {
@@ -10,7 +10,7 @@ define(['cabin'], function(cabin) {
                 viewPath: 'views',
                 ctrlPath: 'scripts/ctrl'
             }
-            this.setLazyRegisterProvider = function(provider){
+            this.setLazyRegisterProvider = function(provider) {
                 lazyRegisterProvider = provider;
             }
             this.setup = function(settings) {
@@ -102,7 +102,7 @@ define(['cabin'], function(cabin) {
                 function getPath(stateParams) {
                     var path = [];
                     angular.forEach(_tPath, function(value, key) {
-                        value = value.replace(/^\^/,'');
+                        value = value.replace(/^\^/, '');
                         if (!/^:/.test(value)) {
                             path.push(value);
                         } else {
@@ -116,5 +116,5 @@ define(['cabin'], function(cabin) {
             };
             return this;
         }
-    ]);
+    ]];
 });
