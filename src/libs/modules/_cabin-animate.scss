@@ -1,6 +1,7 @@
 @import "animate";
 @import "compass";
 @import 'components/animate.css/animate';
+@import 'ng-animation';
 
 @mixin animate-flash-color($name, $attribute, $form-bg-color, $end-bg-color) {
 	@include keyframes($name) {
@@ -42,37 +43,15 @@
 
 
 
-// .sslide-down {
-// 	&.ng-enter {
-// 		@include animation(fadeInRight 1s linear);
-// 	}
+.toggle-enter {
+   @include easingTimingFunction();
+    &.ng-enter {
+        opacity: 0;
+        @include transitionDuration(250ms);
+    }
 
-// 	&.ng-enter-active {
-// 		@include animation(fadeInRight 1s linear);
-// 	}
+    &.ng-enter-active {
+        opacity: 1; 
+    }
 
-
-// 	&.ng-leave {
-// 		@include animation(fadeOutLeft 1s linear);
-// 	}
-
-// 	&.ng-leave-active {
-// 		@include animation(fadeOutLeft 1s linear);
-// 	}
-
-// 	// Hide
-// 	&.ng-hide-add {
-// 		@include animation(fadeInRight 1s linear);
-// 	}	
-// 	&.ng-hide-add.ng-hide-add-active {
-// 		@include animation(fadeInRight 1s linear);
-// 	}
-
-// 	// Show
-// 	&.ng-hide-remove {
-// 		@include animation(fadeOutLeft 1s linear);
-// 	}
-// 	&.ng-hide-remove.ng-hide-remove-active {
-// 		@include animation(fadeOutLeft 1s linear);
-// 	}
-// }
+}

@@ -82,23 +82,23 @@
 	// }
 
 	// Hide
-	// &.ng-hide-add {
-	// 	@include transitionDuration(250ms);
-	// 	opacity:1;		
-	// }	
-	// &.ng-hide-add.ng-hide-add-active {
-	// 	opacity:0;
-	// }
+	&.ng-hide-add {
+		@include transitionDuration(250ms);
+		opacity:1;		
+	}	
+	&.ng-hide-add.ng-hide-add-active {
+		opacity:0;
+	}
 
 	// // Show
-	// &.ng-hide-remove {
-	// 	@include transitionDuration(250ms);
-	// 	display:block!important;
-	// 	opacity:0;
-	// }
-	// &.ng-hide-remove.ng-hide-remove-active {
-	// 	opacity:1;
-	// }
+	&.ng-hide-remove {
+		@include transitionDuration(250ms);
+		display:block!important;
+		opacity:0;
+	}
+	&.ng-hide-remove.ng-hide-remove-active {
+		opacity:1;
+	}
 }
 
 
