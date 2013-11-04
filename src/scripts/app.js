@@ -7,7 +7,8 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 directive: $compileProvider.directive,
                 filter: $filterProvider.register,
                 factory: $provide.factory,
-                service: $provide.service
+                service: $provide.service,
+                provider:$provide.provider
             });
 
             $urlRouterProvider.otherwise('/index');

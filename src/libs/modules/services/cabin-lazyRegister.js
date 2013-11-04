@@ -6,7 +6,8 @@ define(['cabin'], function(cabin) {
             'directive': undefined,
             'filter': undefined,
             'factory': undefined,
-            'service': undefined
+            'service': undefined,
+            'provider':undefined
         };
 
         var registered = {};

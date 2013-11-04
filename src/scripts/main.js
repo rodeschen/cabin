@@ -8,8 +8,10 @@ var properties = {
         'cbSplitter',
         'cbTxnRouterLoaderService'
     ],
-    cabinModulePath: 'libs/modules/directives/',
-    viewsTemplatePath: 'views/'
+    cabinModulePath: 'libs/modules/',
+    //txnViewRootPath: 'views/',
+    txnViewRootPath: 'scripts/page/',
+    txnScriptRootPath: 'scripts/page/'
 };
 
 require.config({

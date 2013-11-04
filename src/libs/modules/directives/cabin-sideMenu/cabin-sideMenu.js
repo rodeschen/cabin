@@ -3,7 +3,7 @@
      return ['directive', 'cbSideMenu', ['$location', 'cabinModulePath', '$http', '$timeout',
          function($location, cabinModulePath, $http, $timeout) {
              return {
-                 templateUrl: cabinModulePath + 'cabin-sideMenu/templates/sideMenu.html',
+                 templateUrl: cabinModulePath + 'directives/cabin-sideMenu/templates/sideMenu.html',
                  restrict: 'A',
                  scope: {
                      'cbSideBar': '@',

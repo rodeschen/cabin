@@ -12,7 +12,7 @@ define(['cabin'], function(cabin) {
                         url: '/system/codeType',
                         name: 'CodeType'
                     }, {
-                        url: '/system/websocket',
+                        url: '/system/webSocket',
                         name: 'WebSocket'
                     }]
                 }, {

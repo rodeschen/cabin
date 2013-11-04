@@ -3,7 +3,7 @@ define(['cabin'], function(cabin) {
     return ['directive', 'cbTopMenu', ['$location', 'cabinModulePath', '$http', '$rootScope',
         function($location, cabinModulePath, $http, $rootScope) {
             return {
-                templateUrl: cabinModulePath + 'cabin-topMenu/templates/topMenu.html',
+                templateUrl: cabinModulePath + 'directives/cabin-topMenu/templates/topMenu.html',
                 restrict: 'A',
                 scope: {
                     'cbTopMenuBar': '@',

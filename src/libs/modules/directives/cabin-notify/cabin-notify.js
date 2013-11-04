@@ -3,7 +3,7 @@ define(['cabin'], function(cabin) {
     return ['directive', 'cbNotify', ['$timeout', '$window', 'cabinModulePath',
         function($timeout, $window, cabinModulePath) {
             return {
-                templateUrl: cabinModulePath + 'cabin-notify/templates/notify.html',
+                templateUrl: cabinModulePath + 'directives/cabin-notify/templates/notify.html',
                 restrict: 'A',
                 scope: {
                     'cbNotify': "@",

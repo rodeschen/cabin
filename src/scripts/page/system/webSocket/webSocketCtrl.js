@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['controller', 'codeTypeCtrl', ['$scope','cbTxnRouterLoaderService', 'codeTypeServ', 'codeTypeServ2',
-        function($scope , serv, serv2) {
+    return ['controller', 'webSocketCtrl', ['$scope',
+        function($scope) {
             $scope.updated = {};
             $scope.data = {};
             $scope.update = function() {
@@ -10,5 +10,5 @@ define(['cabin'], function(cabin) {
         }
     ]];
 
-});
 
+});
