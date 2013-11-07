@@ -1,0 +1,57 @@
+.combo-box-wrapper{
+	border :2px solid #BDC3C7;
+	background-color: #FFF;
+	display: inline-block;
+	@include border-radius(6px);
+	input{
+		border: 0px;
+		height: 1.8em;
+	}
+	.down-icon{
+		cursor: pointer;
+		
+		display: inline-block;
+		border-left: 1px #BDC3C7 solid;
+		width: 2em;
+		text-align: center;
+		i{
+			padding: 0 5px;
+		}
+		&:hover{
+				color:#3498DB;
+		}
+		&:active{
+			color:#3498DB;
+			@include user-select(none);
+			i{
+				font-size: .8em;
+			}
+		}
+	}
+	
+}
+
+.combo-box-list{
+		display: block;
+		position: absolute;
+		z-index: 2000;
+		background-color: #FFF;
+		min-width: 100px;
+		max-width: 200px;
+		@include ellipsis(ellipsis);
+		margin: 2px 0 0 0;
+		border: 2px solid #BDC3C7;
+		border-radius: 7px;
+		ul{
+			padding: 5px 0px 3px;
+			li{
+				padding : 2px 11px;
+				&.active,&:hover{
+					background-color: #0081C2;
+					color: #FFF;
+					cursor: pointer;
+				}
+			}	
+		}
+		
+	}

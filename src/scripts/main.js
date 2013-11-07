@@ -6,12 +6,14 @@ var properties = {
     //contentRoot: '/cap-web',
     useCabinLibs: [
         'cbSplitter',
-        'cbTxnRouterLoaderServ'
+        'cbTxnRouterLoaderServ',
+        'cbComboBoxServ'
     ],
     cabinModulePath: 'libs/modules/',
     //txnViewRootPath: 'views/',
     txnViewRootPath: 'scripts/page/',
-    txnScriptRootPath: 'scripts/page/'
+    txnScriptRootPath: 'scripts/page/',
+    comboBoxCache: false
 };
 
 require.config({

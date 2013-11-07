@@ -28,7 +28,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
     ]).run(['$rootScope', '$window', '$http', 'properties',
         function($rootScope, $window, $http, properties) {
             $rootScope.$on('broadcast', function(ev, args) {
-                console.log('broadcast', args);
+                //console.log('broadcast', args);
                 $rootScope.$broadcast(args.event, args);
             });
             $rootScope.baseUrl = ('http://' + $window.location.host + properties.contentRoot).replace(/\/$/, '') + "/";

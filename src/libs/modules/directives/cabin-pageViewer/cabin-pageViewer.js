@@ -28,7 +28,6 @@ define(['cabin'], function(cabin) {
                                     templateUrl: true,
                                     service: []
                                 }, settings || {});
-                                console.log(s);
                                 var promises = [];
                                 if (s.controller) {
                                     iElement.children().attr('ng-controller', pageName + 'Ctrl');
@@ -81,7 +80,6 @@ define(['cabin'], function(cabin) {
                                         //     scope.$$$viewScope.$destroy();
                                         //     debugger;
                                         // }
-                                        console.log("ADFAS")
                                         //scope.$$$viewScope = scope.$new();
                                         //$compile(iElement.children())(scope);
                                         if (s.templateUrl === true) {
