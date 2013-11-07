@@ -1,6 +1,6 @@
 'use strict';
 define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
-    return cabin.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'cbLazyRegisterProvider', 'cbTxnRouterLoaderServiceProvider',
+    return cabin.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'cbLazyRegisterServProvider', 'cbTxnRouterLoaderServProvider',
         function($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, lazyRegisterProvider, txnRouterLoaderSrv) {
             lazyRegisterProvider.setRegisters({
                 controller: $controllerProvider.register,
@@ -8,7 +8,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 filter: $filterProvider.register,
                 factory: $provide.factory,
                 service: $provide.service,
-                provider:$provide.provider
+                provider: $provide.provider
             });
 
             $urlRouterProvider.otherwise('/index');

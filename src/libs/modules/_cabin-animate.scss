@@ -55,3 +55,22 @@
     }
 
 }
+
+/* ------------------------------------------- */
+/* Slide Rigth 
+/* ------------------------------------------- */
+
+.slide-right-enter {
+    @include easingTimingFunction();
+    &.ng-enter {
+        @include transform(translateX(60px)); 
+        @include transitionDuration(250ms);
+        opacity: 0;
+    }
+
+    &.ng-enter-active {
+        @include transform(translateX(0));
+        opacity: 1; 
+    }
+
+}

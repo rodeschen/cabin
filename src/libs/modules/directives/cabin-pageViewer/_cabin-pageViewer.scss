@@ -156,10 +156,10 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
 	border: 2px solid #bdc3c7;
-	color: #34495e;
+	//color: #34495e;
 	font-size: 1em;
 	padding: 5px;
-	height: 1em;
+	height: 2em;
 	text-indent: 6px;
 	@include appearance(none);
 	@include border-radius(6px);

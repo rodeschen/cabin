@@ -43,6 +43,13 @@ define(['cabin'], function(cabin) {
                 return [200, resData, {}];
             });
 
+
+
+            $httpBackend.whenGET('user').respond(function() {
+                // console.log('Received these data:', method, url, data, headers);
+                return [200, resData, {}];
+            })
+
         }
     ]);
 });

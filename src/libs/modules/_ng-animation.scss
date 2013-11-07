@@ -72,14 +72,14 @@
 		opacity: 1;	
 	}
 
-	// &.ng-leave {
-	// 	opacity: 1;
-	// 	@include transitionDuration(250ms);
-	// }
+	&.ng-leave {
+		opacity: 1;
+		@include transitionDuration(250ms);
+	}
 
-	// &.ng-leave-active {
-	// 	opacity: 0;	
-	// }
+	&.ng-leave-active {
+		opacity: 0;	
+	}
 
 	// Hide
 	&.ng-hide-add {
@@ -90,7 +90,7 @@
 		opacity:0;
 	}
 
-	// // Show
+	// Show
 	&.ng-hide-remove {
 		@include transitionDuration(250ms);
 		display:block!important;

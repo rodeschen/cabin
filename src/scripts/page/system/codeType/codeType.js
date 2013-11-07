@@ -1,5 +1,5 @@
 define(['cabin'], function(cabin) {
     return {
-        service: ["cbTxnRouterLoaderService@modules", 'codeTypeServ', 'codeTypeServ2']
+        service: ["cbTxnRouterLoaderServ@modules", 'codeTypeServ', 'codeTypeServ2']
     }
 });

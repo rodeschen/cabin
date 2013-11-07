@@ -6,7 +6,7 @@ var properties = {
     //contentRoot: '/cap-web',
     useCabinLibs: [
         'cbSplitter',
-        'cbTxnRouterLoaderService'
+        'cbTxnRouterLoaderServ'
     ],
     cabinModulePath: 'libs/modules/',
     //txnViewRootPath: 'views/',

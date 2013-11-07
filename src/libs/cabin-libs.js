@@ -8,23 +8,27 @@ require.config({
         'cbTopMenu': 'libs/modules/directives/cabin-topMenu/cabin-topMenu',
         'cbSideMenu': 'libs/modules/directives/cabin-sideMenu/cabin-sideMenu',
         'cbPageViewer': 'libs/modules/directives/cabin-pageViewer/cabin-pageViewer',
+        'cbComboBox': 'libs/modules/directives/cabin-comboBox/cabin-comboBox',
         // Service
-        'cbTxnRouterLoaderService': 'libs/modules/services/cabin-txnRouterLoaderService',
-        'cbLazyRegister': 'libs/modules/services/cabin-lazyRegister'
+        'cbTxnRouterLoaderServ': 'libs/modules/services/cabin-txnRouterLoaderServ',
+        'cbLazyRegisterServ': 'libs/modules/services/cabin-lazyRegisterServ',
+        'cbComboBoxServ': 'libs/modules/services/cabin-comboBoxServ'
+
     },
     'shim': {
         'cbSplitter': ['libs', 'cabin'],
         'cbNotify': ['libs', 'cabin'],
         'cbModule': ['libs', 'cabin'],
-        'cbLazyRegister': ['libs', 'cabin'],
         'cbTopMenuBar': ['libs', 'cabin'],
         'cbPageViewer': ['libs', 'cabin'],
         'cbSideBar': ['libs', 'cabin'],
-        'cbTxnRouterLoaderService': ['libs', 'cabin']
+        //service
+        'cbTxnRouterLoaderServ': ['libs', 'cabin'],
+        'cbLazyRegisterServ': ['libs', 'cabin']
     }
 });
 
-define('cabin-libs', ['libs', 'cabin', 'cbLazyRegister', 'cbModule'].concat(properties.useCabinLibs), function(libs, cabin) {
+define('cabin-libs', ['libs', 'cabin', 'cbLazyRegisterServ', 'cbModule'].concat(properties.useCabinLibs), function(libs, cabin) {
     for (var index = 2; index < arguments.length; index++) {
         var module = arguments[index];
         cabin[module[0]].call(cabin, module[1], module[2]);

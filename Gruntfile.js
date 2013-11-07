@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                     '<%= yeoman.app %>/{,*/}*.html',
                     '<%= yeoman.app %>/libs/**/*.html',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.*',
+                    '<%= yeoman.app %>/scripts/**/*',
                     //'{.tmp,<%= yeoman.app %>}/libs/**/*.js',
                     '{.tmp,<%= yeoman.app %>}/libs/*.js',
                     '{.tmp,<%= yeoman.app %>}/libs/modules/**/*.js',
@@ -104,6 +104,7 @@ module.exports = function(grunt) {
                         return [
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'test'),
                             mountFolder(connect, yeomanConfig.app)
                         ];
                     }

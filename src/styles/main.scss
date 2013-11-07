@@ -9,6 +9,11 @@
 @import 'modules/ng-animation';
 @import 'modules';
 
+
+*, *:before, *:after {
+	@include box-sizing(border-box);
+}
+
 /*
  Keep in mind that you want to combine both CSS
  classes together to avoid any CSS-specificity

@@ -1,6 +1,6 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['directive', 'cbPageViewer', ['$rootScope', '$compile', '$timeout', '$q', 'properties', 'cbLazyRegister', 'cabinModulePath',
+    return ['directive', 'cbPageViewer', ['$rootScope', '$compile', '$timeout', '$q', 'properties', 'cbLazyRegisterServ', 'cabinModulePath',
         function($rootScope, $compile, $timeout, $q, properties, cbLazyRegister, cabinModulePath) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-pageViewer/templates/pageViewer.html',
