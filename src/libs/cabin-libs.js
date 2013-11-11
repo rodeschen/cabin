@@ -30,8 +30,14 @@ require.config({
 
 define('cabin-libs', ['libs', 'cabin', 'cbLazyRegisterServ', 'cbModule'].concat(properties.useCabinLibs), function(libs, cabin) {
     for (var index = 2; index < arguments.length; index++) {
-        var module = arguments[index];
-        cabin[module[0]].call(cabin, module[1], module[2]);
+        var modules = arguments[index];
+        if(modules[0].constructor === String){
+            modules = [modules];
+        }
+        angular.forEach(modules, function(value, key){
+            cabin[value[0]].call(cabin, value[1], value[2]);    
+        });
+        
     }
     console.log('cabin-libs Initialized');
 });

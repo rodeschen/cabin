@@ -3,7 +3,7 @@ define(['cabin'], function(cabin) {
     return [['directive', 'cbComboBox', ['$rootScope', '$compile', '$timeout', '$parse',
         function($rootScope, $compile, $timeout, $parse) {
             return {
-                priority: 0,
+                //priority: 0,
                 restrict: 'A',
                 require: 'ngModel',
                 //replace: false,
@@ -227,7 +227,7 @@ define(['cabin'], function(cabin) {
                         'ng-show': 'isOpen()'
                     });
 
-                    var icon = angular.element('<div class="down-icon"><i class="fa  fa-1x" ng-class="ngModel?\'fa-times-circle \':\'fa-chevron-circle-down\'"></i></div>');
+                    var icon = angular.element('<div class="down-icon"><i class="fa  fa-1x" ng-class="getNgModelValue()?\'fa-times-circle \':\'fa-chevron-circle-down\'"></i></div>');
                     icon.attr({
                         'ng-click': 'toggle()'
                     });

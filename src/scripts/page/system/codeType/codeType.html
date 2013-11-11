@@ -5,7 +5,7 @@
                 <span class="title">語系</span>
             </div>
             <div class="col-3">
-                <input ng-model="data.locale" type="text" cb-module="cbComboBox"  combo-key="lang" ng-init='data.locale="zh_TW"'/>
+                <input ng-model="data.locale" type="text" cb-combo-box  combo-key="lang" ng-init='data.locale="zh_TW"'/>
                 <!--<input type="text" ng-model="data.locale" />-->
             </div>
         </div>
@@ -37,12 +37,12 @@
                     <span class="title">排序</span>
                 </div>
                 <div class="col-2">
-                    <input type="text" ng-model="data.codeOrder" class="extra-small" />
+                    <input type="text" cb-combo-box ng-model="data.codeOrder" class="extra-small" />
                 </div>
             </div>
         </div>
         <button ng-click="update(data)">xx</button>
 
     </form>
-    <div>{{data}}</div>
+    <div></div>
 </div>

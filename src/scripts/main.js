@@ -5,6 +5,7 @@ var properties = {
     //testMode: false,
     //contentRoot: '/cap-web',
     useCabinLibs: [
+        'cbComboBox',
         'cbSplitter',
         'cbTxnRouterLoaderServ',
         'cbComboBoxServ'
