@@ -8,6 +8,11 @@ define(['cabin'], function(cabin) {
                 $scope.updated = angular.copy($scope.data);
             }
 
+            $scope.ccc = function() {
+               // $scope.data.locale = "ASDFADSF"
+                $scope.data.locale = "zh_TW"
+            }
+
 
         }
     ]];

@@ -56,14 +56,12 @@ module.exports = function(grunt) {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
-                    '<%= yeoman.app %>/{,*/}*.html',
+                    //'<%= yeoman.app %>/{,*/}*.html',
                     '<%= yeoman.app %>/libs/**/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '<%= yeoman.app %>/scripts/**/*',
-                    //'{.tmp,<%= yeoman.app %>}/libs/**/*.js',
-                    '{.tmp,<%= yeoman.app %>}/libs/*.js',
-                    '{.tmp,<%= yeoman.app %>}/libs/modules/**/*.js',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '{.tmp,<%= yeoman.app %>}/libs/**/*.js',
+                    '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
+                    '<%= yeoman.app %>/scripts/**/*.js',
+                    '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             },
             capCoffee: {

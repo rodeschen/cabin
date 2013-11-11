@@ -5,7 +5,7 @@
                 <span class="title">語系</span>
             </div>
             <div class="col-3">
-                <input ng-model="data.locale" cb-module="cbComboBox" type="text" combo-key="lang" ng-init='data.locale="zh_TW"'/>
+                <input ng-model="data.locale" type="text" cb-module="cbComboBox"  combo-key="lang" ng-init='data.locale="zh_TW"'/>
                 <!--<input type="text" ng-model="data.locale" />-->
             </div>
         </div>
@@ -22,7 +22,8 @@
                     <span class="title">值</span>
                 </div>
                 <div class="col-2">
-                    <input type="text" ng-model="data.codeValue" class="medium" />
+                <button ng-click="ccc()">lll</button>
+                    <input type="text" ng-model="data.codeValue" class="medium" ng-click="data.locale = 'aaaaa'"/>
                 </div>
             </div>
             <div class="row">

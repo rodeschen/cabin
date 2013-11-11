@@ -3,217 +3,242 @@ define(['cabin'], function(cabin) {
     return [['directive', 'cbComboBox', ['$rootScope', '$compile', '$timeout', '$parse',
         function($rootScope, $compile, $timeout, $parse) {
             return {
-                priority: 100,
+                priority: 0,
                 restrict: 'A',
                 require: 'ngModel',
-                replace: false,
-                scope: {
-                    'ngModel': '=',
-                    'comboKey': '@',
-                    'dymanicKey': '@',
-                    'comboType': "@"
-                },
+                //replace: false,
+                // scope: {
+                //     'ngModel': '=',
+                //     'comboKey': '@',
+                //     'dymanicKey': '@',
+                //     'comboType': "@"
+                // },
 
-                compile: function(tElement, tAttrs, transclude) {
-                    return function($scope, iElm, iAttrs, controller) {
-
-                        var $parentScope = $scope.$parent;
-                        var setModuleValue = function(value) {
+                link: function($parentScope, iElm, iAttrs, controller) {
+                    var $scope = $parentScope.$new();
+                    angular.extend($scope, {
+                        ngModel: $parse(iAttrs.ngModel),
+                        comboKey: iAttrs.comboKey,
+                        dymanicKey: iAttrs.dymanicKey,
+                        comboType: iAttrs.comboType
+                    })
+                    var local = {
+                        isFocus: false,
+                        $parentScope: $scope.$parent,
+                        setModuleValue: function(value) {
                             // $scope.selectItem = value;
                             if (value.constructor === String) {
                                 $parse(iAttrs.ngModel).assign($parentScope, value);
                             } else {
                                 $parse(iAttrs.ngModel).assign($parentScope, value.key);
                             }
-                        };
-                        // copy from ui-utils;
+                        }
+                    }
 
-                        function setCaretPosition(input, pos) {
-                            if (input.offsetWidth === 0 || input.offsetHeight === 0) {
-                                return; // Input's hidden
+                    // controller.$formatters.push(function(input) {
+                    //     $scope.match(input);
+                    //     if (local.isFocus) {
+                    //         if (input && $scope.matchs.length) {
+                    //             $scope.open();
+                    //         } else if (!input) {
+                    //             $scope.close();
+                    //         }
+                    //     }
+                    //     return input;
+                    // })
+
+                    // copy from ui-utils;
+
+                    // function setCaretPosition(input, pos) {
+                    //     if (input.offsetWidth === 0 || input.offsetHeight === 0) {
+                    //         return; // Input's hidden
+                    //     }
+                    //     if (input.setSelectionRange) {
+                    //         input.focus();
+                    //         input.setSelectionRange(pos, pos);
+                    //     } else if (input.createTextRange) {
+                    //         // Curse you IE
+                    //         var range = input.createTextRange();
+                    //         range.collapse(true);
+                    //         range.moveEnd('character', pos);
+                    //         range.moveStart('character', pos);
+                    //         range.select();
+                    //     }
+                    // }
+
+                    angular.extend($scope, {
+                        showList: false,
+                        activeIdx: -1,
+                        items: [],
+                        matchs: [],
+                        // lastIdx: -1,
+                        // firstItem: undefined,
+                        // currentItem: undefined,
+                        //selectItem: undefined,
+                        open: function() {
+                            if (!$scope.showList) {
+                                $scope.showList = true;
+                                $scope.activeIdx = 0;
                             }
-                            if (input.setSelectionRange) {
-                                input.focus();
-                                input.setSelectionRange(pos, pos);
-                            } else if (input.createTextRange) {
-                                // Curse you IE
-                                var range = input.createTextRange();
-                                range.collapse(true);
-                                range.moveEnd('character', pos);
-                                range.moveStart('character', pos);
-                                range.select();
+                        },
+                        close: function() {
+                            if ($scope.showList) {
+                                $scope.matchs = [];
+                                $scope.activeIdx = -1;
+                                $scope.showList = false;
+                            }
+                        },
+                        isOpen: function() {
+                            return $scope.showList;
+                        },
+                        toggle: function() {
+                            local.setModuleValue('');
+                            if ($scope.isOpen()) {
+                                $scope.close();
+                            } else {
+                                $scope.match('');
+                                $scope.open();
+                                iElm.focus();
+                            }
+                        },
+                        getMatchLength: function() {
+                            return $scope.matchs.length;
+                        },
+                        getNgModelValue: function() {
+                            return controller.$viewValue;
+                        },
+                        match: function(input) {
+                            var mValue = input === undefined && $scope.getNgModelValue() || input;
+                            var _matchs = [];
+                            if (mValue) {
+                                angular.forEach($scope.items, function(value, key) {
+                                    if (value.constructor === String) {
+                                        reg.test(value) && _matchs.push(value)
+                                    } else {
+                                        if (new RegExp(mValue, 'gi').test(value.key) || new RegExp(mValue, 'gi').test(value.value)) {
+                                            _matchs.push(value);
+                                        }
+                                    }
+                                });
+                                $scope.matchs = _matchs;
+                            } else {
+                                $scope.matchs = $scope.items;
+                            }
+                            $scope.indexIdx = ($scope.matchs.length ? 0 : -1);
+                        },
+                        select: function(index) {
+                            if (index === undefined) {
+                                index = $scope.activeIdx;
+                            }
+                            if ($scope.matchs.length) {
+                                local.setModuleValue($scope.matchs[index]);
+                                $scope.close();
+                                iElm.focus();
+                            }
+                        },
+                        showStyle: function(data) {
+                            if (data.constructor === String) {
+                                return data;
+                            } else {
+                                switch ($scope.comboType || '3') {
+                                    case '1':
+                                        return data.key;
+                                    default:
+                                        return data.key + ' - ' + data.value;
+                                }
+                            }
+
+                        },
+                        formatter: function() {
+                            var v = $scope.getNgModelValue();
+                            if (v && $scope.items && !local.isFocus) {
+                                angular.forEach($scope.items, function(value, key) {
+                                    if (value.key == v) {
+                                        if (value.constructor === String) {
+                                            //Do nothing
+                                        } else {
+                                            value && iElm.val($scope.showStyle(value));
+                                        }
+                                        return
+                                    }
+                                });
                             }
                         }
+                    });
 
-                        angular.extend($scope, {
-                            showList: false,
-                            activeIndex: -1,
-                            lastIndex: -1,
-                            firstItem: undefined,
-                            currentItem: undefined,
-                            //selectItem: undefined,
-                            open: function() {
-                                $scope.showList = true;
-                            },
-                            close: function() {
-                                $scope.activeIndex = -1;
-                                $scope.currentItem = undefined,
-                                //$scope.selectItem = undefined,
-                                $scope.showList = false;
-                            },
-                            isOpen: function() {
-                                return $scope.showList;
-                            },
-                            toggle: function() {
-                                $scope.reset();
-                                $scope.showList = !$scope.showList;
-                                iElm.focus();
-                            },
-
-                            setFirstItem: function(item) {
-                                $scope.firstItem = item;
-                            },
-                            setLastIndex: function(index) {
-                                $scope.lastIndex = index;
-                            },
-                            setCurrentItem: function(item) {
-                                $scope.currentItem = item;
-                            },
-                            select: function(data) {
-                                if ($scope.lastIndex === 0) {
-                                    data = $scope.firstItem;
-                                }
-                                $timeout(function() {
-                                    data = data || $scope.currentItem;
-                                    if (data) {
-                                        $scope.close();
-                                        iElm.focus();
-                                        setModuleValue(data);
-                                    }
-                                }, 40)
-                            },
-                            showStyle: function(data) {
-                                if (data.constructor === String) {
-                                    return data;
+                    var keys = [40, 38, 18, 9, 27, 13];
+                    //up(38) / down(40), enter(13) and tab(9), esc(27)
+                    iElm.bind('keydown', function(e) {
+                        var key = e.which;
+                        if (key == 40 || $scope.isOpen() && keys.indexOf(key) > -1) {
+                            if (key === 40) {
+                                $scope.activeIdx++;
+                                if (!$scope.isOpen()) {
+                                    $scope.match();
+                                    $scope.open();
                                 } else {
-                                    switch ($scope.comboType || '3') {
-                                        case '1':
-                                            return data.key;
-                                        default:
-                                            return data.key + ' - ' + data.value;
+
+                                    if ($scope.activeIdx >= $scope.getMatchLength()) {
+                                        $scope.activeIdx = 0;
                                     }
                                 }
-
-                            },
-                            isActive: function(item, index, activeIndex, isLast) {
-                                if (index === 0) {
-                                    $scope.setFirstItem(item);
+                            } else if (key === 38) {
+                                if (--$scope.activeIdx === -1) {
+                                    $scope.close();
                                 }
-
-                                if (index === activeIndex) {
-                                    $scope.setCurrentItem(item);
-                                    return 'active';
-                                } else if (index === -1) {
-                                    $scope.setCurrentItem("");
-                                }
-                                if (isLast) {
-                                    $scope.setLastIndex(index);
-                                }
-                            },
-                            match: function(model) {
-
-                                return true;
-                            },
-                            reset: function() {
-                                setModuleValue("");
-                                $scope.activeIndex = -1;
-                            },
-                            formatter: function() {
-                                if ($scope.ngModel && $scope.items) {
-                                    angular.forEach($scope.items, function(value, key) {
-                                        if (value.key == $scope.ngModel) {
-                                            if (value.constructor === String) {
-                                                //Do nothing
-                                            } else {
-                                                $timeout(function() {
-                                                    value && iElm.val(value.key + " - " + value.value);
-                                                }, 50);
-                                            }
-                                            return
-                                        }
-                                    });
-                                }
+                            } else if (e.which === 13 || e.which === 9) {
+                                $scope.$apply(function() {
+                                    $scope.select($scope.activeIdx);
+                                });
+                            } else if (e.which === 27) {
+                                $scope.close();
                             }
-                        });
-
-                        var keys = [40, 38, 18, 9, 27, 13];
-                        //up(38) / down(40), enter(13) and tab(9), esc(27)
-                        iElm.on('keydown', function(e) {
-                            var key = e.which;
-                            if (key == 40 || $scope.isOpen() && keys.indexOf(key) > -1) {
-                                if (key === 40) {
-                                    if (!$scope.isOpen()) {
-                                        $scope.activeIndex = -1;
-                                        $scope.open();
-                                    } else {
-                                        if (++$scope.activeIndex > $scope.lastIndex) {
-                                            $scope.activeIndex = 0;
-                                        }
-                                    }
-                                } else if (key === 38) {
-                                    $scope.activeIndex > -1 && $scope.activeIndex--;
-                                    if ($scope.activeIndex === -1) {
-                                        $scope.close();
-                                    }
-                                } else if (e.which === 13 || e.which === 9) {
-
-                                    $scope.$apply(function() {
-                                        $scope.select();
-                                    });
-                                } else if (e.which === 27) {
-                                    // evt.stopPropagation();
-
-                                    // resetMatches();
-                                    // scope.$digest();
-                                }
-                                $scope.$digest();
-                                e.preventDefault();
+                            $scope.$digest();
+                            e.preventDefault();
+                        }
+                    }).on('keyup', function(e) {
+                        var key = e.which;
+                        if (!(keys.indexOf(key) > -1)) {
+                            if (!$scope.isOpen() && $scope.getNgModelValue()) {
+                                $scope.open();
                             }
-                            $timeout(function() {
-                                if (key === 8) {
-                                    if (!controller.$modelValue) {
-                                        $scope.close();
-                                    } else if ($scope.lastIndex > -1) {
-                                        $scope.open();
-                                    }
-                                } else if (key !== 8 && key !== 38 && key !== 13 && key !== 9 && key !== 27) {
-                                    ($scope.lastIndex > -1 && controller.$modelValue || key === 40) && $scope.open();
-                                }
-                            }, 10);
-                        }).on('focus', function() {
-                            $scope.ngModel && iElm.val($scope.ngModel);
-                        }).on('blur', $scope.formatter);
+                            $scope.match();
+                            $scope.$digest();
+                        }
+                    }).on('focus', function() {
+                        local.isFocus = true;
+                        $scope.ngModel && iElm.val(controller.$viewValue);
+                    }).on('blur', function() {
+                        local.isFocus = false;
+                        $scope.formatter();
+                        //確保已離開
+                        $timeout(function() {
+                            if (!local.isFocus) {
+                                $scope.close();
+                            }
+                        }, 50)
+                    });
+
+                    $scope.$watch('getNgModelValue()', $scope.formatter);
 
 
+                    var dropdownEl = angular.element('<div cb-combo-box-drop-down></div>');
+                    dropdownEl.attr({
+                        'ng-show': 'isOpen()'
+                    });
 
-                        var dropdownEl = angular.element('<div cb-combo-box-drop-down></div>');
-                        dropdownEl.attr({
-                            'ng-show': 'isOpen()'
-                        });
+                    var icon = angular.element('<div class="down-icon"><i class="fa  fa-1x" ng-class="ngModel?\'fa-times-circle \':\'fa-chevron-circle-down\'"></i></div>');
+                    icon.attr({
+                        'ng-click': 'toggle()'
+                    });
 
-                        var icon = angular.element('<div class="down-icon"><i class="fa  fa-1x" ng-class="ngModel?\'fa-times-circle \':\'fa-chevron-circle-down\'"></i></div>');
-                        icon.attr({
-                            'ng-click': 'toggle()'
-                        });
-
-                        $compile(icon.insertAfter(iElm.wrap('<lable class="combo-box-wrapper"></lable>')))($scope);
-                        $compile(dropdownEl.insertAfter(iElm.parent()))($scope);
-                    };
+                    $compile(icon.insertAfter(iElm.wrap('<lable class="combo-box-wrapper"></lable>')))($scope);
+                    $compile(dropdownEl.insertAfter(iElm.parent()))($scope);
                 }
             };
         }
-    ]], ['directive', 'cbComboBoxDropDown', ['$rootScope', '$compile', '$timeout', 'cabinModulePath', 'cbComboBoxServ',
-        function($rootScope, $compile, $timeout, cabinModulePath, comboBoxServ) {
+    ]], ['directive', 'cbComboBoxDropDown', ['cabinModulePath', 'cbComboBoxServ',
+        function(cabinModulePath, comboBoxServ) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-combobox/templates/cabin-comboBox-dropdown.html',
                 priority: 101,
@@ -222,6 +247,7 @@ define(['cabin'], function(cabin) {
                     var key = $scope.dymanicKey || $scope.comboKey || '';
                     key && comboBoxServ.addKey(key, !$scope.comboKey, function(items) {
                         $scope.items = items || [];
+                        $scope.match($scope.getNgModelValue());
                         $scope.formatter();
                     });
                 }

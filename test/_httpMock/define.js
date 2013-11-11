@@ -2,10 +2,11 @@
 require.config({
     'paths': {
         'last': '../_httpMock/last',
-        'queryMenu': '../_httpMock/queryMenu'
+        'queryMenu': '../_httpMock/queryMenu',
+        'queryComboBox': '../_httpMock/queryComboBox'
     },
     'shim': {
-        'last': ['cabin', 'app', 'queryMenu']
+        'last': ['cabin', 'app', 'queryMenu','queryComboBox']
     }
 });
 

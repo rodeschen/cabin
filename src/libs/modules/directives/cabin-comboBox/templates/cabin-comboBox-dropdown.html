@@ -1,6 +1,6 @@
 <div class="combo-box-list">
     <ul>
-        <li ng-repeat="item in items  | filter:ngModel track by $index" ng-click='select(item)' class="slide-right-enter" ng-class="isActive(item,$index,activeIndex,$last)"><a>{{showStyle(item)}}</a>
+        <li ng-repeat="item in matchs" ng-click='select($index)' class="slide-right-enter" ng-class="{'active' : activeIdx === $index}"><a>{{showStyle(item)}}</a>
         </li>
     </ul>
 </div>
