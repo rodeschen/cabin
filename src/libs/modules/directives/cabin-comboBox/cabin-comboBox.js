@@ -21,7 +21,7 @@ define(['cabin'], function(cabin) {
                         comboKey: iAttrs.comboKey,
                         dymanicKey: iAttrs.dymanicKey,
                         comboType: iAttrs.comboType
-                    })
+                    });
                     var local = {
                         isFocus: false,
                         $parentScope: $scope.$parent,
@@ -33,7 +33,7 @@ define(['cabin'], function(cabin) {
                                 $parse(iAttrs.ngModel).assign($parentScope, value.key);
                             }
                         }
-                    }
+                    };
 
                     // controller.$formatters.push(function(input) {
                     //     $scope.match(input);
@@ -159,7 +159,6 @@ define(['cabin'], function(cabin) {
                                         } else {
                                             value && iElm.val($scope.showStyle(value));
                                         }
-                                        return
                                     }
                                 });
                             }

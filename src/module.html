@@ -37,7 +37,8 @@
 
     <div class="main-body ng-cloak page-content">
         <div cb-module="cbSideMenu" receive-event="sideBar" emit-event="pageViewer"></div>
-        <div cb-module="cbPageViewer" receive-event="pageViewer"></div>
+        <!--<div cb-module="cbPageViewer"  init-path="/system/codeType" ></div>-->
+        <div cb-module="cbPageViewer"  receive-event="pageViewer"></div>
     </div>
     <div ng-include="'_title.html'" ng-init="$active='module'"></div>
     <div cb-module="cbNotify"></div>

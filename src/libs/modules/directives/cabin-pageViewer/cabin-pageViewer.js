@@ -7,20 +7,31 @@ define(['cabin'], function(cabin) {
                 restrict: 'AEC',
                 scope: {
                     'cbPageView': '@',
-                    'receiveEvent': '@'
+                    'receiveEvent': '@',
+                    'initPath' : '@'
                 },
                 link: function(scope, iElement) {
                     scope.includeUrl = "";
-                    scope.$on(scope.receiveEvent || 'pageViewer', function(event, data) {
-                        scope.includeUrl = "";
-                        if (data && data.page && data.page.url) {
-                            var url = data.page.url.replace(/(^\/|\/$)/, '');
+                    if (scope.receiveEvent !== undefined) {
+                        scope.$on(scope.receiveEvent || 'pageViewer', function(event, data) {
+                            scope.includeUrl = "";
+                            if (data && data.page && data.page.url) {
+                                openPage(data.page.url);
+                            }
+                        });
+                    }
+                    if (scope.initPath) {
+                        openPage(scope.initPath); 
+                    }
+
+
+
+                    function openPage(pageUrl) {
+                        if (pageUrl) {
+                            var url = pageUrl.replace(/(^\/|\/$)/, '');
                             var pageName = url.split('/');
                             pageName = pageName[pageName.length - 1];
-
-
-                            iElement.children().attr("ng-controller", pageName + "Ctrl")//.find("#includePage").attr("ng-include", "includeUrl");
-
+                            iElement.children().attr("ng-controller", pageName + "Ctrl");
                             require(["scripts/page/" + url.replace(/^\//, '') + "/" + pageName], function(settings) {
                                 //init data
                                 var s = angular.extend({}, {
@@ -75,24 +86,17 @@ define(['cabin'], function(cabin) {
 
                                 $q.all(promises).then(function() {
                                     $timeout(function() {
-                                        // if(scope.$$$viewScope){
-                                        //     debugger;
-                                        //     scope.$$$viewScope.$destroy();
-                                        //     debugger;
-                                        // }
-                                        //scope.$$$viewScope = scope.$new();
-                                        //$compile(iElement.children())(scope);
                                         if (s.templateUrl === true) {
                                             scope.includeUrl = properties.txnViewRootPath + url + '/' + pageName + ".html"
-                                            //scope.$apply();
                                         }
                                     }, 100)
                                 });
                             }, function(error) {
-                                console.log("load error")
+                                console.log('load ' + pageUrl + ' issue!!');
+                                console.log(error);
                             });
                         }
-                    });
+                    }
                 }
             };
         }
