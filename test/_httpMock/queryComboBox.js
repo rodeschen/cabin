@@ -31,7 +31,6 @@ define(['cabin'], function(cabin) {
                 var data = angular.fromJson(receive);
                 console.log("queryCombo receive:", data);
                 angular.forEach(data.keys || [], function(value, key) {
-                    console.log(value)
                     temp[value] && (res[value] = temp[value]);
                 });
 
