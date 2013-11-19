@@ -1,36 +1,39 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return [['directive', 'cbComboBox', ['$rootScope', '$compile', '$timeout', '$parse',
-        function($rootScope, $compile, $timeout, $parse) {
+    return [['directive', 'cbComboBox', ['$rootScope', '$compile', '$timeout', '$parse', 'cabinModulePath',
+        function($rootScope, $compile, $timeout, $parse, cabinModulePath) {
             return {
                 //priority: 0,
                 restrict: 'A',
                 require: 'ngModel',
-                //replace: false,
-                // scope: {
-                //     'ngModel': '=',
-                //     'comboKey': '@',
-                //     'dymanicKey': '@',
-                //     'comboType': "@"
-                // },
-
-                link: function($parentScope, iElm, iAttrs, controller) {
-                    var $scope = $parentScope.$new();
-                    angular.extend($scope, {
-                        ngModel: $parse(iAttrs.ngModel),
-                        comboKey: iAttrs.comboKey,
-                        dymanicKey: iAttrs.dymanicKey,
-                        comboType: iAttrs.comboType
-                    });
+                templateUrl: cabinModulePath + 'directives/cabin-combobox/templates/cabin-comboBox.html',
+                replace: true,
+                scope: {
+                    ngModel: '=ngModel',
+                    comboKey: '@',
+                    'dymanicKey': '@',
+                    'comboType': "@"
+                },
+                link: function($scope, iElm, iAttrs, controller) {
+                    iElm = iElm.find("input").addClass(iAttrs.class || "").attr(iAttrs.css || "");
+                    //var $scope = $parentScope.$new();
+                    // angular.extend($scope, {
+                    //     ngModel: $parse(iAttrs.ngModel),
+                    //     comboKey: iAttrs.comboKey,
+                    //     dymanicKey: iAttrs.dymanicKey,
+                    //     comboType: iAttrs.comboType
+                    // });
                     var local = {
                         isFocus: false,
                         $parentScope: $scope.$parent,
                         setModuleValue: function(value) {
                             // $scope.selectItem = value;
                             if (value.constructor === String) {
-                                $parse(iAttrs.ngModel).assign($parentScope, value);
+                                $scope.ngModel = value;
+                                //$parse(iAttrs.ngModel).assign($parentScope, value);
                             } else {
-                                $parse(iAttrs.ngModel).assign($parentScope, value.key);
+                                $scope.ngModel = value.key;
+                                //$parse(iAttrs.ngModel).assign($parentScope, value.key);
                             }
                         }
                     };
@@ -92,7 +95,7 @@ define(['cabin'], function(cabin) {
                             return $scope.showList;
                         },
                         toggle: function() {
-                            local.setModuleValue('');
+
                             if ($scope.isOpen()) {
                                 $scope.close();
                             } else {
@@ -100,6 +103,7 @@ define(['cabin'], function(cabin) {
                                 $scope.open();
                                 iElm.focus();
                             }
+                            local.setModuleValue('');
                         },
                         getMatchLength: function() {
                             return $scope.matchs.length;
@@ -130,6 +134,7 @@ define(['cabin'], function(cabin) {
                             if (index === undefined) {
                                 index = $scope.activeIdx;
                             }
+
                             if ($scope.matchs.length) {
                                 local.setModuleValue($scope.matchs[index]);
                                 $scope.close();
@@ -221,18 +226,18 @@ define(['cabin'], function(cabin) {
                     $scope.$watch('getNgModelValue()', $scope.formatter);
 
 
-                    var dropdownEl = angular.element('<div cb-combo-box-drop-down></div>');
-                    dropdownEl.attr({
-                        'ng-show': 'isOpen()'
-                    });
+                    // var dropdownEl = angular.element('<div cb-combo-box-drop-down></div>');
+                    // dropdownEl.attr({
+                    //     'ng-show': 'isOpen()'
+                    // });
 
-                    var icon = angular.element('<div class="down-icon"><i class="fa  fa-1x" ng-class="getNgModelValue()?\'fa-times-circle \':\'fa-chevron-circle-down\'"></i></div>');
-                    icon.attr({
-                        'ng-click': 'toggle()'
-                    });
+                    // var icon = angular.element('<div class="down-icon"><i class="fa  fa-1x" ng-class="getNgModelValue()?\'fa-times-circle \':\'fa-chevron-circle-down\'"></i></div>');
+                    // icon.attr({
+                    //     'ng-click': 'toggle()'
+                    // });
 
-                    $compile(icon.insertAfter(iElm.wrap('<lable class="combo-box-wrapper"></lable>')))($scope);
-                    $compile(dropdownEl.insertAfter(iElm.parent()))($scope);
+                    // $compile(icon.insertAfter(iElm.wrap('<lable class="combo-box-wrapper"></lable>')))($scope);
+                    // $compile(dropdownEl.insertAfter(iElm.parent()))($scope);
                 }
             };
         }

@@ -4,20 +4,20 @@ define(['cabin'], function(cabin) {
         function() {
             return {
                 restrict: 'AC',
-                scope: {
-                    'cbSplitter': '@',
-                    'direction': '@',
-                    'fixed': '@',
-                    'gutter': '@'
-                },
-                link: function(scope, iElement) {
-                    if (scope.fixed === 'fixed') return;
+                // scope: {
+                //     'cbSplitter': '@',
+                //     'direction': '@',
+                //     'fixed': '@',
+                //     'gutter': '@'
+                // },
+                link: function(scope, iElement, iAttr) {
+                    if (iAttr.fixed === 'fixed') return;
                     var isActive = false;
-                    var isPerv = /^(up|left)$/.test(scope.direction);
+                    var isPerv = /^(up|left)$/.test(iAttr.direction);
                     var target = isPerv ? iElement.prev() : iElement.next();
-                    var style = /^(up|down)$/.test(scope.direction) ? 'height' : 'width';
-                    var eventType = /^(up|down)$/.test(scope.direction) ? 'clientY' : 'clientX';
-                    var gutter = scope.gutter || 1;
+                    var style = /^(up|down)$/.test(iAttr.direction) ? 'height' : 'width';
+                    var eventType = /^(up|down)$/.test(iAttr.direction) ? 'clientY' : 'clientX';
+                    var gutter = iAttr.gutter || 1;
                     var sourceSize, targetSize;
                     iElement.on('mousedown', function(ev) {
                         isActive = true;
