@@ -9,75 +9,33 @@ define(['cabin'], function(cabin) {
                 templateUrl: cabinModulePath + 'directives/cabin-combobox/templates/cabin-comboBox.html',
                 replace: true,
                 scope: {
-                    ngModel: '=ngModel',
-                    comboKey: '@',
+                    'ngModel': '=ngModel',
+                    'comboKey': '@',
                     'dymanicKey': '@',
-                    'comboType': "@"
+                    'comboType': '@'
                 },
                 link: function($scope, iElm, iAttrs, controller) {
-                    iElm = iElm.find("input").addClass(iAttrs.class || "").attr(iAttrs.css || "");
-                    //var $scope = $parentScope.$new();
-                    // angular.extend($scope, {
-                    //     ngModel: $parse(iAttrs.ngModel),
-                    //     comboKey: iAttrs.comboKey,
-                    //     dymanicKey: iAttrs.dymanicKey,
-                    //     comboType: iAttrs.comboType
-                    // });
+                    iElm = iElm.find('input');
+                    iElm.addClass(iAttrs.class || '').attr(iAttrs.css || '');
+
                     var local = {
                         isFocus: false,
                         $parentScope: $scope.$parent,
                         setModuleValue: function(value) {
-                            // $scope.selectItem = value;
                             if (value.constructor === String) {
                                 $scope.ngModel = value;
-                                //$parse(iAttrs.ngModel).assign($parentScope, value);
                             } else {
                                 $scope.ngModel = value.key;
-                                //$parse(iAttrs.ngModel).assign($parentScope, value.key);
                             }
                         }
                     };
 
-                    // controller.$formatters.push(function(input) {
-                    //     $scope.match(input);
-                    //     if (local.isFocus) {
-                    //         if (input && $scope.matchs.length) {
-                    //             $scope.open();
-                    //         } else if (!input) {
-                    //             $scope.close();
-                    //         }
-                    //     }
-                    //     return input;
-                    // })
-
-                    // copy from ui-utils;
-
-                    // function setCaretPosition(input, pos) {
-                    //     if (input.offsetWidth === 0 || input.offsetHeight === 0) {
-                    //         return; // Input's hidden
-                    //     }
-                    //     if (input.setSelectionRange) {
-                    //         input.focus();
-                    //         input.setSelectionRange(pos, pos);
-                    //     } else if (input.createTextRange) {
-                    //         // Curse you IE
-                    //         var range = input.createTextRange();
-                    //         range.collapse(true);
-                    //         range.moveEnd('character', pos);
-                    //         range.moveStart('character', pos);
-                    //         range.select();
-                    //     }
-                    // }
 
                     angular.extend($scope, {
                         showList: false,
                         activeIdx: -1,
                         items: [],
                         matchs: [],
-                        // lastIdx: -1,
-                        // firstItem: undefined,
-                        // currentItem: undefined,
-                        //selectItem: undefined,
                         open: function() {
                             if (!$scope.showList) {
                                 $scope.showList = true;
@@ -172,7 +130,7 @@ define(['cabin'], function(cabin) {
 
                     var keys = [40, 38, 18, 9, 27, 13];
                     //up(38) / down(40), enter(13) and tab(9), esc(27)
-                    iElm.bind('keydown', function(e) {
+                    iElm.on('keydown', function(e) {
                         var key = e.which;
                         if (key == 40 || $scope.isOpen() && keys.indexOf(key) > -1) {
                             if (key === 40) {
@@ -222,22 +180,7 @@ define(['cabin'], function(cabin) {
                             }
                         }, 50)
                     });
-
                     $scope.$watch('getNgModelValue()', $scope.formatter);
-
-
-                    // var dropdownEl = angular.element('<div cb-combo-box-drop-down></div>');
-                    // dropdownEl.attr({
-                    //     'ng-show': 'isOpen()'
-                    // });
-
-                    // var icon = angular.element('<div class="down-icon"><i class="fa  fa-1x" ng-class="getNgModelValue()?\'fa-times-circle \':\'fa-chevron-circle-down\'"></i></div>');
-                    // icon.attr({
-                    //     'ng-click': 'toggle()'
-                    // });
-
-                    // $compile(icon.insertAfter(iElm.wrap('<lable class="combo-box-wrapper"></lable>')))($scope);
-                    // $compile(dropdownEl.insertAfter(iElm.parent()))($scope);
                 }
             };
         }
