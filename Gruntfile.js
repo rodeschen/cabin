@@ -57,11 +57,11 @@ module.exports = function(grunt) {
                 },
                 files: [
                     //'<%= yeoman.app %>/{,*/}*.html',
-                    '<%= yeoman.app %>/libs/{,*,*/*,*/*/*}/*.html',
-                    '{.tmp,<%= yeoman.app %>}/libs/{,*,*/*,*/*/*}/*.js',
-                    '{.tmp,<%= yeoman.app %>}/styles//*.css',
-                    '<%= yeoman.app %>/scripts/{,*,*/*,*/*/*}/*.js',
-                    '<%= yeoman.app %>/images/{,*,*/*,*/*/*}/*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.app %>/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.html',
+                    '{.tmp,<%= yeoman.app %>}/libs/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.js',
+                    '{.tmp,<%= yeoman.app %>}/styles/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.css',
+                    '<%= yeoman.app %>/scripts/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.js',
+                    '<%= yeoman.app %>/images/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             },
             capCoffee: {
