@@ -100,6 +100,7 @@ define(['cabin'], function(cabin) {
                 return result;
 
                 function getPath(stateParams) {
+                    
                     var path = [];
                     angular.forEach(_tPath, function(value, key) {
                         value = value.replace(/^\^/, '');

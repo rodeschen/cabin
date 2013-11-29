@@ -1,0 +1,46 @@
+
+.gridFrame {
+
+    display: table;
+
+    border: black solid 1px;
+
+    display: table-caption;
+
+}
+
+.gridRow {
+
+    display: table-row;
+
+}
+
+.gridCell {
+
+    display: table-cell;
+
+}
+
+.gridHeader {
+
+    display: table-caption;
+
+}
+
+.gridData {
+
+    display: table-cell;
+
+}
+
+.grid-bolder {
+
+}
+
+.grid-header-row-bolder {
+
+}
+
+.grid-cell-bolder {
+
+}

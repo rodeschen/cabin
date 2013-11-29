@@ -1,0 +1,43 @@
+<div>
+    <div style="display:table-row;border: black solid 1px;">
+        <!-- Ceiling -->
+        <wi-table-ceiling></wi-table-ceiling>
+    </div>
+
+    <!-- table content -->
+    <div>
+        <!-- if colDef > 0 -->
+        <div ng-if="colDef.length > 0">
+            <!-- header row -->
+            <div style="display:table;">
+                <!-- TODO: width sync-->
+                <span ng-repeat="col in colDef" style="display: table-cell; border: black solid 1px; width: 150px;">
+                    {{col.headerText || col.fieldName}}
+                </span>
+            </div>
+
+            <!-- data row -->
+            <span ng-repeat="data in dataSource.data">
+                <div style="display-table;">
+                    <!-- TODO: width sync-->
+                    <span ng-repeat="col in colDef" style="display:table-cell; border: black solid 1px; width: 150px;">
+                        <span ng-if="col.isNested">
+                            <div place-holder='data' nested-el='col.childrenElm' style="min-height:3px;">
+                            </div>
+                        </span>
+                        <span ng-if="!col.isNested ">
+                            {{data[col.fieldName]}}
+                        </span>
+                    </span>
+                </div>
+            </span>
+
+        </div>
+        <!-- else, TODO: auto generate default table -->
+    </div>
+
+    <!-- Floor -->
+    <div style="display:table-row;">
+        <wi-table-floor></wi-table-floor>
+    </div>
+</div>

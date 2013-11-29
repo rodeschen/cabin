@@ -1,0 +1,25 @@
+<div>
+    <!-- a for loop to generate page index, (dataSource / recordPerPage) + dataSource mod recordPerPage || 0 -->
+    <span ng-repeat="rec in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]">
+        <!-- First page -->
+        <span ng-if="$index == 0 && pagingDef.currentPage > 0">
+            <a ng-href="void(0);">{{pagingDef.firstPageText || "first"}}</a>
+        </span>
+
+        <!-- all page index -->
+        <span ng-if="$index <= pagingDef.totalPageCount">
+            <a ng-href="void(0);">{{$index + 1}}</a>
+        </span>
+
+        <!-- Last page -->
+        <span ng-if="$index == pagingDef.totalPageCount && pagingDef.currentPage < pagingDef.totalPageCount">
+            <a ng-href="void(0);">{{pagingDef.lastPageText || "last"}}</a>
+        </span>
+
+        
+    </span>
+    <!-- allow ComboBox select -->
+        <span ng-if="allowComboBoxSelect">
+
+        </span>
+</div>

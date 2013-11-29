@@ -1,0 +1,43 @@
+<!--[if IE 7 ]>      
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-tw"> <![endif]-->
+<!--[if IE 8 ]>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="no-js ie ie8 lte8 lte9" lang="zh-tw"> <![endif]-->
+<!--[if IE 9 ]>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="no-js ie ie9 lte9>" lang="zh-tw"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<!doctype html>
+<html>
+
+<head>
+    <base href="{{baseUrl}}" target="_blank" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>cabin</title>
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!--[if lt IE 9]>
+        <script src="libs/components/html5shiv/dist/html5shiv.js"></script>
+        <script src="libs/components/json3/lib/json3.min.js"></script>
+        <script src="libs/components/respond/respond.min.js"></script>
+    <![endif]-->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="libs/components/requirejs/require.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+	<header cb-module="cbWilliam"></header>
+	<!-- 主要內容 -->
+	<div class="main-body ng-cloak page-content" ui-view>
+		William Test Content
+	</div>
+
+	<!-- 側欄 -->
+	<div ng-include="'_title.html'" ng-init="$active='william'"></div>
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 'use strict';
+
 var properties = {
     testMode: true,
     contentRoot: '/',
@@ -8,7 +9,8 @@ var properties = {
         'cbComboBox',
         'cbSplitter',
         'cbTxnRouterLoaderServ',
-        'cbComboBoxServ'
+        'cbComboBoxServ' //, //,
+        // 'cbWiTable'
     ],
     cabinModulePath: 'libs/modules/',
     //txnViewRootPath: 'views/',

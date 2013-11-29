@@ -1,0 +1,78 @@
+<script>
+function testCtrl($scope) {
+    $scope.dataSource = {
+        data: [{
+            field1: 'rowData11',
+            field2: 'rowData12',
+            field3: 'rowData13',
+            field4: 'rowData14'
+        }, {
+            field1: 'rowData21',
+            field2: 'rowData22',
+            field3: 'rowData23',
+            field4: 'rowData24'
+        }, {
+            field1: 'rowData31',
+            field2: 'rowData32',
+            field3: 'rowData33',
+            field4: 'rowData34'
+        }, {
+            field1: 'rowData41',
+            field2: 'rowData42',
+            field3: 'rowData43',
+            field4: 'rowData44'
+        }, {
+            field1: 'rowData51',
+            field2: 'rowData52',
+            field3: 'rowData53',
+            field4: 'rowData54'
+        }, {
+            field1: 'rowData61',
+            field2: 'rowData62',
+            field3: 'rowData63',
+            field4: 'rowData64'
+        }]
+    };
+}
+</script>
+<div ng-controller="testCtrl" style="margin: 10px;">
+    <div>
+        <span>Page 1 content</span>
+    </div>
+
+    <!-- TODO: moving-column not implement yet -->
+    <div cb-module="cbWiTable" tb-data-source="dataSource" moving-column="true" paging-position-top="false" paging-position-bottom="true">
+
+        <!-- paging settings -->
+        <!-- TODO: still work on -->
+        <paging-settings current-page="1" record-per-page="2" total-record-count="17" allow-combo-box-select="false" paging-click="fetchPageOfIndex()" first-page-text="首頁" last-page-text="末頁">
+        </paging-settings>
+
+        <!-- sort settings -->
+        <!-- TODO: not implement yet -->
+        <span sort-settings allow-sort="true" sort-field-name="field2" sort-desc="true" server-sort-event="sortByField()"></span>
+
+        <!-- freeze! -->
+        <!-- TODO: not implement yet -->
+        <span freeze freeze-field-name="field1" freeze-mode="true"></span>
+
+        <!-- column settings -->
+        <!-- TODO: editable, formatter not implement yet -->
+        <!-- customized column -->
+        <col-setting>
+            <span header-text="表頭1" formatter="methodName" align="center">
+                <input type="checkbox" field-name="field1">william test haha</input>
+            </span>
+
+            <!-- normal column -->
+            <span field-name="field2" header-text="表頭2" editable="true" align="center"></span>
+
+            <span field-name="field3" header-text="表頭3" align="center">
+                <input type="text" field-name="field3" />
+            </span>
+
+            <span field-name="field4" header-text="表頭4" editable="true" align="center"></span>
+        </col-setting>
+    </div>
+    
+</div>
