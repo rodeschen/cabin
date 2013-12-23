@@ -7,6 +7,7 @@ var properties = {
     useCabinLibs: [
         'cbComboBox',
         'cbSplitter',
+        'cbMask',
         'cbTxnRouterLoaderServ',
         'cbComboBoxServ'
     ],

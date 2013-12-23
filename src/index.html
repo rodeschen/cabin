@@ -16,8 +16,10 @@
     <base href="{{baseUrl}}" target="_blank" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>cabin</title>
-    <!-- build:css({.tmp,app}) styles/main.css -->
+    
+    <!-- build:css({.tmp,src}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <!--[if lt IE 9]>
@@ -25,18 +27,100 @@
         <script src="libs/components/json3/lib/json3.min.js"></script>
         <script src="libs/components/respond/respond.min.js"></script>
     <![endif]-->
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- build:js({.tmp,src}) scripts/scripts.js -->
     <script src="libs/components/requirejs/require.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
 </head>
 
 <body>
-    
+
     <!-- <div ng-include="'_title.html'" ng-init="$active='index'" class="sample-title"></div> -->
     <div class="main-body page-content ng-cloak">
         <ui-view ng-animate="'wave'"></ui-view>
         <div cb-module="cbNotify" cb-event="notify"></div>
     </div>
+    <style>
+    .pin {
+        position:absolute;
+        background-color:#AAA;
+    }
+    .sp {
+        width:0px;
+        height:1px;
+    }
+    </style>
+    <div style="width: 200px;height:500px;background-color:#FFF;margin:100px 100px;position: relative">
+        <div style="position: relative;overflow:hidden;height:100%">
+            <div id="head" style="white-space:nowrap;overflow: hidden">
+                <div>
+                    <span class="sp"></span>
+                    <span class="pin">1</span>
+                    <span>aaaa</span>
+                    <span>bbb</span>
+                    <span class="pin">bbb3</span>
+                    <span>bbb31</span>
+                    <span>bbb32</span>
+                    <span>bbb33</span>
+                    <span>bbb34</span>
+                    <span class="pin">bbb35</span>
+                    <span>bbb36</span>
+                    <span>bbb37</span>
+                    <span>bbb38</span>
+                    </span>
+                </div>
+                <!-- <div>
+                    <div style="position:absolute;background-color:#AAA">
+                        <span>aaaa</span>
+                        <span>bbb</span>
+                        <span>bbb3</span>
+                        <span style="">bbb3</span>
+                    </div>
+                    <div style="padding-left:140px;">
+                        <span style="">bbb3</span>
+                        <span style="">bbb3</span>
+                    </div>
+                </div> -->
+            </div>
+                <div id="tbody" style="white-space:nowrap;overflow: auto;;height:100%;">
+                    <div >
+                        <span class="sp"></span>
+                        <span class="pin">1</span>
+                        <span>aaaa</span>
+                        <span>bbb</span>
+                        <span class="pin">bbb3</span>
+                        <span>bbb31</span>
+                        <span>bbb32</span>
+                        <span>bbb33</span>
+                        <span>bbb34</span>
+                        <span class="pin">bbb35</span>
+                        <span>bbb36</span>
+                        <span>bbb37</span>
+                        <span>bbb38</span>
+                        </span>
+                    </div>
+                    <!-- <div>
+                        <div style="position:absolute;background-color:#AAA">
+                            <span>aaaa</span>
+                            <span>bbb</span>
+                            <span>bbb3</span>
+                            <span style="">bbb3</span>
+                        </div>
+                        <div style="padding-left:140px;">
+                            <span style="">bbb3</span>
+                            <span style="">bbb3</span>
+                        </div>
+                    </div> -->
+                </div>
+        </div>
+    </div>
+    <script>
+    setTimeout(function() {
+        $("#tbody").scroll(function(e) {
+            $("#head").scrollLeft($(this).scrollLeft())
+        })
+    }, 2000)
+    </script>
+
     <div ng-include="'_title.html'" ng-init="$active='index'"></div>
 </body>

@@ -9,10 +9,13 @@ require.config({
         'cbSideMenu': 'libs/modules/directives/cabin-sideMenu/cabin-sideMenu',
         'cbPageViewer': 'libs/modules/directives/cabin-pageViewer/cabin-pageViewer',
         'cbComboBox': 'libs/modules/directives/cabin-comboBox/cabin-comboBox',
+        'cbMask' : 'libs/modules/directives/cabin-mask/cabin-mask',
         // Service
         'cbTxnRouterLoaderServ': 'libs/modules/services/cabin-txnRouterLoaderServ',
         'cbLazyRegisterServ': 'libs/modules/services/cabin-lazyRegisterServ',
-        'cbComboBoxServ': 'libs/modules/services/cabin-comboBoxServ'
+        'cbComboBoxServ': 'libs/modules/services/cabin-comboBoxServ',
+
+        'cbTest': 'libs/modules/directives/cabin-test/cabin-test'
 
     },
     'shim': {

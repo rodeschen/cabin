@@ -5,7 +5,7 @@
                 <span class="title">語系</span>
             </div>
             <div class="col-3">
-                <input ng-model="data.locale" type="text" cb-combo-box  combo-key="lang" ng-init='data.locale="zh_TW"'/>
+                <input ng-model="data.locale" type="text" cb-combo-box combo-key="lang" edit="true" />
                 <!--<input type="text" ng-model="data.locale" />-->
             </div>
         </div>
@@ -15,15 +15,15 @@
                     <span class="title">字典種類</span>
                 </div>
                 <div class="col-3">
-                    <input type="text" ng-model="data.codeType" />
+                    <input type="text" ng-model="data.codeType" cb-mask />{{data.codeType}}
+                    <input type="text" ng-model="data.codeType" />{{data.codeType}}
 
                 </div>
                 <div class="col-3">
                     <span class="title">值</span>
                 </div>
                 <div class="col-2">
-                <button ng-click="ccc()">lll</button>
-                    <input type="text" ng-model="data.codeValue" class="medium" ng-click="data.locale = 'aaaaa'"/>
+                    <input type="text" ng-model="data.codeValue" class="medium" ng-click="data.locale = 'aaaaa'" />
                 </div>
             </div>
             <div class="row">
@@ -41,7 +41,9 @@
                 </div>
             </div>
         </div>
+        <input type="text" class="XXX" cb-module="cbTest" />
         <button ng-click="update(data)">xx</button>
+        <div>{{updated}}</div>
 
     </form>
     <div></div>

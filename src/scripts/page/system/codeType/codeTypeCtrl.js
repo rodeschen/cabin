@@ -9,9 +9,18 @@ define(['cabin'], function(cabin) {
             }
 
             $scope.ccc = function() {
-               // $scope.data.locale = "ASDFADSF"
+                // $scope.data.locale = "ASDFADSF"
                 $scope.data.locale = "zh_TW"
             }
+
+            // $scope.$watch("data.locale", function(value) {
+            //     value && $scope.$emit("broadcast", {
+            //         event: 'notify',
+            //         message: value,
+            //         type: ['error', 'normal', 'warn'][parseInt(((Math.random() * 100) % 3),10)],
+            //         time: new Date().getTime()
+            //     })
+            // });
 
 
         }

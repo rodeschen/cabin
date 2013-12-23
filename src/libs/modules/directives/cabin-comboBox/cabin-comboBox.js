@@ -1,5 +1,5 @@
 'use strict';
-define(['cabin'], function(cabin) {
+define(['cabin'], function() {
     return [['directive', 'cbComboBox', ['$rootScope', '$compile', '$timeout', '$parse', 'cabinModulePath',
         function($rootScope, $compile, $timeout, $parse, cabinModulePath) {
             return {
@@ -12,7 +12,8 @@ define(['cabin'], function(cabin) {
                     'ngModel': '=ngModel',
                     'comboKey': '@',
                     'dymanicKey': '@',
-                    'comboType': '@'
+                    'comboType': '@',
+                    'edit': '@'
                 },
                 link: function($scope, iElm, iAttrs, controller) {
                     iElm = iElm.find('input');
@@ -72,21 +73,25 @@ define(['cabin'], function(cabin) {
                         match: function(input) {
                             var mValue = input === undefined && $scope.getNgModelValue() || input;
                             var _matchs = [];
-                            if (mValue) {
-                                angular.forEach($scope.items, function(value, key) {
+                            if (mValue && $scope.isEdit()) {
+                                angular.forEach($scope.items, function(value) {
                                     if (value.constructor === String) {
-                                        reg.test(value) && _matchs.push(value)
-                                    } else {
-                                        if (new RegExp(mValue, 'gi').test(value.key) || new RegExp(mValue, 'gi').test(value.value)) {
-                                            _matchs.push(value);
-                                        }
+                                        new RegExp(mValue, 'gi').test(value) && _matchs.push(value);
+                                    } else if (new RegExp(mValue, 'gi').test(value.key) || new RegExp(mValue, 'gi').test(value.value)) {
+                                        _matchs.push(value);
                                     }
+
                                 });
                                 $scope.matchs = _matchs;
                             } else {
                                 $scope.matchs = $scope.items;
                             }
                             $scope.indexIdx = ($scope.matchs.length ? 0 : -1);
+
+
+                        },
+                        isEdit: function() {
+                            return $scope.edit !== 'false';
                         },
                         select: function(index) {
                             if (index === undefined) {
@@ -115,8 +120,8 @@ define(['cabin'], function(cabin) {
                         formatter: function() {
                             var v = $scope.getNgModelValue();
                             if (v && $scope.items && !local.isFocus) {
-                                angular.forEach($scope.items, function(value, key) {
-                                    if (value.key == v) {
+                                angular.forEach($scope.items, function(value) {
+                                    if (value.key === v) {
                                         if (value.constructor === String) {
                                             //Do nothing
                                         } else {
@@ -132,7 +137,7 @@ define(['cabin'], function(cabin) {
                     //up(38) / down(40), enter(13) and tab(9), esc(27)
                     iElm.on('keydown', function(e) {
                         var key = e.which;
-                        if (key == 40 || $scope.isOpen() && keys.indexOf(key) > -1) {
+                        if (key === 40 || $scope.isOpen() && keys.indexOf(key) > -1) {
                             if (key === 40) {
                                 $scope.activeIdx++;
                                 if (!$scope.isOpen()) {
@@ -158,9 +163,12 @@ define(['cabin'], function(cabin) {
                             $scope.$digest();
                             e.preventDefault();
                         }
+                        if (!$scope.isEdit() && keys.indexOf(key) === -1) {
+                            e.preventDefault();
+                        }
                     }).on('keyup', function(e) {
                         var key = e.which;
-                        if (!(keys.indexOf(key) > -1)) {
+                        if (keys.indexOf(key) === -1) {
                             if (!$scope.isOpen() && $scope.getNgModelValue()) {
                                 $scope.open();
                             }
@@ -178,9 +186,11 @@ define(['cabin'], function(cabin) {
                             if (!local.isFocus) {
                                 $scope.close();
                             }
-                        }, 50)
+                        }, 50);
                     });
+
                     $scope.$watch('getNgModelValue()', $scope.formatter);
+
                 }
             };
         }
@@ -190,7 +200,7 @@ define(['cabin'], function(cabin) {
                 templateUrl: cabinModulePath + 'directives/cabin-combobox/templates/cabin-comboBox-dropdown.html',
                 priority: 101,
                 restrict: 'A',
-                link: function($scope, iElm, iAttrs, controller) {
+                link: function($scope) {
                     var key = $scope.dymanicKey || $scope.comboKey || '';
                     key && comboBoxServ.addKey(key, !$scope.comboKey, function(items) {
                         $scope.items = items || [];
