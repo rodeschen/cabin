@@ -1,0 +1,11 @@
+{
+  "indexFile": "/module.html",
+  "proxies": {
+    "context": "/api",
+    "host": "localhost",
+    "port": 8080,
+    "rewrite": {
+      "^/api": "/cap-web/api"
+    }
+  }
+}
