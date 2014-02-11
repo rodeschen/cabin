@@ -5,9 +5,10 @@ var properties = {
     //testMode: false,
     //contentRoot: '/cap-web',
     useCabinLibs: [
+        'cbUtils',
         'cbComboBox',
         'cbSplitter',
-        'cbMask',
+        'cbMaskNumber',
         'cbTxnRouterLoaderServ',
         'cbComboBoxServ'
     ],

@@ -9,11 +9,12 @@ require.config({
         'cbSideMenu': 'libs/modules/directives/cabin-sideMenu/cabin-sideMenu',
         'cbPageViewer': 'libs/modules/directives/cabin-pageViewer/cabin-pageViewer',
         'cbComboBox': 'libs/modules/directives/cabin-comboBox/cabin-comboBox',
-        'cbMask' : 'libs/modules/directives/cabin-mask/cabin-mask',
+        'cbMaskNumber' : 'libs/modules/directives/cabin-mask/cabin-mask-number',
         // Service
         'cbTxnRouterLoaderServ': 'libs/modules/services/cabin-txnRouterLoaderServ',
         'cbLazyRegisterServ': 'libs/modules/services/cabin-lazyRegisterServ',
         'cbComboBoxServ': 'libs/modules/services/cabin-comboBoxServ',
+        'cbUtils': 'libs/modules/services/cabin-utils',
 
         'cbTest': 'libs/modules/directives/cabin-test/cabin-test'
 

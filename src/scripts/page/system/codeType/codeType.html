@@ -15,9 +15,7 @@
                     <span class="title">字典種類</span>
                 </div>
                 <div class="col-3">
-                    <input type="text" ng-model="data.codeType" cb-mask />{{data.codeType}}
-                    <input type="text" ng-model="data.codeType" />{{data.codeType}}
-
+                    <input type="text" ng-model="data.codeType" cb-mask-number />
                 </div>
                 <div class="col-3">
                     <span class="title">值</span>
@@ -37,14 +35,10 @@
                     <span class="title">排序</span>
                 </div>
                 <div class="col-2">
-                    <input type="text" cb-combo-box ng-model="data.codeOrder" class="extra-small" />
+                    <input type="text" ng-model="data.codeOrder" class="extra-small" />
                 </div>
             </div>
         </div>
-        <input type="text" class="XXX" cb-module="cbTest" />
-        <button ng-click="update(data)">xx</button>
-        <div>{{updated}}</div>
-
     </form>
     <div></div>
 </div>

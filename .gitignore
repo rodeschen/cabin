@@ -1,5 +1,6 @@
 .sass-cache
 .tmp
+config.json
 node_modules
 src/libs/components
 dist

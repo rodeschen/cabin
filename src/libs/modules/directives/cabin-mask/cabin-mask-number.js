@@ -1,17 +1,29 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['directive', 'cbMask', ['$filter', '$parse', '$timeout',
-        function($filter, $parse) {
+    return ['directive', 'cbMaskNumber', ['$filter', '$parse', 'cbUtils',
+        function($filter, $parse, cbUtils) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
                 link: function(scope, element, attrs, ngModel) {
+                    // var negative =
+                    var charPos = 0;
+                    var currentPos = 0;
+
+                    element.on("keydown", function(e) {
+                        //String.char
+                        currentPos = cbUtils.getCaretPosition(this);
+                        charPos = this.value.length - currentPos;
+                        //如果為「逗號」則shift 一位
+                        if (e.which === 8 && currentPos > 0 && this.value.substr(currentPos - 1, 1) === ',') {
+                            charPos++;
+                        }
+                    });
+
 
                     function parse(viewValue, noRender) {
-
                         if (!viewValue)
                             return viewValue;
-                        console.log("parse", viewValue)
                         // strips all non digits leaving periods.
                         var clean = viewValue.replace(/[^0-9.]+/g, '').replace(/\.{2,}/, '.');
 
@@ -25,41 +37,35 @@ define(['cabin'], function(cabin) {
 
                         if (!noRender)
                             ngModel.$render();
-                        ngModel.$modelValue = clean > 1000 ? "999" : clean;
-                        return clean > 1000 ? "999" : clean;
+                        ngModel.$modelValue = clean;
+                        return clean;
                     }
 
                     ngModel.$parsers.unshift(parse);
-                    ngModel.$formatters.push(function(v){
-                        console.log("formatter",v);
-                        return ((v?v*1:0) + 1000) + "";
-                    })
+                    // ngModel.$formatters.push(function(v) {
+                    //   return v;
+                    // });
                     ngModel.$render = function() {
                         var clean = parse(ngModel.$viewValue, true);
                         if (!clean)
                             return;
-
                         var currencyValue,
                             dotSplit = clean.split('.');
 
                         // todo: refactor, this is ugly
                         if (clean[clean.length - 1] === '.') {
-                            currencyValue = '$' + $filter('number')(parseFloat(clean)) + '.';
+                            currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean)) + '.';
 
                         } else if (clean.indexOf('.') != -1 && dotSplit[dotSplit.length - 1].length == 1) {
-                            currencyValue = '$' + $filter('number')(parseFloat(clean), 1);
+                            currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean), 1);
                         } else if (clean.indexOf('.') != -1 && dotSplit[dotSplit.length - 1].length == 1) {
-                            currencyValue = '$' + $filter('number')(parseFloat(clean), 2);
+                            currencyValue = /*'$' + */ $filter('number')(parseFloat(clean), 2);
                         } else {
-                            currencyValue = '$' + $filter('number')(parseFloat(clean));
+                            currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean));
                         }
-
                         element.val(currencyValue);
-
-                        console.log('viewValue', ngModel.$viewValue);
-                        console.log('modelValue', ngModel.$modelValue);
+                        cbUtils.setCaretPosition(element[0], currencyValue.length - charPos)
                     };
-
                 }
             };
         }
