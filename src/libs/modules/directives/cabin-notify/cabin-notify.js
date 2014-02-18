@@ -38,6 +38,7 @@ define(['cabin'], function(cabin) {
                     // action event
                     scope.$on(scope.receiveEvent || 'notify', function(ev, data) {
                         data.type = data.type || 'normal';
+                        data.time = data.time || new Date;
                         scope.events.push(data);
                         scope.hasNotify = true;
                     });

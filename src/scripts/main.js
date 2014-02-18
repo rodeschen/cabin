@@ -10,13 +10,15 @@ var properties = {
         'cbSplitter',
         'cbMaskNumber',
         'cbTxnRouterLoaderServ',
-        'cbComboBoxServ'
+        'cbComboBoxServ',
+        'cbWebSocketIoServ'
     ],
     cabinModulePath: 'libs/modules/',
     //txnViewRootPath: 'views/',
     txnViewRootPath: 'scripts/page/',
     txnScriptRootPath: 'scripts/page/',
-    comboBoxCache: false
+    comboBoxCache: false,
+    defWebSocketURI: 'http://' + window.location.hostname + ':9092'
 };
 
 require.config({

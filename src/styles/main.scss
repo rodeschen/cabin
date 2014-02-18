@@ -1,17 +1,19 @@
-@import 'compass/reset';
-@import 'define';
+@import "compass/reset";
+@import "define";
+
 //@import 'components/bootstrap-sass/lib/bootstrap';
-@import 'susy';
-@import 'components/font-awesome/scss/font-awesome';
+@import "susy";
+@import "components/font-awesome/scss/font-awesome";
+
 //@import "animate";
 //@import 'components/angular-animate.css/angular-animate';
 //@import 'components/animate.css/animate';
-@import 'modules/ng-animation';
-@import 'modules';
-
+@import "components/Buttons/scss/buttons";
+@import "modules/ng-animation";
+@import "modules";
 
 *, *:before, *:after {
-	@include box-sizing(border-box);
+  @include box-sizing(border-box);
 }
 
 /*
@@ -20,109 +22,108 @@
  conflicts
 */
 .reveal-animation.ng-enter.ng-enter-active {
- /* The animation code itself */
- opacity: 1;
+  /* The animation code itself */
+  opacity: 1;
 }
 
-.page-content{
-	@include container( $total-columns, $mobile, $pad, $pc );
-//	@include susy-grid-background;
+.page-content {
+  @include container($total-columns, $mobile, $pad, $pc);
+  //	@include susy-grid-background;
 }
-
-
 
 hide unready
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
-
 html {
-	height: 100%;
+  height: 100%;
 }
+
 body {
-  	line-height: 1.231;
-  	background-color: #16A085;
-	font-family: "Lato", sans-serif;
-	@include at-breakpoint($mobile){
-		font-size:12px
-	}
-	font-size:14px;
-	margin: 0;
-	//padding: 50px 0 0 0;
-    padding:0;
-	
-	.main-body{
-		position: relative;
-		margin: auto;
-		padding : 0;
-		min-height: 100%;
-	}
-	//padding-top:70px;
-	padding-bottom: 40px;
+  line-height: 1.231;
+  background-color: #16A085;
+  font-family: "Lato", sans-serif;
+  @include at-breakpoint($mobile) {
+    font-size: 12px;
+  }
+
+  font-size: 14px;
+  margin: 0;
+  //padding: 50px 0 0 0;
+  padding: 0;
+  .main-body {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    min-height: 100%;
+  }
+  //padding-top:70px;
+  padding-bottom: 40px;
 }
 
-
-$sample-navbar-width : 150px;
+$sample-navbar-width: 150px;
 $sample-navbar-hdie-left: -146px;
-.sample-navbar{
-	width: 100px;
-	@include at-breakpoint($mobile){
-		width: $sample-navbar-width / 3 *2;	
-	};
-	@include at-breakpoint($pad) {
-		width: $sample-navbar-width;
-	};
-	@include at-breakpoint($pc) {
-		width: $sample-navbar-width;
-	};
 
-	position: fixed;
-	background-color:#222;
-	top:0px;
-	bottom:0px;
+.sample-navbar {
+  width: 100px;
+  @include at-breakpoint($mobile) {
+    width: $sample-navbar-width / 3 * 2;
+  }
 
-	//left:0;
-	left :  $sample-navbar-hdie-left;
-	@include transition(left 0.2s );
-	//@include transition(width 0.2s );
-	color: #FFF;
-	nav{
-		padding-top :200px;
-		ul >{
-			li{
-				cursor: pointer; 
-				text-align: center;
-				&:hover,
-				&.active{
-					background:#DDD;
-					>a{
-						color:#555;
-					}
-				}
-				> a {
-			      position: relative;
-			      display: block;
-			      padding: 10px;
-			      text-decoration: none;
-			      color:#AAA;
-			      &:hover,
-			      &:focus {
-			        //background-color: $nav-link-hover-bg;
-			      }
-			    }
-			}
-		}
-	}
-	&:hover{
-		width: $sample-navbar-width;
-		position: fixed;
-		background-color:#222;
-		top:0px;
-		bottom:0px;
-		left : 0;	
-	}
-	
+  @include at-breakpoint($pad) {
+    width: $sample-navbar-width;
+  }
+
+  @include at-breakpoint($pc) {
+    width: $sample-navbar-width;
+  }
+
+  position: fixed;
+  background-color: #222;
+  top: 0px;
+  bottom: 0px;
+  //left:0;
+  left: $sample-navbar-hdie-left;
+  @include transition(left 0.2s);
+  //@include transition(width 0.2s );
+  color: #FFF;
+  nav {
+    padding-top: 200px;
+    ul > {
+      li {
+        cursor: pointer;
+        text-align: center;
+        &:hover,
+        &.active {
+          background: #DDD;
+          >a {
+            color: #555;
+          }
+        }
+        > a {
+          position: relative;
+          display: block;
+          padding: 10px;
+          text-decoration: none;
+          color: #AAA;
+          &:hover,
+          &:focus {
+            //background-color: $nav-link-hover-bg;
+         
+          }
+        }
+      }
+    }
+  }
+  &:hover {
+    width: $sample-navbar-width;
+    position: fixed;
+    background-color: #222;
+    top: 0px;
+    bottom: 0px;
+    left: 0;
+  }
 }
 
 // // sample nav bar end
@@ -135,13 +136,16 @@ $sample-navbar-hdie-left: -146px;
 // }
 
 //normal.html
-.main-body{
-	
-	section{
-		@include span-columns(8);
-		@include isolate(4);
-	}
-	height: 100%;
-	padding-bottom: 60px;
+.main-body {
+  section {
+    @include span-columns(8);
+    @include isolate(4);
+  }
+  height: 100%;
+  padding-bottom: 60px;
 }
 
+//customer socketStatus
+.top-menu  .socket-status {
+  padding: 10px;
+}

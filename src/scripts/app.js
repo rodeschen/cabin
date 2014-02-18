@@ -25,14 +25,21 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             // .state('group.Page', txnRouterLoaderSrv.setRoute('^/:group/:page'));
 
         }
-    ]).run(['$rootScope', '$window', '$http', 'properties',
-        function($rootScope, $window, $http, properties) {
+    ]).run(['$rootScope', '$window', '$http', 'properties', 'cbWebSocketIoServ',
+        function($rootScope, $window, $http, properties, cbWebSocketIoServ) {
             $rootScope.$on('broadcast', function(ev, args) {
                 //console.log('broadcast', args);
                 $rootScope.$broadcast(args.event, args);
             });
             $rootScope.baseUrl = ('http://' + $window.location.host + properties.contentRoot).replace(/\/$/, '') + "/";
             properties.contentRoot = properties.contentRoot.replace(/\/$/, '') + "/";
+
+            var gSocket = cbWebSocketIoServ.getConnect(properties.defWebSocketURI, "gSocket");
+            gSocket.on("chatevent", function(data) {
+                $rootScope.$broadcast("notify",{
+                    message : data.userName + " : " + data.message
+                })
+            });
         }
     ]).controller('appCtrl', appCtrl);
 });

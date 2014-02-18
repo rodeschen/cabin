@@ -21,7 +21,8 @@
       "angular-socket-io": "0.3.0",
       "jquery" :"1.11.0",
       "font-awesome" : "4.0.3",
-      "angular-animate.css": "1.0.1"
+      "angular-animate.css": "1.0.1",
+      "Buttons" : "latest"
   },
   "devDependencies": {
       "angular-mocks": "1.2.13",

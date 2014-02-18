@@ -1,11 +1,10 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['controller', 'webSocketCtrl', ['$scope',
-        function($scope) {
-            $scope.updated = {};
-            $scope.data = {};
-            $scope.update = function() {
-                $scope.updated = angular.copy($scope.data);
+    return ['controller', 'webSocketCtrl', ['$scope', 'gSocket',
+        function($scope, gSocket) {
+            $scope.send = function(data) {
+                gSocket.emit('chatevent', data);
+                data.message = undefined;
             }
         }
     ]];

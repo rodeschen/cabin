@@ -1,45 +1,13 @@
-<div class="page-context">
-    <form>
-        <div class="row">
-            <div class="col-2">
-                <span class="title">語系x</span>
-            </div>
-            <div class="col-3">
-                <input type="text" ng-model="data.locale" />
-            </div>
-        </div>
-        <div ng-show="data.locale =='111'" class="toggle">
-            <div class="row">
-                <div class="col-2">
-                    <span class="title">字典種類x</span>
-                </div>
-                <div class="col-3">
-                    <input type="text" ng-model="data.codeType" />
-                </div>
-                <div class="col-3">
-                    <span class="title">值x</span>
-                </div>
-                <div class="col-2">
-                    <input type="text" ng-model="data.codeValue" class="medium" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <span class="title">值描述x</span>
-                </div>
-                <div class="col-3">
-                    <input type="text" ng-model="data.codeDesc" class="extra-large" />
-                </div>
-                <div class="col-3">
-                    <span class="title">排序x</span>
-                </div>
-                <div class="col-2">
-                    <input type="text" ng-model="data.codeOrder" class="extra-small" />
-                </div>
-            </div>
-        </div>
-        <button ng-click="update(data)">xx</button>
+<div class="page-context" ng-controller="webSocketCtrl">
+  <form>
+    <div class="row">
+      <div class="col-12">
+        訊息
+        <input type="text" require ng-model="data.userName" class="normal" />
+        <input type="text" require ng-model="data.message" class="extra-large" />
+        <button type="button" class="button button-rounded button-flat-primary"  ng-click="send(data)">Send</button>
+      </div>
+    </div>
 
-    </form>
-    <div>{{updated}}</div>
+  </form>
 </div>

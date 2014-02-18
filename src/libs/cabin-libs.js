@@ -10,11 +10,15 @@ require.config({
         'cbPageViewer': 'libs/modules/directives/cabin-pageViewer/cabin-pageViewer',
         'cbComboBox': 'libs/modules/directives/cabin-comboBox/cabin-comboBox',
         'cbMaskNumber' : 'libs/modules/directives/cabin-mask/cabin-mask-number',
+        'cbSocketStatus' : 'libs/modules/directives/cabin-socketStatus/cabin-socketStatus',
         // Service
         'cbTxnRouterLoaderServ': 'libs/modules/services/cabin-txnRouterLoaderServ',
         'cbLazyRegisterServ': 'libs/modules/services/cabin-lazyRegisterServ',
         'cbComboBoxServ': 'libs/modules/services/cabin-comboBoxServ',
         'cbUtils': 'libs/modules/services/cabin-utils',
+        'cbWebSocketIoServ' : 'libs/modules/services/cabin-websocket-io',
+
+
 
         'cbTest': 'libs/modules/directives/cabin-test/cabin-test'
 

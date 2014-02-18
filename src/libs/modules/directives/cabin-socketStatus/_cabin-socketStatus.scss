@@ -1,0 +1,21 @@
+$socket-status-connect: green !default;
+$socket-status-connecting: yellow !default;
+$socket-status-error: red !default;
+
+.socket-status {
+  cursor: pointer;
+  @include transition(color 2s);
+  @include text-shadow(0px 0px 6px rgba(255,210,210,1));
+  &.connect {
+    color: $socket-status-connect;
+  }
+  &.connecting {
+    color: $socket-status-connecting;
+  }
+  &.error {
+    color: $socket-status-error;
+  }
+  &.disconnect {
+    color: $socket-status-error;
+  }
+}
