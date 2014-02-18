@@ -10,8 +10,8 @@ require.config({
         'angular-mocks': 'libs/components/angular-mocks/angular-mocks',
         'angular-ui-router': 'libs/components/angular-ui-router/release/angular-ui-router',
         'angular-ui-bootstrap': 'libs/components/angular-bootstrap/ui-bootstrap',
-        'angular-ui-utils': 'libs/components/angular-ui-utils/components/angular-ui-docs/build/ui-utils',
-        'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/components/angular-ui-docs/build/ui-utils-ieshiv.min'
+        'angular-ui-utils': 'libs/components/angular-ui-utils/ui-utils',
+        'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/ui-utils-ieshiv.min'
     },
     shim: {
         'angular': ['jquery'],
