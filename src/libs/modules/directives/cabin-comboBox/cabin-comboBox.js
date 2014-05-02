@@ -111,6 +111,8 @@ define(['cabin'], function() {
                                 switch ($scope.comboType || '3') {
                                     case '1':
                                         return data.key;
+                                    case '2':
+                                        return data.value;
                                     default:
                                         return data.key + ' - ' + data.value;
                                 }
@@ -181,12 +183,12 @@ define(['cabin'], function() {
                     }).on('blur', function() {
                         local.isFocus = false;
                         $scope.formatter();
-                        //確保已離開
+                        // change to 500ms for waiting click event fire 
                         $timeout(function() {
                             if (!local.isFocus) {
                                 $scope.close();
                             }
-                        }, 50);
+                        }, 500);
                     });
 
                     $scope.$watch('getNgModelValue()', $scope.formatter);

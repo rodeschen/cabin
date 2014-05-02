@@ -1,6 +1,6 @@
 require.config({
     paths: {
-        'jquery': 'libs/components/jquery/jquery',
+        'jquery': 'libs/components/jquery/dist/jquery',
         'socket-io': 'libs/components/socket.io-client/dist/socket.io',
         'angular': 'libs/components/angular/angular',
         'angular-animate': 'libs/components/angular-animate/angular-animate',

@@ -118,12 +118,12 @@ module.exports = function(grunt) {
             return [
               lrSnippet,
               require('grunt-connect-proxy/lib/utils').proxyRequest,
-              modRewrite([
-                '!\\.html|login|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg|\\.ico$ ' + yeomanConfig.project.indexFile
-              ]),
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test'),
-              mountFolder(connect, yeomanConfig.app)
+               // modRewrite([
+               //   '!\\.html|login|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg|\\.ico$ ' + yeomanConfig.project.indexFile
+               // ]),
+               mountFolder(connect, '.tmp'),
+               mountFolder(connect, 'test'),
+               mountFolder(connect, yeomanConfig.app)
             ];
           }
         }

@@ -2,30 +2,30 @@
   "name": "cabin",
   "version": "0.0.1",
   "dependencies": {
-      "angular": "1.2.13",
-      "angular-animate": "1.2.13",
-      "angular-mocks": "1.2.13",
-      "angular-resource": "1.2.13",
-      "angular-route": "1.2.13",
-      "angular-loader": "1.2.13",
-      "angular-sanitize": "1.2.13",
+      "angular": "1.2.16",
+      "angular-animate": "1.2.16",
+      "angular-mocks": "1.2.16",
+      "angular-resource": "1.2.16",
+      "angular-route": "1.2.16",
+      "angular-loader": "1.2.16",
+      "angular-sanitize": "1.2.16",
       "angular-bootstrap" : "0.10.0",
-      "angular-ui-router": "0.2.8-bowratic-tedium",
+      "angular-ui-router": "0.2.10",
       "angular-ui-utils" : "0.1.1",
       "bootstrap-sass": "3.0.2",
-      "html5shiv": "3.7.0",
-      "json3": "3.3.0",
+      "html5shiv": "3.7.1",
+      "json3": "3.3.1",
       "requirejs": "2.1.11",
       "respond": "1.4.2",
       "socket.io-client" : "0.9.16",
-      "angular-socket-io": "0.3.0",
+      "angular-socket-io": "0.6.0",
       "jquery" :"1.11.0",
       "font-awesome" : "4.0.3",
       "angular-animate.css": "1.0.1",
       "Buttons" : "latest"
   },
   "devDependencies": {
-      "angular-mocks": "1.2.13",
-      "angular-scenario": "1.2.13"
+      "angular-mocks": "1.2.16",
+      "angular-scenario": "1.2.16"
     }
 }
