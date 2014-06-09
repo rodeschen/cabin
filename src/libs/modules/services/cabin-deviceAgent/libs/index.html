@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Invoking XMLRPC</title>
+<script src="vcXMLRPC.js"></script>
+<script src="deviceagent.js"></script>
+<script type="text/javascript">
+<!--
+/*
+ * Initialize PbPrinterService XML-RPC Service
+ */
+initXmlRpcService();
+/*
+ * Custom functions
+ */
+function initXmlRpcService() {
+	try {
+		pbPrinterService.initXmlRpcService();
+	} catch(e) {
+		alert("Exception:"+e.description);
+	}
+}
+function getObjectName() {
+ 	try {
+		var result = pbPrinterService.getObjectName();
+		document.getElementById("getObjectName_response").value = result;
+	} catch(e) {
+		alert("Exception:"+e.description);
+	}
+}
+function obtainSession() {
+ 	try {
+		var result = pbPrinterService.obtainSession();
+		document.getElementById("obtainSession_response").value = result;
+	} catch(e) {
+		alert("Exception:"+e.description);
+	}
+}
+function returnSession() {
+ 	try {
+ 		var returnSession_request = document.getElementById("returnSession_request").value;
+		var result = pbPrinterService.returnSession(returnSession_request);
+		document.getElementById("returnSession_response").value = result;
+	} catch(e) {
+		alert("Exception:"+e.description);
+	}
+}
+function decode() {
+ 	try {
+ 		var sessionId = document.getElementById("decode_sessionId").value;
+ 		var prompt = document.getElementById("decode_prompt").value;
+ 		var trackNo = parseInt(document.getElementById("decode_trackNo").value);
+ 		var eject = "true"==document.getElementById("decode_eject").value;
+		var result = pbPrinterService.decode(sessionId, prompt, trackNo, eject);
+		document.getElementById("decode_response").value = result;
+	} catch(e) {
+		alert("Exception:"+e.description);
+	}
+}
+function encode() {
+ 	try {
+ 		var sessionId = document.getElementById("encode_sessionId").value;
+ 		var data = document.getElementById("encode_data").value;
+ 		var prompt = document.getElementById("encode_prompt").value;
+ 		var trackNo = parseInt(document.getElementById("encode_trackNo").value);
+ 		var eject = "true"==document.getElementById("encode_eject").value;
+		var result = pbPrinterService.encode(sessionId, data, prompt, trackNo, eject);
+		document.getElementById("encode_response").value = result;
+	} catch(e) {
+		alert("Exception:"+e.description);
+	}
+}
+function print() {
+ 	try {
+ 		var sessionId = document.getElementById("print_sessionId").value;
+ 		var data = document.getElementById("print_data").value;
+ 		var prompt = document.getElementById("print_prompt").value;
+ 		var cpi = document.getElementById("print_cpi").value;
+ 		var lpi = document.getElementById("print_lpi").value;
+		var result = pbPrinterService.print(sessionId, data, prompt, cpi, lpi);
+		document.getElementById("print_response").value = result;
+	} catch(e) {
+		alert("Exception:"+e.description);
+	}
+}
+//-->
+</script>
+</head>
+<body>
+<input type="button" value="getObjectName" onclick="getObjectName();"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;response:<input type="text" id="getObjectName_response" name="getObjectName_response" size="50"><br>
+
+<input type="button" value="obtainSession" onclick="obtainSession();"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;response:<input type="text" id="obtainSession_response" name="obtainSession_response" size="50"><br>
+
+<input type="button" value="returnSession" onclick="returnSession()"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: sessionId=<input type="text" id="returnSession_request" name="returnSession_request" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;response:<input type="text" id="returnSession_response" name="returnSession_response" size="50"><br>
+
+<input type="button" value="decode" onclick="decode();"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: sessionId=<input type="text" id="decode_sessionId" name="decode_sessionId" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: prompt=<input type="text" id="decode_prompt" name="decode_prompt" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: trackNo=<input type="text" id="decode_trackNo" name="decode_trackNo" size="1"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: eject=<input type="text" id="decode_eject" name="decode_eject" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;response:<input type="text" id="decode_response" name="decode_response" size="50"><br>
+
+<input type="button" value="encode" onclick="encode();"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: sessionId=<input type="text" id="encode_sessionId" name="encode_sessionId" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: data=<input type="text" id="encode_data" name="encode_data" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: prompt=<input type="text" id="encode_prompt" name="encode_prompt" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: trackNo=<input type="text" id="encode_trackNo" name="encode_trackNo" size="1"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: eject=<input type="text" id="encode_eject" name="encode_eject" size="5"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;response:<input type="text" id="encode_response" name="encode_response" size="5"><br>
+
+<input type="button" value="print" onclick="print();"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: sessionId=<input type="text" id="print_sessionId" name="print_sessionId" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: data=<input type="text" id="print_data" name="print_data" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: prompt=<input type="text" id="print_prompt" name="print_prompt" size="50"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: cpi=<input type="text" id="print_cpi" name="print_cpi" size="4"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;request param: lpi=<input type="text" id="print_lpi" name="print_lpi" size="4"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;response:<input type="text" id="print_response" name="print_response" size="10"><br>
+
+</body>
+</html>

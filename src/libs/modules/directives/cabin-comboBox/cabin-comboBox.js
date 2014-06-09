@@ -169,6 +169,7 @@ define(['cabin'], function() {
                             e.preventDefault();
                         }
                     }).on('keyup', function(e) {
+
                         var key = e.which;
                         if (keys.indexOf(key) === -1) {
                             if (!$scope.isOpen() && $scope.getNgModelValue()) {

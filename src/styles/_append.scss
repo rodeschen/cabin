@@ -1,0 +1,105 @@
+@import "modules";
+
+.tooltip {
+  position: absolute;
+  color: #fff;
+  background: #000;
+  top: 10px !important;
+  border-radius: 3px;
+  padding: 10px 10px;
+  display: inline-block;
+  @include box-longShadow(4, #111111);
+  &:before {
+    content: '';
+    border-style: solid;
+    border-width: 12px 12px 12px 0;
+    border-color: transparent #000 transparent transparent;
+    height: 0;
+    position: absolute;
+    left: 17.5px;
+    top: -15px;
+    width: 0;
+    -webkit-transform: rotate(90deg);
+  }
+}
+
+.tooltip.ng-enter {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip.ng-enter-active {
+  opacity: 1;
+}
+
+.top-menu nav.buttons ul li a {
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+header {
+  .banner {
+    @include isolate(2);
+    @include span-columns(3);
+    .img {
+      background-image: url(/images/banner.png);
+      width: 200px;
+      height: 45px;
+      margin: 13px 5px;
+      display: block;
+      background-size: 200px 45px;
+    }
+  }
+  .info {
+    @include span-columns(3);
+    >div {
+      line-height: 20px;
+      width: 300px;
+      padding: 6px 5px;
+      height: 30px;
+      color: #EEE;
+      font-weight: 900;
+    }
+  }
+}
+
+footer {
+  width: 100%;
+  display: block;
+  height: 50px;
+  position: fixed;
+  bottom: 0px;
+  background: #34495E;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.loginPage{
+  
+}
+
+body{
+  //background-color: #1ABC9C;
+  //@include transition(background-color)
+}
+
+.form-group input.form-control{
+  width: 100%;
+}
+
+.login{
+  width: 1000px;
+  margin : auto;
+  .login-screen{
+    @include border-radius(7px);
+    border: 12px #2C3E50 solid;
+  }
+}
+
+.combo-box-list a{
+  color : #000;
+}
+
+
+input[cb-mask-number]{
+  text-align: right;
+}

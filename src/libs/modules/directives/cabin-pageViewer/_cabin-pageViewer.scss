@@ -1,11 +1,14 @@
 .page-viewer{
-	//@include isolate(1);
-	@include span-columns(7);
+	@include isolate(2);
+	@include span-columns(10);
 	background-color:#ECF0F1;
 	display:block;
 	margin-top:40px;
-	min-height: 420px;
+	//min-height: 420px;
+	min-height: 520px;
 	position: relative;
+	border: 5px #2C3E50 solid;
+	@include border-radius(5px);
 
 	.row{
 		&:before, &:after {
@@ -27,7 +30,7 @@
 		height: 100%;
 		//background-color: #FFF;
 		[class*=col]{
-			padding: 10px 0;
+			padding: 4px 0;
 
 		}
 		.col-1{
@@ -96,10 +99,10 @@
 		}
 
 		input.extra-large{
-			width: 200px;
+			width: 300px;
 		}
-		input.larg{
-			width: 150px;
+		input.large{
+			width: 200px;
 		}
 		input.medium{
 			width : 100px;
@@ -114,11 +117,12 @@
 		}
 
 		.title{
-			font-size: 1em;
+			font-size: 1.1em;
 			display: block;
 			line-height: 2em;
 			text-align: right;
 			padding:0 1em;
+			font-weight: 900;
 		}
 
 		.title-left{
@@ -184,7 +188,7 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
-	width: 100px;
+	width: 95px;
 }
 	
 
@@ -228,6 +232,23 @@ input[type="color"]:focus,
 }
 
 
+input[type="text"][disabled],
+input[type="password"][disabled],
+input[type="datetime"][disabled],
+input[type="datetime-local"][disabled],
+input[type="date"][disabled],
+input[type="month"][disabled],
+input[type="time"][disabled],
+input[type="week"][disabled],
+input[type="number"][disabled],
+input[type="email"][disabled],
+input[type="url"][disabled],
+input[type="search"][disabled],
+input[type="tel"][disabled],
+input[type="color"][disabled],
+.uneditable-input {
+	background-color: #AAA;
+}
 
 
 

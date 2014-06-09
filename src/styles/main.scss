@@ -1,5 +1,9 @@
 @import "compass/reset";
 @import "define";
+@import "icons";
+@import "bootstrap";
+@import "flat-ui";
+
 
 //@import 'components/bootstrap-sass/lib/bootstrap';
 @import "susy";
@@ -42,11 +46,17 @@ html {
 
 body {
   line-height: 1.231;
-  background-color: #16A085;
+  //background-color: #16A085;
+  &.is-login{
+    background-color: #bac1c8;  
+  }
   font-family: "Lato", sans-serif;
+  min-width: 1024px;
   @include at-breakpoint($mobile) {
     font-size: 12px;
+    width : 100%;
   }
+
 
   font-size: 14px;
   margin: 0;
@@ -149,3 +159,5 @@ $sample-navbar-hdie-left: -146px;
 .top-menu  .socket-status {
   padding: 10px;
 }
+
+@import "append";

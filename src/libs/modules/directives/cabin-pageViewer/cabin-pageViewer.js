@@ -20,9 +20,15 @@ define(['cabin'], function(cabin) {
                             }
                         });
                     }
-                    if (scope.initPath) {
-                        openPage(scope.initPath); 
-                    }
+                    // if (scope.initPath) {
+                    //     openPage(scope.initPath); 
+                    // }
+
+                    scope.$watch('initPath',function(v){
+                        v && openPage(v);    
+                    });
+
+
 
 
 

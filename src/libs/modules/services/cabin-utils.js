@@ -2,6 +2,47 @@
 define(['cabin'], function(cabin) {
     return ['service', 'cbUtils', [
         function() {
+            // add String method
+            $.extend(String.prototype, {
+                // 計算有幾個全型字、中文字... 或英數字混雜
+                countLength: function(type) {
+                    var c = this.match(/[^ -~]/g);
+                    if (type == 'B') { // big5
+                        // +2
+                        return this.length + (c ? c.length : 0);
+                    } else { // 預設UTF-8 +3
+                        return this.length + (c ? c.length * 2 : 0);
+                    }
+                },
+
+                /* 半型字符範圍：33-126;全型字符範圍：65281-65374:對應關係是相差：65248;全型空格：12288;半型空格：32* */
+                // 轉全型
+                toFull: function() {
+                    var result = "";
+                    var str = $.trim(this);
+                    for (var i = 0; i < str.length; i++) {
+                        var tmp;
+                        var c = str.charCodeAt(i);
+                        tmp = (c <= 126 && c >= 33) && c + 65248 || (c == 32) && 12288 || c;
+                        result += String.fromCharCode(tmp);
+                    }
+                    return result;
+                },
+                // 轉半型
+                toHalf: function() {
+                    var result = "";
+                    var str = $.trim(this);
+                    for (var i = 0; i < str.length; i++) {
+                        var tmp;
+                        var c = str.charCodeAt(i);
+                        tmp = (c <= 65374 && c >= 65281) && c - 65248 || (c == 12288) && 32 || c;
+                        result += String.fromCharCode(tmp);
+                    }
+                    return result;
+                }
+            });
+
+
             var utils = {
                 // from angular ui -utils start
                 getCaretPosition: function(input) {

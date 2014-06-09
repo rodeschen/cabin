@@ -9,16 +9,14 @@
 <html class="no-js ie ie9 lte9>" lang="zh-tw"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <!doctype html>
-<html class="no-js" lang="zh-tw">
+<html class="no-js" lang="zh-tw" ng-cloak>
 <!--<![endif]-->
 
 <head>
-    <base href="{{baseUrl}}" target="_blank" />
+    <base href="/" target="_blank" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>cabin</title>
-    
     <!-- build:css({.tmp,src}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
@@ -33,94 +31,86 @@
     <!-- endbuild -->
 </head>
 
-<body>
-
-    <!-- <div ng-include="'_title.html'" ng-init="$active='index'" class="sample-title"></div> -->
-    <div class="main-body page-content ng-cloak">
-        <ui-view ng-animate="'wave'"></ui-view>
-        <div cb-module="cbNotify" cb-event="notify"></div>
-    </div>
-    <style>
-    .pin {
-        position:absolute;
-        background-color:#AAA;
-    }
-    .sp {
-        width:0px;
-        height:1px;
-    }
-    </style>
-    <div style="width: 200px;height:500px;background-color:#FFF;margin:100px 100px;position: relative">
-        <div style="position: relative;overflow:hidden;height:100%">
-            <div id="head" style="white-space:nowrap;overflow: hidden">
+<body ng-controller="appCtrl" ng-class="{'is-login':isLogin}">
+    <!-- <header cb-module="cbTopMenu" receive-event="topMenuBar" emit-event="sideBar"> -->
+    <header ng-show="isLogin" class="slide-down">
+        <div class="top-menu page-content">
+            <span class="banner">
+                <div class="img"></div>
+            </span>
+            <span class="info">
                 <div>
-                    <span class="sp"></span>
-                    <span class="pin">1</span>
-                    <span>aaaa</span>
-                    <span>bbb</span>
-                    <span class="pin">bbb3</span>
-                    <span>bbb31</span>
-                    <span>bbb32</span>
-                    <span>bbb33</span>
-                    <span>bbb34</span>
-                    <span class="pin">bbb35</span>
-                    <span>bbb36</span>
-                    <span>bbb37</span>
-                    <span>bbb38</span>
-                    </span>
+                    <div>分行　　：200
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LU： B9404</span>
+                    </div>
+                    <div>使用者　：888801 - 高級專員 (2002560)</div>
+                    <div>營業日期：103/05/26 - {{currentTime | date:'HH:mm:ss'}}</div>
                 </div>
-                <!-- <div>
-                    <div style="position:absolute;background-color:#AAA">
-                        <span>aaaa</span>
-                        <span>bbb</span>
-                        <span>bbb3</span>
-                        <span style="">bbb3</span>
+            </span>
+
+            <nav class="buttons">
+                <ul>
+                    <li>
+                        <a href="" class="icon icon-booklet" ng-tooltip="日誌" ng-click="openTxn('codeType')"></a>
+                    </li>
+                    <li>
+                        <a href="" class="icon icon-security" ng-tooltip="授權" ng-click="openTxn('system/codeType')"></a>
+                    </li>
+                    <li>
+                        <a href="" class="icon icon-compose" ng-tooltip="代辦"></a>
+                    </li>
+                    <li>
+                        <a href="" class="icon icon-browser" ng-tooltip="理規Web"></a>
+                    </li>
+                    <li>
+                        <a href="" class="icon icon-computer" ng-tooltip="3270"></a>
+                    </li>
+                    <li>
+                        <a href="" class="icon icon-power" ng-tooltip="簽退"></a>
+                    </li>
+                    <!-- <li>
+                        <a href="" class="icon icon-locked" ng-tooltip="鎖定"></a>
+                    </li> -->
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    </header>
+
+    <div class="main-body ng-cloak page-content">
+        <div ng-hide="!isLogin || isLock" class="toggle">
+            <div cb-module="cbPageViewer" init-path="/favorite" receive-event="pageViewer"></div>
+        </div>
+        <div ng-if="!isLogin">
+            <div class="login">
+                <div class="login-screen">
+                    <div class="login-icon">
+                        <img src="images/login/icon.png" alt="Welcome to Mail App">
+                        <h4>Welcome to
+                            <small>iBranch</small>
+                        </h4>
                     </div>
-                    <div style="padding-left:140px;">
-                        <span style="">bbb3</span>
-                        <span style="">bbb3</span>
+
+                    <div class="login-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control login-field" ng-model="userForm.userId" value="" placeholder="Enter your name" id="login-name">
+                            <label class="login-field-icon fui-user" for="login-name"></label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" ng-model="userForm.password"class="form-control login-field" value="" placeholder="Password" id="login-pass">
+                            <label class="login-field-icon fui-lock" for="login-pass"></label>
+                        </div>
+
+                        <a class="btn btn-primary btn-lg btn-block" href="" ng-click="login(userForm)">Log in</a>
                     </div>
-                </div> -->
+                </div>
             </div>
-                <div id="tbody" style="white-space:nowrap;overflow: auto;;height:100%;">
-                    <div >
-                        <span class="sp"></span>
-                        <span class="pin">1</span>
-                        <span>aaaa</span>
-                        <span>bbb</span>
-                        <span class="pin">bbb3</span>
-                        <span>bbb31</span>
-                        <span>bbb32</span>
-                        <span>bbb33</span>
-                        <span>bbb34</span>
-                        <span class="pin">bbb35</span>
-                        <span>bbb36</span>
-                        <span>bbb37</span>
-                        <span>bbb38</span>
-                        </span>
-                    </div>
-                    <!-- <div>
-                        <div style="position:absolute;background-color:#AAA">
-                            <span>aaaa</span>
-                            <span>bbb</span>
-                            <span>bbb3</span>
-                            <span style="">bbb3</span>
-                        </div>
-                        <div style="padding-left:140px;">
-                            <span style="">bbb3</span>
-                            <span style="">bbb3</span>
-                        </div>
-                    </div> -->
-                </div>
         </div>
     </div>
-    <script>
-    setTimeout(function() {
-        $("#tbody").scroll(function(e) {
-            $("#head").scrollLeft($(this).scrollLeft())
-        })
-    }, 2000)
-    </script>
-
-    <div ng-include="'_title.html'" ng-init="$active='index'"></div>
+    <!-- <footer ng-show="isLogin" class="slide-top">
+    </footer> -->
+    <div ng-show="isLogin" class="slide-top" cb-module="cbNotify"></div>
 </body>

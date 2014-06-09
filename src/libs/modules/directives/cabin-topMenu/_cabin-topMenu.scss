@@ -1,52 +1,60 @@
-$top-menu-background-color: #34495E !default;
-$top-menu-background-color-li-active: #1ABC9C;
-$top-menu-font-color: #FFF !default;
-$top-menu-font-color-hover: #1ABC9C !default;
-$top-menu-font-color-ative: #FFF !default;
-.top-menu{
-	height: auto;
-	background: #34495E;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+$top-menu-background-color: #34495e !default;
+$top-menu-background-color-li-active: #1abc9c;
+$top-menu-font-color: white !default;
+$top-menu-font-color-hover: #1abc9c !default;
+$top-menu-font-color-ative: white !default;
 
-	nav{
-		@include at-breakpoint($mobile){
-			@include isolate(1);
-			@include span-columns(5);
-		};
-		@include at-breakpoint($pad){
-			@include isolate(3); 
-			@include span-columns(5);
-		};
-		@include at-breakpoint($pc){
-			@include isolate(5); 
-			@include span-columns(5);
-		}
-		@include clearfix();
-		ul{
-			background-color: $top-menu-background-color;
-			li{
-				@include transition(background-color 0.2s);
-				cursor: pointer; 
-				float:left;
-				position: relative;
-				display: inline-block;
-				color:#FFF;
-				padding:13px;
-				a{	
-					font-size: 1.2em;
-					line-height: 1.5em;
-				}
-				&:hover{
-					color:$top-menu-font-color-hover;
-				}
-				&.active{
-					background-color: $top-menu-background-color-li-active;
-					color: $top-menu-font-color-ative;
-				}
-
-				
-			}
-		}
-		
-	}
+.top-menu {
+  height: auto;
+  background: #34495E;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  nav {
+    // @include at-breakpoint($mobile){
+    // 	@include isolate(1);
+    // 	@include span-columns(5);
+    // };
+    // @include at-breakpoint($pad){
+    // 	@include isolate(3); 
+    // 	@include span-columns(5);
+    // };
+    //@include at-breakpoint($pc){
+    @include isolate(3);
+    @include span-columns(5);
+    //}
+    @include clearfix;
+    ul {
+      background-color: $top-menu-background-color;
+      li {
+        @include transition(background-color 0.2s);
+        float: left;
+        position: relative;
+        display: inline-block;
+        color: #FFF;
+        padding: 13px;
+        a {
+          font-size: 1.2em;
+          line-height: 2.0em;
+        }
+        &:hover {
+          color: $top-menu-font-color-hover;
+        }
+        &.active {
+          background-color: $top-menu-background-color-li-active;
+          color: $top-menu-font-color-ative;
+        }
+      }
+    }
+    &.buttons {
+      @include isolate(1);
+      @include span-columns(4);
+      float: right;
+      right: 50px;
+      ul li {
+        padding: 13px 5px;
+        a {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }

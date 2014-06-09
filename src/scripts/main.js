@@ -5,13 +5,15 @@ var properties = {
     //testMode: false,
     //contentRoot: '/cap-web',
     useCabinLibs: [
+        'cbBehavior',
         'cbUtils',
         'cbComboBox',
         'cbSplitter',
         'cbMaskNumber',
         'cbTxnRouterLoaderServ',
         'cbComboBoxServ',
-        'cbWebSocketIoServ'
+        'cbWebSocketIoServ',
+        'cbDeviceAgent'
     ],
     cabinModulePath: 'libs/modules/',
     //txnViewRootPath: 'views/',

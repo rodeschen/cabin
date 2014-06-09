@@ -118,12 +118,20 @@ module.exports = function(grunt) {
             return [
               lrSnippet,
               require('grunt-connect-proxy/lib/utils').proxyRequest,
-               // modRewrite([
-               //   '!\\.html|login|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg|\\.ico$ ' + yeomanConfig.project.indexFile
-               // ]),
+              modRewrite([
+                  '!\\.html|login|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg|\\.ico$ ' + yeomanConfig.project.indexFile
+              ]),
                mountFolder(connect, '.tmp'),
                mountFolder(connect, 'test'),
-               mountFolder(connect, yeomanConfig.app)
+               mountFolder(connect, yeomanConfig.app),
+               function(req, res, next) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+          res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+          // don't just call next() return it
+          return next();
+        }
             ];
           }
         }
