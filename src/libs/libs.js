@@ -14,7 +14,8 @@ require.config({
         'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/ui-utils-ieshiv.min',
         'tether-utils': 'libs/components/tether/js/utils',
         'tether': 'libs/components/tether/js/tether',
-        'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip'
+        'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
+        'angular-modal' : 'libs/components-fixed/angular-modal'
     },
     shim: {
         'angular': ['jquery'],
@@ -27,11 +28,12 @@ require.config({
         'angular-ui-bootstrap': ['angular'],
         'angular-ui-utils': ['angular'],
         'angular-ui-utils-hiv': ['angular'],
+        'angular-modal': ['angular'],
         'tether' : ['tether-utils'],
         'angular-tooltip': ['angular','tether']
     }
 });
 
-define('libs', ['jquery', 'socket-io', 'angular', 'angular-animate', 'angular-sanitize', 'angular-resource', 'angular-ui-router', 'angular-socket-io', 'angular-ui-bootstrap', 'angular-ui-utils', 'angular-ui-utils-hiv','tether','angular-tooltip'].concat(properties.testMode ? ['angular-mocks'] : []), function() {
+define('libs', ['jquery', 'socket-io', 'angular', 'angular-animate', 'angular-sanitize', 'angular-resource', 'angular-ui-router', 'angular-socket-io', 'angular-ui-bootstrap', 'angular-ui-utils', 'angular-ui-utils-hiv','tether','angular-tooltip','angular-modal'].concat(properties.testMode ? ['angular-mocks'] : []), function() {
     console.log('libs Initialized');
 });

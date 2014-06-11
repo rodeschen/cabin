@@ -36,7 +36,6 @@
 		.col-1{
 			@include span-columns(1);
 		}
-
 		.col-2{
 			@include span-columns(2);
 		}
@@ -96,6 +95,31 @@
 		}
 		.col-21{
 			@include span-columns(21);
+		}
+
+		.offset-1{
+			@include isolate(1);
+		}
+		.offset-2{
+			@include isolate(2);
+		}
+		.offset-3{
+			@include isolate(3);
+		}
+		.offset-4{
+			@include isolate(4);
+		}
+		.offset-5{
+			@include isolate(5);
+		}
+		.offset-6{
+			@include isolate(6);
+		}
+		.offset-7{
+			@include isolate(7);
+		}
+		.offset-8{
+			@include isolate(8);
 		}
 
 		input.extra-large{
@@ -232,24 +256,30 @@ input[type="color"]:focus,
 }
 
 
-input[type="text"][disabled],
-input[type="password"][disabled],
-input[type="datetime"][disabled],
-input[type="datetime-local"][disabled],
-input[type="date"][disabled],
-input[type="month"][disabled],
-input[type="time"][disabled],
-input[type="week"][disabled],
-input[type="number"][disabled],
-input[type="email"][disabled],
-input[type="url"][disabled],
-input[type="search"][disabled],
-input[type="tel"][disabled],
-input[type="color"][disabled],
+input[type="text"][disabled],input[type="text"][readonly],
+input[type="password"][disabled],input[type="password"][readonly],
+input[type="datetime"][disabled],input[type="datetime"][readonly],
+input[type="datetime-local"][disabled],input[type="datetime-local"][readonly],
+input[type="date"][disabled],input[type="date"][readonly],
+input[type="month"][disabled],input[type="month"][readonly],
+input[type="time"][disabled],input[type="time"][readonly],
+input[type="week"][disabled],input[type="week"][readonly],
+input[type="number"][disabled],input[type="number"][readonly],
+input[type="email"][disabled],input[type="email"][readonly],
+input[type="url"][disabled],input[type="url"][readonly],
+input[type="search"][disabled],input[type="search"][readonly],
+input[type="tel"][disabled],input[type="tel"][readonly],
+input[type="color"][disabled],input[type="color"][readonly],
 .uneditable-input {
-	background-color: #AAA;
+	background-color: #ECF0F1;
 }
 
+
+textarea.ng-invalid,
+input.ng-invalid,
+.uneditable-input.ng-invalid {
+  border-color: #e74c3c !important;
+}
 
 
 

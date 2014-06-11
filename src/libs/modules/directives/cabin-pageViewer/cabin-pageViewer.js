@@ -8,7 +8,9 @@ define(['cabin'], function(cabin) {
                 scope: {
                     'cbPageView': '@',
                     'receiveEvent': '@',
-                    'initPath' : '@'
+                    'initPath': '@',
+                    'initData': '=',
+                    'readOnly': '='
                 },
                 link: function(scope, iElement) {
                     scope.includeUrl = "";
@@ -24,8 +26,12 @@ define(['cabin'], function(cabin) {
                     //     openPage(scope.initPath); 
                     // }
 
-                    scope.$watch('initPath',function(v){
-                        v && openPage(v);    
+                    if (scope.initData) {
+                        angular.extend(scope, scope.initData);
+                    }
+
+                    scope.$watch('initPath', function(v) {
+                        v && openPage(v);
                     });
 
 
@@ -93,7 +99,19 @@ define(['cabin'], function(cabin) {
                                 $q.all(promises).then(function() {
                                     $timeout(function() {
                                         if (s.templateUrl === true) {
+                                            scope.$on('$includeContentLoaded', function() {
+
+                                                if (scope.readOnly == true) {
+                                                    $timeout(function() {
+                                                        iElement.find("input").prop('readonly', true);
+                                                    }, 500);
+                                                }
+                                                $timeout(function() {
+                                                    iElement.find("input[readonly],textarea[readonly]").attr('tabindex', -1);
+                                                }, 600);
+                                            });
                                             scope.includeUrl = properties.txnViewRootPath + url + '/' + pageName + ".html"
+
                                         }
                                     }, 100)
                                 });

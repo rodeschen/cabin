@@ -9,11 +9,17 @@ var properties = {
         'cbUtils',
         'cbComboBox',
         'cbSplitter',
+        'cbSupeviseModal',
         'cbMaskNumber',
         'cbTxnRouterLoaderServ',
         'cbComboBoxServ',
         'cbWebSocketIoServ',
-        'cbDeviceAgent'
+        //for poc
+        'cbDeviceAgent',
+        'iBranchServ',
+        'userServ'
+
+
     ],
     cabinModulePath: 'libs/modules/',
     //txnViewRootPath: 'views/',

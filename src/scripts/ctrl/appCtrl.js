@@ -1,6 +1,6 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$scope', '$http', '$timeout', '$interval', function($scope, $http, $timeout, $interval) {
+    return ['$scope', '$http', '$timeout', '$interval', 'cbSupeviseModal', 'userServ', function($scope, $http, $timeout, $interval, cbSupeviseModal, userServ) {
         $http.get('basehandler/queryMenu').success(function(data) {
             $timeout(function() {
                 $scope.$emit('broadcast', {
@@ -23,12 +23,28 @@ define(['cabin'], function(cabin) {
                     $scope.$emit('broadcast', {
                         event: 'pageViewer',
                         page: {
-                            url: 'txn120606'
+                            url: txnId
                         }
                     });
                 },
                 login: function(userForm) {
-                    $scope.isLogin = true
+                    if (!userForm.$invalid) {
+                        userServ.login(userForm.userId, userForm.password);
+                    }
+                },
+                logout: function(){
+                    userServ.logout();
+                },
+                openModal: function() {
+                    cbSupeviseModal.activate({
+                        'lists': ["BA12起息日期不同1", "測試訊息2"],
+                        'txnData': {
+                            data: {
+                                func: '2',
+                                custId: 'aaa'
+                            }
+                        }
+                    });
                 }
             });
 

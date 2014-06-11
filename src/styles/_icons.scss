@@ -2,40 +2,55 @@
 @import "modules/cabin-animate";
 
 .icon {
-    width: 40px;
-    height: 40px;
-    display: block;
-    background-size:40px;
-    background-repeat:no-repeat;
-    @include box-longShadow(7,#111);
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  @include box-longShadow(7, #111111);
+  &.icon-64 {
+    width: 64px;
+    height: 64px;
+    background-size: 64px;
+  }
 }
 
 .icon-booklet {
-    background-image: url(/images/booklet.png);
+  background-image: url(/images/booklet.png);
 }
+
 .icon-browser {
-    background-image: url(/images/browser.png);
+  background-image: url(/images/browser.png);
 }
+
 .icon-compose {
-    background-image: url(/images/compose.png);
+  background-image: url(/images/compose.png);
 }
+
 .icon-computer {
-    background-image: url(/images/computer.png);
+  background-image: url(/images/computer.png);
 }
+
 .icon-contacts {
-    background-image: url(/images/contacts.png);
+  background-image: url(/images/contacts.png);
 }
+
 .icon-locked {
-    background-image: url(/images/locked.png);
+  background-image: url(/images/locked.png);
 }
+
 .icon-power {
-    background-image: url(/images/power.png);
+  background-image: url(/images/power.png);
 }
+
 .icon-security {
-    background-image: url(/images/security.png);
+  background-image: url(/images/security.png);
 }
 
+.icon-money {
+  background-image: url(/images/money.png);
+}
 
-
-
-
+.icon-gold {
+  background-image: url(/images/gold.png);
+}

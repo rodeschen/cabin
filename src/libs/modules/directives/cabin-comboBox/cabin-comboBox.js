@@ -54,7 +54,9 @@ define(['cabin'], function() {
                             return $scope.showList;
                         },
                         toggle: function() {
-
+                            if(iElm.prop('readonly') || iElm.prop('disabled')){
+                                return;
+                            }
                             if ($scope.isOpen()) {
                                 $scope.close();
                             } else {
@@ -181,6 +183,7 @@ define(['cabin'], function() {
                     }).on('focus', function() {
                         local.isFocus = true;
                         $scope.ngModel && iElm.val(controller.$viewValue);
+                        iElm.closest('[cb-combo-box]').addClass('cb-focus');
                     }).on('blur', function() {
                         local.isFocus = false;
                         $scope.formatter();
@@ -190,6 +193,7 @@ define(['cabin'], function() {
                                 $scope.close();
                             }
                         }, 500);
+                        iElm.closest('[cb-combo-box]').removeClass('cb-focus');
                     });
 
                     $scope.$watch('getNgModelValue()', $scope.formatter);

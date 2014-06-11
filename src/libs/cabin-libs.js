@@ -2,7 +2,7 @@
 require.config({
     'paths': {
         // Directives
-        'cbBehavior' : 'libs/modules/directives/cabin-behavior/cabin-behavior',
+        'cbBehavior': 'libs/modules/directives/cabin-behavior/cabin-behavior',
         'cbModule': 'libs/modules/directives/cabin-module/cabin-module',
         'cbSplitter': 'libs/modules/directives/cabin-splitter/cabin-splitter',
         'cbNotify': 'libs/modules/directives/cabin-notify/cabin-notify',
@@ -19,6 +19,10 @@ require.config({
         'cbUtils': 'libs/modules/services/cabin-utils',
         'cbWebSocketIoServ': 'libs/modules/services/cabin-websocket-io',
 
+
+        // Modal
+        'cbSupeviseModal': 'libs/modules/modals/cabin-supeviseModal/cabin-supeviseModal',
+
         //deviceAgent
         //'xmlRPC': 'libs/modules/services/cabin-deviceAgent/libs/vcXMLRPC',
         //'xmlRPC' : 'libs/components/mimic',
@@ -27,6 +31,18 @@ require.config({
         //'deviceAgent' : 'libs/modules/services/cabin-deviceAgent/libs/deviceagent',
         'cbDeviceAgent': 'libs/modules/services/cabin-deviceAgent/cabin-deviceAgent',
 
+
+
+
+
+        //for poc
+        'iBranchServ': 'scripts/services/iBranchServ',
+        'userServ': 'scripts/services/userServ',
+
+
+
+
+
         'cbTest': 'libs/modules/directives/cabin-test/cabin-test'
 
 
@@ -34,7 +50,7 @@ require.config({
 
     },
     'shim': {
-        'cbBehavior' : ['libs', 'cabin'],
+        'cbBehavior': ['libs', 'cabin'],
         'cbSplitter': ['libs', 'cabin'],
         'cbNotify': ['libs', 'cabin'],
         'cbModule': ['libs', 'cabin'],
@@ -44,9 +60,13 @@ require.config({
         //service
         'cbTxnRouterLoaderServ': ['libs', 'cabin'],
         'cbLazyRegisterServ': ['libs', 'cabin'],
+        //modal
+        'cbSupeviseModal': ['libs', 'cabin'],
         //deviceAgent
         'deviceAgent': ['xmlRPC'],
-        'cbDeviceAgent': ['libs', 'cabin', 'xmlRPC', /*'deviceAgent'*/]
+        'cbDeviceAgent': ['libs', 'cabin', 'xmlRPC', /*'deviceAgent'*/ ],
+        'iBranchServ': ['libs', 'cabin'],
+        'userServ': ['libs', 'cabin', 'iBranchServ']
     }
 });
 
