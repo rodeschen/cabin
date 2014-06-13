@@ -22,6 +22,7 @@ require.config({
 
         // Modal
         'cbSupeviseModal': 'libs/modules/modals/cabin-supeviseModal/cabin-supeviseModal',
+        'cbSupeviseRequireModal' : 'libs/modules/modals/cabin-supeviseRequireModal/cabin-supeviseRequireModal',
 
         //deviceAgent
         //'xmlRPC': 'libs/modules/services/cabin-deviceAgent/libs/vcXMLRPC',
@@ -62,6 +63,7 @@ require.config({
         'cbLazyRegisterServ': ['libs', 'cabin'],
         //modal
         'cbSupeviseModal': ['libs', 'cabin'],
+        'cbSupeviseRequireModal': ['libs', 'cabin'],
         //deviceAgent
         'deviceAgent': ['xmlRPC'],
         'cbDeviceAgent': ['libs', 'cabin', 'xmlRPC', /*'deviceAgent'*/ ],

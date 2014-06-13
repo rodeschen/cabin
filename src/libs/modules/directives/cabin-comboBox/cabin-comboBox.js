@@ -11,12 +11,17 @@ define(['cabin'], function() {
                 scope: {
                     'ngModel': '=ngModel',
                     'comboKey': '@',
+                    'comboList': '=',
                     'dymanicKey': '@',
                     'comboType': '@',
                     'edit': '@'
+
                 },
                 link: function($scope, iElm, iAttrs, controller) {
                     iElm = iElm.find('input');
+                    if(iAttrs.autofocus !== undefined){
+                        iElm.focus();
+                    }
                     iElm.addClass(iAttrs.class || '').attr(iAttrs.css || '');
 
                     var local = {
@@ -54,7 +59,7 @@ define(['cabin'], function() {
                             return $scope.showList;
                         },
                         toggle: function() {
-                            if(iElm.prop('readonly') || iElm.prop('disabled')){
+                            if (iElm.prop('readonly') || iElm.prop('disabled')) {
                                 return;
                             }
                             if ($scope.isOpen()) {
@@ -85,6 +90,7 @@ define(['cabin'], function() {
 
                                 });
                                 $scope.matchs = _matchs;
+                                controller.$setValidity('cbComboBox', _matchs.length > 0);
                             } else {
                                 $scope.matchs = $scope.items;
                             }
@@ -208,12 +214,18 @@ define(['cabin'], function() {
                 priority: 101,
                 restrict: 'A',
                 link: function($scope) {
-                    var key = $scope.dymanicKey || $scope.comboKey || '';
-                    key && comboBoxServ.addKey(key, !$scope.comboKey, function(items) {
-                        $scope.items = items || [];
+                    if ($scope.comboList) {
+                        $scope.items = $scope.comboList || [];
                         $scope.match($scope.getNgModelValue());
                         $scope.formatter();
-                    });
+                    } else {
+                        var key = $scope.dymanicKey || $scope.comboKey || '';
+                        key && comboBoxServ.addKey(key, !$scope.comboKey, function(items) {
+                            $scope.items = items || [];
+                            $scope.match($scope.getNgModelValue());
+                            $scope.formatter();
+                        });
+                    }
                 }
             };
         }

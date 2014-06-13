@@ -8,7 +8,8 @@ define(['cabin'], function(cabin) {
                 userId: false
             };
             iBranchServ.send('000002').success(function(data) {
-                user = angular.extend(data);
+                user = angular.extend(user, data);
+                console.log(user)
                 defer.resolve(data);
             }).error(function() {
                 angular.extend(promise, {
@@ -29,6 +30,18 @@ define(['cabin'], function(cabin) {
                     }).then(function(data) {
                         angular.extend(user, data.data);
                         $rootScope.isLogin = true;
+                    }, function(data) {
+                        console.log('error');
+                    });
+                },
+                logout: function() {
+                    return iBranchServ.send("000003", {
+                        userId: user.userId,
+                    }).then(function(data) {
+                        angular.extend(user, {
+                            user: false
+                        });
+                        $rootScope.isLogin = false;
                     }, function(data) {
                         console.log('error');
                     });

@@ -7,10 +7,12 @@ define(['cabin'], function(cabin) {
                 restrict: 'A',
                 scope: {
                     'cbNotify': "@",
-                    'receiveEvent': '@'
+                    'receiveEvent': '@',
+                    'maxNotify': '@'
                 },
                 link: function(scope, iElement) {
                     scope.events = [];
+                    scope.maxNofiy = parseInt(scope.maxNotify || 30, 10);
                     // scope.events = [{
                     //  'type':'normal',
                     //  'time':'10/01 10:10:10',
@@ -40,6 +42,9 @@ define(['cabin'], function(cabin) {
                         data.type = data.type || 'normal';
                         data.time = data.time || new Date;
                         scope.events.push(data);
+                        if (scope.events.length > scope.maxNofiy) {
+                            scope.events.shift();
+                        }
                         scope.hasNotify = true;
                     });
 

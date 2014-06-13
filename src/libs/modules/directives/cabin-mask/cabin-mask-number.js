@@ -10,14 +10,14 @@ define(['cabin'], function(cabin) {
                     var charPos = 0;
                     var currentPos = 0;
                     var val, keyIn;
-                    var validChar = "^( " + ["4[8-9]|5[0-7]", + // "0-9" number
+                    var validChar = "^(" + ["4[8-9]|5[0-7]", + // "0-9" number
                         "189", // "-" negative 
                         "8", // backspace
                         "9", // tab
                         "3[79]", // → ←
                         "190",
-                        "13"
-                    ].join("|") // enter
+                        "13"    // enter
+                    ].join("|") 
                     + ")$";
 
                     element.on("keydown", function(e) {
@@ -30,7 +30,9 @@ define(['cabin'], function(cabin) {
                             charPos++;
                             return;
                         }
-
+                        if(e.which === 48 && charPos === 0 && val.match(/[.]0$/)){
+                            return false;
+                        }
                         //ignore invalid char 
                         if (!(new RegExp(validChar).test(e.which))) {
                             return false;
@@ -42,6 +44,8 @@ define(['cabin'], function(cabin) {
                         if(e.which === 190 && this.value.indexOf(".") > 0){
                             return false;
                         }
+                        //fix: alaways to parse
+                        ngModel.$setViewValue("");
                     });
 
 

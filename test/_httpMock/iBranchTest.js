@@ -27,7 +27,47 @@ define(['cabin'], function(cabin) {
                 //query isLogin
                 '000002': function() {
                     //return [200, user, {}];
-                    return [400, {},{}];
+                    return [400, {}, {}];
+                },
+                '000003': function() {
+                    return [200, user, {}];
+                },
+                '120606': function(data) {
+                    if (data.supevise) {
+                        if (data.supevise === "333333") {
+                            return [200, {
+                                txnStatus: '1',
+                                message: "approve"
+                            }, {}];
+                        }
+                        return [400, {
+                            message: "reject"
+                        }, {}];
+
+                    }
+
+                    if (data.func != '2') {
+                        return [200, {
+                            txnStatus: '9',
+                            supevise: {
+                                messages: ["BA12起息日期不同11", "測試訊息22", "測試訊息33", "測試訊息44", "測試訊息55"],
+                                users: [{
+                                    key: '11111',
+                                    value: '1111name'
+                                }, {
+                                    key: '222222',
+                                    value: '22222name'
+                                }, {
+                                    key: '333333',
+                                    value: '3333name'
+                                }]
+                            }
+                        }, {}];
+                    } else {
+                        return [200, {
+                            txnStatus: '1'
+                        }];
+                    }
                 }
 
             };

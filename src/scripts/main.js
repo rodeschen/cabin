@@ -9,7 +9,6 @@ var properties = {
         'cbUtils',
         'cbComboBox',
         'cbSplitter',
-        'cbSupeviseModal',
         'cbMaskNumber',
         'cbTxnRouterLoaderServ',
         'cbComboBoxServ',
@@ -17,7 +16,10 @@ var properties = {
         //for poc
         'cbDeviceAgent',
         'iBranchServ',
-        'userServ'
+        'userServ',
+        //modal 
+        'cbSupeviseModal',
+        'cbSupeviseRequireModal'
 
 
     ],

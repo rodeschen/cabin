@@ -1,0 +1,33 @@
+<div class="btf-modal cabin-modal cabin-supevise-require-modal toggle page-content">
+    <div class="supevise-message-context">
+        <form name="sendForm" novalidate>
+            <div class="row col-xs-12">
+                <div class="col-xs-5">
+                    <div class="supevise-message">
+                        <ul>
+                            <li ng-repeat="message in messages">{{message}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-5 col-xs-offset-1">
+
+                    <div class="supevise-user-info">請選擇主管名稱　：
+                        <br/>
+                        <input ng-model="sendForm.user" type="text" required cb-combo-box combo-list="users" edit="true" autofocus/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-md-offset-6">
+                    <a href="" class="btn btn-block btn-lg btn-primary" ng-click="send(sendForm)">Send</a> 
+                </div>
+                <div class="col-xs-3">
+                    <a href="" class="btn btn-block btn-lg btn-danger" ng-click="cancel()">Cancel</a>
+                </div>
+            </div>
+        </form>
+        <div class="supevise-overlay" ng-show="sendSupevise">
+            
+        </div>
+    </div>
+</div>

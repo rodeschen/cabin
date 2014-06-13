@@ -82,6 +82,40 @@ define(['cabin'], function(cabin) {
                         return dom[0];
                     }
                     return dom;
+                },
+                validDate: function(text, isTwDate) {
+                    var comp = text.replace(/\//g, "");
+                    if (isTwDate) {
+                        if (comp.length === 7) {
+                            comp = (parseInt(text.substr(0, 3), 10) + 1911) + text.substr(3);
+                        } else {
+                            return false;
+                        }
+                    } else if (comp.length !== 8) {
+                        return false;
+                    }
+                    var y = parseInt(comp.substr(0, 4), 10);
+                    var m = parseInt(comp.substr(4, 2), 10);
+                    var d = parseInt(comp.substr(6, 2), 10);
+
+                    var date = new Date(y, m - 1, d);
+                    if (date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                },
+                formatDate: function(text, isTwDate) {
+                    var comp = text.replace(/\//g, "");
+                    if (this.validDate(comp, isTwDate)) {
+                        if (isTwDate) {
+                            return comp.substr(0, 3) + "/" + comp.substr(3, 2) + "/" + comp.substr(5, 2);    
+                        }else{
+                            return comp.substr(0, 4) + "/" + comp.substr(4, 2) + "/" + comp.substr(6, 2);    
+                        }
+                        
+                    }
                 }
             };
             return utils;

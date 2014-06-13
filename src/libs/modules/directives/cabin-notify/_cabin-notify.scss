@@ -1,113 +1,114 @@
 @import "modules/cabin-animate";
 
-@include animate-flash-color(notify-flash, background, #333, #800);
+@include animate-flash-color(notify-flash, background, #333333, #880000);
 
-.msg-area{
-	position: fixed;
-	bottom: 0px;
-	height: auto;
-	color:#FFF;
-	right:5%;
-	vertical-align: middle;
-	border-right:  #DDD 0px solid; 
-	z-index: 1040px;
-	// stash
-	font-size: 1.0em;
-	
-	
-	.msg-title.msg-notify{
-		@include animation(notify-flash 3s infinite);
-	}
-
-	.msg-title{
-		padding:5px 0 ;
-		float:right;
-		background-color: #333;
-		width:100px;
-		text-align: center;
-		//height:25px;
-		position: relative;
-		cursor: pointer;
-		@include box-shadow(1px 1px 1px rgba(20%,20%,40%,0.5));
-	}
- 
-
-	.msg-close-btn{
-		display: inline-block;
-		cursor: pointer;		
-		color: #0AA;
-	}
-
-	.msg-body{
-		position: relative;
-		clear: both;
-		float:right;
-		padding:0;
-		width:350px;
-		height:0px;
-		color:black;
-		border-left: #DDD 1px solid; 
-		border-top: #DDD 1px solid; 
-		border-right: #DDD 0px solid; 
-		overflow: auto;
-		background: 	#EEE  50% 50% repeat-x;
-		@include transition(height 0.2s );
-		@include box-shadow(1px 1px 1px rgba(20%,20%,40%,0.5));
-
-		.msg{
-			margin: 5px 10px ;
-			padding: 5px 10px;
-			@include box-shadow(1px 1px 1px rgba(20%,20%,40%,0.5));
-		}
-
-		.msg-wrapper{
-			position: absolute;
-			width: 100%;
-			bottom: 0;
-			overflow:hidden;
-		}
-
-
-		.msg-event-title{
-			float:left;
-		}	
-
-		.msg-event-message{
-			padding-left:20px;
-		}
-	}
-
-
-	&.msg-close{
-		.msg-body{
-			height: 5px;
-			border: #DDD 0px solid;
-		}
-	}
-
+.msg-area {
+  @include calc(width, 100% - 10%);
+  left: 5%;
+  min-width: 900px;
+  margin: auto;
+  position: fixed;
+  bottom: 0px;
+  height: auto;
+  color: #FFF;
+  vertical-align: middle;
+  border-right: #DDD 0px solid;
+  z-index: 2200;
+  // stash
+  font-size: 1.0em;
+  .msg-title.msg-notify {
+    @include animation(notify-flash 3s infinite);
+  }
+  .msg-title {
+    padding: 5px 0;
+    float: right;
+    background-color: #333;
+    width: 100px;
+    text-align: center;
+    //height:25px;
+    position: relative;
+    cursor: pointer;
+    @include box-shadow(1px 1px 1px rgba(20%, 20%, 40%, 0.5));
+  }
+  .msg-last-msg {
+    padding: 5px 0 5px 5px;
+    @include calc(width, "100% - 100px");
+    word-wrap: break-word;
+    overflow: hidden;
+    background-color: #2980B9;
+    @include transition(background-color 300ms);
+    i {
+      padding: 0px 5px;
+    }
+  }
+  .msg-close-btn {
+    display: inline-block;
+    cursor: pointer;
+    color: #0AA;
+  }
+  .msg-body {
+    position: relative;
+    clear: both;
+    float: right;
+    padding: 0;
+    width: 100%;
+    height: 0px;
+    color: black;
+    border-left: #DDD 1px solid;
+    border-top: #DDD 1px solid;
+    border-right: #DDD 0px solid;
+    overflow: auto;
+    background: #EEE  50% 50% repeat-x;
+    @include transition(height 0.2s);
+    @include box-shadow(1px 1px 1px rgba(20%, 20%, 40%, 0.5));
+    .msg {
+      margin: 5px 10px;
+      padding: 5px 10px;
+      @include box-shadow(1px 1px 1px rgba(20%, 20%, 40%, 0.5));
+    }
+    .msg-wrapper {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      overflow: hidden;
+    }
+    .msg-event-title {
+      float: left;
+    }
+    .msg-event-message {
+      padding-left: 20px;
+    }
+  }
+  &.msg-close {
+    .msg-body {
+      height: 5px;
+      border: #DDD 0px solid;
+    }
+  }
 }
 
-.msg-area{
-	.msg{
-		&.msg-type-normal{
-			background-color: #FFFFFF;
-			color: #000;
-			//@include text-longShadow(10,#AAA - #777);
-			//@include box-longShadow(1,#AAA - #777);
-		}
-
-		&.msg-type-error{
-			background-color: #C0402A;
-			color: #FFF;
-			//	@include box-longShadow(1,#C0402A - #777);
-			//@include text-longShadow(10,#C0402A - #777);
-		}
-
-		&.msg-type-warn{
-			background-color: #FAFAAA;
-			color: #000;
-			//	@include box-longShadow(1,#FAFAAA - #777);
-			//@include text-longShadow(10,#FAFAAA - #777);
-		}
-	}
+.msg-area {
+  //.msg, {
+  .msg-type-normal {
+    background-color: #FFFFFF;
+    color: #000;
+    //@include text-longShadow(10,#AAA - #777);
+    //@include box-longShadow(1,#AAA - #777);
+ 
+  }
+  .msg-type-error {
+    background-color: #C0402A;
+    color: #FFF;
+    //	@include box-longShadow(1,#C0402A - #777);
+    //@include text-longShadow(10,#C0402A - #777);
+ 
+  }
+  .msg-type-warn {
+    background-color: #FAFAAA;
+    color: #000;
+    //	@include box-longShadow(1,#FAFAAA - #777);
+    //@include text-longShadow(10,#FAFAAA - #777);
+ 
+  }
+  //}
 }

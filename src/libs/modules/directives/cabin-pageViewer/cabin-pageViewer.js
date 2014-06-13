@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['directive', 'cbPageViewer', ['$rootScope', '$compile', '$timeout', '$q', 'properties', 'cbLazyRegisterServ', 'cabinModulePath',
-        function($rootScope, $compile, $timeout, $q, properties, cbLazyRegister, cabinModulePath) {
+    return ['directive', 'cbPageViewer', ['$rootScope', '$compile', '$timeout', '$q', 'properties', 'cbLazyRegisterServ', 'cabinModulePath', 'iBranchServ',
+        function($rootScope, $compile, $timeout, $q, properties, cbLazyRegister, cabinModulePath, iBranchServ) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-pageViewer/templates/pageViewer.html',
                 restrict: 'AEC',
@@ -34,11 +34,23 @@ define(['cabin'], function(cabin) {
                         v && openPage(v);
                     });
 
-
-
-
+                    //for poc
+                    var txnId;
+                    scope.submitForm = function(dataForm) {
+                        console.log(dataForm);
+                        if (dataForm.$valid) {
+                            iBranchServ.send(txnId, dataForm);
+                        } else {
+                            iBranchServ.sendMessage('error', "煩請確認資料是否正確!");
+                        }
+                    }
 
                     function openPage(pageUrl) {
+                        if (pageUrl.match(/txn[1-9]+/)) {
+                            txnId = pageUrl.replace('txn', '');
+                        } else {
+                            txnId = '';
+                        }
                         if (pageUrl) {
                             var url = pageUrl.replace(/(^\/|\/$)/, '');
                             var pageName = url.split('/');

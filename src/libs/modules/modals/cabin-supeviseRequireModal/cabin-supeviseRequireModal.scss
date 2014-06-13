@@ -1,0 +1,40 @@
+.cabin-modal.cabin-supevise-require-modal {
+  background-color: #ECF0F1;
+  border: 7px #2980B9 solid;
+  position: fixed;
+  width: 500px;
+  font-size: 15px;
+  max-width: 950px;
+  overflow-y: auto;
+  margin: auto 0px;
+  padding: auto 0px;
+  top: 45%;
+  .supevise-message-context {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    top: 0px;
+    //background-color: #34495E;
+    //border-bottom: 2px #222 solid;
+    //color: #EEE;
+    overflow: hidden;
+    .supevise-message {
+      //height: 60px;
+      overflow: auto;
+    }
+    .supevise-user-info {
+      //height: 60px;
+   
+    }
+    .supevise-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1400;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+}

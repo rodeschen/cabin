@@ -1,3 +1,6 @@
 <div class="page-viewer">
-    <div id="includePage" ng-include="includeUrl" class="toggle-enter"></div>
+	<form name="data" ng-submit="!readOnly && submitForm(data)" novalidate>
+    	<div id="includePage" ng-include="includeUrl" class="toggle-enter"></div>
+    	<input type="submit" class="hidden" value="submit"/>
+    </form>
 </div>
