@@ -5,11 +5,17 @@ define(['cabin'], function(cabin) {
             return btfModal({
                 //duplicate: true,
                 controllerAs: 'modal',
-                closeByEsc :false,
+                closeByEsc: false,
                 templateUrl: cabinModulePath + 'modals/cabin-supeviseModal/templates/cabin-supeviseModal.html',
-                controller: ['$scope', 'cbSupeviseModal',
-                    function($scope, modal) {
-
+                controller: ['$scope', 'cbSupeviseModal', 'iBranchServ',
+                    function($scope, modal, iBranchServ) {
+                        iBranchServ.send("999999").then(function(xhr) {
+                            $scope.sendUser = xhr.data.sendUser;
+                            $scope.messages = xhr.data.messages;
+                            $scope.txnData = {
+                                data: xhr.data.txnData
+                            };
+                        });
                         angular.extend($scope, {
                             approve: function() {
                                 modal.deactivate();

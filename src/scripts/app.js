@@ -102,6 +102,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 function(event, toState, toParams, fromState, fromParams) {});
             userServ.then(function(data) {
                 $rootScope.isLogin = true;
+                $state.go('index');
             }, function(data) {
                 $state.go('index');
                 $rootScope.isLogin = false;

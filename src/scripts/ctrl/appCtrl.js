@@ -38,7 +38,7 @@ define(['cabin'], function(cabin) {
                 },
                 openModal: function() {
                     cbSupeviseModal.activate({
-                        'lists': ["BA12起息日期不同1", "測試訊息2"],
+                        'messages': ["BA12起息日期不同1", "測試訊息2"],
                         'txnData': {
                             data: {
                                 func: '2',

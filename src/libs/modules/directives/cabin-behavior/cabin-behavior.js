@@ -5,7 +5,7 @@ define(['cabin'], function(cabin) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
-                priority: 1,
+                priority: 2,
                 link: function(scope, element, attrs, ngModel) {
 
                     var charPos = 0;
@@ -45,7 +45,7 @@ define(['cabin'], function(cabin) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
-                priority: 0,
+                priority: 2,
                 link: function(scope, element, attrs, ngModel) {
                     var charPos = 0;
                     var which = 0;
@@ -82,7 +82,7 @@ define(['cabin'], function(cabin) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
-                priority: 0,
+                priority: 2,
                 link: function(scope, element, attrs, ngModel) {
 
                     var charPos = 0;
@@ -131,7 +131,7 @@ define(['cabin'], function(cabin) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
-                priority: 1,
+                priority: 2,
                 link: function(scope, element, attrs, ngModel) {
 
 
@@ -168,7 +168,7 @@ define(['cabin'], function(cabin) {
 
                     function parse(viewValue, noRender) {
                         //rodes fix input method issue
-                        ngModel.$setValidity('cbTwDate', viewValue.length === 7);
+                        ngModel.$setValidity('cbTwDate', cbUtils.validDate(viewValue, true));
                         viewValue = viewValue.replace(/\//g, "");
 
                         which = -1;
@@ -176,19 +176,6 @@ define(['cabin'], function(cabin) {
                     }
 
                     ngModel.$parsers.unshift(parse);
-                    // ngModel.$render = function() {
-                    //     var clean = parse(ngModel.$viewValue, true);
-                    //     if (!clean)
-                    //         element.val(clean);
-                    //         return;
-
-                    //     if(clean.length === 7){
-
-                    //     }
-
-                    //     cbUtils.setCaretPosition(element[0], clean.length - charPos);
-                    //     return clean;
-                    // };
                 }
             };
         }
@@ -197,7 +184,7 @@ define(['cabin'], function(cabin) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
-                priority: 0,
+                priority: 1,
                 link: function(scope, element, attrs, ngModel) {
 
                     var maxLenght = parseInt(attrs['cbMaxlength'], 10);
@@ -207,7 +194,9 @@ define(['cabin'], function(cabin) {
                     element.on("keydown", function(e) {
                         which = e.which;
                         //fix: alaways to parse
-                        ngModel.$setViewValue("");
+                        if (which !== 9 && which !== 13) {
+                            ngModel.$setViewValue("");
+                        }
                         oldValue = element.val();
                         var currentPos = cbUtils.getCaretPosition(this);
                         charPos = this.value.length - currentPos;
@@ -235,7 +224,7 @@ define(['cabin'], function(cabin) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
-                priority: 1,
+                priority: 2,
                 link: function(scope, element, attrs, ngModel) {
                     var validChar = "^(" + ["4[8-9]|5[0-7]", + // "0-9" number
                         "189", // "-" negative 

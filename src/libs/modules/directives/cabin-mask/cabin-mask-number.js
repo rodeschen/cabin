@@ -5,6 +5,7 @@ define(['cabin'], function(cabin) {
             return {
                 require: 'ngModel',
                 restrict: 'A',
+                priority: 2,
                 link: function(scope, element, attrs, ngModel) {
                     // var negative =
                     var charPos = 0;
@@ -16,11 +17,11 @@ define(['cabin'], function(cabin) {
                         "9", // tab
                         "3[79]", // → ←
                         "190",
-                        "13"    // enter
-                    ].join("|") 
-                    + ")$";
+                        "13" // enter
+                    ].join("|") + ")$";
 
                     element.on("keydown", function(e) {
+
                         val = element.val();
                         currentPos = cbUtils.getCaretPosition(this);
                         charPos = this.value.length - currentPos;
@@ -30,7 +31,7 @@ define(['cabin'], function(cabin) {
                             charPos++;
                             return;
                         }
-                        if(e.which === 48 && charPos === 0 && val.match(/[.]0$/)){
+                        if (e.which === 48 && charPos === 0 && val.match(/[.]0$/)) {
                             return false;
                         }
                         //ignore invalid char 
@@ -41,11 +42,13 @@ define(['cabin'], function(cabin) {
                         if (189 == e.which && (currentPos != 0 || /^-/.test(val))) {
                             return false;
                         }
-                        if(e.which === 190 && this.value.indexOf(".") > 0){
+                        if (e.which === 190 && this.value.indexOf(".") > 0) {
                             return false;
                         }
                         //fix: alaways to parse
-                        ngModel.$setViewValue("");
+                        if (e.which !== 9 && e.which !== 13) {
+                            ngModel.$setViewValue("");
+                        }
                     });
 
 
@@ -68,7 +71,8 @@ define(['cabin'], function(cabin) {
 
                         // fix angualr 1.2.16
                         //ngModel.$modelValue = clean;
-                        return (/^-/.test(viewValue) ? '-' : '') + clean;
+                        var resValue = (/^-/.test(viewValue) ? '-' : '') + clean;
+                        return resValue;
                     }
 
                     ngModel.$parsers.unshift(parse);
