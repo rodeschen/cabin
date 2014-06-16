@@ -29,8 +29,8 @@ define(['cabin'], function(cabin) {
                 },
                 //query isLogin
                 '000002': function() {
-                    return [200, user, {}];
-                    //return [400, {}, {}];
+                    //return [200, user, {}];
+                    return [400, {}, {}];
                 },
                 '000003': function() {
                     return [200, user, {}];
@@ -87,7 +87,7 @@ define(['cabin'], function(cabin) {
                 data = angular.fromJson(data);
                 console.log(data.txnId, url, "mock", data, headers);
                 //[200, resData, {}];
-                return txns[data.txnId](data)
+                return txns[data.txnId](data.txnData)
             });
 
         }

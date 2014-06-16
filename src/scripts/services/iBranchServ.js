@@ -5,15 +5,18 @@ define(['cabin'], function(cabin) {
             //cbDeviceAgentSrv, cbSupeviseRequireModal
             var funcs = {
                 send: function(txnId, data) {
-                    var txnData = data || {};
-                    txnData.txnId = txnId;
+                    var txnData = {
+                        'txnId': txnId,
+                        'txnData': data
+                    };
                     var http = $http({
                         url: 'ibranch',
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
+                            //'Content-Type': 'application/x-www-form-urlencoded'
+                            'Content-Type':  'text/plain;charset=UTF-8'
                         },
-                        data: txnData // $.param(txnData)
+                        data: angular.toJson(txnData) // $.param(txnData)
                     });
 
                     http.then(function(xhr) {

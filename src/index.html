@@ -26,8 +26,7 @@
         <script src="libs/components/respond/respond.min.js"></script>
     <![endif]-->
     <!-- build:js({.tmp,src}) scripts/scripts.js -->
-    <script src="libs/components/requirejs/require.js"></script>
-    <script src="scripts/main.js"></script>
+    <script data-main="main-build.js" src="libs/components/requirejs/require.js"></script>
     <!-- endbuild -->
 </head>
 
@@ -54,7 +53,7 @@
                         <a href="" class="icon icon-booklet" ng-tooltip="日誌" ng-click=""></a>
                     </li>
                     <li>
-                        <a href="" class="icon icon-security" ng-tooltip="授權" ng-click="openModal()"></a>
+                        <a href="" class="icon icon-security" ng-tooltip="授權" ng-click="openModal()"><div class="sup-notify"></div></a>
                     </li>
                     <li>
                         <a href="" class="icon icon-compose" ng-tooltip="代辦" ng-click="openSupModal()"></a>

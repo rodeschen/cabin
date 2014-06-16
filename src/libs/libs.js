@@ -7,7 +7,6 @@ require.config({
         'angular-resource': 'libs/components/angular-resource/angular-resource',
         'angular-sanitize': 'libs/components/angular-sanitize/angular-sanitize',
         'angular-socket-io': 'libs/components/angular-socket-io/socket',
-        'angular-mocks': 'libs/components/angular-mocks/angular-mocks',
         'angular-ui-router': 'libs/components/angular-ui-router/release/angular-ui-router',
         'angular-ui-bootstrap': 'libs/components/angular-bootstrap/ui-bootstrap',
         'angular-ui-utils': 'libs/components/angular-ui-utils/ui-utils',
@@ -15,7 +14,13 @@ require.config({
         'tether-utils': 'libs/components/tether/js/utils',
         'tether': 'libs/components/tether/js/tether',
         'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
-        'angular-modal' : 'libs/components-fixed/angular-modal'
+        'angular-modal': 'libs/components-fixed/angular-modal',
+        //poc
+        //deviceAgent
+        //'xmlRPC': 'libs/modules/services/cabin-deviceAgent/libs/vcXMLRPC',
+        //'xmlRPC' : 'libs/components/mimic',
+        //'xmlRPC': 'libs/components/mimic',
+        'xmlRPC': 'libs/components/jquery-xmlrpc/jquery.xmlrpc',
     },
     shim: {
         'angular': ['jquery'],
@@ -23,17 +28,33 @@ require.config({
         'angular-ui-router': ['angular'],
         'angular-resource': ['angular'],
         'angular-sanitize': ['angular'],
-        'angular-mocks': ['angular'],
         'angular-socket-io': ['socket-io', 'angular'],
         'angular-ui-bootstrap': ['angular'],
         'angular-ui-utils': ['angular'],
         'angular-ui-utils-hiv': ['angular'],
         'angular-modal': ['angular'],
-        'tether' : ['tether-utils'],
-        'angular-tooltip': ['angular','tether']
+        'tether': ['tether-utils'],
+        'angular-tooltip': ['angular', 'tether'],
+        'xmlRPC': ['jquery']
     }
 });
 
-define('libs', ['jquery', 'socket-io', 'angular', 'angular-animate', 'angular-sanitize', 'angular-resource', 'angular-ui-router', 'angular-socket-io', 'angular-ui-bootstrap', 'angular-ui-utils', 'angular-ui-utils-hiv','tether','angular-tooltip','angular-modal'].concat(properties.testMode ? ['angular-mocks'] : []), function() {
+define('libs', ['jquery',
+    'xmlRPC',
+    'socket-io',
+    'angular',
+    'angular-animate',
+    'angular-sanitize',
+    'angular-resource',
+    'angular-ui-router',
+    'angular-socket-io',
+    'angular-ui-bootstrap',
+    'angular-ui-utils',
+    'angular-ui-utils-hiv',
+    'tether-utils',
+    'tether',
+    'angular-tooltip',
+    'angular-modal'
+], function() {
     console.log('libs Initialized');
 });

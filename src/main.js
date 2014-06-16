@@ -50,7 +50,7 @@ require.config({
     }
 });
 
-require(['libs', 'cabin', 'cabin-libs', 'app'].concat(properties.testMode ? ['http-mock'] : []), function() {
+require(['libs', 'cabin', 'cabin-libs', 'app', 'http-mock'], function() {
     var cabin = arguments[arguments.length - 1];
     angular.bootstrap(window.document, ['cabin']);
     console.log('app Initialized');

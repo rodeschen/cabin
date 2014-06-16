@@ -132,3 +132,11 @@ body {
     height: 400px;
   }
 }
+
+@include animate-flash-color(notify-flash-top, background, rgba(255, 255, 255, 0), rgba(100, 0, 0, 0.7));
+
+.sup-notify {
+  @include animation(notify-flash-top 3s infinite);
+  height: 100%;
+  @include border-radius(50%);
+}

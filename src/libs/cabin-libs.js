@@ -18,37 +18,14 @@ require.config({
         'cbComboBoxServ': 'libs/modules/services/cabin-comboBoxServ',
         'cbUtils': 'libs/modules/services/cabin-utils',
         'cbWebSocketIoServ': 'libs/modules/services/cabin-websocket-io',
-
-
         // Modal
         'cbSupeviseModal': 'libs/modules/modals/cabin-supeviseModal/cabin-supeviseModal',
-        'cbSupeviseRequireModal' : 'libs/modules/modals/cabin-supeviseRequireModal/cabin-supeviseRequireModal',
-
-        //deviceAgent
-        //'xmlRPC': 'libs/modules/services/cabin-deviceAgent/libs/vcXMLRPC',
-        //'xmlRPC' : 'libs/components/mimic',
-        //'xmlRPC': 'libs/components/mimic',
-        'xmlRPC': 'libs/components/jquery-xmlrpc/jquery.xmlrpc',
-        //'deviceAgent' : 'libs/modules/services/cabin-deviceAgent/libs/deviceagent',
+        'cbSupeviseRequireModal': 'libs/modules/modals/cabin-supeviseRequireModal/cabin-supeviseRequireModal',
         'cbDeviceAgent': 'libs/modules/services/cabin-deviceAgent/cabin-deviceAgent',
-
-
-
-
-
         //for poc
         'iBranchServ': 'scripts/services/iBranchServ',
         'userServ': 'scripts/services/userServ',
-
-
-
-
-
         'cbTest': 'libs/modules/directives/cabin-test/cabin-test'
-
-
-
-
     },
     'shim': {
         'cbBehavior': ['libs', 'cabin'],
@@ -65,17 +42,32 @@ require.config({
         'cbSupeviseModal': ['libs', 'cabin'],
         'cbSupeviseRequireModal': ['libs', 'cabin'],
         //deviceAgent
-        'deviceAgent': ['xmlRPC'],
-        'cbDeviceAgent': ['libs', 'cabin', 'xmlRPC', /*'deviceAgent'*/ ],
+        'cbDeviceAgent': ['libs', 'cabin' ],
         'iBranchServ': ['libs', 'cabin'],
         'userServ': ['libs', 'cabin', 'iBranchServ']
     }
 });
 
-define('cabin-libs', ['libs', 'cabin', 'cbLazyRegisterServ', 'cbModule'].concat(properties.useCabinLibs), function(libs, cabin) {
+define('cabin-libs', ['libs', 'cabin', 'cbLazyRegisterServ', 'cbModule',
+    'cbBehavior',
+    'cbUtils',
+    'cbComboBox',
+    'cbSplitter',
+    'cbMaskNumber',
+    'cbTxnRouterLoaderServ',
+    'cbComboBoxServ',
+    'cbWebSocketIoServ',
+    //for poc
+    'cbDeviceAgent',
+    'iBranchServ',
+    'userServ',
+    //modal 
+    'cbSupeviseModal',
+    'cbSupeviseRequireModal'
+], function(libs, cabin) {
     for (var index = 2; index < arguments.length; index++) {
         var modules = arguments[index];
-        if (modules[0].constructor === String) {
+        if (modules[0] && modules[0].constructor === String) {
             modules = [modules];
         }
         angular.forEach(modules, function(value, key) {
