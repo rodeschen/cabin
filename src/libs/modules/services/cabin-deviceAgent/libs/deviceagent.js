@@ -1,7 +1,8 @@
 /* 
  * Setup PbPrinterService XML-RPC Service
  */
-var pbPrinterService = XMLRPC.getService("http://localhost:9980/deviceagent/xmlrpc");
+//var pbPrinterService = XMLRPC.getService("http://192.168.221.111:9980/deviceagent/xmlrpc");
+var pbPrinterService = XMLRPC.getService("http://192.168.221.129:9980/deviceagent/xmlrpc");
 /* Methods from MnmMoMBean */
 
 pbPrinterService.add("tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.initXmlRpcService", "initXmlRpcService");

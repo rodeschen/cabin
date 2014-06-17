@@ -26,8 +26,9 @@
         <script src="libs/components/respond/respond.min.js"></script>
     <![endif]-->
     <!-- build:js({.tmp,src}) scripts/scripts.js -->
-    <script data-main="main-build.js" src="libs/components/requirejs/require.js"></script>
     <!-- endbuild -->
+    <script src="libs/components/requirejs/require.min.js"></script>
+    <script src="main.js"></script>
 </head>
 
 <body ng-controller="appCtrl" ng-class="{'is-login':isLogin}">
@@ -53,7 +54,9 @@
                         <a href="" class="icon icon-booklet" ng-tooltip="日誌" ng-click=""></a>
                     </li>
                     <li>
-                        <a href="" class="icon icon-security" ng-tooltip="授權" ng-click="openModal()"><div class="sup-notify"></div></a>
+                        <a href="" class="icon icon-security" ng-tooltip="授權" ng-click="openModal()">
+                            <div class="sup-notify"></div>
+                        </a>
                     </li>
                     <li>
                         <a href="" class="icon icon-compose" ng-tooltip="代辦" ng-click="openSupModal()"></a>
@@ -65,7 +68,7 @@
                         <a href="" class="icon icon-computer" ng-tooltip="3270" ng-click="sendMessage()"></a>
                     </li>
                     <li>
-                        <a href="" class="icon icon-power" ng-tooltip="簽退"  ng-click="logout()"></a>
+                        <a href="" class="icon icon-power" ng-tooltip="簽退" ng-click="logout()"></a>
                     </li>
                 </ul>
             </nav>

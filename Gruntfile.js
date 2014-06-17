@@ -119,7 +119,7 @@ module.exports = function(grunt) {
                             lrSnippet,
                             require('grunt-connect-proxy/lib/utils').proxyRequest,
                             modRewrite([
-                                '!\\.html|login|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg|\\.ico$ ' + yeomanConfig.project.indexFile
+                                '!\\.html|login|\\.pdf|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg|\\.ico$ ' + yeomanConfig.project.indexFile
                             ]),
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'test'),
@@ -377,7 +377,30 @@ module.exports = function(grunt) {
                         'styles/fonts/*'
                     ]
                 }]
-            }
+            },
+            poc: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>',
+                    dest: '<%= yeoman.dist %>',
+                    src: [
+                        '{*,views/**/*}.{ico,png,txt,html}',
+                        '*.{ico,png,txt,html}',
+                        'scripts/**/*',
+                        'libs/*',
+                        'libs/{components-fix,modules}/**/*',
+                        'libs/components/requirejs/require.min.js',
+                        'libs/components/font-awesome/**/*',
+                        //'.htaccess',
+                        //'images/{,*/}*.{png,gif,webp,svg}',
+                        //'scripts/**/*.js',
+                        //'libs/*.js',
+                        'fonts/**/*'
+                    ]
+                }]
+            },
+
             // ,
             // capLibs:{
             //   files: [{
@@ -441,20 +464,40 @@ module.exports = function(grunt) {
                     cwd: '<%= yeoman.dist %>/scripts',
                     src: '*.js',
                     dest: '<%= yeoman.dist %>/scripts'
+                }, {
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>',
+                    src: '*.js',
+                    dest: '<%= yeoman.dist %>'
                 }]
             }
         },
         uglify: {
             dist: {
                 files: {
-                    // '<%= yeoman.dist %>/scripts/scripts.js': [
-                    //     '<%= yeoman.dist %>/scripts/scripts.js'
-                    // ]
-                    '<%= yeoman.dist %>/scripts/main-build.js': [
-                        '<%= yeoman.dist %>/scripts/main-build.js'
+                    '<%= yeoman.dist %>/scripts/scripts.js': [
+                        '<%= yeoman.dist %>/scripts/scripts.js'
+                    ]
+                }
+            },
+            poc: {
+                files: {
+                    '<%= yeoman.dist %>/scripts/scripts.js': [
+                        '<%= yeoman.dist %>/scripts/scripts.js'
+                    ],
+                    '<%= yeoman.dist %>/main.js': [
+                        '<%= yeoman.dist %>/main.js'
                     ]
 
                 }
+            },
+            pocScript: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>/scripts',
+                    src: '**/*.js',
+                    dest: '<%= yeoman.dist %>/scripts'
+                }]
             }
         },
         // ,
@@ -477,7 +520,7 @@ module.exports = function(grunt) {
                     name: "main", // assumes a production build using almond
                     optimize: 'none',
                     //out: "<%= yeoman.dist %>/scripts/main.js",
-                    out: "<%= yeoman.dist %>/scripts/main-build.js",
+                    out: "<%= yeoman.dist %>/main.js",
                     paths: {
                         'jquery': 'libs/components/jquery/jquery',
                         'socket-io': 'libs/components/socket.io-client/dist/socket.io',
@@ -496,9 +539,6 @@ module.exports = function(grunt) {
                         'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
                         'angular-modal': 'libs/components-fixed/angular-modal',
                         //deviceAgent
-                        //'xmlRPC': 'libs/modules/services/cabin-deviceAgent/libs/vcXMLRPC',
-                        //'xmlRPC' : 'libs/components/mimic',
-                        //'xmlRPC': 'libs/components/mimic',
                         'xmlRPC': 'libs/components/jquery-xmlrpc/jquery.xmlrpc',
                         "libs": "libs/libs",
                         "cabin": "libs/cabin",
@@ -532,21 +572,11 @@ module.exports = function(grunt) {
 
                         //'deviceAgent' : 'libs/modules/services/cabin-deviceAgent/libs/deviceagent',
                         'cbDeviceAgent': 'libs/modules/services/cabin-deviceAgent/cabin-deviceAgent',
-
-
-
-
-
                         //for poc
                         'iBranchServ': 'scripts/services/iBranchServ',
                         'userServ': 'scripts/services/userServ',
-
-
-
-
-
                         'cbTest': 'libs/modules/directives/cabin-test/cabin-test',
-
+                        //mock test
                         'last': '../test/_httpMock/last',
                         'queryMenu': '../test/_httpMock/queryMenu',
                         'queryComboBox': '../test/_httpMock/queryComboBox',
@@ -594,6 +624,37 @@ module.exports = function(grunt) {
         'rev',
         'usemin'
     ]);
+
+    grunt.registerTask('buildpoc', ['clean:dist',
+        'useminPrepare',
+        'concurrent:dist',
+        'concat',
+        'copy:poc',
+        'cdnify',
+        'requirejs',
+        'ngmin',
+        'cssmin',
+        'uglify:poc',
+        'uglify:pocScript',
+        'rev',
+        'usemin'
+    ]);
+
+     grunt.registerTask('serverpoc', function(target) {
+        if (target === 'dist') {
+            return grunt.task.run(['buildpoc', 'open', 'connect:dist:keepalive']);
+        }
+
+        grunt.task.run([
+            'clean:server',
+            'concurrent:server',
+            'configureProxies',
+            'connect:livereload',
+            'open',
+            'concurrent:watchServer'
+        ]);
+        //
+    });
 
     grunt.registerTask('default', [
         'jshint',

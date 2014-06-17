@@ -523,7 +523,8 @@ XMLRPC = {
 			http.open('POST', srv, async);
 			//http.setRequestHeader("User-Agent", "vcXMLRPC v0.91 (" + navigator.userAgent + ")");
 			//http.setRequestHeader("Host", srv.replace(/^https?:\/{2}([:\[\]\-\w\.]+)\/?.*/, '$1'));
-			http.setRequestHeader("Content-type", "text/xml");
+			//http.setRequestHeader("Content-type", "text/xml");
+			http.setRequestHeader("Content-type", "text/plain");
 			if(autoroute == "active"){
 				http.setRequestHeader("X-Proxy-Request", serverAddress);
 				http.setRequestHeader("X-Compress-Response", "gzip");
