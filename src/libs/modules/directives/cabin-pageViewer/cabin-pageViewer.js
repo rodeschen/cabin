@@ -18,6 +18,7 @@ define(['cabin'], function(cabin) {
                         scope.$on(scope.receiveEvent || 'pageViewer', function(event, data) {
                             scope.includeUrl = "";
                             if (data && data.page && data.page.url) {
+                                scope.data = {};
                                 openPage(data.page.url);
                             }
                         });
@@ -37,10 +38,10 @@ define(['cabin'], function(cabin) {
                     //for poc
                     var txnId;
                     scope.submitForm = function(dataForm) {
-                        console.log(dataForm);
                         if (dataForm.$valid) {
                             iBranchServ.send(txnId, dataForm);
                         } else {
+                            console.log(dataForm)
                             iBranchServ.sendMessage('error', "煩請確認資料是否正確!");
                         }
                     }

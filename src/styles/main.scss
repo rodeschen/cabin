@@ -1,12 +1,15 @@
 @import "compass/reset";
 @import "define";
-@import "icons";
+@import 'modules/cabin-animate';
 @import "bootstrap";
 @import "flat-ui";
+@import "susy";
+@import "icons";
 
 
 //@import 'components/bootstrap-sass/lib/bootstrap';
-@import "susy";
+@import "components/hint.css/src/hint";
+
 @import "components/font-awesome/scss/font-awesome";
 @import "components-fixed/angular-modal";
 

@@ -68,47 +68,47 @@ define(['cabin'], function(cabin) {
             //       console.log("Error")
             //     }
             // });
-
-            var url = "http://192.168.221.111:9980/deviceagent/xmlrpc";
+            var url = "http://10.204.1.67:9980/deviceagent/xmlrpc";
+            // var url = "http://192.168.221.111:9980/deviceagent/xmlrpc";
             // var url = "http://192.168.221.129:9980/deviceagent/xmlrpc";
-            // $.xmlrpc(url, {
-            //     'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.getObjectName',
-            //     'params': [],
-            //     'success': function(data, request) {
-            //         $.xmlrpc(url, {
-            //             'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.obtainSession',
-            //             'params': [],
-            //             'success': function(data, request) {
-            //                 $.xmlrpc(url, {
-            //                     'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.print',
-            //                     'params': ["ibm9068session;rmi://127.0.0.1  4", "測asdfads試adsfadsf測asdfasdf試<ff>", "sssddd", "12", "5"],
-            //                     'success': function(data, request) {
-            //                         $.xmlrpc(url, {
-            //                             'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.returnSession',
-            //                             'params': ["ibm9068session;rmi://127.0.0.1  4"],
-            //                             'success': function(data, request) {
-            //                                 console.log(data);
-            //                             },
-            //                             'error': function() {
-            //                                 console.log("Error")
-            //                             }
-            //                         });
+            $.xmlrpc(url, {
+                'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.getObjectName',
+                'params': [],
+                'success': function(data, request) {
+                    $.xmlrpc(url, {
+                        'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.obtainSession',
+                        'params': [],
+                        'success': function(data, request) {
+                            $.xmlrpc(url, {
+                                'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.print',
+                                'params': ["ibm9068session;rmi://127.0.0.1  4", "測asdfads試adsfadsf測asdfasdf試<ff>", "sssddd", "12", "5"],
+                                'success': function(data, request) {
+                                    $.xmlrpc(url, {
+                                        'methodName': 'tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.returnSession',
+                                        'params': ["ibm9068session;rmi://127.0.0.1  4"],
+                                        'success': function(data, request) {
+                                            console.log(data);
+                                        },
+                                        'error': function() {
+                                            console.log("Error")
+                                        }
+                                    });
 
-            //                     },
-            //                     'error': function() {
-            //                         console.log("Error")
-            //                     }
-            //                 });
-            //             },
-            //             'error': function() {
-            //                 console.log("Error")
-            //             }
-            //         });
-            //     },
-            //     'error': function() {
-            //         console.log("Error")
-            //     }
-            // });
+                                },
+                                'error': function() {
+                                    console.log("Error")
+                                }
+                            });
+                        },
+                        'error': function() {
+                            console.log("Error")
+                        }
+                    });
+                },
+                'error': function() {
+                    console.log("Error")
+                }
+            });
 
             // $.xmlrpc("http://mimic-xmlrpc.sourceforge.net/demos/calc.php", {
             //     'methodName': 'calc.minus',
@@ -137,27 +137,39 @@ define(['cabin'], function(cabin) {
             };
 
             //create Service
+            //var url = "http://10.204.1.63:9980/deviceagent/xmlrpc";
+            // $.xmlrpc(url, {
+            //     'methodName': methods.createService,
+            //     'params': []
+            // });
+
+
             $.xmlrpc(url, {
-                'methodName': methods.createService,
-                'params': []
-            });
+                    "methodName": methods.obtainSession//,
+                    //"params": params
+                })
 
             function deviceAction(action, params) {
+                console.log("FFF")
                 return $.xmlrpc(url, {
                     "methodName": action,
                     "params": params
                 })
             }
-
+            console.log("DD")
 
             return {
                 print: function(printData) {
                     deviceAction(methods.obtainSession, []).success(function(data) {
                         deviceAction(methods.print, [data, printData, "", "12", "5"]).success(function() {
                             deviceAction(method.returnSession).success(function() {
-
+                                
+                            }).error(function() {
+                                console.log("Error")
                             });
-                        })
+                        }).error(function() {
+                            console.log("Error")
+                        });
                     }).error(function() {
                         console.log("Error")
                     });

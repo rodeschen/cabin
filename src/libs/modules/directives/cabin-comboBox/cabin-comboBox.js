@@ -15,15 +15,16 @@ define(['cabin'], function() {
                     'dymanicKey': '@',
                     'comboType': '@',
                     'edit': '@'
-
                 },
                 link: function($scope, iElm, iAttrs, controller) {
+                    controller.$label = iAttrs.label || "";
+                    var sourceEl = iElm;
                     iElm = iElm.find('input');
-                    if(iAttrs.autofocus !== undefined){
+                    if (iAttrs.autofocus !== undefined) {
                         iElm.focus();
                     }
                     iElm.addClass(iAttrs.class || '').attr(iAttrs.css || '');
-
+                    $scope.comboViewItems = iAttrs.comboViewItems || 4;
                     var local = {
                         isFocus: false,
                         $parentScope: $scope.$parent,
@@ -90,7 +91,7 @@ define(['cabin'], function() {
 
                                 });
                                 $scope.matchs = _matchs;
-                                controller.$setValidity('cbComboBox', _matchs.length > 0);
+                                $scope.checkValid();
                             } else {
                                 $scope.matchs = $scope.items;
                             }
@@ -111,6 +112,21 @@ define(['cabin'], function() {
                                 $scope.close();
                                 iElm.focus();
                             }
+                            $scope.checkValid();
+                        },
+                        checkValid: function() {
+                            //暫解
+                            $timeout(function() {
+                                console.log($scope.getNgModelValue());
+                                for (var i = 0; i < $scope.items.length; i++) {
+                                    if ($scope.getNgModelValue() == $scope.items[i].key) {
+                                        controller.$setValidity('cbComboBox', true);
+                                        return
+                                    }
+                                }
+                                controller.$setValidity('cbComboBox', false);
+                            }, 60);
+
                         },
                         showStyle: function(data) {
                             if (data.constructor === String) {
@@ -204,16 +220,20 @@ define(['cabin'], function() {
 
                     $scope.$watch('getNgModelValue()', $scope.formatter);
 
+
+
                 }
             };
         }
-    ]], ['directive', 'cbComboBoxDropDown', ['cabinModulePath', 'cbComboBoxServ',
-        function(cabinModulePath, comboBoxServ) {
+    ]], ['directive', 'cbComboBoxDropDown', ['cabinModulePath', 'cbComboBoxServ', '$timeout',
+        function(cabinModulePath, comboBoxServ, $timeout) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-combobox/templates/cabin-comboBox-dropdown.html',
                 priority: 101,
                 restrict: 'A',
-                link: function($scope) {
+                link: function($scope, iElm) {
+                    console.log($scope)
+                    var listContent = iElm.find(".combo-box-list");
                     if ($scope.comboList) {
                         $scope.items = $scope.comboList || [];
                         $scope.match($scope.getNgModelValue());
@@ -226,6 +246,52 @@ define(['cabin'], function() {
                             $scope.formatter();
                         });
                     }
+                    $scope.$watch('activeIdx', function(nVal, oVal) {
+                        $timeout(function() {
+                            var activeEl = listContent.find('li.active');
+                            if (activeEl.size()) {
+                                // refrenence to selectize.js
+                                var height_menu = listContent.height();
+                                var height_item = activeEl.outerHeight(true);
+                                var scroll = listContent.scrollTop() || 0;
+                                var y = activeEl.offset().top - listContent.offset().top + scroll;
+                                var scroll_top = y;
+                                var scroll_bottom = y - height_menu + height_item;
+
+                                // console.log("y", y, activeEl[0]);
+                                // console.log("height_item", height_item);
+                                // console.log("scroll", scroll);
+                                // console.log("height_menu", height_menu, listContent[0]);
+                                // console.log("---------------------------");
+
+                                if (y + height_item > height_menu + scroll) {
+                                    listContent.scrollTop(scroll_bottom);
+                                    // self.$dropdown_content.stop().animate({
+                                    //     scrollTop: scroll_bottom
+                                    // }, animate ? self.settings.scrollDuration : 0);
+                                } else if (y < scroll) {
+                                    listContent.scrollTop(scroll_top);
+                                    // self.$dropdown_content.stop().animate({
+                                    //     scrollTop: scroll_top
+                                    // }, animate ? self.settings.scrollDuration : 0);
+                                }
+
+                            }
+                        }, 50);
+                    });
+                    var maxHeight = 0;
+                    $scope.$watch('showList', function(nVal) {
+                        if (maxHeight > 0)
+                            return;
+                        $timeout(function() {
+                            var itemHeight = listContent.find('li:first').outerHeight(true);
+                            if (itemHeight) {
+                                maxHeight = (itemHeight * $scope.comboViewItems) + 8;
+                                listContent.css('maxHeight', maxHeight);
+                            }
+                        }, 50);
+                    });
+
                 }
             };
         }

@@ -96,8 +96,9 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             //     })
             // });
         }
-    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state',
-        function($rootScope, $window, userServ, $state) {
+    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state','cbDeviceAgentSrv',
+        function($rootScope, $window, userServ, $state,cbDeviceAgentSrv) {
+          //  cbDeviceAgentSrv.print("adfafadsf<ff>")
             $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams) {});
             userServ.then(function(data) {
