@@ -245,5 +245,36 @@ define(['cabin'], function(cabin) {
                 }
             };
         }
+    ]], ['value', 'errorMessage', {
+        'required': '此欄位必填',
+        'cbComboBox': '請選擇正確選項',
+        'cbTwDate': '日期錯誤'
+    }], ['directive', 'validator', ['errorMessage',
+        function(errorMessage) {
+            return {
+                require: 'ngModel',
+                restrict: 'A',
+                priority: 2,
+                link: function(scope, element, attrs, ngModel) {
+                    var scope = scope.$new();
+                    scope.ngModel = ngModel;
+                    scope.$watchCollection('ngModel.$error', function(v) {
+                        var err = '';
+                        for (var key in v) {
+                            if (v[key]) {
+                                err = errorMessage[key];
+                                break;
+                            }
+                        }
+
+                        var after = element.next();
+                        if (!after.is('.cb-hint')) {
+                            after = element.after('<span class="cb-hint hint hint--error  hint--right" data-hint=""></span>');
+                        }
+                        after.attr('data-hint', err);
+                    })
+                }
+            };
+        }
     ]]];
 });

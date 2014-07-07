@@ -13,8 +13,11 @@ require.config({
         'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/ui-utils-ieshiv.min',
         'tether-utils': 'libs/components/tether/js/utils',
         'tether': 'libs/components/tether/js/tether',
-        'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
+        'angular-validation' : 'libs/components/angular-validation/dist/angular-validation',
+        //'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
+
         'angular-modal': 'libs/components-fixed/angular-modal',
+
         //poc
         //deviceAgent
         //'xmlRPC': 'libs/modules/services/cabin-deviceAgent/libs/vcXMLRPC',
@@ -32,9 +35,10 @@ require.config({
         'angular-ui-bootstrap': ['angular'],
         'angular-ui-utils': ['angular'],
         'angular-ui-utils-hiv': ['angular'],
+        'angular-validation' :['angular'],
         'angular-modal': ['angular'],
         'tether': ['tether-utils'],
-        'angular-tooltip': ['angular', 'tether'],
+        //'angular-tooltip': ['angular', 'tether'],
         'xmlRPC': ['jquery']
     }
 });
@@ -51,9 +55,10 @@ define('libs', ['jquery',
     'angular-ui-bootstrap',
     'angular-ui-utils',
     'angular-ui-utils-hiv',
+    'angular-validation',
     'tether-utils',
     'tether',
-    'angular-tooltip',
+    //'angular-tooltip',
     'angular-modal'
 ], function() {
     console.log('libs Initialized');

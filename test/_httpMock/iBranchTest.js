@@ -18,22 +18,104 @@ define(['cabin'], function(cabin) {
             };
 
             var receiveData = {};
+            // var txns = {
+            //     //login
+            //     '000001': function(data) {
+            //         if (data.userId === '00001' && data.password === 'p') {
+            //             return [200, user, {}];
+            //         } else {
+            //             return [400, {}, {}];
+            //         }
+            //     },
+            //     //query isLogin
+            //     '000002': function() {
+            //         //return [200, user, {}];
+            //         return [400, {}, {}];
+            //     },
+            //     '000003': function() {
+            //         return [200, user, {}];
+            //     },
+            //     '120606': function(data) {
+            //         receiveData = data;
+            //         if (data.supevise) {
+            //             if (data.supevise === "333333") {
+            //                 return [200, {
+            //                     txnStatus: '1',
+            //                     message: "approve"
+            //                 }, {}];
+            //             }
+            //             return [400, {
+            //                 message: "reject"
+            //             }, {}];
+
+            //         }
+
+            //         if (data.func != '2') {
+            //             return [200, {
+            //                 txnStatus: '9',
+            //                 supevise: {
+            //                     messages: ["BA12起息日期不同11", "測試訊息22", "測試訊息33", "測試訊息44", "測試訊息55"],
+            //                     users: [{
+            //                         key: '11111',
+            //                         value: '1111name'
+            //                     }, {
+            //                         key: '222222',
+            //                         value: '22222name'
+            //                     }, {
+            //                         key: '333333',
+            //                         value: '3333name'
+            //                     }]
+            //                 }
+            //             }, {}];
+            //         } else {
+            //             return [200, {
+            //                 txnStatus: '1'
+            //             }];
+            //         }
+            //     },
+            //     '999999': function() {
+            //         return [200, {
+            //             txnData: receiveData,
+            //             sendUser: user,
+            //             messages: ["BA12起息日期不同11", "測試訊息22", "測試訊息33", "測試訊息44", "測試訊息55"]
+            //         }, {}];
+            //     }
+
+            // };
+
             var txns = {
                 //login
-                '000001': function(data) {
-                    if (data.userId === '00001' && data.password === 'p') {
-                        return [200, user, {}];
-                    } else {
-                        return [400, {}, {}];
-                    }
+                '0110': function(data) {
+                    return [200, angular.toJson([{
+                        "poc": {
+                            "txnData": {
+                                "luNo": "",
+                                "title": "高級專員",
+                                "bankUserId": "2001560",
+                                "branchId": "200",
+                                "userId": "888801",
+                                "userName": "高級專員"
+                            },
+                            "txnMessage" : "ADFASDFASDF",
+                            "sessionId": "719A6B742CD02A38E5023667E6468DD8",
+                            "txnStatus": "1"
+                        }
+                    }]), {}];
                 },
                 //query isLogin
                 '000002': function() {
-                    //return [200, user, {}];
-                    return [400, {}, {}];
+                    return [200, angular.toJson([{
+                        "poc": {
+                            "txnData": user,
+                            "sessionId": "719A6B742CD02A38E5023667E6468DD8",
+                            "txnStatus": "2"
+                        }
+                    }]), {}];
+                    //return [400, {"SSS","SSS"}, {}];
                 },
-                '000003': function() {
-                    return [200, user, {}];
+                //logout
+                '0221': function() {
+                    return [200, angular.toJson({}), {}];
                 },
                 '120606': function(data) {
                     receiveData = data;
@@ -83,7 +165,7 @@ define(['cabin'], function(cabin) {
 
             };
 
-            $httpBackend.whenPOST('ibranch').respond(function(method, url, data, headers) {
+            $httpBackend.whenPOST('\/iBranchApp\/json').respond(function(method, url, data, headers) {
                 data = angular.fromJson(data);
                 console.log(data.txnId, url, "mock", data, headers);
                 //[200, resData, {}];

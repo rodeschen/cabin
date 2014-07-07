@@ -10,16 +10,18 @@ define(['cabin'], function(cabin) {
                         'txnData': data
                     };
                     var http = $http({
-                        url: 'ibranch',
+                        url: '/iBranchApp/json',
                         method: 'POST',
+                        responseType: 'JSON',
                         headers: {
                             //'Content-Type': 'application/x-www-form-urlencoded'
-                            'Content-Type':  'text/plain;charset=UTF-8'
+                            'Content-Type': 'text/plain;charset=UTF-8'
                         },
                         data: angular.toJson(txnData) // $.param(txnData)
                     });
 
                     http.then(function(xhr) {
+                        console.log(txnId, "response", xhr.data);
                         var res = xhr.data;
                         if (res.txnStatus === '9') {
                             res.supevise.txnData = txnData;
@@ -27,12 +29,13 @@ define(['cabin'], function(cabin) {
                             funcs.sendMessage('error', '此交易需主管授權。');
                             modal.activate(res.supevise);
                         } else {
-                            funcs.txnSuccess(res);
+                            funcs.txnSuccess(res, txnData);
                         }
                         console.info("send " + txnId + " success");
                     }, function(xhr) {
-                        funcs.sendMessage('error', xhr.data.message);
-                        console.error("send " + txnId + " error :" + xhr.data.message);
+                        console.log(xhr.data)
+                        funcs.sendMessage('error', xhr.data.txnMessage);
+                        console.error("send " + txnId + " error :" + xhr.data.txnMessage);
                     });
                     return http;
                 },
@@ -43,9 +46,13 @@ define(['cabin'], function(cabin) {
                         message: message
                     });
                 },
-                txnSuccess: function(txnData) {
+                txnSuccess: function(txnData, sendData) {
                     if (txnData.txnStatus === '1') {
-                        funcs.sendMessage('normal', '交易完成。');
+                        if (sendData.txnId == '0110') {
+                            funcs.sendMessage('normal', '簽入完成。');
+                        } else {
+                            funcs.sendMessage('normal', '交易完成。');
+                        }
                     }
                 }
             };

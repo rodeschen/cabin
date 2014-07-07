@@ -79,6 +79,59 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             $locationProvider.html5Mode(false);
 
         }
+    ]).config(['$httpProvider',
+        function($httpProvider) {
+            $httpProvider.interceptors.push(['$q', '$rootScope',
+                function($q, $rootScope) {
+                    return {
+                        // optional method
+                        'request': function(config) {
+                            //console.log('httpConfig', config);
+                            // do something on success
+                            return config;
+                        },
+
+                        // optional method
+                        'requestError': function(rejection) {
+                            console.log('requestError', rejection);
+                            // do something on error
+                            // if (canRecover(rejection)) {
+                            //     return responseOrNewPromise
+                            // }
+                            return $q.reject(rejection);
+                        },
+
+
+
+                        // optional method
+                        'response': function(response) {
+                            var url = response.config.url;
+                            if (url == '/iBranchApp/json') {
+                                console.log('response', response);
+                                if (angular.isArray(response.data)) {
+                                    response.data = response.data[0].poc;
+                                    if (response.data.txnStatus == '2') {
+                                        return $q.reject(response);
+                                    }
+                                }
+                                // do something on success
+                            }
+                            return response;
+                        },
+
+                        // optional method
+                        'responseError': function(rejection) {
+                            console.log('responseError', rejection);
+                            // do something on error
+                            // if (canRecover(rejection)) {
+                            //     return responseOrNewPromise
+                            // }
+                            return $q.reject(rejection);
+                        }
+                    };
+                }
+            ]);
+        }
     ]).run(['$rootScope', '$window', '$http', 'properties', 'cbWebSocketIoServ', 'cbDeviceAgentSrv',
         function($rootScope, $window, $http, properties, cbWebSocketIoServ, cbDeviceAgentSrv) {
             $rootScope.$on('broadcast', function(ev, args) {
@@ -96,9 +149,9 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             //     })
             // });
         }
-    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state','cbDeviceAgentSrv',
-        function($rootScope, $window, userServ, $state,cbDeviceAgentSrv) {
-          //  cbDeviceAgentSrv.print("adfafadsf<ff>")
+    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state', 'cbDeviceAgentSrv',
+        function($rootScope, $window, userServ, $state, cbDeviceAgentSrv) {
+            //  cbDeviceAgentSrv.print("adfafadsf<ff>")
             $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams) {});
             userServ.then(function(data) {
@@ -110,7 +163,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             });
 
             $rootScope.user = userServ.getUser();
-            console.log($rootScope.user,'user');
+            console.log($rootScope.user, 'user');
 
         }
     ]);

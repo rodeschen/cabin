@@ -534,9 +534,10 @@ module.exports = function(grunt) {
                         'angular-ui-bootstrap': 'libs/components/angular-bootstrap/ui-bootstrap',
                         'angular-ui-utils': 'libs/components/angular-ui-utils/ui-utils',
                         'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/ui-utils-ieshiv.min',
+                        'angular-validation' : 'libs/components/angular-validation/dist/angular-validation',
                         'tether-utils': 'libs/components/tether/js/utils',
                         'tether': 'libs/components/tether/js/tether',
-                        'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
+                        //'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
                         'angular-modal': 'libs/components-fixed/angular-modal',
                         //deviceAgent
                         'xmlRPC': 'libs/components/jquery-xmlrpc/jquery.xmlrpc',
