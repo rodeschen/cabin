@@ -4,11 +4,16 @@ define(['cabin'], function(cabin) {
         function($rootScope, $http, $q, $injector, $timeout, cbDeviceAgentSrv, $filter) {
             //cbDeviceAgentSrv, cbSupeviseRequireModal
             var funcs = {
-                send: function(txnId, data) {
-                    var sendData = {
+                send: function(txnId, data, headerData) {
+                    var testOV = "Y";
+                    var sendData = angular.extend({
                         'txnId': txnId,
-                        'txnData': data
-                    };
+                        'txnData': data || {}
+                    }, headerData || {});
+                    console.log("send TxndId" + txnId);
+                    if (txnId == '120606') {
+                        sendData.txnData.TESTOV = testOV;
+                    }
                     var http = $http({
                         url: '/iBranchApp/json',
                         method: 'POST',
@@ -52,12 +57,15 @@ define(['cabin'], function(cabin) {
                     var jobs = [];
                     if (respData.ACTIONCOUNT) {
                         for (var i = 0; i < respData.ACTIONCOUNT; i++) {
-                            jobs.push(respData['A' + i]);
+                            var job = respData['A' + i];
+                            job.txnId = sendData.txnId;
+                            jobs.push(job);
                         }
                     }
                     //append override jobs to end
                     if (status === '9') {
                         jobs.push({
+                            txnId: sendData.txnId,
                             TYPE: 'SUP',
                             DATA: {
                                 respData: respData,
@@ -66,11 +74,11 @@ define(['cabin'], function(cabin) {
                         });
                     }
                     if (status === '1') {
-                        if (sendData.txnId == '0110') {
-                            funcs.sendMessage('normal', '簽入成功。');
-                        } else {
-                            funcs.sendMessage('normal', '交易完成。');
-                        }
+                        jobs.push({
+                            txnId: sendData.txnId,
+                            TYPE: 'MSG',
+                            DATA: sendData.txnId == '0110' ? '簽入成功。' : '交易完成。'
+                        });
                     }
                     funcs.executeJobs(jobs).finally(function() {
                         console.log("all jobs finish")
@@ -81,7 +89,6 @@ define(['cabin'], function(cabin) {
                     if (jobs.length) {
                         var job = jobs.shift();
                         funcs.action(job).finally(function() {
-                            console.log(job.TYPE + ": end");
                             if (jobs.length) {
                                 funcs.executeJobs(jobs).finally(function() {
                                     defer.resolve();
@@ -100,8 +107,8 @@ define(['cabin'], function(cabin) {
                     job.deferred = defer;
                     switch (job.TYPE) {
                         case 'POPUP':
-                            console.log("sPOPUP");
-                            // return cbDeviceAgentSrv.print(job.DATA, true);
+                            // console.log("sPOPUP");
+                            //return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'PB':
                             console.log("sPB");
@@ -110,23 +117,27 @@ define(['cabin'], function(cabin) {
                             console.log("sWARN");
                             break;
                         case 'CONFIRM':
-                            console.log("sCONFIRM");
-                            //return cbDeviceAgentSrv.print(job.DATA, true);
+                            // console.log("sCONFIRM");
+                            //return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'FORM':
-                            console.log("sFORM");
-                            //return cbDeviceAgentSrv.print(job.DATA, true);
+                            // console.log("sFORM");
+                            return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'MSR':
                             console.log("sMSR");
                             break;
                         case 'PDF':
                             console.log("sPDF");
+                            //return cbDeviceAgentSrv.printWebPrinter(job.DATA, true, job.PROMPT, job.txnId);
+                            break;
+                        case 'MSG':
+                            funcs.sendMessage('normal', '[' + job.txnId + '] ' + job.DATA);
                             break;
                         case 'SUP':
                             console.log("sSUP");
                             var modal = $injector.get('cbSupeviseRequireModal');
-                            funcs.sendMessage('error', '此交易需主管授權。');
+                            funcs.sendMessage('error', '[' + job.txnId + '] ' + '此交易需主管授權。');
                             modal.activate(job);
                             return defer.promise;
                             break;

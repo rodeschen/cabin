@@ -9,21 +9,21 @@ define(['cabin'], function(cabin) {
                 templateUrl: cabinModulePath + 'modals/cabin-supeviseRequireModal/templates/cabin-supeviseRequireModal.html',
                 controller: ['$scope', 'cbSupeviseRequireModal',
                     function($scope, modal) {
-
                         var deferred = $scope.deferred;
                         var sendData = $scope.DATA.sendData;
                         var respData = $scope.DATA.respData;
-                        debugger;
                         console.log(deferred)
                         var txnId = sendData.txnId;
-                        sendData.supevise = true;
                         angular.extend($scope, {
                             send: function(sendForm) {
                                 if (sendForm.$valid) {
                                     //sendData.supevise = sendForm.user;
                                     $scope.sendSupevise = true;
-                                    iBranchServ.send(txnId, sendData).then(function(xhr) {
-                                        iBranchServ.txnSuccess(xhr.data);
+                                    iBranchServ.send(txnId, sendData.txnData, {
+                                        supevise: 'Y',
+                                        TESTOVRC: 'AC'
+                                    }).then(function(xhr) {
+                                        $scope.sendSupevise = false;
                                         deferred.resolve();
                                         modal.deactivate();
                                     }, function(xhr) {
@@ -34,8 +34,19 @@ define(['cabin'], function(cabin) {
                                 }
                             },
                             cancel: function() {
-                                deferred.reject("cancel");
-                                modal.deactivate();
+                                $scope.sendSupevise = true;
+                                iBranchServ.send(txnId, sendData.txnData, {
+                                    supevise: 'Y',
+                                    TESTOVRC: 'RJ'
+                                }).then(function(xhr) {
+                                    $scope.sendSupevise = false;
+                                    deferred.resolve();
+                                    modal.deactivate();
+                                }, function(xhr) {
+                                    $scope.sendSupevise = false;
+                                    deferred.reject("reject");
+                                    modal.deactivate();
+                                });
                             }
                         })
 

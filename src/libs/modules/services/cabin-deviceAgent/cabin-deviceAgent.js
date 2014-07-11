@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['service', 'cbDeviceAgentSrv', ['$rootScope', 'properties', '$q',
-        function($rootScope, properties, $q) {
+    return ['service', 'cbDeviceAgentSrv', ['$rootScope', 'properties', '$q', '$timeout',
+        function($rootScope, properties, $q, $timeout) {
             // var alias = {
             //     /* Methods from MnmMoMBean */
             //     "initXmlRpcService": "tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.initXmlRpcService",
@@ -172,39 +172,47 @@ define(['cabin'], function(cabin) {
 
 
             var allAction = {
-                print: function(printData, eject) {
+                print: function(printData, eject, prompt, prefix) {
                     var deferred = $q.defer();
+                    //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal","請放入紙張");
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
                         var sessionId = data;
+                        //print
                         deviceAction(methods.print, [sessionId, printData, "", "12", "5"]).success(function() {
                             if (eject) {
-                                allAction.sendMessage("normal","列印中…");
+                                allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + "列印中...");
+                                //eject
                                 deviceAction(methods.eject, [sessionId]).success(function() {
-                                    allAction.releaseSession(sessionId, deferred);
+                                    //relase
+                                    allAction.releaseSession(sessionId, deferred, "", prefix);
                                 }).error(function(xhr) {
                                     console.log("deviceAgent returnSession error");
                                     deferred.reject("deviceAgent returnSession error");
-                                    allAction.releaseSession(sessionId, deferred);
+                                    allAction.releaseSession(sessionId, deferred, "", prefix);
                                 });
                             } else {
-                                allAction.releaseSession(sessionId, deferred);
+                                //relase
+                                allAction.releaseSession(sessionId, deferred, "", prefix);
                             }
                         }).error(function(xhr) {
                             console.log("deviceAgent print error");
-                            allAction.releaseSession(sessionId, deferred);
+                            //relase
+                            allAction.releaseSession(sessionId, deferred, "", prefix);
                             //deferred.reject("deviceAgent print error");
                         });
                     }).error(function(xhr) {
                         console.log("deviceAgent obtainSession error");
+                        //relase
                         deferred.reject("deviceAgent obtainSession error");
                     });
                     return deferred.promise;
                 },
 
-                releaseSession: function(sessionId, deferred, data) {
+                releaseSession: function(sessionId, deferred, data, prefix) {
+                    //relase
                     deviceAction(methods.returnSession, [sessionId]).success(function() {
-                        allAction.sendMessage("normal","動作結束…");
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + "動作結束…");
                         return deferred.resolve(data || "ok");
                     }).error(function() {
                         console.log("deviceAgent returnSession error");
@@ -214,21 +222,28 @@ define(['cabin'], function(cabin) {
                     });
                 },
                 printWebPrinter: function(url) {
-
-                },
-                decode: function(eject) {
                     var deferred = $q.defer();
+                    $timeout(function() {
+                        deferred.resolve();
+                    }, 2000);
+                    return deferred.promise;
+                },
+                decode: function(eject, prompt, prefix) {
+                    var deferred = $q.defer();
+                    //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal","請放入存褶…");
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
                         var sessionId = data;
+                        //decode
                         deviceAction(methods.decode, [sessionId, "", 2, eject]).success(function(data) {
-                            //allAction.sendMessage("normal","請放入存褶…");
                             console.log('decodeData', data)
-                            allAction.releaseSession(sessionId, deferred, data);
+                            //release
+                            allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
                             console.log("deviceAgent decode error");
                             deferred.reject("deviceAgent decode error");
-                            allAction.releaseSession(sessionId, deferred);
+                            //release
+                            allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
                         console.log("deviceAgent obtainSession error");
@@ -236,18 +251,22 @@ define(['cabin'], function(cabin) {
                     });
                     return deferred.promise;
                 },
-                encode: function(writterData, eject) {
+                encode: function(writterData, eject, prompt, prefix) {
                     var deferred = $q.defer();
+                    //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal","請放入存褶…");
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
                         var sessionId = data;
+                        //encode
                         deviceAction(methods.encode, [sessionId, writterData, "", 2, eject]).success(function(data) {
                             console.log('decodeData', data)
-                            allAction.releaseSession(sessionId, deferred, data);
+                            //release
+                            allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
                             console.log("deviceAgent encode error");
                             deferred.reject("deviceAgent encode error");
-                            allAction.releaseSession(sessionId, deferred);
+                            //release
+                            allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
                         console.log("deviceAgent obtainSession error");
