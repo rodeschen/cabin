@@ -133,9 +133,8 @@ define(['cabin'], function(cabin) {
                 restrict: 'A',
                 priority: 2,
                 link: function(scope, element, attrs, ngModel) {
-
-
-
+                    console.log("")
+                    var convertToAd = attrs.convertToAd == "true" || false;
                     var charPos = 0;
                     var which = 0;
                     var validChar = "^(" + [
@@ -170,12 +169,31 @@ define(['cabin'], function(cabin) {
                         //rodes fix input method issue
                         ngModel.$setValidity('cbTwDate', cbUtils.validDate(viewValue, true));
                         viewValue = viewValue.replace(/\//g, "");
-
+                        if(convertToAd){
+                            viewValue = cbUtils.convertAdAndTw(viewValue,true);
+                        }
                         which = -1;
                         return viewValue;
                     }
 
                     ngModel.$parsers.unshift(parse);
+
+                    if(convertToAd){
+                        ngModel.$formatters.push(function(viewValue){
+                            if(viewValue){
+                                viewValue = viewValue.replace(/\//g, "");
+                                var valid = cbUtils.validDate(viewValue, false);
+                                ngModel.$setValidity('cbTwDate', valid);
+                                if(valid){
+                                    viewValue = cbUtils.convertAdAndTw(viewValue,false);       
+                                }
+                            }
+
+                            return viewValue;
+                        });  
+                    }
+                    
+
                 }
             };
         }
@@ -266,10 +284,9 @@ define(['cabin'], function(cabin) {
                                 break;
                             }
                         }
-
                         var after = element.next();
                         if (!after.is('.cb-hint')) {
-                            after = element.after('<span class="cb-hint hint hint--error  hint--right" data-hint=""></span>');
+                            after = $('<span class="cb-hint hint hint--error  hint--right" data-hint=""></span>').insertAfter(element);
                         }
                         after.attr('data-hint', err);
                     })

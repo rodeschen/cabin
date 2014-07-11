@@ -79,7 +79,9 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             $locationProvider.html5Mode(false);
 
         }
+
     ]).config(['$httpProvider',
+        //txn precheck
         function($httpProvider) {
             $httpProvider.interceptors.push(['$q', '$rootScope',
                 function($q, $rootScope) {
@@ -110,6 +112,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                                 console.log('response', response);
                                 if (angular.isArray(response.data)) {
                                     response.data = response.data[0].poc;
+                                    //如果交易狀態為2及 reject 交易
                                     if (response.data.txnStatus == '2') {
                                         return $q.reject(response);
                                     }
@@ -149,9 +152,9 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             //     })
             // });
         }
-    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state', 'cbDeviceAgentSrv',
-        function($rootScope, $window, userServ, $state, cbDeviceAgentSrv) {
-            //  cbDeviceAgentSrv.print("adfafadsf<ff>")
+    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state', '$timeout',
+        function($rootScope, $window, userServ, $state, cbDeviceAgentSrv, $timeout) {
+
             $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams) {});
             userServ.then(function(data) {
@@ -165,6 +168,26 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             $rootScope.user = userServ.getUser();
             console.log($rootScope.user, 'user');
 
+        }
+    ]).run(['$timeout', 'iBranchServ', 'cbDeviceAgentSrv',
+        function($timeout, iBranchServ, cbDeviceAgentSrv) {
+            //test code
+            //  cbDeviceAgentSrv.print("adfafadsf<ff>")
+            //console.log("FFFFFFFFFFFFFFFFF",cbDeviceAgentSrv.decode(true))
+            $timeout(function() {
+                // cbDeviceAgentSrv.decode(true).then(function(data) {
+                //     alert("success:" + data)
+                // }, function(data) {
+                //     alert("error" + data);
+                // });
+                // cbDeviceAgentSrv.encode(":20016801378622373500000054595000112340", true).then(function(data) {
+                //     alert("success:" + data)
+                // }, function(data) {
+                //     alert("error" + data);
+                // });
+            }, 1000);
+
+            iBranchServ.queryEjContext(3);
         }
     ]);
 });

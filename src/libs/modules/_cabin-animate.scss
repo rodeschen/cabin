@@ -15,6 +15,17 @@
 	}
 }
 
+@mixin animate-flash-color-customer($name, $attribute, $form-bg-color, $end-bg-color, $middle1, $middle2) {
+    @include keyframes($name) {
+        0%, 100% {
+            #{$attribute}: $form-bg-color;
+        }
+        #{$middle1} , #{$middle2} {
+            #{$attribute}: $end-bg-color;
+        }
+    }
+}
+
 //新增一個mixin，名稱為box-longShadow，並且新增兩個變數。  
 @mixin box-longShadow($lenght: 20,$rgb: #000)  {
 	//先準備一個空的變數  

@@ -8,6 +8,7 @@ define(['cabin'], function(cabin) {
                 scope: {
                     'cbNotify': "@",
                     'receiveEvent': '@',
+                    'clearEvent' : '@',
                     'maxNotify': '@'
                 },
                 link: function(scope, iElement) {
@@ -48,6 +49,9 @@ define(['cabin'], function(cabin) {
                         scope.hasNotify = true;
                     });
 
+                    scope.$on(scope.clearEvent || 'notify-clear', function(ev, data) {
+                        scope.events = [];
+                    });
 
                     scope.toggleNotify = function() {
                         (scope.isOpen = !scope.isOpen);

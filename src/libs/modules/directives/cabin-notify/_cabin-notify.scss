@@ -1,6 +1,9 @@
 @import "modules/cabin-animate";
 
 @include animate-flash-color(notify-flash, background, #333333, #880000);
+@include animate-flash-color-customer(notify-flash-error, background, #C0402A, #E74C3C , 20% , 30%);
+@include animate-flash-color-customer(notify-flash-warn, background, #FAFAAA, #F1C40F , 20% , 30%);
+@include animate-flash-color-customer(notify-flash-normal, background, #FFFFFF, #95A5A6 , 20% , 30%);
 
 .msg-area {
   @include calc(width, 100% - 10%);
@@ -90,6 +93,7 @@
 .msg-area {
   //.msg, {
   .msg-type-normal {
+    @include animation(notify-flash-normal 3s);
     background-color: #FFFFFF;
     color: #000;
     //@include text-longShadow(10,#AAA - #777);
@@ -97,6 +101,7 @@
  
   }
   .msg-type-error {
+    @include animation(notify-flash-error 3s);
     background-color: #C0402A;
     color: #FFF;
     //	@include box-longShadow(1,#C0402A - #777);
@@ -104,6 +109,7 @@
  
   }
   .msg-type-warn {
+    @include animation(notify-flash-warn 3s);
     background-color: #FAFAAA;
     color: #000;
     //	@include box-longShadow(1,#FAFAAA - #777);

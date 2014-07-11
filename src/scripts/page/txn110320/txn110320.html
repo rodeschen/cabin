@@ -1,0 +1,118 @@
+<div class="page-context loginPage" ng-controller="txn110320Ctrl">
+    <h6>有摺轉帳交易(110320)</h6>
+    <form >
+        <div class="row">
+            <div class="col-2">
+                <span class="title">存款帳號</span>
+            </div>
+            <div class="col-3">
+                <input ng-model="data.ACNO_SA"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">存摺餘額</span>
+            </div>
+            <div class="col-3">
+                <input ng-model="data.PB_BAL"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">金額(AMOUNT) </span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.AMT1"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">存摺行數</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.PB_LINE"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">附　　註</span>
+            </div>
+            <div class="col-2">
+                <input ng-model="data.REF"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">提款密碼</span>
+            </div>
+            <div class="col-2">
+                <input ng-model="data.WD_PSW"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">項　　目</span>
+            </div>
+            <div class="col-2">
+                <input ng-model="data.ITEM"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">摺號</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.PB_NO"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">交易摘要</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.MEMO"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">起息日</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.INT_DATE"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">轉帳代碼</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.TRN_CODE"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">身份證號</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.INACT_NO"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">卡號</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.CARD_NO"  type="text" validator/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <span class="title">捷利戶通提碼</span>
+            </div>
+            <div class="col-5">
+                <input ng-model="data.VB_PSW"  type="text" validator/>
+            </div>
+        </div>
+    </form>
+    <div></div>
+</div>

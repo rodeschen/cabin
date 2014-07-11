@@ -11,7 +11,7 @@ angular.module('btford.modal', ['ngAnimate']).
 factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$templateCache', '$animate',
     function($compile, $rootScope, $controller, $q, $http, $templateCache, $animate) {
         return function modalFactory(config) {
-            if ((+ !! config.template) + (+ !! config.templateUrl) !== 1) {
+            if ((+!!config.template) + (+!!config.templateUrl) !== 1) {
                 throw new Error('Expected modal to have exacly one of either `template` or `templateUrl`');
             }
 
@@ -23,7 +23,7 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                 duplicate = config.duplicate || false,
                 element = null,
                 overlay = null,
-                scope = null,
+                //scope = null,
                 closeByEsc = config.closeByEsc !== false ? true : false,
                 html;
 
@@ -49,6 +49,7 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
             }
 
             function attach(html, locals) {
+                var scope;
                 if (locals && locals.$parentScope) {
                     scope = locals.$parentScope.$new();
                     locals.$parentScope = undefined;
@@ -87,6 +88,7 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
 
             function deactivate() {
                 if (element) {
+                    var scope = element.scope();
                     $animate.leave(element, function() {
                         element.remove();
                         element = null;

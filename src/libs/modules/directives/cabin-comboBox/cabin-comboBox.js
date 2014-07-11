@@ -17,6 +17,7 @@ define(['cabin'], function() {
                     'edit': '@'
                 },
                 link: function($scope, iElm, iAttrs, controller) {
+                    var isRequired = iElm.is('[required]');
                     controller.$label = iAttrs.label || "";
                     var sourceEl = iElm;
                     iElm = iElm.find('input');
@@ -91,13 +92,12 @@ define(['cabin'], function() {
 
                                 });
                                 $scope.matchs = _matchs;
-                                $scope.checkValid();
+                                
                             } else {
                                 $scope.matchs = $scope.items;
                             }
                             $scope.indexIdx = ($scope.matchs.length ? 0 : -1);
-
-
+                            $scope.checkValid();
                         },
                         isEdit: function() {
                             return $scope.edit !== 'false';
@@ -117,14 +117,18 @@ define(['cabin'], function() {
                         checkValid: function() {
                             //暫解
                             $timeout(function() {
-                                console.log($scope.getNgModelValue());
+                                var val = $scope.getNgModelValue();
                                 for (var i = 0; i < $scope.items.length; i++) {
-                                    if ($scope.getNgModelValue() == $scope.items[i].key) {
+                                    if (val == $scope.items[i].key) {
                                         controller.$setValidity('cbComboBox', true);
                                         return
                                     }
                                 }
-                                controller.$setValidity('cbComboBox', false);
+                                if(!isRequired && !val){
+                                    controller.$setValidity('cbComboBox', true);    
+                                }else{
+                                    controller.$setValidity('cbComboBox', false);
+                                }
                             }, 60);
 
                         },

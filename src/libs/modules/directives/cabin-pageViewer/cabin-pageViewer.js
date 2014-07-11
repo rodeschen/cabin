@@ -13,16 +13,57 @@ define(['cabin'], function(cabin) {
                     'readOnly': '='
                 },
                 link: function(scope, iElement) {
-                    scope.includeUrl = "";
-                    if (scope.receiveEvent !== undefined) {
-                        scope.$on(scope.receiveEvent || 'pageViewer', function(event, data) {
+                    scope.isLock = false;
+                    scope.lock = function() {
+
+                    }
+
+
+                    angular.extend(scope, {
+                        includeUrl: '',
+                        isLock: false,
+                        lock: function() {
+                            if (scope.isLock) return;
+                            iElement.find("input,textarea").each(function(i, e) {
+                                var el = $(e);
+                                el.data('preadonly', el.prop('readonly') || false).prop('readonly', true).prop('tabindex', -1);
+                            });
+                            scope.isLock = true;
+                        },
+                        unlock: function() {
+                            if (!scope.isLock) return;
+                            iElement.find("input,textarea").each(function(i, e) {
+                                var el = $(e);
+                                el.prop('readonly', el.data('preadonly') || false).removeData('preadonly');
+                                if (el.prop('readonly')) {
+                                    el.prop('tabindex', -1);
+                                } else {
+                                    el.removeProp('tabindex');
+                                }
+                            });
+                            scope.isLock = false;
+                        }
+                    })
+
+
+                    if (scope.receiveEvent !== false) {
+                        var receiveEvent = scope.receiveEvent || 'pageViewer';
+
+                        scope.$on(receiveEvent, function(event, data) {
                             scope.includeUrl = "";
                             if (data && data.page && data.page.url) {
                                 scope.data = {};
+                                scope.isLock = false;
                                 openPage(data.page.url);
                             }
                         });
+                        scope.$on(receiveEvent + '-lock', scope.lock);
+                        scope.$on(receiveEvent + '-unlock', scope.unlock);
                     }
+
+                    //lock page
+
+
                     // if (scope.initPath) {
                     //     openPage(scope.initPath); 
                     // }
@@ -39,7 +80,7 @@ define(['cabin'], function(cabin) {
                     var txnId;
                     scope.submitForm = function(dataForm) {
                         if (dataForm.$valid) {
-                            iBranchServ.send(txnId, dataForm);
+                            iBranchServ.send(txnId, scope.data);
                         } else {
                             console.log(dataForm)
                             iBranchServ.sendMessage('error', "煩請確認資料是否正確!");
@@ -116,11 +157,12 @@ define(['cabin'], function(cabin) {
 
                                                 if (scope.readOnly == true) {
                                                     $timeout(function() {
-                                                        iElement.find("input").prop('readonly', true);
+                                                        scope.lock();
+                                                        //iElement.find("input").prop('readonly', true);
                                                     }, 500);
                                                 }
                                                 $timeout(function() {
-                                                    iElement.find("input[readonly],textarea[readonly]").attr('tabindex', -1);
+                                                    iElement.find("input[readonly],textarea[readonly]").prop('tabindex', -1);
                                                 }, 600);
                                             });
                                             scope.includeUrl = properties.txnViewRootPath + url + '/' + pageName + ".html"

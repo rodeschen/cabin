@@ -1,6 +1,6 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['service', 'txn000045Serv', [
+    return ['service', 'txn110320Serv', [
         function() {
             return {};
         }

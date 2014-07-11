@@ -8,6 +8,8 @@ define(['cabin'], function(cabin) {
                     'menus': data.menu
                 });
             }, 500);
+
+            //current biz date 
             $interval(function() {
                 $scope.currentTime = new Date();
             }, 1000);
@@ -79,6 +81,13 @@ define(['cabin'], function(cabin) {
                         event: 'notify',
                         type: msgType,
                         message: "ADFADFADSF " + ran
+                    });
+                },
+                lock: false,
+                clearMessage: function() {
+                    $scope.lock = !$scope.lock;
+                    $scope.$emit('broadcast', {
+                        event: ('pageViewer-' + ($scope.lock ? 'lock' : 'unlock'))
                     });
                 }
             });

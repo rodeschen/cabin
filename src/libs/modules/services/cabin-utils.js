@@ -1,6 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
     return ['service', 'cbUtils', [
+
         function() {
             // add String method
             $.extend(String.prototype, {
@@ -110,11 +111,20 @@ define(['cabin'], function(cabin) {
                     var comp = text.replace(/\//g, "");
                     if (this.validDate(comp, isTwDate)) {
                         if (isTwDate) {
-                            return comp.substr(0, 3) + "/" + comp.substr(3, 2) + "/" + comp.substr(5, 2);    
-                        }else{
-                            return comp.substr(0, 4) + "/" + comp.substr(4, 2) + "/" + comp.substr(6, 2);    
+                            return comp.substr(0, 3) + "/" + comp.substr(3, 2) + "/" + comp.substr(5, 2);
+                        } else {
+                            return comp.substr(0, 4) + "/" + comp.substr(4, 2) + "/" + comp.substr(6, 2);
                         }
-                        
+
+                    }
+                },
+                convertAdAndTw: function(text, toAd) {
+                    var comp = text.replace(/\//g, "");
+                    if (toAd) {
+                        return (parseInt(comp.substr(0, 3)) + 1911) + comp.substr(3, 2) + comp.substr(5, 2)
+                    } else {
+                        var year = parseInt(comp.substr(0, 4)) - 1911;
+                        return ((year < 100) ? "0" : "") + year + comp.substr(4, 2) + comp.substr(6, 2);
                     }
                 }
             };
