@@ -26,7 +26,8 @@ define(['cabin'], function(cabin) {
                             if (scope.isLock) return;
                             iElement.find("input,textarea").each(function(i, e) {
                                 var el = $(e);
-                                el.data('preadonly', el.prop('readonly') || false).prop('readonly', true).prop('tabindex', -1);
+                                //el.data('preadonly', el.prop('readonly') || false).prop('readonly', true).prop('tabindex', -1);
+                                el.data('preadonly', el.prop('disabled') || false).prop('disabled', true).prop('tabindex', -1);
                             });
                             scope.isLock = true;
                         },
@@ -34,8 +35,8 @@ define(['cabin'], function(cabin) {
                             if (!scope.isLock) return;
                             iElement.find("input,textarea").each(function(i, e) {
                                 var el = $(e);
-                                el.prop('readonly', el.data('preadonly') || false).removeData('preadonly');
-                                if (el.prop('readonly')) {
+                                el.prop('disabled', el.data('preadonly') || false).removeData('preadonly');
+                                if (el.prop('disabled')) {
                                     el.prop('tabindex', -1);
                                 } else {
                                     el.removeProp('tabindex');
@@ -161,9 +162,9 @@ define(['cabin'], function(cabin) {
                                                         //iElement.find("input").prop('readonly', true);
                                                     }, 500);
                                                 }
-                                                $timeout(function() {
-                                                    iElement.find("input[readonly],textarea[readonly]").prop('tabindex', -1);
-                                                }, 600);
+                                                // $timeout(function() {
+                                                //     iElement.find("input[readonly],textarea[readonly]").prop('tabindex', -1);
+                                                // }, 600);
                                             });
                                             scope.includeUrl = properties.txnViewRootPath + url + '/' + pageName + ".html"
 

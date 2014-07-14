@@ -270,8 +270,8 @@ define(['cabin'], function(cabin) {
                 };
             }
         ]],
-        ['directive', 'validator', ['cbValidationServ',
-            function(cbValidationServ) {
+        ['directive', 'validator', ['cbValidationServ', '$timeout',
+            function(cbValidationServ, $timeout) {
                 return {
                     require: 'ngModel',
                     restrict: 'A',
@@ -279,19 +279,23 @@ define(['cabin'], function(cabin) {
                     link: function(scope, element, attrs, ngModel) {
                         var scope = scope.$new();
                         scope.ngModel = ngModel;
-                        scope.$watchCollection('ngModel.$error', function(v) {
-                            var err = '';
-                            for (var key in v) {
-                                if (v[key]) {
-                                    err = cbValidationServ.errorMessage(key);
-                                    break;
+                        scope.$watchCollection('ngModel.$viewValue', function(v) {
+                            $timeout(function() {
+                                var err = '';
+                                v = ngModel.$error;
+                                for (var key in v) {
+                                    if (v[key]) {
+                                        err = cbValidationServ.errorMessage(key);
+                                        break;
+                                    }
                                 }
-                            }
-                            var after = element.next();
-                            if (!after.is('.cb-hint')) {
-                                after = $('<span class="cb-hint hint hint--error  hint--right" data-hint=""></span>').insertAfter(element);
-                            }
-                            after.attr('data-hint', err);
+                                var after = element.next();
+                                if (!after.is('.cb-hint')) {
+                                    after = $('<span class="cb-hint hint hint--error  hint--right" data-hint=""></span>').insertAfter(element);
+                                }
+                                after.attr('data-hint', err);
+                            }, 200);
+
                         });
 
                         //add valid

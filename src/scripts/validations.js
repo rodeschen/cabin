@@ -2,8 +2,8 @@ require.config({
     paths: {
         'taiwanId': 'libs/modules/validations/taiwanId',
        
-"txn1206062Val" : "scripts/validations/txn120606/txn1206062Val",
-"txn120606Val" : "scripts/validations/txn120606Val"
+"txn120606ACNOVal" : "scripts/validations/txn120606/txn120606ACNOVal",
+"txn120606COPY" : "scripts/validations/txn120606/txn120606COPY"
     },
     shim: {
         'taiwanId': ['cabin']

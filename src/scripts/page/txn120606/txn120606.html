@@ -29,7 +29,7 @@
             <span class="title">黃金帳號</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.ACNO_SA" type="text" class="large" validator/>
+            <input ng-model="data.ACNO_SA" type="text" class="large" validator="txn120606ACNOVal" maxlength="12"/>
         </div>
     </div>
     <div class="row">
@@ -77,7 +77,7 @@
             <span class="title">印錄份數</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.P_COPY" required type="text" validator/>
+            <input ng-model="data.P_COPY" required type="text" validator="txn120606COPY"/>
         </div>
     </div>
     <div class="row">
@@ -85,7 +85,7 @@
             <span class="title">英文名稱</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.ENG_NAME1" cb-mask-to-full type="text" class="extra-large" cb-maxlength="12" validator/>
+            <input ng-model="data.ENG_NAME1" ng-disabled="data.P_WORD != '2'" cb-mask-to-full type="text" class="extra-large" cb-maxlength="12" validator/>
         </div>
     </div>
     <div class="row">
@@ -93,7 +93,7 @@
             <span class="title"></span>
         </div>
         <div class="col-5">
-            <input name="engName2" ng-model="data.ENG_NAME2" cb-mask-to-full type="text" class="extra-large" validator/>
+            <input name="engName2" ng-model="data.ENG_NAME2" ng-disabled="data.P_WORD != '2'" cb-mask-to-full type="text" class="extra-large" validator/>
         </div>
     </div>
     <div class="row">
