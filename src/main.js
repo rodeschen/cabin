@@ -38,6 +38,7 @@ require.config({
         'libs': 'libs/libs',
         'cabin': 'libs/cabin',
         'cabin-libs': 'libs/cabin-libs',
+        'txn-validations': 'scripts/validations',
         'app': 'scripts/app',
         'http-mock': '../_httpMock/define',
         //customize
@@ -46,11 +47,12 @@ require.config({
     shim: {
         'cabin-libs': ['libs'],
         'app': ['libs', 'cabin', 'cabin-libs'],
+        'txn-validations': ['libs', 'cabin', 'cabin-libs', 'app'],
         'http-mock': ['libs', 'cabin', 'cabin-libs', 'app']
     }
 });
 
-require(['libs', 'cabin', 'cabin-libs', 'app', 'http-mock'], function() {
+require(['libs', 'cabin', 'cabin-libs', 'app', 'txn-validations', 'http-mock'], function() {
     var cabin = arguments[arguments.length - 1];
     angular.bootstrap(window.document, ['cabin']);
     console.log('app Initialized');

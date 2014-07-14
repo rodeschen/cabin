@@ -512,6 +512,50 @@ module.exports = function(grunt) {
         //         }]
         //     }
         // }
+        'string-replace': {
+            kit: {
+                files: {
+                    '<%= yeoman.app %>/scripts/validations.js': '<%= yeoman.app %>/libs/validations-template.js'
+                },
+                options: {
+                    replacements: [{
+                        pattern: / 'txnValidaions': ''/,
+                        replacement: function(match, p1, offset, string) {
+                            function readFiles(path) {
+                                var files = [];
+                                var fileData = {};
+                                fs.readdirSync(path).map(function(file) {
+                                    if (fs.statSync(path + "/" + file).isDirectory()) {
+                                        var _files = readFiles(path + "/" + file);
+                                        //grunt.log.writeln("list _fodler : " + _files);
+                                        files = files.concat(_files);
+                                    } else {
+                                        if (file.match(/[.]js/)) {
+                                            //grunt.log.writeln("push _file : " + file);
+                                            var _tmp = file.replace(/[.](js)$/, "");
+                                            files.push({
+                                                key: _tmp,
+                                                value: path.replace("src/", "") + "/" + _tmp
+                                            });
+                                        }
+                                    }
+                                });
+                                return files;
+                            }
+
+                            var files = readFiles(yeomanConfig.app + "/scripts/validations");
+                            var str = "";
+                            for (var i in files) {
+                                str += ("\n\"" + files[i].key + "\" : \"" + files[i].value + "\",");
+                            }
+
+
+                            return str.replace(/,$/,"");
+                        }
+                    }]
+                }
+            }
+        },
         requirejs: {
             compile: {
                 options: {
@@ -534,7 +578,7 @@ module.exports = function(grunt) {
                         'angular-ui-bootstrap': 'libs/components/angular-bootstrap/ui-bootstrap',
                         'angular-ui-utils': 'libs/components/angular-ui-utils/ui-utils',
                         'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/ui-utils-ieshiv.min',
-                        'angular-validation' : 'libs/components/angular-validation/dist/angular-validation',
+                        'angular-validation': 'libs/components/angular-validation/dist/angular-validation',
                         'tether-utils': 'libs/components/tether/js/utils',
                         'tether': 'libs/components/tether/js/tether',
                         //'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
@@ -593,7 +637,10 @@ module.exports = function(grunt) {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
         }
 
+
+
         grunt.task.run([
+            'string-replace',
             'clean:server',
             'concurrent:server',
             'configureProxies',
@@ -641,10 +688,12 @@ module.exports = function(grunt) {
         'usemin'
     ]);
 
-     grunt.registerTask('serverpoc', function(target) {
+    grunt.registerTask('serverpoc', function(target) {
         if (target === 'dist') {
             return grunt.task.run(['buildpoc', 'open', 'connect:dist:keepalive']);
         }
+
+
 
         grunt.task.run([
             'clean:server',
@@ -696,4 +745,38 @@ module.exports = function(grunt) {
             src: [filepath]
         }]);
     });
+
+    grunt.registerTask('ttt', function(action, filepath) {
+        function readFiles(path) {
+            var files = [];
+            var fileData = {};
+            fs.readdirSync(path).map(function(file) {
+                if (fs.statSync(path + "/" + file).isDirectory()) {
+                    var _files = readFiles(path + "/" + file);
+                    //grunt.log.writeln("list _fodler : " + _files);
+                    files = files.concat(_files);
+                } else {
+                    if (file.match(/[.]js/)) {
+                        //grunt.log.writeln("push _file : " + file);
+                        var _tmp = file.replace(/[.](js)$/, "");
+                        files.push({
+                            key: _tmp,
+                            value: path.replace("src/", "") + "/" + _tmp
+                        });
+                    }
+                }
+            });
+            return files;
+        }
+
+        var ffff = readFiles(yeomanConfig.app + "/scripts/validations");
+        var str = "";
+        for (var i in ffff) {
+            str += ("\n\"" + ffff[i].key + "\" : \"" + ffff[i].value + "\",");
+        }
+
+        grunt.log.writeln(str.replace(/,$/, ""));
+
+    });
+
 };

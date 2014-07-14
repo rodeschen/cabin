@@ -22,6 +22,7 @@ require.config({
         'cbSupeviseModal': 'libs/modules/modals/cabin-supeviseModal/cabin-supeviseModal',
         'cbSupeviseRequireModal': 'libs/modules/modals/cabin-supeviseRequireModal/cabin-supeviseRequireModal',
         'cbDeviceAgent': 'libs/modules/services/cabin-deviceAgent/cabin-deviceAgent',
+        'cbValidationServ' : 'libs/modules/services/cabin-validation',
         //for poc
         'iBranchServ': 'scripts/services/iBranchServ',
         'userServ': 'scripts/services/userServ',
@@ -38,6 +39,7 @@ require.config({
         //service
         'cbTxnRouterLoaderServ': ['libs', 'cabin'],
         'cbLazyRegisterServ': ['libs', 'cabin'],
+        'cbValidationServ' : ['libs', 'cabin'],
         //modal
         'cbSupeviseModal': ['libs', 'cabin'],
         'cbSupeviseRequireModal': ['libs', 'cabin'],
@@ -58,6 +60,7 @@ define('cabin-libs', ['libs', 'cabin', 'cbLazyRegisterServ', 'cbModule',
     'cbComboBoxServ',
     'cbWebSocketIoServ',
     //for poc
+    'cbValidationServ',
     'cbDeviceAgent',
     'iBranchServ',
     'userServ',
