@@ -62,8 +62,10 @@ div[cb-combo-box] {
       padding: 2px 11px;
       &.active,&:hover {
         background-color: #0081C2;
-        color: #FFF;
         cursor: pointer;
+        a {
+          color: #FFF;
+        }
       }
     }
   }

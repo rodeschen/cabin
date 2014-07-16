@@ -14,10 +14,6 @@ define(['cabin'], function(cabin) {
                 },
                 link: function(scope, iElement) {
                     scope.isLock = false;
-                    scope.lock = function() {
-
-                    }
-
 
                     angular.extend(scope, {
                         includeUrl: '',
@@ -68,9 +64,9 @@ define(['cabin'], function(cabin) {
                     // if (scope.initPath) {
                     //     openPage(scope.initPath); 
                     // }
-
                     if (scope.initData) {
-                        angular.extend(scope, scope.initData);
+                        scope.data = scope.initData;
+                        angular.extend(scope.data, scope.initData);
                     }
 
                     scope.$watch('initPath', function(v) {
@@ -98,7 +94,7 @@ define(['cabin'], function(cabin) {
                             var url = pageUrl.replace(/(^\/|\/$)/, '');
                             var pageName = url.split('/');
                             pageName = pageName[pageName.length - 1];
-                            iElement.children().attr("ng-controller", pageName + "Ctrl");
+                            //iElement.children().attr("ng-controller", pageName + "Ctrl");
                             require(["scripts/page/" + url.replace(/^\//, '') + "/" + pageName], function(settings) {
                                 //init data
                                 var s = angular.extend({}, {
@@ -108,7 +104,7 @@ define(['cabin'], function(cabin) {
                                 }, settings || {});
                                 var promises = [];
                                 if (s.controller) {
-                                    iElement.children().attr('ng-controller', pageName + 'Ctrl');
+                                    //iElement.children().attr('ng-controller', pageName + 'Ctrl');
                                     var ctrl_deferred = $q.defer();
                                     var path = s.controller === true ? (properties.txnScriptRootPath + url + '/' + pageName + 'Ctrl') : s.controller;
                                     require([path], function() {

@@ -7,20 +7,42 @@ define(['cabin'], function(cabin) {
                 controllerAs: 'modal',
                 closeByEsc: false,
                 templateUrl: cabinModulePath + 'modals/cabin-supeviseModal/templates/cabin-supeviseModal.html',
-                controller: ['$scope', 'cbSupeviseModal', 'iBranchServ',
-                    function($scope, modal, iBranchServ) {
-                        iBranchServ.send("999999").then(function(xhr) {
-                            $scope.sendUser = xhr.data.sendUser;
-                            $scope.messages = xhr.data.messages;
-                            $scope.txnData = {
-                                data: xhr.data.txnData
-                            };
-                        });
+                controller: ['$scope', 'cbSupeviseModal', 'iBranchServ', '$rootScope',
+                    function($scope, modal, iBranchServ, $rootScope) {
+                        $scope.ovTxnId = "/txn" + $scope.txnId;
+
                         angular.extend($scope, {
                             approve: function() {
+                                $scope.sendSupevise = true;
+                                iBranchServ.send("OVACTION", {
+                                    userid: $rootScope.user.userId
+                                }, {
+                                    supevise: 'Y',
+                                    TESTOVRC: 'AC'
+                                }).then(function(xhr) {
+                                    $scope.sendSupevise = false;
+                                    deferred.resolve();
+                                    modal.deactivate();
+                                }, function(xhr) {
+                                    $scope.sendSupevise = false;
+                                    modal.deactivate();
+                                });
                                 modal.deactivate();
                             },
                             reject: function() {
+                                $scope.sendSupevise = true;
+                                iBranchServ.send("OVACTION", {
+                                    userid: $rootScope.user.userId
+                                }, {
+                                    supevise: 'Y',
+                                    TESTOVRC: 'RJ'
+                                }).then(function(xhr) {
+                                    $scope.sendSupevise = false;
+                                    modal.deactivate();
+                                }, function(xhr) {
+                                    $scope.sendSupevise = false;
+                                    modal.deactivate();
+                                });
                                 modal.deactivate();
                             }
                         })

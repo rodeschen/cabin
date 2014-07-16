@@ -221,11 +221,27 @@ define(['cabin'], function(cabin) {
                         }
                     });
                 },
-                printWebPrinter: function(url) {
+                printWebPrinter: function(url, prompt, prefix) {
                     var deferred = $q.defer();
-                    $timeout(function() {
-                        deferred.resolve();
-                    }, 2000);
+                    //obtainSession
+                    deviceAction(methods.obtainSession, []).success(function(data) {
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
+                        var sessionId = data;
+                        //print
+                        deviceAction(methods.print, [sessionId, "[PDF]http://10.204.1.63" + url, "", "12", "5"]).success(function() {
+                            //relase
+                            allAction.releaseSession(sessionId, deferred, "", prefix);
+                        }).error(function(xhr) {
+                            console.log("deviceAgent print error");
+                            //relase
+                            allAction.releaseSession(sessionId, deferred, "", prefix);
+                            //deferred.reject("deviceAgent print error");
+                        });
+                    }).error(function(xhr) {
+                        console.log("deviceAgent obtainSession error");
+                        //relase
+                        deferred.reject("deviceAgent obtainSession error");
+                    });
                     return deferred.promise;
                 },
                 decode: function(eject, prompt, prefix) {
@@ -237,7 +253,7 @@ define(['cabin'], function(cabin) {
                         //decode
                         deviceAction(methods.decode, [sessionId, "", 2, eject]).success(function(data) {
                             console.log('decodeData', data)
-                            //release
+                                //release
                             allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
                             console.log("deviceAgent decode error");
@@ -260,7 +276,7 @@ define(['cabin'], function(cabin) {
                         //encode
                         deviceAction(methods.encode, [sessionId, writterData, "", 2, eject]).success(function(data) {
                             console.log('decodeData', data)
-                            //release
+                                //release
                             allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
                             console.log("deviceAgent encode error");

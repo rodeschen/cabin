@@ -169,8 +169,9 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             console.log($rootScope.user, 'user');
 
         }
-    ]).run(['$timeout', 'iBranchServ', 'cbDeviceAgentSrv',
-        function($timeout, iBranchServ, cbDeviceAgentSrv) {
+    ]).run(['$timeout', 'iBranchServ', 'cbDeviceAgentSrv', '$injector',
+        function($timeout, iBranchServ, cbDeviceAgentSrv, $injector) {
+            // cbDeviceAgentSrv.printWebPrinter("/iBranchApp/seal1.pdf", "xdfdfdfd...", "XXX");
             //test code
             //  cbDeviceAgentSrv.print("adfafadsf<ff>")
             //console.log("FFFFFFFFFFFFFFFFF",cbDeviceAgentSrv.decode(true))
@@ -187,7 +188,30 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 // });
             }, 1000);
 
-            iBranchServ.queryEjContext(3);
+            // iBranchServ.queryEjContext(3);
+            // var modal = $injector.get('cbCommonModal');
+            // var job = {};
+            // modal.activate({
+            //     message: job.DATA || "SSSS",
+            //     deferred: job.deferred,
+            //     buttons: [{
+            //         name: '列印',
+            //         type: 'primary',
+            //         action: function() {
+            //             cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {
+            //                 deferred.resolve();
+            //             });
+            //         }
+            //     }, {
+            //         name: '取消',
+            //         type: 'danger',
+            //         action: function() {
+            //             cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {
+            //                 deferred.reject();
+            //             });
+            //         }
+            //     }]
+            // });
         }
     ]);
 });

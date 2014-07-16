@@ -38,7 +38,7 @@ define(['cabin'], function(cabin) {
                     'value': '全行'
                 }],
                 'txn120606.P_WORD': [{
-                    'key': ' 1',
+                    'key': '1',
                     'value': '中文'
                 }, {
                     'key': '2',

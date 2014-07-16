@@ -8,7 +8,9 @@ define(['cabin'], function(cabin) {
                 closeByEsc: false,
                 templateUrl: cabinModulePath + 'modals/cabin-commonModal/templates/cabin-commonModal.html',
                 controller: ['$scope', 'cbSupeviseModal',
-                    function($scope, modal) {}
+                    function($scope, modal) {
+                        
+                    }
                 ]
             });
         }

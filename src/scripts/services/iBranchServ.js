@@ -6,6 +6,13 @@ define(['cabin'], function(cabin) {
             var funcs = {
                 send: function(txnId, data, headerData) {
                     var testOV = "Y";
+                    //remove empty data
+                    for (var key in data) {
+                        if (data[key] == "") {
+                            delete data[key]
+                        }
+                    }
+
                     var sendData = angular.extend({
                         'txnId': txnId,
                         'txnData': data || {}
@@ -28,15 +35,7 @@ define(['cabin'], function(cabin) {
                     http.then(function(xhr) {
                         console.log(txnId, "response", xhr.data);
                         var respData = xhr.data;
-                        // if (respData.txnStatus === '9') {
-                        //     respData.supevise.sendData = sendData;
-                        //     var modal = $injector.get('cbSupeviseRequireModal');
-                        //     funcs.sendMessage('error', '此交易需主管授權。');
-                        //     modal.activate(respData.supevise);
-                        // } else {
                         funcs.txnSuccess(respData, sendData);
-                        //}
-                        //console.info("send " + txnId + " success");
                     }, function(xhr) {
                         console.log(xhr.data)
                         funcs.sendMessage('error', txnId + " : " + xhr.data.txnMessage);
@@ -108,7 +107,20 @@ define(['cabin'], function(cabin) {
                     switch (job.TYPE) {
                         case 'POPUP':
                             // console.log("sPOPUP");
-                            //return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
+                            var modal = $injector.get('cbCommonModal');
+                            modal.activate({
+                                message: job.DATA,
+                                deferred: job.deferred,
+                                buttons: [{
+                                    name: '確定',
+                                    type: 'primary',
+                                    action: function() {
+                                        modal.deactivate();
+                                        defer.resolve();
+                                    }
+                                }]
+                            });
+                            return defer.promise;
                             break;
                         case 'PB':
                             console.log("sPB");
@@ -118,6 +130,30 @@ define(['cabin'], function(cabin) {
                             break;
                         case 'CONFIRM':
                             // console.log("sCONFIRM");
+                            var modal = $injector.get('cbCommonModal');
+                            modal.activate({
+                                message: "客戶有待辦事項，是否需要列印?",
+                                deferred: job.deferred,
+                                buttons: [{
+                                    name: '列印',
+                                    type: 'primary',
+                                    action: function() {
+                                        modal.deactivate()
+                                        cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {
+                                            defer.resolve();
+                                        });
+
+                                    }
+                                }, {
+                                    name: '取消',
+                                    type: 'danger',
+                                    action: function() {
+                                        modal.deactivate();
+                                        defer.reject();
+                                    }
+                                }]
+                            });
+                            return defer.promise;
                             //return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'FORM':
@@ -129,7 +165,7 @@ define(['cabin'], function(cabin) {
                             break;
                         case 'PDF':
                             console.log("sPDF");
-                            //return cbDeviceAgentSrv.printWebPrinter(job.DATA, true, job.PROMPT, job.txnId);
+                            return cbDeviceAgentSrv.printWebPrinter(job.DATA, job.PROMPT, job.txnId);
                             break;
                         case 'MSG':
                             funcs.sendMessage('normal', '[' + job.txnId + '] ' + job.DATA);
@@ -143,7 +179,7 @@ define(['cabin'], function(cabin) {
                             break;
                     }
                     $timeout(function() {
-                        // console.log(job.TYPE, "AAA", job);
+                        console.log(job.TYPE, "AAA", job);
                         defer.resolve();
                     }, 1000);
                     return defer.promise;
@@ -161,19 +197,23 @@ define(['cabin'], function(cabin) {
             //pooling supevise query
             (function querySup() {
                 if ($rootScope.user && $rootScope.user.userId) {
-                    funcs.send("querySup", {
-                        userId: $rootScope.userId
+                    funcs.send("OVQUERY", {
+                        userid: $rootScope.user.userId
                     }).then(function(xhr) {
-                        console.log(xhr);
-                        //if(xhr.data)
+                        var resData = xhr.data;
+                        if (resData.OVDATA && resData.OVDATA.OVSTATUS == "1") {
+                            $rootScope.hasOV = true;
+                        } else {
+                            $rootScope.hasOV = false;
+                        }
                     }).finally(function() {
-                        $timeout(querySup, 1000);
+                        $timeout(querySup, 10000);
                     });
                 } else {
-                    $timeout(querySup, 1000);
+                    $timeout(querySup, 10000);
                 };
 
-            }) //();
+            })();
             return funcs;
         }
     ]];

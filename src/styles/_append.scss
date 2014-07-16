@@ -142,7 +142,8 @@ body {
 //for valid
 input.ng-invalid {
   &:focus,&:hover {
-    + .hint:not([data-hint=''])  {
+    + .hint:not([data-hint='']) {
+      padding-left: 4px;
       &:before, &:after {
         visibility: visible;
         opacity: 1;
@@ -154,6 +155,7 @@ input.ng-invalid {
 [cb-combo-box].ng-invalid {
   &.cb-focus,&:hover {
     + .hint:not([data-hint='']) {
+      padding-left: 4px;
       &:before, &:after {
         visibility: visible;
         opacity: 1;
@@ -161,6 +163,8 @@ input.ng-invalid {
     }
   }
 }
-.hint{
-  min-height: 5px;
+
+.hint {
+  //padding-left : 4px;
+  min-height: 7px;
 }

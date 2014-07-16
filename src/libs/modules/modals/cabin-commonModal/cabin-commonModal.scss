@@ -1,3 +1,20 @@
-.cabin-common-modal {
-  
+.cabin-modal.cabin-common-modal {
+  background-color: #ECF0F1;
+  border: 7px #2980B9 solid;
+  position: fixed;
+  width: 500px;
+  font-size: 15px;
+  max-width: 950px;
+  overflow-y: auto;
+  margin: auto 0px;
+  padding: auto 0px;
+  top: 45%;
+  .common-modal-context {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    top: 0px;
+    overflow: hidden;
+  }
 }

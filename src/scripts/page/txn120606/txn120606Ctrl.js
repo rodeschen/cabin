@@ -2,6 +2,9 @@
 define(['cabin'], function(cabin) {
     return ['controller', 'txn120606Ctrl', ['$scope', 'txn120606Serv', '$q', '$timeout', '$resource',
         function($scope, serv, $q, $timeout, $resource) {
+            // $scope.data = {
+            //     "XXX" : "DDD"
+            // }
             // $scope.data = angular.extend({
             //     'FUNC_01': '',
             //     'IDNO': '',

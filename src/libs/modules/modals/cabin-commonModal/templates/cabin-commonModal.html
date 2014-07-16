@@ -1,5 +1,10 @@
-<div class="btf-modal cabin-common-modal toggle">
-    <div class="common-modal-context">
-
+<div class="btf-modal cabin-modal cabin-common-modal toggle">
+    <div class="common-modal-context" ng-bind-html="message">
+    </div>
+    <div class="row">
+        <div class="col-xs-1 col-md-offset-2"></div>
+        <div class="col-xs-3" ng-repeat="button in buttons">
+            <a href="" class="btn btn-block btn-lg btn-{{button.type || 'primary'}}" ng-click="button.action()">{{button.name}}</a> 
+        </div>
     </div>
 </div>

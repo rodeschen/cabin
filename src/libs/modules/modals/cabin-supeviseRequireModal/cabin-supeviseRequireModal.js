@@ -19,9 +19,9 @@ define(['cabin'], function(cabin) {
                                 if (sendForm.$valid) {
                                     //sendData.supevise = sendForm.user;
                                     $scope.sendSupevise = true;
-                                    iBranchServ.send(txnId, sendData.txnData, {
+                                    iBranchServ.send(txnId, {} /*sendData*/ , {
                                         supevise: 'Y',
-                                        TESTOVRC: 'AC'
+                                        // TESTOVRC: 'AC'
                                     }).then(function(xhr) {
                                         $scope.sendSupevise = false;
                                         deferred.resolve();
@@ -35,7 +35,7 @@ define(['cabin'], function(cabin) {
                             },
                             cancel: function() {
                                 $scope.sendSupevise = true;
-                                iBranchServ.send(txnId, sendData.txnData, {
+                                iBranchServ.send(txnId, {} /*sendData*/ , {
                                     supevise: 'Y',
                                     TESTOVRC: 'RJ'
                                 }).then(function(xhr) {

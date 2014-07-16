@@ -8,6 +8,7 @@ define(['cabin'], function(cabin) {
                 priority: 2,
                 link: function(scope, element, attrs, ngModel) {
                     // var negative =
+                    var fraction = parseInt(attrs.fraction || 4);
                     var charPos = 0;
                     var currentPos = 0;
                     var val, keyIn;
@@ -34,8 +35,12 @@ define(['cabin'], function(cabin) {
                         if (e.which === 48 && charPos === 0 && val.match(/[.]0$/)) {
                             return false;
                         }
+
                         //ignore invalid char 
                         if (!(new RegExp(validChar).test(e.which))) {
+                            return false;
+                        }
+                        if (/4[8-9]|5[0-7]/.test(e.which) && (charPos < (fraction + 1)) && val.match("[.][0-9]{" + fraction + "}$")) {
                             return false;
                         }
 
@@ -45,9 +50,9 @@ define(['cabin'], function(cabin) {
                         if (e.which === 190 && this.value.indexOf(".") > 0) {
                             return false;
                         }
-                        //fix: alaways to parse
+                        //fix: alaways to parse 修正重復輸入時不會執行format資料
                         if (e.which !== 9 && e.which !== 13) {
-                            ngModel.$setViewValue("");
+                            //  ngModel.$setViewValue("");
                         }
                     });
 
@@ -56,14 +61,14 @@ define(['cabin'], function(cabin) {
                         if (!viewValue)
                             return viewValue;
                         // strips all non digits leaving periods.
-                        var clean = viewValue.replace(/[^0-9.]+/g, '').replace(/\.{2,}/, '.');
+                        var clean = viewValue.replace(/[^0-9.]+/g, '').replace("\.{" + fraction + ",}", '.');
                         // case for users entering multiple periods throughout the number
 
                         var dotSplit = clean.split('.');
                         if (dotSplit.length > 2) {
-                            clean = dotSplit[0] + '.' + dotSplit[1].slice(0, 2);
+                            clean = dotSplit[0] + '.' + dotSplit[1].slice(0, fraction);
                         } else if (dotSplit.length == 2) {
-                            clean = dotSplit[0] + '.' + dotSplit[1].slice(0, 2);
+                            clean = dotSplit[0] + '.' + dotSplit[1].slice(0, fraction);
                         }
 
                         if (!noRender)
@@ -87,15 +92,12 @@ define(['cabin'], function(cabin) {
                         }
                         var currencyValue,
                             dotSplit = clean.split('.');
-
-                        // todo: refactor, this is ugly
+                            // todo: refactor, this is ugly
                         if (clean[clean.length - 1] === '.') {
                             currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean, 10)) + '.';
-
-                        } else if (clean.indexOf('.') != -1 && dotSplit[dotSplit.length - 1].length == 1) {
-                            currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean, 10), 1);
-                        } else if (clean.indexOf('.') != -1 && dotSplit[dotSplit.length - 1].length == 1) {
-                            currencyValue = /*'$' + */ $filter('number')(parseFloat(clean, 10), 2);
+                        } else if (clean.indexOf('.') != -1 && dotSplit[dotSplit.length - 1].length) {
+                            var length = dotSplit[dotSplit.length - 1].length;
+                            currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean, 10), length > fraction ? fraction : length);
                         } else {
                             currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean, 10));
                         }

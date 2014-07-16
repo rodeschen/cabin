@@ -277,6 +277,7 @@ define(['cabin'], function(cabin) {
                     restrict: 'A',
                     priority: 2,
                     link: function(scope, element, attrs, ngModel) {
+                        var parentScope = scope;
                         var scope = scope.$new();
                         scope.ngModel = ngModel;
                         scope.$watchCollection('ngModel.$viewValue', function(v) {
@@ -297,16 +298,15 @@ define(['cabin'], function(cabin) {
                             }, 200);
 
                         });
-
                         //add valid
                         if (attrs.validator) {
                             angular.forEach(attrs.validator.split(","), function(e, i) {
                                 cbValidationServ.initValidation(e);
                                 element.on('keyup', function() {
                                     var _this = this;
-                                    scope.$parent.$apply(function() {
+                                    parentScope.$apply(function() {
                                         try {
-                                            var text = cbValidationServ.validation(e)(_this.value);
+                                            var text = cbValidationServ.validation(e)(_this.value, parentScope.data, parentScope);
                                             if (text !== true) {
                                                 throw text;
                                             }

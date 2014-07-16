@@ -78,6 +78,10 @@ module.exports = function(grunt) {
                     '<%= yeoman.app %>/images/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             },
+            watchValid: {
+                files: ['<%= yeoman.app %>/scripts/validations/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.js'],
+                tasks: ['string-replace']
+            },
             capCoffee: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
                 tasks: ['coffee:capDist']
@@ -436,7 +440,9 @@ module.exports = function(grunt) {
                 'watch:compass',
                 'watch:livereload',
                 'watch:coffee',
-                'watch:coffeeTest'
+                'watch:coffeeTest',
+                //forpoc
+                'watch:watchValid'
             ],
             capWatch: [
                 'watch:capCoffee',
