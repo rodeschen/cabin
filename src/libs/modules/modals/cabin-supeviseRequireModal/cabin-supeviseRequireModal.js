@@ -9,6 +9,9 @@ define(['cabin'], function(cabin) {
                 templateUrl: cabinModulePath + 'modals/cabin-supeviseRequireModal/templates/cabin-supeviseRequireModal.html',
                 controller: ['$scope', 'cbSupeviseRequireModal',
                     function($scope, modal) {
+                        $scope.data = {
+                            remote : "Y"
+                        };
                         var deferred = $scope.deferred;
                         var sendData = $scope.DATA.sendData;
                         var respData = $scope.DATA.respData;

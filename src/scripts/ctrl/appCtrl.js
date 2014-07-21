@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$rootScope', '$scope', '$http', '$timeout', '$interval', 'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ', '$filter',
-        function($rootScope, $scope, $http, $timeout, $interval, cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ, $filter) {
+    return ['$rootScope', '$scope', '$http', '$timeout', '$state', '$interval', 'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ', '$filter', '$injector',
+        function($rootScope, $scope, $http, $timeout, $state, $interval, cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ, $filter, $injector) {
             $http.get('basehandler/queryMenu').success(function(data) {
                 $timeout(function() {
                     $scope.$emit('broadcast', {
@@ -11,6 +11,7 @@ define(['cabin'], function(cabin) {
                 }, 500);
 
                 //current biz date 
+                $scope.currentTime = new Date();
                 $interval(function() {
                     $scope.currentTime = new Date();
                 }, 1000);
@@ -37,23 +38,40 @@ define(['cabin'], function(cabin) {
                     },
                     logout: function() {
                         userServ.logout();
-                        $scope.$emit('broadcast', {
-                            event: 'pageViewer',
-                            page: {
-                                url: 'favorite'
-                            }
-                        });
+                        $state.go("index");
                     },
                     openModal: function() {
-                        cbSupeviseModal.activate({
-                            'messages': ["BA12起息日期不同1", "測試訊息2"],
-                            'txnData': {
-                                data: {
-                                    func: '2',
-                                    custId: 'aaa'
+
+                        var modal = $injector.get('cbSupeviseRequireModal');
+                        modal.activate({
+                            DATA: {
+                                sendData: {},
+                                respData: {
+                                    OVERRIDE_MSG: "ADSFADF"
                                 }
                             }
                         });
+
+                        // var modal = $injector.get('cbCommonModal');
+                        // modal.activate({
+                        //     message: "客戶有待辦事項，是否需要列印?",
+                        //     buttons: [{
+                        //         name: '列印',
+                        //         type: 'primary',
+                        //         action: function() {
+                        //             modal.deactivate()
+
+                        //         }
+                        //     }, {
+                        //         name: '取消',
+                        //         type: 'danger',
+                        //         action: function() {
+                        //             modal.deactivate().finally(function() {
+                        //                 defer.reject();
+                        //             });
+                        //         }
+                        //     }]
+                        // });
                     },
                     openSupModal: function() {
                         iBranchServ.send("OVSHOW", {

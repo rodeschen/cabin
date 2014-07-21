@@ -1,10 +1,13 @@
 .icon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   display: inline-block;
-  background-size: 40px;
+  background-size: 48px;
   background-repeat: no-repeat;
-  @include box-longShadow(7, #111111);
+//  @include box-longShadow(7, #111111);
+  cursor: pointer;
+  border-radius: 12px;
+  background-position: -1px -2px;
   &.icon-64 {
     width: 64px;
     height: 64px;
@@ -13,41 +16,51 @@
 }
 
 .icon-booklet {
-  background-image: url(/images/booklet.png);
+  //background-image: url(/images/booklet.png);
+  background-image: url(/images/icon_data.png);
 }
 
 .icon-browser {
-  background-image: url(/images/browser.png);
+  // background-image: url(/images/browser.png);
+  background-image: url(/images/icon_web.png);
 }
 
 .icon-compose {
-  background-image: url(/images/compose.png);
+  // background-image: url(/images/compose.png);
+  background-image: url(/images/icon_wait.png);
 }
 
 .icon-computer {
-  background-image: url(/images/computer.png);
+  // background-image: url(/images/computer.png);
+  background-image: url(/images/icon_signout.png);
 }
 
 .icon-contacts {
-  background-image: url(/images/contacts.png);
+  // background-image: url(/images/contacts.png);
+  background-image: url(/images/computer.png);
 }
 
 .icon-locked {
-  background-image: url(/images/locked.png);
+  // background-image: url(/images/locked.png);
+  background-image: url(/images/computer.png);
 }
 
 .icon-power {
-  background-image: url(/images/power.png);
+  // background-image: url(/images/power.png);
+  background-image: url(/images/icon_lock.png);
 }
 
 .icon-security {
-  background-image: url(/images/security.png);
+  // background-image: url(/images/security.png);
+  background-image: url(/images/icon_warrant.png);
 }
 
 .icon-money {
-  background-image: url(/images/money.png);
+  // background-image: url(/images/money.png);
+  background-image: url(/images/computer.png);
 }
 
 .icon-gold {
-  background-image: url(/images/gold.png);
+  // background-image: url(/images/gold.png);
+  background-image: url(/images/computer.png);
 }

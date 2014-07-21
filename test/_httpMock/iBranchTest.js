@@ -231,12 +231,12 @@ define(['cabin'], function(cabin) {
 
 
             // 
-            // $httpBackend.whenPOST('\/iBranchApp\/json').respond(function(method, url, data, headers) {
-            //     data = angular.fromJson(data);
-            //     console.log(data.txnId, url, "mock", data, headers);
-            //     //[200, resData, {}];
-            //     return txns[data.txnId] && txns[data.txnId](data) || txns['mockNotFound']();
-            // });
+            $httpBackend.whenPOST('\/iBranchApp\/json').respond(function(method, url, data, headers) {
+                data = angular.fromJson(data);
+                console.log(data.txnId, url, "mock", data, headers);
+                //[200, resData, {}];
+                return txns[data.txnId] && txns[data.txnId](data) || txns['mockNotFound']();
+            });
 
         }
     ]);

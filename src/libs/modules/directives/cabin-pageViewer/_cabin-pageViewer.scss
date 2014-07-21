@@ -1,171 +1,165 @@
-.page-viewer{
-	@include isolate(2);
-	@include span-columns(10);
-	background-color:#ECF0F1;
-	display:block;
-	margin-top:40px;
-	//min-height: 420px;
-	min-height: 520px;
-	position: relative;
-	border: 5px #2C3E50 solid;
-	@include border-radius(5px);
-
-	.row{
-		&:before, &:after {
-		content: " ";
-		display: table;
-		clear: both;
-		}	
-	}
-	
-
-
-	.page-context{
-		top:0;
-		bottom: 0;
-		left:0;
-		right:0;
-		//position: absolute;
-		margin:20px;
-		height: 100%;
-		//background-color: #FFF;
-		[class*=col]{
-			padding: 4px 0;
-
-		}
-		.col-1{
-			@include span-columns(1);
-		}
-		.col-2{
-			@include span-columns(2);
-		}
-		.col-3{
-			@include span-columns(3);
-		}
-		.col-4{
-			@include span-columns(4);
-		}
-		.col-5{
-			@include span-columns(5);
-		}
-		.col-6{
-			@include span-columns(6);
-		}
-		.col-7{
-			@include span-columns(7);
-		}
-		.col-8{
-			@include span-columns(8);
-		}
-		.col-9{
-			@include span-columns(9);
-		}
-		.col-10{
-			@include span-columns(10);
-		}
-		.col-11{
-			@include span-columns(11);
-		}
-		.col-12{
-			@include span-columns(12);
-		}
-		.col-13{
-			@include span-columns(13);
-		}
-		.col-14{
-			@include span-columns(14);
-		}
-		.col-15{
-			@include span-columns(15);
-		}
-		.col-16{
-			@include span-columns(16);
-		}
-		.col-17{
-			@include span-columns(17);
-		}
-		.col-18{
-			@include span-columns(18);
-		}
-		.col-19{
-			@include span-columns(19);
-		}
-		.col-20{
-			@include span-columns(20);
-		}
-		.col-21{
-			@include span-columns(21);
-		}
-
-		.offset-1{
-			@include isolate(1);
-		}
-		.offset-2{
-			@include isolate(2);
-		}
-		.offset-3{
-			@include isolate(3);
-		}
-		.offset-4{
-			@include isolate(4);
-		}
-		.offset-5{
-			@include isolate(5);
-		}
-		.offset-6{
-			@include isolate(6);
-		}
-		.offset-7{
-			@include isolate(7);
-		}
-		.offset-8{
-			@include isolate(8);
-		}
-
-		input.extra-large{
-			width: 300px;
-		}
-		input.large{
-			width: 200px;
-		}
-		input.medium{
-			width : 85px;
-		}
-
-		input.small{
-			width: 50px;
-		}
-
-		input.extra-small{
-			width:30px;
-		}
-
-		.title{
-			font-size: 1.1em;
-			display: block;
-			line-height: 2em;
-			text-align: right;
-			padding:0 1em;
-			font-weight: 900;
-		}
-
-		.title-left{
-			@extend .title;
-			text-align: left;
-		}
-		.title-center{
-			@extend .title;
-			text-align: center;
-		}
-
-	}
-
+.page-viewer {
+  //@include isolate(1);
+  //@include span-columns(12);
+  width: 96%;
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: #ECF0F1;
+  display: block;
+  margin-top: 20px;
+  //min-height: 420px;
+  min-height: 520px;
+  position: relative;
+  border: 5px #2C3E50 solid;
+  @include border-radius(5px);
+  .row {
+    &:before, &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+  }
+  .page-context {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    //position: absolute;
+    margin: 20px;
+    height: 100%;
+    //background-color: #FFF;
+    [class*=col] {
+      padding: 4px 0;
+    }
+    .col-1 {
+      @include span-columns(1);
+    }
+    .col-2 {
+      @include span-columns(2);
+    }
+    .col-3 {
+      @include span-columns(3);
+    }
+    .col-4 {
+      @include span-columns(4);
+    }
+    .col-5 {
+      @include span-columns(5);
+    }
+    .col-6 {
+      @include span-columns(6);
+    }
+    .col-7 {
+      @include span-columns(7);
+    }
+    .col-8 {
+      @include span-columns(8);
+    }
+    .col-9 {
+      @include span-columns(9);
+    }
+    .col-10 {
+      @include span-columns(10);
+    }
+    .col-11 {
+      @include span-columns(11);
+    }
+    .col-12 {
+      @include span-columns(12);
+    }
+    .col-13 {
+      @include span-columns(13);
+    }
+    .col-14 {
+      @include span-columns(14);
+    }
+    .col-15 {
+      @include span-columns(15);
+    }
+    .col-16 {
+      @include span-columns(16);
+    }
+    .col-17 {
+      @include span-columns(17);
+    }
+    .col-18 {
+      @include span-columns(18);
+    }
+    .col-19 {
+      @include span-columns(19);
+    }
+    .col-20 {
+      @include span-columns(20);
+    }
+    .col-21 {
+      @include span-columns(21);
+    }
+    .offset-1 {
+      @include isolate(1);
+    }
+    .offset-2 {
+      @include isolate(2);
+    }
+    .offset-3 {
+      @include isolate(3);
+    }
+    .offset-4 {
+      @include isolate(4);
+    }
+    .offset-5 {
+      @include isolate(5);
+    }
+    .offset-6 {
+      @include isolate(6);
+    }
+    .offset-7 {
+      @include isolate(7);
+    }
+    .offset-8 {
+      @include isolate(8);
+    }
+    .title {
+      font-size: 1.1em;
+      display: block;
+      line-height: 2em;
+      text-align: right;
+      padding: 0 1em;
+      font-weight: 900;
+    }
+    .title-left {
+      @extend .title;
+      text-align: left;
+    }
+    .title-center {
+      @extend .title;
+      text-align: center;
+    }
+  }
 }
 
+input.extra-large,[cb-combo-box].extra-large {
+  width: 300px;
+}
 
+input.large,[cb-combo-box].large {
+  width: 200px;
+}
 
+input.large,[cb-combo-box].normal {
+  width: 120px;
+}
 
+input.medium,[cb-combo-box].medium {
+  width: 85px;
+}
 
+input.small,[cb-combo-box].small {
+  width: 50px;
+}
+
+input.extra-small,[cb-combo-box].extra-small {
+  width: 30px;
+}
 
 textarea,
 input[type="text"],
@@ -183,19 +177,18 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
-
-	border: 2px solid #bdc3c7;
-	//color: #34495e;
-	font-size: 1em;
-	padding: 5px;
-	height: 2em;
-	text-indent: 6px;
-	@include appearance(none);
-	@include border-radius(6px);
-	@include box-shadow(none);
-	@include transition(border .25s linear, color .25s linear);
-	-webkit-backface-visibility: hidden;
-	outline: none;
+  border: 2px solid #bdc3c7;
+  //color: #34495e;
+  font-size: 1em;
+  padding: 5px;
+  height: 2em;
+  text-indent: 6px;
+  @include appearance(none);
+  @include border-radius(6px);
+  @include box-shadow(none);
+  @include transition(border 0.25s linear, color 0.25s linear);
+  -webkit-backface-visibility: hidden;
+  outline: none;
 }
 
 input[type="text"],
@@ -213,16 +206,13 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
-	width: 100%;
-	//width: 95px;
+  width: 100%;
+  //width: 95px;
 }
 
-
-input[type="text"].cbbox{
-	width: calc(100% - 34px);
+input[type="text"].cbbox {
+  width: calc(100% - 34px);
 }
-	
-
 
 textarea.placeholder,
 input[type="text"].placeholder,
@@ -262,7 +252,6 @@ input[type="color"]:focus,
   border-color: #1abc9c;
 }
 
-
 input[type="text"][disabled],input[type="text"][readonly],
 input[type="password"][disabled],input[type="password"][readonly],
 input[type="datetime"][disabled],input[type="datetime"][readonly],
@@ -278,23 +267,11 @@ input[type="search"][disabled],input[type="search"][readonly],
 input[type="tel"][disabled],input[type="tel"][readonly],
 input[type="color"][disabled],input[type="color"][readonly],
 .uneditable-input {
-	background-color: #ECF0F1;
+  background-color: #ECF0F1;
 }
-
 
 textarea.ng-invalid,
 input.ng-invalid,
 .uneditable-input.ng-invalid {
   border-color: #e74c3c !important;
 }
-
-
-
-
-
-
-
-
-
-
-

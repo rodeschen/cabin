@@ -1,11 +1,11 @@
 @import "compass/reset";
 @import "define";
-@import 'modules/cabin-animate';
+@import "modules/cabin-animate";
 @import "bootstrap";
-@import "flat-ui";
+
+//@import "flat-ui";
 @import "susy";
 @import "icons";
-
 
 //@import 'components/bootstrap-sass/lib/bootstrap';
 @import "components/hint.css/src/hint";
@@ -36,7 +36,7 @@
 
 .page-content {
   @include container($total-columns, $mobile, $pad, $pc);
-  //	@include susy-grid-background;
+  //  @include susy-grid-background;
 }
 
 hide unready
@@ -51,16 +51,15 @@ html {
 body {
   line-height: 1.231;
   //background-color: #16A085;
-  &.is-login{
-    background-color: #bac1c8;  
+  &.is-login {
+    background-color: #bac1c8;
   }
   font-family: "Lato", sans-serif;
   min-width: 1024px;
   @include at-breakpoint($mobile) {
     font-size: 12px;
-    width : 100%;
+    width: 100%;
   }
-
 
   font-size: 14px;
   margin: 0;
@@ -164,4 +163,264 @@ $sample-navbar-hdie-left: -146px;
   padding: 10px;
 }
 
+body {
+  background: url(../images/bg.jpg) repeat;
+}
+
+.login {
+  background: none;
+  color: #ffffff;
+  padding: 125px 200px 0px 238px;
+  position: relative;
+}
+
+.login-screen {
+  background: url(../images/from_bg.png) 0 0 no-repeat;
+  width: 600px;
+  min-height: 370px;
+  padding: 93px 120px 0px 230px;
+}
+
+.login-form {
+  height: 250px;
+  width: 280px;
+}
+
+.login-icon {
+  left: 200px;
+  position: absolute;
+  top: 160px;
+  width: 96px;
+}
+
+.login-icon > img {
+  display: block;
+  margin-bottom: 6px;
+  width: 100%;
+}
+
+.login-icon > h4 {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 34px;
+  opacity: 0.95;
+  filter: alpha(opacity = 95);
+}
+
+.login-icon > h4 small {
+  color: inherit;
+  display: block;
+  font-size: inherit;
+  font-weight: 700;
+}
+
+.login-form:before {
+  content: '';
+  height: 0;
+  position: absolute;
+  left: -12px;
+  top: 35px;
+  width: 0;
+  -webkit-transform: rotate(360deg);
+}
+
+.login-form .control-group {
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.login-form .login-field {
+  font-size: 17px;
+  text-indent: 6px;
+}
+
+.login-form .login-field:focus {
+  border-color: #1abc9c;
+}
+
+.login-form .login-field:focus + .login-field-icon {
+  color: #1abc9c;
+}
+
+.login-form .login-field-icon {
+  color: #bfc9ca;
+  font-size: 16px;
+  position: absolute;
+  right: 15px;
+  top: 3px;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  width: 158px;
+}
+
+.login-link {
+  color: #bfc9ca;
+  display: block;
+  font-size: 13px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+//header
+
+$top-menu-background-color: white !default;
+$top-menu-background-color-li-active: #1abc9c;
+$top-menu-font-color: white !default;
+$top-menu-font-color-hover: #1abc9c !default;
+$top-menu-font-color-ative: white !default;
+
+.top-menu {
+  height: auto;
+  background: $top-menu-background-color;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  nav {
+    @include isolate(2);
+    @include span-columns(6);
+    @include clearfix;
+    ul {
+      background-color: $top-menu-background-color;
+      li {
+        @include transition(background-color 0.2s);
+        float: left;
+        position: relative;
+        display: inline-block;
+        color: #FFF;
+        padding: 13px;
+        a {
+          font-size: 1.2em;
+          line-height: 2.0em;
+        }
+        &:hover {
+          color: $top-menu-font-color-hover;
+        }
+        &.active {
+          background-color: $top-menu-background-color-li-active;
+          color: $top-menu-font-color-ative;
+        }
+      }
+    }
+    &.buttons {
+      @include isolate(1);
+      @include span-columns(5);
+      overflow: inherit;
+      float: right;
+      right: 50px;
+      ul {
+        float: right;
+        margin-bottom: 0px;
+        li {
+          padding: 5px 5px;
+          a {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+header {
+  //@include box-longShadow(1, #111111);
+  @include box-shadow(1px 1px 10px #111111);
+  .banner {
+    @include isolate(1);
+    @include span-columns(3);
+    .img {
+      background: url(../images/logo.jpg) no-repeat;
+      width: 240px;
+      height: 50px;
+      margin: 13px 5px;
+      display: block;
+      background-position: 0px -35px;
+      //background-size: 240px 95px;
+   
+    }
+  }
+  // .info {
+  //   @include span-columns(3);
+  //   >div {
+  //     line-height: 20px;
+  //     width: 300px;
+  //     padding: 6px 5px;
+  //     height: 30px;
+  //     color: #EEE;
+  //     font-weight: 900;
+  //   }
+  // }
+  .info {
+    display: block;
+    float: right;
+    //width: 600px;
+    //height: 20px;
+    background-color: #57c3c4;
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+    font-weight: 900;
+    padding: 4px 10px 4px 10px;
+    border-bottom-left-radius: 5px;
+  }
+}
+
+.btn_000045 {
+  @include isolate(1);
+  @include span-columns(5);
+  background: #6ef7c8;
+  background-image: -webkit-linear-gradient(top, #6ef7c8, #22c19d);
+  background-image: -moz-linear-gradient(top, #6ef7c8, #22c19d);
+  background-image: -ms-linear-gradient(top, #6ef7c8, #22c19d);
+  background-image: -o-linear-gradient(top, #6ef7c8, #22c19d);
+  background-image: linear-gradient(to bottom, #6ef7c8, #22c19d);
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  font-family: Arial;
+  text-align: center;
+  color: #ffffff;
+  font-size: 17px;
+  padding: 38px 120px 36px 80px;
+  text-decoration: none;
+}
+
+.btn_000045:hover {
+  background: #21b080;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn_120606 {
+  @include isolate(2);
+  @include span-columns(5);
+  background: #5ad8f8;
+  background-image: -webkit-linear-gradient(top, #5ad8f8, #0c7ba4);
+  background-image: -moz-linear-gradient(top, #5ad8f8, #0c7ba4);
+  background-image: -ms-linear-gradient(top, #5ad8f8, #0c7ba4);
+  background-image: -o-linear-gradient(top, #5ad8f8, #0c7ba4);
+  background-image: linear-gradient(to bottom, #5ad8f8, #0c7ba4);
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 17px;
+  text-align: center;
+  padding: 38px 40px 36px 40px;
+  text-decoration: none;
+}
+
+.btn_120606:hover {
+  background: #2371ad;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.favorite {
+  .table {
+    height: 400px;
+  }
+}
+
+.pointer{
+  cursor: pointer;
+}
 @import "append";

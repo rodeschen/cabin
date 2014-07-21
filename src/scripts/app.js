@@ -152,8 +152,8 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             //     })
             // });
         }
-    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state', '$timeout',
-        function($rootScope, $window, userServ, $state, cbDeviceAgentSrv, $timeout) {
+    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state', '$stateParams', '$timeout',
+        function($rootScope, $window, userServ, $state, $stateParams, cbDeviceAgentSrv, $timeout) {
 
             $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams) {});
@@ -164,7 +164,8 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 $state.go('index');
                 $rootScope.isLogin = false;
             });
-
+            $rootScope.$state = $state;
+            $rootScope.$stateParams = $stateParams;
             $rootScope.user = userServ.getUser();
             console.log($rootScope.user, 'user');
 
