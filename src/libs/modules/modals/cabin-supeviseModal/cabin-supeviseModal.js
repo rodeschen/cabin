@@ -10,7 +10,7 @@ define(['cabin'], function(cabin) {
                 controller: ['$scope', 'cbSupeviseModal', 'iBranchServ', '$rootScope',
                     function($scope, modal, iBranchServ, $rootScope) {
                         $scope.ovTxnId = "/txn" + $scope.txnId;
-
+                        $scope.messages = $scope.OVDATA.OVMSG.split(",");
                         angular.extend($scope, {
                             approve: function() {
                                 $scope.sendSupevise = true;

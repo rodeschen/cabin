@@ -1,0 +1,97 @@
+<div class="page-context loginPage" ng-controller="txn000001Ctrl">
+    <h6>EJ查詢(000001)</h6>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">交易行</span>
+        </div>
+        <div class="col-1">
+            <input ng-model="data.BranchCD" type="text" validator/>
+        </div>
+        <div class="col-2">
+            <span class="title">交易狀態</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.TxnStatus" type="text" validator/>
+        </div>
+        <div class="col-2">
+            <span class="title">金　　額</span>
+        </div>
+        <div class="col-1">
+            <input ng-model="data.StartAmount" type="text" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">員工編號</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.UserID" type="text" validator="" />
+        </div>
+        <div class="col-2">
+            <span class="title">主管編號</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.SupervisorID" type="text" cb-mask-to-upper-case validator="" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">日　　期</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.StartDate" type="text" class="medium" cb-mask-tw-date convert-to-ad="true" validator ng-init="data.StartDate=getToday()" />
+            <span>～</span>
+            <input ng-model="data.EndDate" type="text" class="medium" cb-mask-tw-date convert-to-ad="true" validator ng-init="data.EndDate=getToday()"/>
+        </div>
+        <div class="col-2">
+            <span class="title">時　　間</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.StartTime" type="text" class="medium" validator/>
+            <span>～</span>
+            <input ng-model="data.EndTime" type="text" class="medium" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+        </div>
+        <div class="col-2">
+            <a href="" class="btn btn-block btn-lg btn-primary" ng-click="send(data)">查詢</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div style="width:100%;overflow:auto;height:300px;font-size=8px">
+            <table style="border:1px #000 solid;width:1000px">
+                <tr style="border:1px #000 solid">
+                    <th style="border:1px #000 solid">交易行</th>
+                    <th>員工編號</th>
+                    <th>交易日期</th>
+                    <th>交易時間</th>
+                    <th>交易代號</th>
+                    <th>批號</th>
+                    <th>交易序號</th>
+                    <th>帳號(ID)</th>
+                    <th>交易金額</th>
+                    <th>交易狀態</th>
+                    <th>授權主管代號</th>
+                    <th>EJ</th>
+                </tr>
+                <tr style="border:1px #000 solid" ng-repeat="resData in result">
+                    <th>{{resData[0]}}</th>
+                    <th>{{resData[1]}}</th>
+                    <th>{{resData[2]}}</th>
+                    <th>{{resData[3]}}</th>
+                    <th>{{resData[4]}}</th>
+                    <th>{{resData[5]}}</th>
+                    <th>{{resData[6]}}</th>
+                    <th>{{resData[7]}}</th>
+                    <th>{{resData[8]}}</th>
+                    <th>{{resData[9]}}</th>
+                    <th>{{resData[10]}}</th>
+                    <th>{{resData[11]}}</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

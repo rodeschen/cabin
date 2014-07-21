@@ -1,6 +1,6 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['validation',
+    return ['validation', ['value', 'allValue',
         function(value, allValue) {
             var res = false;
             if (/^[a-zA-Z](1|2)\d{8}$/i.test(value)) {
@@ -20,5 +20,5 @@ define(['cabin'], function(cabin) {
             }
             return true;
         }
-    ];
+    ]];
 });

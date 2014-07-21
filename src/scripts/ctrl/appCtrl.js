@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$rootScope', '$scope', '$http', '$timeout', '$interval', 'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ',
-        function($rootScope, $scope, $http, $timeout, $interval, cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ) {
+    return ['$rootScope', '$scope', '$http', '$timeout', '$interval', 'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ', '$filter',
+        function($rootScope, $scope, $http, $timeout, $interval, cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ, $filter) {
             $http.get('basehandler/queryMenu').success(function(data) {
                 $timeout(function() {
                     $scope.$emit('broadcast', {
@@ -37,6 +37,12 @@ define(['cabin'], function(cabin) {
                     },
                     logout: function() {
                         userServ.logout();
+                        $scope.$emit('broadcast', {
+                            event: 'pageViewer',
+                            page: {
+                                url: 'favorite'
+                            }
+                        });
                     },
                     openModal: function() {
                         cbSupeviseModal.activate({

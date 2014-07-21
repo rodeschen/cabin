@@ -269,60 +269,6 @@ define(['cabin'], function(cabin) {
                     }
                 };
             }
-        ]],
-        ['directive', 'validator', ['cbValidationServ', '$timeout',
-            function(cbValidationServ, $timeout) {
-                return {
-                    require: 'ngModel',
-                    restrict: 'A',
-                    priority: 2,
-                    link: function(scope, element, attrs, ngModel) {
-                        var parentScope = scope;
-                        var scope = scope.$new();
-                        scope.ngModel = ngModel;
-                        scope.$watchCollection('ngModel.$viewValue', function(v) {
-                            $timeout(function() {
-                                var err = '';
-                                v = ngModel.$error;
-                                for (var key in v) {
-                                    if (v[key]) {
-                                        err = cbValidationServ.errorMessage(key);
-                                        break;
-                                    }
-                                }
-                                var after = element.next();
-                                if (!after.is('.cb-hint')) {
-                                    after = $('<span class="cb-hint hint hint--error  hint--right" data-hint=""></span>').insertAfter(element);
-                                }
-                                after.attr('data-hint', err);
-                            }, 200);
-
-                        });
-                        //add valid
-                        if (attrs.validator) {
-                            angular.forEach(attrs.validator.split(","), function(e, i) {
-                                cbValidationServ.initValidation(e);
-                                element.on('keyup', function() {
-                                    var _this = this;
-                                    parentScope.$apply(function() {
-                                        try {
-                                            var text = cbValidationServ.validation(e)(_this.value, parentScope.data, parentScope);
-                                            if (text !== true) {
-                                                throw text;
-                                            }
-                                            ngModel.$setValidity(e, true);
-                                        } catch (exp) {
-                                            cbValidationServ.setErrorMessage(e, exp);
-                                            ngModel.$setValidity(e, false);
-                                        }
-                                    });
-                                });
-                            });
-
-                        }
-                    }
-                };
-            }
         ]]
     ];
 });

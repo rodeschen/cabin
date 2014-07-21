@@ -1,6 +1,7 @@
 require.config({
     paths: {
         'taiwanId': 'libs/modules/validations/taiwanId',
+        'readMsr' : 'libs/modules/validations/readMsr',
         'txnValidaions': ''
     },
     shim: {

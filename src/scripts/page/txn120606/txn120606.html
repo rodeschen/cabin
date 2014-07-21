@@ -1,10 +1,10 @@
 <div class="page-context loginPage" ng-controller="txn120606Ctrl">
-    <h6>黃金存摺餘額/存額證明列印(120606)</h6>
+    <h6>黃金存摺餘額/存額證明列印(120606)</h6>{{data.ffff}}
     <div class="row">
         <div class="col-2">
             <span class="title">功　　能</span>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <input name="func" ng-model="data.FUNC_01" type="text" required cb-combo-box combo-key="txn120606.FUNC_01" edit="true" validator/>
         </div>
     </div>
@@ -12,7 +12,7 @@
         <div class="col-2">
             <span class="title">身份証號</span>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <input ng-model="data.IDNO" required type="text" cb-mask-to-upper-case validator="taiwanId"/>
         </div>
     </div>
@@ -20,8 +20,8 @@
         <div class="col-2">
             <span class="title">列印分行</span>
         </div>
-        <div class="col-5">
-            <input ng-model="data.PRT_FLG" type="text"  cb-combo-box combo-key="ttxn120606.PRT_FLG" edit="true" class="large" combo-view-items="3" validator/>
+        <div class="col-2">
+            <input ng-model="data.PRT_FLG" type="text"  cb-combo-box combo-key="txn120606.PRT_FLG" edit="true" combo-view-items="3" validator/>
         </div>
     </div>
     <div class="row">
@@ -29,7 +29,7 @@
             <span class="title">黃金帳號</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.ACNO_SA" type="text" class="large" validator="txn120606ACNOVal" maxlength="12"/>
+            <input ng-model="data.ACNO_SA" type="text" validator="txn120606ACNOVal" maxlength="12"/>
         </div>
     </div>
     <div class="row">
@@ -37,21 +37,24 @@
             <span class="title">證明日期</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.P_DATE" required type="text" cb-mask-tw-date convert-to-ad="true" validator/>
+            <input ng-model="data.P_DATE" required type="text" class="medium" cb-mask-tw-date convert-to-ad="true" validator/>
         </div>
         <div class="col-2">
             <span class="title">申請用途</span>
         </div>
         <div class="col-5">
-            <input type="text" ng-model="data.P_USE" class="extra-large" cb-mask-to-full validator/>
+            <input type="text" ng-model="data.P_USE" cb-mask-to-full validator/>
         </div>
     </div>
     <div class="row">
         <div class="col-2">
             <span class="title">證明重量</span>
         </div>
-        <div class="col-2">
-            <input ng-model="data.P_AMT" required cb-mask-number type="text" validator/>公克
+        <div class="col-1">
+            <input ng-model="data.P_AMT" required cb-mask-number type="text"  validator/>
+        </div>
+        <div class="col-1">
+            <span class="title">公克</span>
         </div>
         <div class="col-2">
             <span class="title">幣別</span>
@@ -62,7 +65,7 @@
         <div class="col-1">
             <span class="title">匯率</span>
         </div>
-        <div class="col-2">
+        <div class="col-1">
             <input ng-model="data.P_RATE" cb-mask-number required type="text" validator/>
         </div>
     </div>
@@ -76,8 +79,8 @@
         <div class="col-2">
             <span class="title">印錄份數</span>
         </div>
-        <div class="col-3">
-            <input ng-model="data.P_COPY" required type="text" validator="txn120606COPY"/>
+        <div class="col-1">
+            <input ng-model="data.P_COPY" required type="number" min="0" max="8" validator="txn120606COPY"/>
         </div>
     </div>
     <div class="row">
@@ -85,7 +88,7 @@
             <span class="title">英文名稱</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.ENG_NAME1" ng-disabled="data.P_WORD != '2'" cb-mask-to-full type="text" class="extra-large" cb-maxlength="12" validator/>
+            <input ng-model="data.ENG_NAME1" ng-disabled="data.P_WORD != '2'" cb-mask-to-full type="text" cb-maxlength="12" validator/>
         </div>
     </div>
     <div class="row">
@@ -93,7 +96,7 @@
             <span class="title"></span>
         </div>
         <div class="col-5">
-            <input name="engName2" ng-model="data.ENG_NAME2" ng-disabled="data.P_WORD != '2'" cb-mask-to-full type="text" class="extra-large" validator/>
+            <input name="engName2" ng-model="data.ENG_NAME2" ng-disabled="data.P_WORD != '2'" cb-mask-to-full type="text" validator/>
         </div>
     </div>
     <div class="row">
@@ -101,7 +104,7 @@
             <span class="title">備　　註</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.REF1" type="text" class="extra-large" cb-mask-to-full validator/>
+            <input ng-model="data.REF1" type="text" cb-mask-to-full validator/>
         </div>
     </div>
     <div class="row">
@@ -109,7 +112,7 @@
             <span class="title"></span>
         </div>
         <div class="col-5">
-            <input ng-model="data.REF2" type="text" class="extra-large" cb-mask-to-full validator/>
+            <input ng-model="data.REF2" type="text" cb-mask-to-full validator/>
         </div>
     </div>
     <div class="row">
@@ -117,17 +120,27 @@
             <span class="title"></span>
         </div>
         <div class="col-5">
-            <input ng-model="data.REF3" type="text" class="extra-large" cb-mask-to-full validator/>
+            <input ng-model="data.REF3" type="text" cb-mask-to-full validator/>
         </div>
     </div>
     <div class="row">
         <div class="col-2">
             <span class="title">文　　號</span>
         </div>
-        <div class="col-5">
-            北銀
-            <input ng-model="data.T_REF" type="text" cb-mask-to-full required cb-number validator/>字第
-            <input ng-model="data.T_SEQ" type="text"  required cb-number validator/>號
+        <div class="col-1">
+            <span class="title">北銀</span>
+        </div>
+        <div class="col-1">
+            <input ng-model="data.T_REF" type="text" cb-mask-to-full required cb-number validator/>
+        </div>
+        <div class="col-1">
+            <span class="title">字第</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.T_SEQ" type="text"  required cb-number validator/>
+        </div>
+        <div class="col-1">
+            <span class="title">號</span>
         </div>
     </div>
     <div class="row">
@@ -149,7 +162,7 @@
             <span class="title">戶　　名</span>
         </div>
         <div class="col-5">
-            <input type="text" ng-model="data.NAME" class="extra-large" cb-mask-to-full validator/>
+            <input type="text" ng-model="data.NAME" cb-mask-to-full validator/>
         </div>
 
     </div>

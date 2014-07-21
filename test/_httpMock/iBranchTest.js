@@ -82,11 +82,7 @@ define(['cabin'], function(cabin) {
             //     }
 
             // };
-
-            var txns = {
-                //login
-                '0110': function(data) {
-                    return [200, angular.toJson([{
+            var user = [{
                         "poc": {
                             "txnData": {
                                 "luNo": "",
@@ -100,17 +96,16 @@ define(['cabin'], function(cabin) {
                             "sessionId": "719A6B742CD02A38E5023667E6468DD8",
                             "txnStatus": "1"
                         }
-                    }]), {}];
+                    }];
+
+            var txns = {
+                //login
+                '0110': function(data) {
+                    return [200, angular.toJson(user), {}];
                 },
                 //query isLogin
                 '000002': function() {
-                    return [200, angular.toJson([{
-                        "poc": {
-                            "txnData": user,
-                            "sessionId": "719A6B742CD02A38E5023667E6468DD8",
-                            "txnStatus": "2"
-                        }
-                    }]), {}];
+                    return [200, angular.toJson(user), {}];
                     //return [400, {"SSS","SSS"}, {}];
                 },
                 //logout

@@ -79,7 +79,9 @@ module.exports = function(grunt) {
                 ]
             },
             watchValid: {
-                files: ['<%= yeoman.app %>/scripts/validations/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.js'],
+                files: ['<%= yeoman.app %>/scripts/validations/{,*/,*/*/,*/*/*/,*/*/*/*/,*/*/*/*/*/}*.js',
+                    '<%= yeoman.app %>/libs/modules/validations-template.js'
+                ],
                 tasks: ['string-replace']
             },
             capCoffee: {
@@ -556,7 +558,7 @@ module.exports = function(grunt) {
                             }
 
 
-                            return str.replace(/,$/,"");
+                            return str.replace(/,$/, "");
                         }
                     }]
                 }

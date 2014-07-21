@@ -5,7 +5,7 @@ define(['cabin'], function(cabin) {
             //cbDeviceAgentSrv, cbSupeviseRequireModal
             var funcs = {
                 send: function(txnId, data, headerData) {
-                    var testOV = "Y";
+                    var testOV = "N";
                     //remove empty data
                     for (var key in data) {
                         if (data[key] == "") {
@@ -15,7 +15,9 @@ define(['cabin'], function(cabin) {
 
                     var sendData = angular.extend({
                         'txnId': txnId,
-                        'txnData': data || {}
+                        'txnData': data || {
+                            'txnId': txnId
+                        }
                     }, headerData || {});
                     console.log("send TxndId" + txnId);
                     if (txnId == '120606') {
@@ -106,7 +108,7 @@ define(['cabin'], function(cabin) {
                     job.deferred = defer;
                     switch (job.TYPE) {
                         case 'POPUP':
-                            // console.log("sPOPUP");
+                            console.log("sPOPUP");
                             var modal = $injector.get('cbCommonModal');
                             modal.activate({
                                 message: job.DATA,
@@ -115,8 +117,9 @@ define(['cabin'], function(cabin) {
                                     name: '確定',
                                     type: 'primary',
                                     action: function() {
-                                        modal.deactivate();
-                                        defer.resolve();
+                                        modal.deactivate().finally(function() {
+                                            defer.resolve();
+                                        });
                                     }
                                 }]
                             });
@@ -129,7 +132,7 @@ define(['cabin'], function(cabin) {
                             console.log("sWARN");
                             break;
                         case 'CONFIRM':
-                            // console.log("sCONFIRM");
+                            console.log("sCONFIRM");
                             var modal = $injector.get('cbCommonModal');
                             modal.activate({
                                 message: "客戶有待辦事項，是否需要列印?",
@@ -148,8 +151,9 @@ define(['cabin'], function(cabin) {
                                     name: '取消',
                                     type: 'danger',
                                     action: function() {
-                                        modal.deactivate();
-                                        defer.reject();
+                                        modal.deactivate().finally(function() {
+                                            defer.reject();
+                                        });
                                     }
                                 }]
                             });
@@ -157,7 +161,7 @@ define(['cabin'], function(cabin) {
                             //return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'FORM':
-                            // console.log("sFORM");
+                            console.log("sFORM");
                             return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'MSR':
@@ -173,7 +177,8 @@ define(['cabin'], function(cabin) {
                         case 'SUP':
                             console.log("sSUP");
                             var modal = $injector.get('cbSupeviseRequireModal');
-                            funcs.sendMessage('error', '[' + job.txnId + '] ' + '此交易需主管授權。');
+                            console.log(job.DATA);
+                            funcs.sendMessage('error', '[' + job.txnId + '] ' + '交易需主管授權；' +  job.DATA.respData.OVERRIDE_MSG);
                             modal.activate(job);
                             return defer.promise;
                             break;
@@ -213,7 +218,7 @@ define(['cabin'], function(cabin) {
                     $timeout(querySup, 10000);
                 };
 
-            })();
+            }) //();
             return funcs;
         }
     ]];

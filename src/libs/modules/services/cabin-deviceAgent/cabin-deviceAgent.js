@@ -166,8 +166,12 @@ define(['cabin'], function(cabin) {
 
             deviceAction(methods.initXmlRpcService, []).success(function(data) {
                 deviceAction(methods.getObjectName, []).success(function(data) {
-
+                    console.log('devinceAgent get Object Success');
+                }).error(function() {
+                    console.error('devinceAgent get Object error');
                 });
+            }).error(function() {
+                console.error('devinceAgent Init error');
             });
 
 
@@ -187,7 +191,7 @@ define(['cabin'], function(cabin) {
                                     //relase
                                     allAction.releaseSession(sessionId, deferred, "", prefix);
                                 }).error(function(xhr) {
-                                    console.log("deviceAgent returnSession error");
+                                    console.error("deviceAgent returnSession error");
                                     deferred.reject("deviceAgent returnSession error");
                                     allAction.releaseSession(sessionId, deferred, "", prefix);
                                 });
@@ -196,13 +200,13 @@ define(['cabin'], function(cabin) {
                                 allAction.releaseSession(sessionId, deferred, "", prefix);
                             }
                         }).error(function(xhr) {
-                            console.log("deviceAgent print error");
+                            console.error("deviceAgent print error");
                             //relase
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                             //deferred.reject("deviceAgent print error");
                         });
                     }).error(function(xhr) {
-                        console.log("deviceAgent obtainSession error");
+                        console.error("deviceAgent obtainSession error");
                         //relase
                         deferred.reject("deviceAgent obtainSession error");
                     });
@@ -215,7 +219,7 @@ define(['cabin'], function(cabin) {
                         allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + "動作結束…");
                         return deferred.resolve(data || "ok");
                     }).error(function() {
-                        console.log("deviceAgent returnSession error");
+                        console.error("deviceAgent returnSession error");
                         if (deferred) {
                             deferred.reject("deviceAgent returnSession error");
                         }
@@ -232,13 +236,13 @@ define(['cabin'], function(cabin) {
                             //relase
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         }).error(function(xhr) {
-                            console.log("deviceAgent print error");
+                            console.error("deviceAgent print error");
                             //relase
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                             //deferred.reject("deviceAgent print error");
                         });
                     }).error(function(xhr) {
-                        console.log("deviceAgent obtainSession error");
+                        console.error("deviceAgent obtainSession error");
                         //relase
                         deferred.reject("deviceAgent obtainSession error");
                     });
@@ -248,7 +252,7 @@ define(['cabin'], function(cabin) {
                     var deferred = $q.defer();
                     //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."));
                         var sessionId = data;
                         //decode
                         deviceAction(methods.decode, [sessionId, "", 2, eject]).success(function(data) {
@@ -256,13 +260,13 @@ define(['cabin'], function(cabin) {
                                 //release
                             allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
-                            console.log("deviceAgent decode error");
+                            console.error("deviceAgent decode error");
                             deferred.reject("deviceAgent decode error");
                             //release
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
-                        console.log("deviceAgent obtainSession error");
+                        console.error("deviceAgent obtainSession error");
                         deferred.reject("deviceAgent obtainSession error");
                     });
                     return deferred.promise;
@@ -271,7 +275,7 @@ define(['cabin'], function(cabin) {
                     var deferred = $q.defer();
                     //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."));
                         var sessionId = data;
                         //encode
                         deviceAction(methods.encode, [sessionId, writterData, "", 2, eject]).success(function(data) {
@@ -279,13 +283,13 @@ define(['cabin'], function(cabin) {
                                 //release
                             allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
-                            console.log("deviceAgent encode error");
+                            console.error("deviceAgent encode error");
                             deferred.reject("deviceAgent encode error");
                             //release
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
-                        console.log("deviceAgent obtainSession error");
+                        console.error("deviceAgent obtainSession error");
                         deferred.reject("deviceAgent obtainSession error");
                     });
                     return deferred.promise;

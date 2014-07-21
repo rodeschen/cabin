@@ -41,15 +41,15 @@ define(['cabin'], function(cabin) {
                             scope.isLock = false;
                         }
                     })
-
-
+                    scope.data = {
+                        "txnId": undefined
+                    }
                     if (scope.receiveEvent !== false) {
                         var receiveEvent = scope.receiveEvent || 'pageViewer';
 
                         scope.$on(receiveEvent, function(event, data) {
                             scope.includeUrl = "";
                             if (data && data.page && data.page.url) {
-                                scope.data = {};
                                 scope.isLock = false;
                                 openPage(data.page.url);
                             }
@@ -58,15 +58,11 @@ define(['cabin'], function(cabin) {
                         scope.$on(receiveEvent + '-unlock', scope.unlock);
                     }
 
-                    //lock page
+                    scope.data = {};
 
-
-                    // if (scope.initPath) {
-                    //     openPage(scope.initPath); 
-                    // }
                     if (scope.initData) {
                         scope.data = scope.initData;
-                        angular.extend(scope.data, scope.initData);
+                        //angular.extend(scope.data, scope.initData);
                     }
 
                     scope.$watch('initPath', function(v) {
@@ -77,6 +73,8 @@ define(['cabin'], function(cabin) {
                     var txnId;
                     scope.submitForm = function(dataForm) {
                         if (dataForm.$valid) {
+                            scope.data = scope.data || {};
+                            scope.data.hiddenData = "hiddenData";
                             iBranchServ.send(txnId, scope.data);
                         } else {
                             console.log(dataForm)
@@ -84,8 +82,15 @@ define(['cabin'], function(cabin) {
                         }
                     }
 
+                    scope.$on('putValue', function(event, data) {
+                        scope.data = scope.data || {};
+                        for (var key in data) {
+                            scope.data[key] = data[key];
+                        }
+                    })
+
                     function openPage(pageUrl) {
-                        if (pageUrl.match(/txn[1-9]+/)) {
+                        if (pageUrl.match(/txn[0-9]+/)) {
                             txnId = pageUrl.replace('txn', '');
                         } else {
                             txnId = '';
@@ -146,7 +151,7 @@ define(['cabin'], function(cabin) {
                                         promises.push(srv_deferred.promise);
                                     }
                                 }
-
+                                scope.autoSend = s.autoSend === false ? false : true;
                                 $q.all(promises).then(function() {
                                     $timeout(function() {
                                         if (s.templateUrl === true) {

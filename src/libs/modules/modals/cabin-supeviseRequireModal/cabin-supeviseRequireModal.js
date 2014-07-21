@@ -12,40 +12,52 @@ define(['cabin'], function(cabin) {
                         var deferred = $scope.deferred;
                         var sendData = $scope.DATA.sendData;
                         var respData = $scope.DATA.respData;
-                        console.log(deferred)
+                        $scope.messages = respData.OVERRIDE_MSG.split(",");
                         var txnId = sendData.txnId;
                         angular.extend($scope, {
                             send: function(sendForm) {
                                 if (sendForm.$valid) {
                                     //sendData.supevise = sendForm.user;
-                                    $scope.sendSupevise = true;
-                                    iBranchServ.send(txnId, {} /*sendData*/ , {
-                                        supevise: 'Y',
-                                        // TESTOVRC: 'AC'
-                                    }).then(function(xhr) {
-                                        $scope.sendSupevise = false;
-                                        deferred.resolve();
-                                        modal.deactivate();
-                                    }, function(xhr) {
-                                        $scope.sendSupevise = false;
-                                        deferred.reject("reject");
-                                        modal.deactivate();
+                                    modal.deactivate().finally(function() {
+                                        $scope.sendSupevise = true;
+                                        var sendTxnData = angular.copy(sendData.txnData || {});
+                                        if (respData.ac1) {
+                                            sendTxnData.ac1 = respData.ac1
+                                        }
+                                        iBranchServ.send(txnId, sendTxnData, {
+                                            supevise: 'Y',
+                                            // TESTOVRC: 'AC'
+                                        }).then(function(xhr) {
+                                            $scope.sendSupevise = false;
+                                            deferred.resolve();
+
+                                        }, function(xhr) {
+                                            $scope.sendSupevise = false;
+                                            deferred.reject("reject");
+                                            // modal.deactivate();
+                                        });
                                     });
                                 }
                             },
                             cancel: function() {
                                 $scope.sendSupevise = true;
-                                iBranchServ.send(txnId, {} /*sendData*/ , {
-                                    supevise: 'Y',
-                                    TESTOVRC: 'RJ'
-                                }).then(function(xhr) {
-                                    $scope.sendSupevise = false;
-                                    deferred.resolve();
-                                    modal.deactivate();
-                                }, function(xhr) {
-                                    $scope.sendSupevise = false;
-                                    deferred.reject("reject");
-                                    modal.deactivate();
+                                var sendTxnData = angular.copy(sendData.txnData || {});
+                                if (respData.ac1) {
+                                    sendTxnData.ac1 = respData.ac1
+                                }
+                                modal.deactivate().finally(function() {
+                                    iBranchServ.send(txnId, sendTxnData, {
+                                        supevise: 'Y',
+                                        TESTOVRC: 'RJ'
+                                    }).then(function(xhr) {
+                                        $scope.sendSupevise = false;
+                                        deferred.resolve();
+                                     //   modal.deactivate();
+                                    }, function(xhr) {
+                                        $scope.sendSupevise = false;
+                                        deferred.reject("reject");
+                                   //     modal.deactivate();
+                                    });
                                 });
                             }
                         })

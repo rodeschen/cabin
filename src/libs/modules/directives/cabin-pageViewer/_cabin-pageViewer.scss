@@ -129,7 +129,7 @@
 			width: 200px;
 		}
 		input.medium{
-			width : 100px;
+			width : 85px;
 		}
 
 		input.small{
@@ -183,6 +183,7 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
+
 	border: 2px solid #bdc3c7;
 	//color: #34495e;
 	font-size: 1em;
@@ -212,7 +213,13 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
-	width: 95px;
+	width: 100%;
+	//width: 95px;
+}
+
+
+input[type="text"].cbbox{
+	width: calc(100% - 34px);
 }
 	
 

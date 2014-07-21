@@ -1,7 +1,7 @@
 'use strict';
 //txn120606ACNOVal
 define(['cabin'], function(cabin) {
-    return ['validation',
+    return ['validation', ['value', 'allValue',
         function(value) {
             if (!value) {
                 return true;
@@ -41,5 +41,5 @@ define(['cabin'], function(cabin) {
 
             return true;
         }
-    ];
+    ]];
 });

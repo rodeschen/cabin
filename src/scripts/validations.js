@@ -1,6 +1,7 @@
 require.config({
     paths: {
         'taiwanId': 'libs/modules/validations/taiwanId',
+        'readMsr' : 'libs/modules/validations/readMsr',
        
 "txn120606ACNOVal" : "scripts/validations/txn120606/txn120606ACNOVal",
 "txn120606COPY" : "scripts/validations/txn120606/txn120606COPY"

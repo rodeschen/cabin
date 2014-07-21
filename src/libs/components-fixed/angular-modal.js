@@ -87,18 +87,21 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
             }
 
             function deactivate() {
+                var deferred = $q.defer();
                 if (element) {
                     var scope = element.scope();
                     $animate.leave(element, function() {
                         element.remove();
                         element = null;
                         scope.$destroy();
+                        deferred.resolve();
                     });
                     $animate.leave(overlay, function() {
                         overlay.remove();
                         overlay = null;
                     });
                 }
+                return deferred.promise;
             }
 
             function active() {

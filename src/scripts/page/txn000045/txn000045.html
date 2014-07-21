@@ -1,0 +1,137 @@
+<div class="page-context loginPage" ng-controller="txn000045Ctrl">
+    <h6>有摺轉帳交易(000045)</h6>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">轉出帳號</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.110320_ACNO_SA" type="text" validator="focus-readMsr" />
+        </div>
+        <div class="col-2">
+            <span class="title">戶　　名</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110320_NAME1" disabled="disabled" class="large" type="text" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">轉帳金額</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.110320_AMT1" type="text" cb-mask-number validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">提款密碼輸入註記</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.110320_WD_PWD_FLG" type="text" cb-combo-box combo-key="txn110320.WD_PWD_FLG" validator/>
+        </div>
+        <div class="col-2">
+            <span class="title">提款密碼</span>
+        </div>
+        <div class="col-1">
+            <input ng-model="data.110320_WD_PSW"   maxlength="4" type="password" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">項　　目</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110320_ITEM" type="text" cb-combo-box  combo-key="txn110320.ITEM" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">轉出附註</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110320_REF" type="text" validator/>
+        </div>
+    </div>
+
+    <div class="hidden row">
+        <div class="col-2">
+            <span class="title">存摺餘額</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.110320_PB_BAL" class="large" cb-mask-number type="text" validator/>
+        </div>
+        <div class="col-2">
+            <span class="title">交易摘要</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.110320_MEMO" type="text" validator/>
+        </div>
+        <div class="col-2">
+            <span class="title">存摺行數</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110320_PB_LINE" type="text" class="large" validator/>
+        </div>
+        <div class="col-2">
+            <span class="title">轉帳代碼</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110320_TRN_CODE" type="text" validator/>
+        </div>
+        <div class="col-2">
+            <span class="title">摺 號</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.110320_PB_NO" type="text" validator/>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-2">
+            <span class="title">轉入帳號</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.110220_ACNO_SA" class="large" type="text" validator="" />
+        </div>
+        <div class="col-2">
+            <span class="title">戶　　名</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110220_NAME1" disabled="disabled" type="text" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">轉入附註</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110220_REF" type="text" validator/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <span class="title">起 息 日</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110320_INT_DATE" type="text" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">關懷提問</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110320_TA_REMARK" type="text" validator/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">起 息 日</span>
+        </div>
+        <div class="col-5">
+            <input ng-model="data.110220_INT_DATE1" type="text" validator/>
+        </div>
+    </div>
+</div>
