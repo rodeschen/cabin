@@ -1,0 +1,16 @@
+<div class="cabin-grid" ng-style="gridStyle" style="overflow:hidden">
+    <div class="cabin-grid-header" ng-style="getHeaderStyle()">
+        <table class="grid-header">
+            <tr>
+                <th ng-repeat="column in columns" ng-style="getColumnStyle(column)">{{column.name}}</th>
+            </tr>
+        </table>
+    </div>
+    <div class="cabin-grid-body" ng-style="getBodyStyle()">
+        <table class="grid-body">
+            <tr ng-repeat="data in gridData">
+                <td ng-repeat="value in data track by $index" ng-style="getColumnStyle(columns[$index],$index)">{{value}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
