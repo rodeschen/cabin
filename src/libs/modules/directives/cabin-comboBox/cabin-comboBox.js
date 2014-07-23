@@ -21,10 +21,15 @@ define(['cabin'], function() {
                     controller.$label = iAttrs.label || "";
                     var sourceEl = iElm;
                     iElm = iElm.find('input');
+                    //init attrs
                     if (iAttrs.autofocus !== undefined) {
                         iElm.focus();
                     }
+                    if(iAttrs.placeholder){
+                        iElm.attr('placeholder',iAttrs.placeholder);    
+                    }
                     iElm.addClass(iAttrs.class || '').attr(iAttrs.css || '');
+
                     $scope.comboViewItems = iAttrs.comboViewItems || 4;
                     var local = {
                         isFocus: false,
@@ -236,7 +241,6 @@ define(['cabin'], function() {
                 priority: 101,
                 restrict: 'A',
                 link: function($scope, iElm) {
-                    console.log($scope)
                     var listContent = iElm.find(".combo-box-list");
                     if ($scope.comboList) {
                         $scope.items = $scope.comboList || [];
