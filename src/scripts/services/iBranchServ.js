@@ -5,7 +5,7 @@ define(['cabin'], function(cabin) {
             //cbDeviceAgentSrv, cbSupeviseRequireModal
             var funcs = {
                 send: function(txnId, data, headerData) {
-                    var testOV = "N";
+                    var testOV = "Y";
                     //remove empty data
                     for (var key in data) {
                         if (data[key] == "") {
@@ -40,7 +40,7 @@ define(['cabin'], function(cabin) {
                         funcs.txnSuccess(respData, sendData);
                     }, function(xhr) {
                         console.log(xhr.data)
-                        funcs.sendMessage('error', txnId + " : " + xhr.data.txnMessage);
+                        funcs.sendMessage('error', "[" + txnId + "] " + xhr.data.txnMessage);
                         console.error("send " + txnId + " error :" + xhr.data.txnMessage);
                     });
                     return http;
@@ -77,7 +77,7 @@ define(['cabin'], function(cabin) {
                     if (status === '1') {
                         jobs.push({
                             txnId: sendData.txnId,
-                            TYPE: 'MSG',
+                            TYPE: 'END',
                             DATA: sendData.txnId == '0110' ? '簽入成功。' : '交易完成。'
                         });
                     }
@@ -107,6 +107,8 @@ define(['cabin'], function(cabin) {
                     var defer = $q.defer();
                     job.deferred = defer;
                     switch (job.TYPE) {
+                        case 'WARN':
+                            console.log("sWARN");
                         case 'POPUP':
                             console.log("sPOPUP");
                             var modal = $injector.get('cbCommonModal');
@@ -117,9 +119,8 @@ define(['cabin'], function(cabin) {
                                     name: '確定',
                                     type: 'primary',
                                     action: function() {
-                                        modal.deactivate().finally(function() {
-                                            defer.resolve();
-                                        });
+                                        modal.deactivate(this.modalId);
+                                        defer.resolve();
                                     }
                                 }]
                             });
@@ -128,9 +129,7 @@ define(['cabin'], function(cabin) {
                         case 'PB':
                             console.log("sPB");
                             break;
-                        case 'WARN':
-                            console.log("sWARN");
-                            break;
+
                         case 'CONFIRM':
                             console.log("sCONFIRM");
                             var modal = $injector.get('cbCommonModal');
@@ -141,7 +140,7 @@ define(['cabin'], function(cabin) {
                                     name: '列印',
                                     type: 'primary',
                                     action: function() {
-                                        modal.deactivate()
+                                        modal.deactivate(this.modalId);
                                         cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {
                                             defer.resolve();
                                         });
@@ -151,9 +150,8 @@ define(['cabin'], function(cabin) {
                                     name: '取消',
                                     type: 'danger',
                                     action: function() {
-                                        modal.deactivate().finally(function() {
-                                            defer.reject();
-                                        });
+                                        modal.deactivate(this.modalId);
+                                        defer.reject();
                                     }
                                 }]
                             });
@@ -178,9 +176,13 @@ define(['cabin'], function(cabin) {
                             console.log("sSUP");
                             var modal = $injector.get('cbSupeviseRequireModal');
                             console.log(job.DATA);
-                            funcs.sendMessage('error', '[' + job.txnId + '] ' + '交易需主管授權；' +  job.DATA.respData.OVERRIDE_MSG);
+                            funcs.sendMessage('error', '[' + job.txnId + '][授權] ' + job.DATA.respData.OVERRIDE_MSG);
                             modal.activate(job);
                             return defer.promise;
+                            break;
+                        case 'END':
+                            funcs.sendMessage('normal', '[' + job.txnId + '] ' + job.DATA);
+                            $rootScope.$broadcast('pageViewer-lock');
                             break;
                     }
                     $timeout(function() {

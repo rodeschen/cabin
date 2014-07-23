@@ -9,7 +9,9 @@ define(['cabin'], function(cabin) {
                 templateUrl: cabinModulePath + 'modals/cabin-commonModal/templates/cabin-commonModal.html',
                 controller: ['$scope', 'cbSupeviseModal',
                     function($scope, modal) {
-                        
+                        for(var idx in $scope.buttons || []){
+                            $scope.buttons[idx].modalId = $scope.modalId;
+                        }
                     }
                 ]
             });

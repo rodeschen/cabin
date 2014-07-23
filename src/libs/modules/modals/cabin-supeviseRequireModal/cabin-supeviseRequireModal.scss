@@ -1,29 +1,30 @@
 .cabin-modal.cabin-supevise-require-modal {
-  width:900px;
-  top:0px;
-  .cabin-modal-context{
-    min-height:100px;
-  }
-
-  
-
+  width: 900px;
+  //font-size:15px;
+  top: 0px;
   @include transform(translateX(-50%) translateY(0%));
+  .cabin-modal-context {
+    min-height: 100px;
+  }
+  .cancel-btn,.approve-btn {
+    padding-top: 20px;
+  }
   .supevise-message-context {
     position: relative;
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 13px;
     top: 0px;
     //background-color: #34495E;
     //border-bottom: 2px #222 solid;
     //color: #EEE;
-    overflow: hidden;
+    overflow: inherit;
     .supevise-message {
       //height: 60px;
       overflow: auto;
       height: 70px;
-      padding:5px;
-      border:1px black solid;
+      padding: 5px;
+      border: 1px black solid;
       background-color: #FFF;
       @include border-radius(5px);
     }
@@ -43,6 +44,6 @@
   }
 }
 
-.btf-modal-overlay ~ .cabin-modal.cabin-supevise-require-modal{
-    background-color: rgba(0, 0, 0, 0);
-  }
+.btf-modal-overlay ~ .cabin-modal.cabin-supevise-require-modal {
+  background-color: rgba(0, 0, 0, 0);
+}
