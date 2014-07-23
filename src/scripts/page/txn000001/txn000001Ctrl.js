@@ -16,6 +16,38 @@ define(['cabin'], function(cabin) {
                     });
                 }
             });
+
+
+            $scope.gridSettings = {
+                columns: [{
+                    name: '交易行',width: 70
+                }, {
+                    name: '員工編號',width: 70
+                }, {
+                    name: '交易日期',width: 70
+                }, {
+                    name: '交易時間',width:70
+                }, {
+                    name: '交易代號',width: 70,
+                }, {
+                    name: '批號',width: 170
+                }, {
+                    name: '交易序號',width: 70
+                }, {
+                    name: '帳號(ID)',width: 70
+                }, {
+                    name: '交易金額',width: 70
+                }, {
+                    name: '交易狀態',width: 70
+                }
+                , {
+                    name: '授權主管代號',width: 100
+                }, {
+                    name: 'EJ',width: 70
+                }
+                ]
+            }
+
         }
     ]];
 

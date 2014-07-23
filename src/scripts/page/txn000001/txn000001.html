@@ -41,7 +41,7 @@
         <div class="col-3">
             <input ng-model="data.StartDate" type="text" class="medium" cb-mask-tw-date convert-to-ad="true" validator ng-init="data.StartDate=getToday()" />
             <span>～</span>
-            <input ng-model="data.EndDate" type="text" class="medium" cb-mask-tw-date convert-to-ad="true" validator ng-init="data.EndDate=getToday()"/>
+            <input ng-model="data.EndDate" type="text" class="medium" cb-mask-tw-date convert-to-ad="true" validator ng-init="data.EndDate=getToday()" />
         </div>
         <div class="col-2">
             <span class="title">時　　間</span>
@@ -61,8 +61,9 @@
     </div>
 
     <div class="row">
-        <div style="width:100%;overflow:auto;height:300px;font-size=8px">
-            <table style="border:1px #000 solid;width:1000px">
+        <div cb-grid="gridSettings" grid-data="result"></div>
+        <!-- <div class="grid" style="width:100%;overflow:auto;height:300px;font-size=12px">
+            <table class="grind-header" style="border:1px #000 solid;width:1000px">
                 <tr style="border:1px #000 solid">
                     <th style="border:1px #000 solid">交易行</th>
                     <th>員工編號</th>
@@ -77,6 +78,8 @@
                     <th>授權主管代號</th>
                     <th>EJ</th>
                 </tr>
+            </table>
+            <table>
                 <tr style="border:1px #000 solid" ng-repeat="resData in result">
                     <th>{{resData[0]}}</th>
                     <th>{{resData[1]}}</th>
@@ -92,6 +95,6 @@
                     <th>{{resData[11]}}</th>
                 </tr>
             </table>
-        </div>
+        </div> -->
     </div>
 </div>
