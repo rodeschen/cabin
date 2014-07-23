@@ -137,27 +137,27 @@
   }
 }
 
-input.extra-large,[cb-combo-box].extra-large {
+input[type].extra-large,[cb-combo-box].extra-large {
   width: 300px;
 }
 
-input.large,[cb-combo-box].large {
+input[type].large,[cb-combo-box].large {
   width: 200px;
 }
 
-input.large,[cb-combo-box].normal {
+input[type].normal,[cb-combo-box].normal {
   width: 120px;
 }
 
-input.medium,[cb-combo-box].medium {
+input[type].medium,[cb-combo-box].medium {
   width: 85px;
 }
 
-input.small,[cb-combo-box].small {
+input[type].small,[cb-combo-box].small {
   width: 50px;
 }
 
-input.extra-small,[cb-combo-box].extra-small {
+input[type].extra-small,[cb-combo-box].extra-small {
   width: 30px;
 }
 

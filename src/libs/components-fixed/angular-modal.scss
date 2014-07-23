@@ -24,7 +24,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1020;
+  z-index: 2000;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -47,7 +47,7 @@
     background-image: -moz-linear-gradient(top, #d8e0e5, #f7fafc);
     background-image: -ms-linear-gradient(top, #d8e0e5, #f7fafc);
     background-image: -o-linear-gradient(top, #d8e0e5, #f7fafc);
-    padding: 10px 10px 10px 10px;
+    //padding: 10px 10px 10px 10px;
     -webkit-border-radius: 5;
     -moz-border-radius: 5;
     border-radius: 5px;

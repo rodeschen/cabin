@@ -1,24 +1,38 @@
-<div class="btf-modal cabin-supevise-modal toggle page-content">
-    <div>
-        <div cb-module="cbPageViewer" init-path="/{{ovTxnId}}" class="page-viewer-content" receive-event="pageViewer" init-data="txnData" read-only="true"></div>
+<div class="btf-modal cabin-modal cabin-supevise-modal toggle page-content">
+    <div class="cabin-modal-context">
+        <div>
+            <div cb-module="cbPageViewer" init-path="/{{ovTxnId}}" class="page-viewer-content" receive-event="pageViewer" init-data="txnData" read-only="true"></div>
+        </div>
+        <div class="supevise-message-context">
+            <form name="sendForm" novalidate>
+                <div class="row col-xs-12">
+                    <div class="col-xs-4">
+                        <div class="supevise-message">
+                            <ul>
+                                <li ng-repeat="message in messages">{{message}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div>櫃員：{{user.userId}} - {{user.title}}({{user.bankUserId}})</div>
+                        <!-- <div>
+                            <label>
+                                <input type="radio" ng-model="data.remote" name="remote" value="Y" />&nbsp;遠端授權
+                            </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" ng-model="data.remote" name="remote" value="N" />&nbsp;本機授權</label>
+                        </div>
+                        <input ng-model="data.user" type="text" placeholder="請選擇主管" cb-combo-box combo-list="supList" edit="true" required autofocus class="normal" validator/>
+                        <input ng-show="data.remote=='N'" ng-required="data.remote=='N'" ng-model="data.password" required type="password" placeholder="密碼" autofocus class="normal" validator /> -->
+                    </div>
+                    <div class="col-xs-2 cancel-btn">
+                        <a href="" class="btn btn-block btn-lg btn-danger" ng-click="reject()">取消</a>
+                    </div>
+                    <div class="col-xs-2 approve-btn">
+                        <a href="" class="btn btn-block btn-lg btn-primary" ng-click="approve(sendForm)">核準</a> 
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="supevise-message-context">
-        <div class="col-xs-4">
-            <div class="supevise-message">
-                <ul>
-                    <li ng-repeat="message in messages">{{message}}</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="supevise-user-info">使用者　：<br/>{{sendUser.userId}} - {{sendUser.title}} ({{sendUser.bankUserId}})</div>
-        </div>
-        <div class="col-xs-2">
-            <a href="" class="btn btn-block btn-lg btn-primary" ng-click="approve()">Approve</a> 
-        </div>
-        <div class="col-xs-2">
-            <a href="" class="btn btn-block btn-lg btn-danger" ng-click="reject()">Reject</a>
-        </div>
-    </div>
-</div>
 </div>
