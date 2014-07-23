@@ -14,18 +14,19 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
             if ((+!!config.template) + (+!!config.templateUrl) !== 1) {
                 throw new Error('Expected modal to have exacly one of either `template` or `templateUrl`');
             }
-
             var template = config.template,
                 controller = config.controller || angular.noop,
                 controllerAs = config.controllerAs,
                 container = angular.element(config.container || document.body),
                 _overlay = angular.element('<div class="btf-modal-overlay toggle"></div>'),
                 duplicate = config.duplicate || false,
+                opacity = config.opacity == undefined ? 30 : config.opacity,
                 element = null,
                 overlay = null,
                 //scope = null,
                 closeByEsc = config.closeByEsc !== false ? true : false,
-                html;
+                html,
+                modals = {};
 
             if (config.template) {
                 var deferred = $q.defer();
@@ -41,14 +42,16 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
             }
 
             function activate(locals) {
+                var modalId = "modalId" + parseInt(Math.random() * 1000, 10);
                 html.then(function(html) {
-                    if (!element) {
-                        attach(html, locals);
-                    }
+                    //if (!element) {
+                    attach(html, locals, modalId);
+                    //}
                 });
+                return modalId;
             }
 
-            function attach(html, locals) {
+            function attach(html, locals, modalId) {
                 var scope;
                 if (locals && locals.$parentScope) {
                     scope = locals.$parentScope.$new();
@@ -56,12 +59,18 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                 } else {
                     scope = $rootScope.$new();
                 }
+                scope.modalId = modalId;
                 element = angular.element(html);
 
                 container.prepend(element);
                 scope.closeModal = deactivate;
+                overlay = _overlay.clone().css('opacity', opacity);
 
-                overlay = _overlay.clone();
+                modals[modalId] = {
+                    el: element,
+                    ov: overlay
+                };
+
                 if (closeByEsc) {
                     overlay.on('click', function() {
                         scope.$apply(deactivate)
@@ -86,19 +95,31 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                 $animate.enter(element, container);
             }
 
-            function deactivate() {
+            function deactivate(modalId) {
                 var deferred = $q.defer();
-                if (element) {
-                    var scope = element.scope();
-                    $animate.leave(element, function() {
-                        element.remove();
-                        element = null;
+                var el,ov;
+                if(modalId){
+                    if(modals[modalId]){
+                        el = modals[modalId].el;
+                        ov = modals[modalId].ov;
+                    }
+
+                }else{
+                    el = element;
+                    ov = overlay;
+                }
+                if (el) {
+                    var scope = el.scope();
+                    $animate.leave(el, function() {
+                        el.remove();
+                        el = null;
                         scope.$destroy();
+                        delete modals[modalId || ""]; 
                         deferred.resolve();
                     });
-                    $animate.leave(overlay, function() {
-                        overlay.remove();
-                        overlay = null;
+                    $animate.leave(ov, function() {
+                        ov.remove();
+                        ov = null;
                     });
                 }
                 return deferred.promise;
