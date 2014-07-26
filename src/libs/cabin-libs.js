@@ -25,6 +25,8 @@ require.config({
         'cbDeviceAgent': 'libs/modules/services/cabin-deviceAgent/cabin-deviceAgent',
         'cbValidationServ': 'libs/modules/services/cabin-validation',
         'cbCommonModal': 'libs/modules/modals/cabin-commonModal/cabin-commonModal',
+        'cbEjContextModal': 'libs/modules/modals/cabin-ejContextModal/cabin-ejContextModal',
+        'cbOpenTxnModal': 'libs/modules/modals/cabin-openTxnModal/cabin-openTxnModal',
         //for poc
         'iBranchServ': 'scripts/services/iBranchServ',
         'userServ': 'scripts/services/userServ',
@@ -62,7 +64,9 @@ define('cabin-libs', ['libs', 'cabin', 'cbLazyRegisterServ', 'cbModule',
     'cbComboBoxServ',
     'cbWebSocketIoServ',
     'cbCommonModal',
+    'cbEjContextModal',
     'cbGrid',
+    'cbOpenTxnModal',
     //for poc
     'cbValidationServ',
     'cbDeviceAgent',

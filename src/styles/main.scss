@@ -1,3 +1,4 @@
+@import "font";
 @import "compass/reset";
 @import "define";
 @import "modules/cabin-animate";
@@ -47,6 +48,9 @@ hide unready
 html {
   height: 100%;
 }
+body * {
+  font-family: "Noto Sans T Chinese", "FontAwesome", "Lato", sans-serif !important;
+}
 
 body {
   line-height: 1.231;
@@ -54,7 +58,7 @@ body {
   &.is-login {
     background-color: #bac1c8;
   }
-  font-family: "Lato", sans-serif;
+  
   min-width: 1024px;
   @include at-breakpoint($mobile) {
     font-size: 12px;
@@ -211,7 +215,7 @@ body {
   color: inherit;
   display: block;
   font-size: inherit;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .login-form:before {
@@ -272,7 +276,8 @@ $top-menu-font-color-ative: white !default;
 .top-menu {
   height: auto;
   background: $top-menu-background-color;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
+  //box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
   nav {
     @include isolate(2);
     @include span-columns(6);
@@ -321,7 +326,8 @@ $top-menu-font-color-ative: white !default;
 
 header {
   //@include box-longShadow(1, #111111);
-  @include box-shadow(1px 1px 10px #111111);
+  //@include box-shadow(1px 1px 10px #111111);
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
   .banner {
     @include isolate(1);
     @include span-columns(3);
@@ -356,7 +362,7 @@ header {
     font-size: 12px;
     color: #000;
     text-align: center;
-    font-weight: 900;
+    font-weight: 500;
     padding: 4px 10px 4px 10px;
     border-bottom-left-radius: 5px;
   }
@@ -365,7 +371,7 @@ header {
 .btn_000045 {
   @include isolate(1);
   @include span-columns(5);
-  background-color: #d84315;
+  background-color: #6a1b9a;
   color: #FFF;
   //background: #6ef7c8;
   // background-image: -webkit-linear-gradient(top, #6ef7c8, #22c19d);
@@ -378,15 +384,28 @@ header {
   border-radius: 5px;
   font-family: Arial;
   text-align: center;
-  
   font-size: 17px;
-  padding: 38px 120px 36px 80px;
+  padding: 38px 0px 38px 0px;
   text-decoration: none;
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
+  span {
+    position: relative;
+    &:before {
+      position: absolute;
+      content: ' ';
+      height: 40px;
+      width: 40px;
+      background: url(../images/000045.png) no-repeat;
+      background-size: 40px;
+      left: -44px;
+      top:-12px;
+    }
+  }
 }
 
 .btn_000045:hover {
   //background: #21b080;
-  background-color: #ff5722;
+  background-color: #8e24aa;
   color: #ffffff;
   text-decoration: none;
 }
@@ -394,7 +413,7 @@ header {
 .btn_120606 {
   @include isolate(2);
   @include span-columns(5);
-  background-color: #33691e;
+  background-color: #455a64;
   //background: #5ad8f8;
   // background-image: -webkit-linear-gradient(top, #5ad8f8, #0c7ba4);
   // background-image: -moz-linear-gradient(top, #5ad8f8, #0c7ba4);
@@ -405,16 +424,31 @@ header {
   -moz-border-radius: 5;
   border-radius: 5px;
   font-family: Arial;
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 17px;
   text-align: center;
-  padding: 38px 40px 36px 40px;
+  padding: 38px 0px 38px 0px;
   text-decoration: none;
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
+  span {
+    position: relative;
+    &:before {
+      position: absolute;
+      content: ' ';
+      height: 40px;
+      width: 40px;
+      background-color: #000000;
+      background: url(../images/120606.png) no-repeat;
+      background-size: 40px;
+      left: -44px;
+      top:-12px;
+    }
+  }
 }
 
 .btn_120606:hover {
   //background: #2371ad;
-  background-color: #558b2f;
+  background-color: #546e7a;
   color: #ffffff;
   text-decoration: none;
 }
@@ -425,11 +459,12 @@ header {
   }
 }
 
-.btn-login{
+.btn-login {
   background-color: #ff5722;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
+
 @import "append";

@@ -20,7 +20,7 @@ define(['cabin'], function(cabin) {
                         isLock: false,
                         lock: function() {
                             if (scope.isLock) return;
-                            iElement.find("input,textarea").each(function(i, e) {
+                            iElement.find("input,textarea").not(".no-lock").each(function(i, e) {
                                 var el = $(e);
                                 //el.data('preadonly', el.prop('readonly') || false).prop('readonly', true).prop('tabindex', -1);
                                 el.data('preadonly', el.prop('disabled') || false).prop('disabled', true).prop('tabindex', -1);
@@ -29,7 +29,7 @@ define(['cabin'], function(cabin) {
                         },
                         unlock: function() {
                             if (!scope.isLock) return;
-                            iElement.find("input,textarea").each(function(i, e) {
+                            iElement.find("input,textarea").not(".no-lock").each(function(i, e) {
                                 var el = $(e);
                                 el.prop('disabled', el.data('preadonly') || false).removeData('preadonly');
                                 if (el.prop('disabled')) {
@@ -51,10 +51,15 @@ define(['cabin'], function(cabin) {
                             scope.includeUrl = "";
                             if (data && data.page && data.page.url) {
                                 scope.isLock = false;
+                                scope.data = {};
                                 openPage(data.page.url);
                             }
                         });
-                        scope.$on(receiveEvent + '-lock', scope.lock);
+                        scope.$on(receiveEvent + '-lock', function(event, data) {
+                            if (data.endTxn == true && scope.settings.endLock) {
+                                scope.lock();
+                            }
+                        });
                         scope.$on(receiveEvent + '-unlock', scope.unlock);
                     }
 
@@ -72,13 +77,18 @@ define(['cabin'], function(cabin) {
                     //for poc
                     var txnId;
                     scope.submitForm = function(dataForm) {
-                        if (dataForm.$valid) {
-                            scope.data = scope.data || {};
-                            scope.data.hiddenData = "hiddenData";
-                            iBranchServ.send(txnId, scope.data);
-                        } else {
-                            console.log(dataForm)
-                            iBranchServ.sendMessage('error', "煩請確認資料是否正確!");
+                        if (!scope.readOnly && scope.settings.autoSend && !scope.isLock) {
+                            if (dataForm.$valid) {
+                                scope.data = scope.data || {};
+                                scope.data.hiddenData = "hiddenData";
+                                scope.lock();
+                                iBranchServ.send(txnId, scope.data).then(function(res) {}, function() {
+                                    scope.unlock();
+                                });
+                            } else {
+                                console.log(dataForm)
+                                iBranchServ.sendMessage('error', "煩請確認資料是否正確!");
+                            }
                         }
                     }
 
@@ -105,8 +115,11 @@ define(['cabin'], function(cabin) {
                                 var s = angular.extend({}, {
                                     controller: true,
                                     templateUrl: true,
-                                    service: []
+                                    service: [],
+                                    autoSend: true,
+                                    endLock: true
                                 }, settings || {});
+                                scope.settings = s;
                                 var promises = [];
                                 if (s.controller) {
                                     //iElement.children().attr('ng-controller', pageName + 'Ctrl');
@@ -151,7 +164,7 @@ define(['cabin'], function(cabin) {
                                         promises.push(srv_deferred.promise);
                                     }
                                 }
-                                scope.autoSend = s.autoSend === false ? false : true;
+
                                 $q.all(promises).then(function() {
                                     $timeout(function() {
                                         if (s.templateUrl === true) {
@@ -173,6 +186,11 @@ define(['cabin'], function(cabin) {
                                     }, 100)
                                 });
                             }, function(error) {
+                                scope.$emit('broadcast', {
+                                    event: 'notify',
+                                    type: 'error',
+                                    message: '無此交易(' + txnId + ')'
+                                });
                                 console.log('load ' + pageUrl + ' issue!!');
                                 console.log(error);
                             });

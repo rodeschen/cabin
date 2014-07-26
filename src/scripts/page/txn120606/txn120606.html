@@ -1,5 +1,5 @@
 <div class="page-context loginPage" ng-controller="txn120606Ctrl">
-    <h6>黃金存摺餘額/存額證明列印(120606)</h6>{{data.ffff}}
+    <h6>黃金存摺餘額/存額證明列印(120606)</h6>
     <div class="row">
         <div class="col-2">
             <span class="title">功　　能</span>
@@ -13,7 +13,7 @@
             <span class="title">身份証號</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.IDNO" required type="text" cb-mask-to-upper-case validator="taiwanId"/>
+            <input ng-model="data.IDNO" required type="text" cb-mask-to-upper-case validator="taiwanId" />
         </div>
     </div>
     <div class="row">
@@ -21,7 +21,7 @@
             <span class="title">列印分行</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.PRT_FLG" type="text"  cb-combo-box combo-key="txn120606.PRT_FLG" edit="true" combo-view-items="3" validator/>
+            <input ng-model="data.PRT_FLG" type="text" cb-combo-box combo-key="txn120606.PRT_FLG" edit="true" combo-view-items="3" validator/>
         </div>
     </div>
     <div class="row">
@@ -29,7 +29,7 @@
             <span class="title">黃金帳號</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.ACNO_SA" type="text" validator="txn120606ACNOVal" maxlength="12"/>
+            <input ng-model="data.ACNO_SA" type="text" validator="txn120606ACNOVal" maxlength="12" />
         </div>
     </div>
     <div class="row">
@@ -51,7 +51,7 @@
             <span class="title">證明重量</span>
         </div>
         <div class="col-1">
-            <input ng-model="data.P_AMT" required cb-mask-number type="text"  validator/>
+            <input ng-model="data.P_AMT" required cb-mask-number type="text" validator/>
         </div>
         <div class="col-1">
             <span class="title">公克</span>
@@ -60,7 +60,7 @@
             <span class="title">幣別</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.P_CUR"  type="text"  label="currencyss" cb-mask-to-upper-case cb-combo-box combo-key="txn120606.P_CUR" edit="true" validator/>
+            <input ng-model="data.P_CUR" type="text" label="currencyss" cb-mask-to-upper-case cb-combo-box combo-key="txn120606.P_CUR" edit="true" validator/>
         </div>
         <div class="col-1">
             <span class="title">匯率</span>
@@ -80,7 +80,7 @@
             <span class="title">印錄份數</span>
         </div>
         <div class="col-1">
-            <input ng-model="data.P_COPY" required type="text" validator="txn120606COPY"/>
+            <input ng-model="data.P_COPY" required type="text" validator="txn120606COPY" />
         </div>
     </div>
     <div class="row">
@@ -137,7 +137,7 @@
             <span class="title">字第</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.T_SEQ" type="text"  required cb-number validator/>
+            <input ng-model="data.T_SEQ" type="text" required cb-number validator/>
         </div>
         <div class="col-1">
             <span class="title">號</span>

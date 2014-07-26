@@ -2,14 +2,14 @@
     <div class="cabin-grid-header" ng-style="getHeaderStyle()">
         <table class="grid-header">
             <tr>
-                <th ng-repeat="column in columns" ng-style="getColumnStyle(column)">{{column.name}}</th>
+                <th ng-repeat="column in columns" ng-style="getHeaderColumnStyle(column)">{{column.name}}</th>
             </tr>
         </table>
     </div>
     <div class="cabin-grid-body" ng-style="getBodyStyle()">
         <table class="grid-body">
-            <tr ng-repeat="data in gridData">
-                <td ng-repeat="value in data track by $index" ng-style="getColumnStyle(columns[$index],$index)">{{value}}</td>
+            <tr ng-repeat="data in gridData" ng-dblclick="s.dblclick(data)" ng-click="s.click(data)">
+                <td ng-repeat="column in columns track by $index" ng-style="getColumnStyle(columns[$index],$index)" title="{{columns[$index].formatter && columns[$index].formatter(data[$index],data) || data[$index] || '&nbsp;'}}">{{columns[$index].formatter && columns[$index].formatter(data[$index],data) || data[$index] || '&nbsp;'}}</td>
             </tr>
         </table>
     </div>

@@ -182,7 +182,9 @@ define(['cabin'], function(cabin) {
                             break;
                         case 'END':
                             funcs.sendMessage('normal', '[' + job.txnId + '] ' + job.DATA);
-                            $rootScope.$broadcast('pageViewer-lock');
+                            $rootScope.$broadcast('pageViewer-lock', {
+                                endTxn: true
+                            });
                             break;
                     }
                     $timeout(function() {

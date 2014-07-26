@@ -10,6 +10,7 @@ define(['cabin'], function(cabin) {
                     gridData: '='
                 },
                 link: function($scope, iElement) {
+                    $scope.s = $scope.gridSettings;
                     $scope.columns = $scope.gridSettings.columns;
                     var columnWidth = 0,
                         parentWidth = iElement.outerWidth(),
@@ -20,6 +21,7 @@ define(['cabin'], function(cabin) {
                     angular.forEach($scope.columns, function(e) {
                         columnWidth += e.width || 10
                     });
+
                     if (columnWidth < parentWidth) {
                         usePercent = true;
                         table.css('width', parentWidth);
@@ -28,25 +30,25 @@ define(['cabin'], function(cabin) {
                     }
                     $scope.getColumnStyle = function(column, index) {
                         return {
-                            textAlign: 'center',
-                            'display': 'inline-block',
-                            overflow: 'hidden',
-                            //'float': 'left',
-                            'float' : column.float || 'none',
-                            width: usePercent ? (((column.width * parentWidth) / columnWidth)) : column.width
-                        }
+                            textAlign: column.align || 'center',
+                            width: usePercent ? ((((column.width) * parentWidth) / columnWidth)) : column.width
+                        };
+                    }
+
+                    $scope.getHeaderColumnStyle = function(column){
+                        return {
+                            width: usePercent ? ((((column.width) * parentWidth) / columnWidth)) : column.width
+                        };
                     }
 
                     $scope.getBodyStyle = function() {
                         return {
-                            height: 200,
-                            overflow: 'auto'
-                        }
+                            height: $scope.gridSettings.height || 200
+                        };
                     }
                     $scope.getHeaderStyle = function() {
                         return {
-                            overflow: 'hidden'
-                        }
+                        };
                     }
                     bodyTable.scroll(function() {
                         headerTable.scrollLeft(bodyTable.scrollLeft());

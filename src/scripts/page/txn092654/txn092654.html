@@ -1,0 +1,37 @@
+<div class="page-context loginPage" ng-controller="txn092654Ctrl">
+    <h6>櫃員帳務查詢(092654)</h6>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">櫃員代號</span>
+        </div>
+        <div class="col-1">
+            <input ng-model="data.uid" readonly type="text" />
+        </div>
+        <div class="col-2">
+            <span class="title">主機櫃員代號</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.hId" readonly type="text" />
+        </div>
+        <div class="col-2">
+            <span class="title">主機櫃員名稱</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.hName" readonly  type="text" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">主機現金帳</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.hAMT" readonly  type="text" class="number" />
+        </div>
+        <div class="col-2">
+            <span class="title">端未現金帳</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.tAMT" readonly type="text" class="number"/>
+        </div>
+    </div>
+</div>

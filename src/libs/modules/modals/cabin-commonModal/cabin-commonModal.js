@@ -7,7 +7,7 @@ define(['cabin'], function(cabin) {
                 controllerAs: 'modal',
                 closeByEsc: false,
                 templateUrl: cabinModulePath + 'modals/cabin-commonModal/templates/cabin-commonModal.html',
-                controller: ['$scope', 'cbSupeviseModal',
+                controller: ['$scope', 'cbCommonModal',
                     function($scope, modal) {
                         for(var idx in $scope.buttons || []){
                             $scope.buttons[idx].modalId = $scope.modalId;

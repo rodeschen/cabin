@@ -42,7 +42,7 @@ define(['cabin'], function(cabin) {
                     },
                     openModal: function() {
 
-                        var modal = $injector.get('cbSupeviseRequireModal');
+                        var modal = $injector.get('cbSupeviseModal');
                         modal.activate({
                             DATA: {
                                 sendData: {},

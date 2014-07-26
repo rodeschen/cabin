@@ -20,7 +20,7 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                 container = angular.element(config.container || document.body),
                 _overlay = angular.element('<div class="btf-modal-overlay toggle"></div>'),
                 duplicate = config.duplicate || false,
-                opacity = config.opacity == undefined ? 30 : config.opacity,
+                showOverlay = config.showOverlay === false ? false : true,
                 element = null,
                 overlay = null,
                 //scope = null,
@@ -64,18 +64,25 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
 
                 container.prepend(element);
                 scope.closeModal = deactivate;
-                overlay = _overlay.clone().css('opacity', opacity);
+                scope.close = deactivate;
+                overlay = _overlay.clone();
+                if (!showOverlay) {
+                    overlay.css('opacity', 0);
+                }
 
                 modals[modalId] = {
                     el: element,
                     ov: overlay
                 };
-
                 if (closeByEsc) {
                     overlay.on('click', function() {
-                        scope.$apply(deactivate)
+                        scope.$apply(function() {
+                            deactivate();
+                        });
                     });
-                    scope.$on("keydown.esc", deactivate);
+                    scope.$on("keydown.esc", function() {
+                        deactivate();
+                    });
                 }
                 container.prepend(overlay);
                 var _locals = duplicate ? angular.copy(locals) : locals;
@@ -97,14 +104,14 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
 
             function deactivate(modalId) {
                 var deferred = $q.defer();
-                var el,ov;
-                if(modalId){
-                    if(modals[modalId]){
+                var el, ov;
+                if (modalId) {
+                    if (modals[modalId]) {
                         el = modals[modalId].el;
                         ov = modals[modalId].ov;
                     }
 
-                }else{
+                } else {
                     el = element;
                     ov = overlay;
                 }
@@ -114,7 +121,7 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                         el.remove();
                         el = null;
                         scope.$destroy();
-                        delete modals[modalId || ""]; 
+                        delete modals[modalId || ""];
                         deferred.resolve();
                     });
                     $animate.leave(ov, function() {
@@ -130,6 +137,9 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
             }
 
             return {
+                open: activate,
+                close: deactivate,
+                closeModal: deactivate,
                 activate: activate,
                 deactivate: deactivate,
                 active: active

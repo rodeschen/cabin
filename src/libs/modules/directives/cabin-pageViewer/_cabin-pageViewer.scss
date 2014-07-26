@@ -12,6 +12,7 @@
   position: relative;
   border: 5px #2C3E50 solid;
   @include border-radius(5px);
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
   .row {
     &:before, &:after {
       content: " ";
@@ -124,7 +125,7 @@
       line-height: 2em;
       text-align: right;
       padding: 0 1em;
-      font-weight: 900;
+      font-weight: 500;
     }
     .title-left {
       @extend .title;
@@ -274,4 +275,50 @@ textarea.ng-invalid,
 input.ng-invalid,
 .uneditable-input.ng-invalid {
   border-color: #e74c3c !important;
+}
+
+.cabin-button {
+  width: 10em;
+  line-height: 25px;
+  border: 0px;
+  font-weight: 500;
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
+  outline: 0;
+  color: #FFF;
+  margin: 5px;
+  @include border-radius(5px);
+  &.button-red {
+    background-color: #b0120a;
+    &:hover {
+      background-color: #c41411;
+    }
+  }
+  &.button-teal {
+    background-color: #00695c;
+    &:hover {
+      background-color: #00796b;
+    }
+  }
+  &.button-blue {
+    background-color: #2a36b1;
+    &:hover {
+      background-color: #3b50ce;
+    }
+  }
+}
+
+.btn.btn-red {
+  color:#FFF;
+  background-color: #b0120a;
+  &:hover {
+    background-color: #c41411;
+  }
+}
+
+.btn.btn-blue {
+  color:#FFF;
+  background-color: #2a36b1;
+  &:hover {
+    background-color: #3b50ce;
+  }
 }

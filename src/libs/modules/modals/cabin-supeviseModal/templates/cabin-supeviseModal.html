@@ -1,7 +1,7 @@
 <div class="btf-modal cabin-modal cabin-supevise-modal toggle page-content">
     <div class="cabin-modal-context">
         <div>
-            <div cb-module="cbPageViewer" init-path="/{{ovTxnId}}" class="page-viewer-content" receive-event="pageViewer" init-data="txnData" read-only="true"></div>
+            <div cb-module="cbPageViewer" init-path="/{{ovTxnId}}" class="page-viewer-content" receive-event="supeviseViewer" init-data="txnData" read-only="true"></div>
         </div>
         <div class="supevise-message-context">
             <form name="sendForm" novalidate>
@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4">
-                        <div>櫃員：{{user.userId}} - {{user.title}}({{user.bankUserId}})</div>
+                        <div>櫃員：{{tellerinfo}}</div>
                         <!-- <div>
                             <label>
                                 <input type="radio" ng-model="data.remote" name="remote" value="Y" />&nbsp;遠端授權
@@ -26,10 +26,10 @@
                         <input ng-show="data.remote=='N'" ng-required="data.remote=='N'" ng-model="data.password" required type="password" placeholder="密碼" autofocus class="normal" validator /> -->
                     </div>
                     <div class="col-xs-2 cancel-btn">
-                        <a href="" class="btn btn-block btn-lg btn-danger" ng-click="reject()">取消</a>
+                        <a href="" class="btn btn-block btn-lg btn-red" ng-click="reject()">退回</a>
                     </div>
                     <div class="col-xs-2 approve-btn">
-                        <a href="" class="btn btn-block btn-lg btn-primary" ng-click="approve(sendForm)">核準</a> 
+                        <a href="" class="btn btn-block btn-lg btn-blue" ng-click="approve(sendForm)">核准</a> 
                     </div>
                 </div>
             </form>

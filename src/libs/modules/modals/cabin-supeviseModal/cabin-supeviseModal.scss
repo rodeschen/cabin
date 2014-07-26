@@ -14,6 +14,7 @@
     height: 100px;
     padding: 13px;
     top: 0px;
+    font-weight: 500;
     //background-color: #34495E;
     //border-bottom: 2px #222 solid;
     //color: #EEE;
@@ -22,7 +23,8 @@
     background-image: -ms-linear-gradient(top, #d8e0e5, #f7fafc);
     background-image: -o-linear-gradient(top, #d8e0e5, #f7fafc);
     overflow: inherit;
-    @include box-shadow(1px 1px 5px #111111);
+    //@include box-shadow(1px 1px 5px #111111);
+    @include box-shadow(0 2px 5px 0 rgba(0,0,0,.26));
     //border-bottom: 2px #222 solid;
     .supevise-message {
       height: 60px;

@@ -1,59 +1,39 @@
-$top-menu-background-color: #34495e !default;
-$top-menu-background-color-li-active: #1abc9c;
-$top-menu-font-color: white !default;
-$top-menu-font-color-hover: #1abc9c !default;
-$top-menu-font-color-ative: white !default;
+$grid-border-color : #ECF0F1 !default;
+$grid-hover-bg-color: #6CBCEE !default;
+$grid-header-bg-color : #0088AA !default;
+$grid-header-color: #FFF;
+$grid-body-bg-color: #FFFFFF !default;
+$grid-body-color : #000;
 
-.top-menu {
-  height: auto;
-  background: #34495E;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
-  nav {
-    // @include at-breakpoint($mobile){
-    // 	@include isolate(1);
-    // 	@include span-columns(5);
-    // };
-    // @include at-breakpoint($pad){
-    // 	@include isolate(3); 
-    // 	@include span-columns(5);
-    // };
-    //@include at-breakpoint($pc){
-    @include isolate(3);
-    @include span-columns(5);
-    //}
-    @include clearfix;
-    ul {
-      background-color: $top-menu-background-color;
-      li {
-        @include transition(background-color 0.2s);
-        float: left;
-        position: relative;
-        display: inline-block;
-        color: #FFF;
-        padding: 13px;
-        a {
-          font-size: 1.2em;
-          line-height: 2.0em;
-        }
-        &:hover {
-          color: $top-menu-font-color-hover;
-        }
-        &.active {
-          background-color: $top-menu-background-color-li-active;
-          color: $top-menu-font-color-ative;
-        }
-      }
+.cabin-grid {
+  @include box-shadow(0 2px 5px 0 rgba(0,0,0,.26));
+  border: 1px #ECF0F1 solid;
+  td,th {
+    border-right: 1px $grid-border-color solid;
+    border-bottom: 1px $grid-border-color solid;
+    //height: 20px;
+    padding: 5px 0px;
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .cabin-grid-header {
+    overflow: hidden;
+    .grid-header {
+      color : $grid-header-color;
+      background-color: $grid-header-bg-color;
     }
-    &.buttons {
-      @include isolate(1);
-      @include span-columns(4);
-      overflow: inherit;
-      float: right;
-      right: 50px;
-      ul li {
-        padding: 13px 5px;
-        a {
-          cursor: pointer;
+  }
+  .cabin-grid-body {
+    height: 200;
+    overflow: auto;
+    .grid-body {
+      color : $grid-body-color;
+      background-color : $grid-body-bg-color;
+      tr {
+        cursor: pointer;
+        &:hover {
+          background-color: $grid-hover-bg-color;
         }
       }
     }

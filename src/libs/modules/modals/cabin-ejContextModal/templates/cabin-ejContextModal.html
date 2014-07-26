@@ -1,0 +1,14 @@
+<div class="btf-modal cabin-modal cabin-ej-context-modal toggle page-content">
+
+    <div class="cabin-modal-context">
+        <div>
+            <div cb-module="cbPageViewer" init-path="/txn{{txnId}}" class="page-viewer-content" receive-event="ejcontextViwer" init-data="txnData" read-only="true"></div>
+        </div>
+        <div class="buttons">
+            <button class="cabin-button button-teal" ng-click="openMessage()">交易訊息</button>
+            <button class="cabin-button button-blue">電文</button>
+            <button class="cabin-button button-red" ng-click="closeModal()">關閉</button>
+        </div>
+    </div>
+
+</div>

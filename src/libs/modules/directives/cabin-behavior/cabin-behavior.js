@@ -141,6 +141,7 @@ define(['cabin'], function(cabin) {
                         var convertToAd = attrs.convertToAd == "true" || false;
                         var charPos = 0;
                         var which = 0;
+                        var isFocus = false;
                         var validChar = "^(" + [
                             "8", // backspace
                             "9", // tab
@@ -151,32 +152,42 @@ define(['cabin'], function(cabin) {
 
                         var numberChar = "^(4[8-9]|5[0-7])$";
 
-                        element.on('focus', function(e) {
-                            this.value = this.value.replace(/\//g, "");
-                        }).on("keydown", function(e) {
+                        element
+                            .on('focus', function(e) {
+                                this.value = this.value.replace(/\//g, "");
+                                isFocus = true;
+                            })
+                            .on("keydown", function(e) {
 
-                            which = e.which;
-                            if (!(new RegExp(validChar).test(e.which)) && !(new RegExp(numberChar).test(e.which))) {
-                                return false;
-                            }
+                                which = e.which;
+                                if (!(new RegExp(validChar).test(e.which)) && !(new RegExp(numberChar).test(e.which))) {
+                                    return false;
+                                }
 
-                            if (this.value.length > 6 && (new RegExp(numberChar).test(e.which))) {
-                                return false;
-                            }
-                        }).on('blur', function(e) {
-                            if (cbUtils.validDate(this.value, true)) {
-                                this.value = cbUtils.formatDate(this.value, true);
-                            }
-                        });
+                                if (this.value.length > 6 && (new RegExp(numberChar).test(e.which))) {
+                                    return false;
+                                }
+                            })
+                            .on('blur', function(e) {
+                                if (cbUtils.validDate(this.value, true)) {
+                                    this.value = cbUtils.formatDate(this.value, true);
+                                }
+                                isFocus = false;
+                            });
 
                         function parse(viewValue, noRender) {
                             //rodes fix input method issue
-                            ngModel.$setValidity('cbTwDate', cbUtils.validDate(viewValue, true));
-                            viewValue = viewValue.replace(/\//g, "");
-                            if (convertToAd) {
-                                viewValue = cbUtils.convertAdAndTw(viewValue, true);
+                            if (viewValue) {
+                                ngModel.$setValidity('cbTwDate', cbUtils.validDate(viewValue, true));
+                                viewValue = viewValue.replace(/\//g, "");
+                                if (convertToAd) {
+                                    viewValue = cbUtils.convertAdAndTw(viewValue, true);
+                                }
+                                if (!noRender)
+                                    ngModel.$render();
+
+                                which = -1;
                             }
-                            which = -1;
                             return viewValue;
                         }
 
@@ -190,12 +201,25 @@ define(['cabin'], function(cabin) {
                                     ngModel.$setValidity('cbTwDate', valid);
                                     if (valid) {
                                         viewValue = cbUtils.convertAdAndTw(viewValue, false);
+                                        //element.val(viewValue) = cbUtils.formatDate(viewValue, true);
                                     }
                                 }
 
                                 return viewValue;
                             });
                         }
+
+                        ngModel.$render = function() {
+                            var clean = parse(ngModel.$viewValue, true);
+                            if (!isFocus) {
+                                if (cbUtils.validDate(clean, false)) {
+                                    element.val(cbUtils.formatDate(cbUtils.convertAdAndTw(clean, false), true));
+                                } else {
+                                    element.val(element.val().replace(/\//g, ""));
+                                }
+                            }
+                            return clean;
+                        };
 
 
                     }

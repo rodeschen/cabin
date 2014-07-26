@@ -1,6 +1,6 @@
 <div class="page-viewer">
-	<form name="formData" ng-submit="autoSend && !readOnly && submitForm(formData)" novalidate autocomplete="off">
+	<form name="formData" ng-submit="submitForm(formData)" novalidate autocomplete="off">
     	<div id="includePage" ng-include="includeUrl" class="toggle-enter"></div>
-    	<input type="submit" class="hidden" value="submit"/>
+    	<input type="submit" class="hidden no-lock" value="submit"/>
     </form>
 </div>

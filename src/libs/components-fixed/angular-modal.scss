@@ -36,11 +36,13 @@
   background-image: -moz-linear-gradient(top, #478ad9, #2b9598);
   background-image: -ms-linear-gradient(top, #478ad9, #2b9598);
   background-image: -o-linear-gradient(top, #478ad9, #2b9598);
+  border:5px #478ad9 solid;
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
   .cabin-modal-context {
     position: relative;
     min-width: 300px;
     min-height: 150px;
-    margin: 5px;
+    //margin: 5px;
     border: none;
     display: block;
     background-image: -webkit-linear-gradient(top, #d8e0e5, #f7fafc);
@@ -56,6 +58,8 @@
       position: absolute;
       bottom: 10px;
       width: 100%;
+      text-align: center;
+      // right :10px;
     }
   }
 }

@@ -85,7 +85,7 @@ define(['cabin'], function(cabin) {
                     return dom;
                 },
                 validDate: function(text, isTwDate) {
-                    var comp = text.replace(/\//g, "");
+                    var comp = (text || "").replace(/\//g, "");
                     if (isTwDate) {
                         if (comp.length === 7) {
                             comp = (parseInt(text.substr(0, 3), 10) + 1911) + text.substr(3);

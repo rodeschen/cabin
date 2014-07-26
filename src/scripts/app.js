@@ -135,8 +135,8 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 }
             ]);
         }
-    ]).run(['$rootScope', '$window', '$http', 'properties', 'cbWebSocketIoServ', 'cbDeviceAgentSrv',
-        function($rootScope, $window, $http, properties, cbWebSocketIoServ, cbDeviceAgentSrv) {
+    ]).run(['$rootScope', '$window', '$http', 'properties', 'cbWebSocketIoServ', 'cbDeviceAgentSrv', '$document', 'cbOpenTxnModal',
+        function($rootScope, $window, $http, properties, cbWebSocketIoServ, cbDeviceAgentSrv, $document, cbOpenTxnModal) {
             $rootScope.$on('broadcast', function(ev, args) {
                 //console.log('broadcast', args);
                 $rootScope.$broadcast(args.event, args);
@@ -144,7 +144,24 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             $rootScope.baseUrl = ('http://' + $window.location.host + properties.contentRoot).replace(/\/$/, '') + "/";
             //$rootScope.baseUrl 
             properties.contentRoot = properties.contentRoot.replace(/\/$/, '') + "/";
+            angular.element($document).on('keydown', function(e) {
 
+                $rootScope.$apply(function() {
+                    console.log("FADFAS")
+                    switch (e.which) {
+                        case 27:
+                            $rootScope.$broadcast("keydown.esc");
+                            break;
+                        case 13:
+                            $rootScope.$broadcast("keydown.enter");
+                        case 84:
+                            if (e.ctrlKey) {
+                                cbOpenTxnModal.open();
+                            }
+                            break;
+                    }
+                });
+            });
             // var gSocket = cbWebSocketIoServ.getConnect(properties.defWebSocketURI, "gSocket");
             // gSocket.on("chatevent", function(data) {
             //     $rootScope.$broadcast("notify",{
