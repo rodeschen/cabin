@@ -85,9 +85,8 @@ define(['cabin'], function(cabin) {
                                     valid.name = e;
                                 }
 
-                                //                          console.log("VVVVSCOPE:",parentScope.$parent.$parent)
                                 cbValidationServ.initValidation(valid.name);
-                                element.on(valid.type, function() {
+                                element.on(valid.type, function(event) {
                                     var _this = this;
                                     parentScope.$apply(function() {
                                         try {
@@ -99,12 +98,19 @@ define(['cabin'], function(cabin) {
                                                 'scope': parentScope,
 
                                             };
-
-                                            var text = $injector.invoke(cbValidationServ.validation(valid.name), ngModel, localVar);
-                                            if (text !== true) {
+                                            try {
+                                                if (valid.type == 'focus' || _this.value) {
+                                                    var text = $injector.invoke(cbValidationServ.validation(valid.name), ngModel, localVar);
+                                                    if (text !== true) {
+                                                        throw text;
+                                                    }
+                                                }
+                                            } catch (e) {
+                                                event.preventDefault();
                                                 throw text;
                                             }
                                             ngModel.$setValidity(e, true);
+
                                         } catch (exp) {
                                             cbValidationServ.setErrorMessage(e, exp);
                                             ngModel.$setValidity(e, false);

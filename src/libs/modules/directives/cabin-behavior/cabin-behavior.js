@@ -293,6 +293,21 @@ define(['cabin'], function(cabin) {
                     }
                 };
             }
+        ]],
+        ['directive', 'cbFocus', ['$timeout',
+            function($timeout) {
+                return {
+                    restrict: 'AC',
+                    link: function(scope, element, attrs) {
+;                        scope.$watch(attrs.cbFocus,
+                            function(v) {
+                                $timeout(function() {
+                                    v && element.focus();
+                                }, 400);
+                            });
+                    }
+                };
+            }
         ]]
     ];
 });

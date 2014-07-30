@@ -49,6 +49,26 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                             });
                         }
                     ]
+                }).state('txnInit', {
+                    url: '^/txn/{id:[^/]+}/{data:[^/]+}',
+                    resolve: {
+                        userServ: ['userServ',
+                            function(user) {
+                            }
+                        ]
+                    },
+                    controller: ['$stateParams', '$scope',
+                        function($stateParams, $scope) {
+                            var decode = atob($stateParams.data);
+                            $scope.$emit('broadcast', {
+                                event: 'pageViewer',
+                                page: {
+                                    url: 'txn' + $stateParams.id,
+                                    data: decode
+                                }
+                            });
+                        }
+                    ]
                 }).state('login', {
                     url: '/login',
                     resolve: {
@@ -147,7 +167,6 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             angular.element($document).on('keydown', function(e) {
 
                 $rootScope.$apply(function() {
-                    console.log("FADFAS")
                     switch (e.which) {
                         case 27:
                             $rootScope.$broadcast("keydown.esc");

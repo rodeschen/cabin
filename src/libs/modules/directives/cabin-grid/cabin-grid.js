@@ -12,6 +12,7 @@ define(['cabin'], function(cabin) {
                 link: function($scope, iElement) {
                     $scope.s = $scope.gridSettings;
                     $scope.columns = $scope.gridSettings.columns;
+                    $scope.actions = $scope.gridSettings.actions || {};
                     var columnWidth = 0,
                         parentWidth = iElement.outerWidth(),
                         usePercent = false,

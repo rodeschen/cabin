@@ -45,14 +45,14 @@
                         <a href="" class="icon icon-booklet" ui-sref="txn({id:'000001'})"></a>
                     </li>
                     <li class="hint--bottom" data-hint="授權">
-                        <a href="" class="icon icon-security" ng-click="openSupModal()">
+                        <a href="" class="icon icon-security">
                             <div ng-class="{'sup-notify': hasOV}"></div>
                         </a>
                     </li>
                     <li class="hint--bottom" data-hint="代辦">
-                        <a href="" class="icon icon-compose" ng-click="openModal()"></a>
+                        <a href="" class="icon icon-compose"></a>
                     </li>
-                    <li class="hint--bottom" data-hint="理規Web">
+                    <li class="hint--bottom" data-hint="櫃員帳務查詢">
                         <a href="" class="icon icon-browser" ui-sref="txn({id:'092654'})"></a>
                     </li>
                     <li class="hint--bottom" data-hint="3270">
@@ -72,19 +72,28 @@
                 <div class="table">
                     <div class="table-cell v-middle">
                         <div class="row">
-                            <div class="offset-2 col-5">
+                            <div class="">
                                 <a class="btn_120606" ui-sref="txn({id:'120606'})"><span>黃金存摺餘額 / 存額證明列印 (120606)</span></a>
                             </div>
-                            <div class="offset-7 col-5">
+                            <div class="">
                                 <a class="btn_000045" ui-sref="txn({id:'000045'})"><span>有摺轉帳交易 (000045)</span></a>
+                            </div>
+                        </div>
+                        <br/>
+                         <div class="row">
+                            <div class="">
+                                <a class="btn_032671" ui-sref="txn({id:'032671'})"><span>帳戶查詢(032671)</span></a>
+                            </div>
+                            <div class="">
+                                <a class="btn_092654" ui-sref="txn({id:'092654'})"><span>櫃員現金查詢(092654)</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-show="$state.is('txn')" class="toggle" cb-module="cbPageViewer" init-path="favorite" receive-event="pageViewer"></div>
+            <div ng-show="$state.is('txn') || $state.is('txnInit')" class="toggle" cb-module="cbPageViewer" init-path="favorite" receive-event="pageViewer"></div>
         </div>
-        <div ng-if="isLogin != undefined && !isLogin">
+        <div ng-if="isLogin != undefined && !isLogin" class="slide-top">
             <div class="login">
                 <div class="login-screen">
                     <form name="userForm" ng-sublmit="login(userForm)" novalidate>
@@ -98,7 +107,7 @@
                                 <input type="password" required ng-model="userForm.password" class="form-control login-field" value="" placeholder="Password" id="login-pass" autocomplete="off">
                                 <!-- <label class="login-field-icon fui-lock" for="login-pass"></label> -->
                             </div>
-                            <input type='submit' class="btn btn-lg btn-block btn-login" ng-click="login(userForm)" value="Log in" />
+                            <input type='submit' class="btn btn-lg btn-block btn-login btn-blue" ng-click="login(userForm)" value="Log in" />
                         </div>
                     </form>
                 </div>

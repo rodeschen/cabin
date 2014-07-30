@@ -3,6 +3,8 @@ require.config({
         'taiwanId': 'libs/modules/validations/taiwanId',
         'readMsr' : 'libs/modules/validations/readMsr',
        
+"ACNOVal" : "scripts/validations/common/ACNOVal",
+"txn000045ACNOVal" : "scripts/validations/txn000045/txn000045ACNOVal",
 "txn120606ACNOVal" : "scripts/validations/txn120606/txn120606ACNOVal",
 "txn120606COPY" : "scripts/validations/txn120606/txn120606COPY"
     },

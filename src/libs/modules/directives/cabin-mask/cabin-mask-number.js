@@ -11,6 +11,7 @@ define(['cabin'], function(cabin) {
                     var fraction = parseInt(attrs.fraction || 4);
                     var charPos = 0;
                     var currentPos = 0;
+                    var negative = attrs.negative === 'Y'
                     var val, keyIn;
                     var validChar = "^(" + ["4[8-9]|5[0-7]", + // "0-9" number
                         "189", // "-" negative 
@@ -44,7 +45,7 @@ define(['cabin'], function(cabin) {
                             return false;
                         }
 
-                        if (189 == e.which && (currentPos != 0 || /^-/.test(val))) {
+                        if (189 == e.which && (!negative || currentPos != 0 || /^-/.test(val))) {
                             return false;
                         }
                         if (e.which === 190 && this.value.indexOf(".") > 0) {

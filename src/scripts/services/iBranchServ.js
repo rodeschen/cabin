@@ -126,9 +126,6 @@ define(['cabin'], function(cabin) {
                             });
                             return defer.promise;
                             break;
-                        case 'PB':
-                            console.log("sPB");
-                            break;
 
                         case 'CONFIRM':
                             console.log("sCONFIRM");
@@ -158,12 +155,18 @@ define(['cabin'], function(cabin) {
                             return defer.promise;
                             //return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
+                        case 'PB':
+                            console.log("sPB");
+                            return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
+                            break;
+                            // break;
                         case 'FORM':
                             console.log("sFORM");
                             return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'MSR':
                             console.log("sMSR");
+                            return cbDeviceAgentSrv.encode(job.DATA, true, job.PROMPT, job.txnId)
                             break;
                         case 'PDF':
                             console.log("sPDF");
@@ -222,7 +225,7 @@ define(['cabin'], function(cabin) {
                     $timeout(querySup, 10000);
                 };
 
-            }) //();
+            })//();
             return funcs;
         }
     ]];

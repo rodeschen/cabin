@@ -51,7 +51,7 @@ define(['cabin'], function(cabin) {
                             scope.includeUrl = "";
                             if (data && data.page && data.page.url) {
                                 scope.isLock = false;
-                                scope.data = {};
+                                scope.data = angular.fromJson(data.page.data || '{}');
                                 openPage(data.page.url);
                             }
                         });
