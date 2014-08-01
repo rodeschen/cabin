@@ -143,14 +143,14 @@ define(['cabin'], function(cabin) {
                                 deferred: job.deferred,
                                 buttons: [{
                                     name: '取消',
-                                    type: 'red',
+                                    color: 'red',
                                     action: function() {
                                         modal.deactivate(this.modalId);
                                         defer.reject();
                                     }
                                 }, {
                                     name: '列印',
-                                    type: 'bule',
+                                    color: 'blue',
                                     action: function() {
                                         modal.deactivate(this.modalId);
                                         cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {

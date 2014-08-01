@@ -74,15 +74,17 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                     el: element,
                     ov: overlay
                 };
-                if (closeByEsc) {
-                    overlay.on('click', function() {
-                        scope.$apply(function() {
+                if (!locals || locals.closeByEsc !== false) {
+                    if (closeByEsc) {
+                        overlay.on('click', function() {
+                            scope.$apply(function() {
+                                deactivate();
+                            });
+                        });
+                        scope.$on("keydown.esc", function() {
                             deactivate();
                         });
-                    });
-                    scope.$on("keydown.esc", function() {
-                        deactivate();
-                    });
+                    }
                 }
                 container.prepend(overlay);
                 var _locals = duplicate ? angular.copy(locals) : locals;

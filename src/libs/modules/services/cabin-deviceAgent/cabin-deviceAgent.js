@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['service', 'cbDeviceAgentSrv', ['$rootScope', 'properties', '$q', '$timeout',
-        function($rootScope, properties, $q, $timeout) {
+    return ['service', 'cbDeviceAgentSrv', ['$rootScope', 'properties', '$q', '$timeout', 'cbCommonModal',
+        function($rootScope, properties, $q, $timeout, cbCommonModal) {
             // var alias = {
             //     /* Methods from MnmMoMBean */
             //     "initXmlRpcService": "tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.initXmlRpcService",
@@ -176,16 +176,18 @@ define(['cabin'], function(cabin) {
 
 
             var allAction = {
+                modalId: null,
                 print: function(printData, eject, prompt, prefix) {
                     var deferred = $q.defer();
+                    var modal = null;;
                     //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
+                        modal = allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
                         var sessionId = data;
                         //print
                         deviceAction(methods.print, [sessionId, printData, "", "12", "5"]).success(function() {
                             if (eject) {
-                                allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + "列印中...");
+                                modal = allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + "列印中...", true);
                                 //eject
                                 deviceAction(methods.eject, [sessionId]).success(function() {
                                     //relase
@@ -200,12 +202,14 @@ define(['cabin'], function(cabin) {
                                 allAction.releaseSession(sessionId, deferred, "", prefix);
                             }
                         }).error(function(xhr) {
+                            modal.deactivate();
                             console.error("deviceAgent print error");
                             //relase
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                             //deferred.reject("deviceAgent print error");
                         });
                     }).error(function(xhr) {
+                        modal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         //relase
                         deferred.reject("deviceAgent obtainSession error");
@@ -229,7 +233,7 @@ define(['cabin'], function(cabin) {
                     var deferred = $q.defer();
                     //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."));
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
                         var sessionId = data;
                         //print
                         deviceAction(methods.print, [sessionId, "[PDF]http://10.204.1.63" + url, "", "12", "5"]).success(function() {
@@ -252,12 +256,12 @@ define(['cabin'], function(cabin) {
                     var deferred = $q.defer();
                     //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."));
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."), true);
                         var sessionId = data;
                         //decode
                         deviceAction(methods.decode, [sessionId, "", 2, eject]).success(function(data) {
                             console.log('decodeData', data)
-                                //release
+                            //release
                             allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
                             console.error("deviceAgent decode error");
@@ -275,12 +279,12 @@ define(['cabin'], function(cabin) {
                     var deferred = $q.defer();
                     //obtainSession
                     deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."));
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."), true);
                         var sessionId = data;
                         //encode
                         deviceAction(methods.encode, [sessionId, writterData, "", 2, eject]).success(function(data) {
                             console.log('decodeData', data)
-                                //release
+                            //release
                             allAction.releaseSession(sessionId, deferred, data, prefix);
                         }).error(function(xhr) {
                             console.error("deviceAgent encode error");
@@ -294,13 +298,27 @@ define(['cabin'], function(cabin) {
                     });
                     return deferred.promise;
                 },
-                sendMessage: function(type, message) {
+                sendMessage: function(type, message, openModal) {
                     console.log(message)
+                    try {
+                        cbCommonModal.deactivate(allAction.modalId);
+                        allAction.modal = null;
+                    } catch (e) {
+                        console.error('close error',e)
+                    }
                     $rootScope.$broadcast('notify', {
                         event: 'notify',
                         type: type,
                         message: message
                     });
+                    if (openModal) {
+                        allAction.modal = cbCommonModal.activate({
+                            message: message,
+                            closeByEsc : false
+                        });
+                    }
+
+                    return allAction.modal;
                 },
             };
             return allAction;

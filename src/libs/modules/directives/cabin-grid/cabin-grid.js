@@ -26,7 +26,7 @@ define(['cabin'], function(cabin) {
 
                     $scope.$watch("gridData", function(v) {
                         $scope.iGridData = [];
-                        if (v) {
+                        if (v && v.length) {
                             (function appendData(d) {
                                 $timeout(function() {
                                     $scope.iGridData.push(d.shift());

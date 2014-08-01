@@ -34,7 +34,7 @@
 <body ng-controller="appCtrl" ng-class="{'is-login':isLogin}">
     <!-- <header cb-module="cbTopMenu" receive-event="topMenuBar" emit-event="sideBar"> -->
     <header ng-show="isLogin" class="slide-down">
-        <div class="info">分行：{{user.branchId}}&nbsp;&nbsp;&nbsp;LU：{{user.luNo || 'unknow'}}&nbsp;&nbsp;&nbsp;使用者：{{user.userId}} - {{user.title}}({{user.bankUserId}})&nbsp;&nbsp;&nbsp;營業日期：{{(currentTime | date :'yyyy') - 1911}}/{{currentTime | date:'MM/dd HH:mm:ss'}}</div>
+        <div class="info">分行：{{user.branchId}}<!-- &nbsp;&nbsp;&nbsp;LU：{{user.luNo || 'unknow'}} -->&nbsp;&nbsp;&nbsp;使用者：{{user.userId}} - {{user.title}}({{user.bankUserId}})&nbsp;&nbsp;&nbsp;營業日期：{{(currentTime | date :'yyyy') - 1911}}/{{currentTime | date:'MM/dd HH:mm:ss'}}</div>
         <div class="top-menu page-content">
             <span class="banner">
                 <div class="img pointer" ui-sref="index"></div>
@@ -85,7 +85,7 @@
                                 <a class="btn_032671" ui-sref="txn({id:'032671'})"><span>帳戶查詢(032671)</span></a>
                             </div>
                             <div class="">
-                                <a class="btn_092654" ui-sref="txn({id:'092654'})"><span>櫃員現金查詢(092654)</span></a>
+                                <a class="btn_092654" ui-sref="txn({id:'092654'})"><span>櫃員帳務查詢(000002)</span></a>
                             </div>
                         </div>
                     </div>

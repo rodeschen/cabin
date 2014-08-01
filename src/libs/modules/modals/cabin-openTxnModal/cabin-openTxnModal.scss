@@ -1,50 +1,7 @@
-.cabin-modal.cabin-supevise-require-modal {
-  width: 900px;
-  //font-size:15px;
-  top: 0px;
-  @include transform(translateX(-50%) translateY(0%));
-  .cabin-modal-context {
-    min-height: 100px;
+.cabin-open-txn-modal {
+  font-size: 37px;
+  line-height: 52px;
+  input:focus {
+    border: 5px #1abc9c solid;
   }
-  .cancel-btn,.approve-btn {
-    padding-top: 20px;
-  }
-  .supevise-message-context {
-    position: relative;
-    display: block;
-    width: 100%;
-    padding: 13px;
-    top: 0px;
-    font-weight: 500;
-    //background-color: #34495E;
-    //border-bottom: 2px #222 solid;
-    //color: #EEE;
-    overflow: inherit;
-    .supevise-message {
-      //height: 60px;
-      overflow: auto;
-      height: 70px;
-      padding: 5px;
-      border: 1px black solid;
-      background-color: #FFF;
-      @include border-radius(5px);
-    }
-    .supevise-user-info {
-      //height: 60px;
-   
-    }
-    .supevise-overlay {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 1400;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-  }
-}
-
-.btf-modal-overlay ~ .cabin-modal.cabin-supevise-require-modal {
-  background-color: rgba(0, 0, 0, 0);
 }

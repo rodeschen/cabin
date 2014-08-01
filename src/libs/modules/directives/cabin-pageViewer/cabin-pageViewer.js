@@ -58,9 +58,12 @@ define(['cabin'], function(cabin) {
                         scope.$on(receiveEvent + '-lock', function(event, data) {
                             if (data && data.endTxn == true && scope.settings.endLock) {
                                 scope.lock();
-                            }else{
+                            }else if(!data){
                                 scope.lock();
                             }
+                            // else if(data.endTxn == true &&  scope.settings.endLock){
+                            //     scope.lock();
+                            // }
                         });
                         scope.$on(receiveEvent + '-unlock', scope.unlock);
                     }

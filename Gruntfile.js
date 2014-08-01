@@ -724,9 +724,9 @@ module.exports = function(grunt) {
         'requirejs',
         'ngmin',
         'cssmin',
-        'uglify:poc',
-        'uglify:distLib',
-        'uglify:pocScript',
+        // 'uglify:poc',
+        // 'uglify:distLib',
+        // 'uglify:pocScript',
         'rev',
         'usemin'
     ]);
