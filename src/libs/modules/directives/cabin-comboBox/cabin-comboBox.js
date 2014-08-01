@@ -6,7 +6,7 @@ define(['cabin'], function() {
                 //priority: 0,
                 restrict: 'A',
                 require: 'ngModel',
-                templateUrl: cabinModulePath + 'directives/cabin-combobox/templates/cabin-comboBox.html',
+                templateUrl: cabinModulePath + 'directives/cabin-comboBox/templates/cabin-comboBox.html',
                 replace: true,
                 scope: {
                     'ngModel': '=ngModel',
@@ -237,7 +237,7 @@ define(['cabin'], function() {
     ]], ['directive', 'cbComboBoxDropDown', ['cabinModulePath', 'cbComboBoxServ', '$timeout',
         function(cabinModulePath, comboBoxServ, $timeout) {
             return {
-                templateUrl: cabinModulePath + 'directives/cabin-combobox/templates/cabin-comboBox-dropdown.html',
+                templateUrl: cabinModulePath + 'directives/cabin-comboBox/templates/cabin-comboBox-dropdown.html',
                 priority: 101,
                 restrict: 'A',
                 link: function($scope, iElm) {

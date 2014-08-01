@@ -41,7 +41,8 @@ define(['cabin'], function(cabin) {
                     }, function(xhr) {
                         console.log(xhr.data)
                         funcs.sendMessage('error', "[" + txnId + "] " + xhr.data.txnMessage);
-                        console.error("send " + txnId + " error :" + xhr.data.txnMessage);
+                        console.error("send " + txnId + " error :" + xhr.data.txnMessage || "System Error");
+                        $rootScope.$broadcast('pageViewer-unlock');
                     });
                     return http;
                 },
@@ -80,6 +81,12 @@ define(['cabin'], function(cabin) {
                             TYPE: 'END',
                             DATA: sendData.txnId == '0110' ? '簽入成功。' : '交易完成。'
                         });
+
+                        try {
+                            angular.extend(sendData.txnData, respData.txnData || {});
+                        } catch (e) {
+                            console.error("replace err");
+                        }
                     }
                     funcs.executeJobs(jobs).finally(function() {
                         console.log("all jobs finish")
@@ -109,6 +116,7 @@ define(['cabin'], function(cabin) {
                     switch (job.TYPE) {
                         case 'WARN':
                             console.log("sWARN");
+                            funcs.sendMessage('warn', '[' + job.txnId + '] ' + job.DATA);
                         case 'POPUP':
                             console.log("sPOPUP");
                             var modal = $injector.get('cbCommonModal');
@@ -134,21 +142,21 @@ define(['cabin'], function(cabin) {
                                 message: "客戶有待辦事項，是否需要列印?",
                                 deferred: job.deferred,
                                 buttons: [{
+                                    name: '取消',
+                                    type: 'red',
+                                    action: function() {
+                                        modal.deactivate(this.modalId);
+                                        defer.reject();
+                                    }
+                                }, {
                                     name: '列印',
-                                    type: 'primary',
+                                    type: 'bule',
                                     action: function() {
                                         modal.deactivate(this.modalId);
                                         cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {
                                             defer.resolve();
                                         });
 
-                                    }
-                                }, {
-                                    name: '取消',
-                                    type: 'danger',
-                                    action: function() {
-                                        modal.deactivate(this.modalId);
-                                        defer.reject();
                                     }
                                 }]
                             });
@@ -225,7 +233,7 @@ define(['cabin'], function(cabin) {
                     $timeout(querySup, 10000);
                 };
 
-            })//();
+            }) //();
             return funcs;
         }
     ]];

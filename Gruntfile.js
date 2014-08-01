@@ -488,6 +488,24 @@ module.exports = function(grunt) {
                     ]
                 }
             },
+            distLib: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>/libs/components-fixed',
+                    src: '**/*.js',
+                    dest: '<%= yeoman.dist %>/libs/components-fixed'
+                }, {
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>/libs/modules',
+                    src: '**/*.js',
+                    dest: '<%= yeoman.dist %>/libs/modules'
+                }, {
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>/libs',
+                    src: '*.js',
+                    dest: '<%= yeoman.dist %>/libs'
+                }]
+            },
             poc: {
                 files: {
                     '<%= yeoman.dist %>/scripts/scripts.js': [
@@ -562,6 +580,19 @@ module.exports = function(grunt) {
                         }
                     }]
                 }
+            },
+            contentRoot: {
+                files: {
+                    '<%= yeoman.dist %>/index.html': '<%= yeoman.dist %>/index.html'
+                },
+                options: {
+                    replacements: [{
+                        pattern: /<base href="\/" target="_blank" \/>/,
+                        replacement: function(match, p1, offset, string) {
+                            return '<base href="/iBranchApp/" target="_blank" />';
+                        }
+                    }]
+                }
             }
         },
         requirejs: {
@@ -607,6 +638,7 @@ module.exports = function(grunt) {
                         'cbTopMenu': 'libs/modules/directives/cabin-topMenu/cabin-topMenu',
                         'cbSideMenu': 'libs/modules/directives/cabin-sideMenu/cabin-sideMenu',
                         'cbPageViewer': 'libs/modules/directives/cabin-pageViewer/cabin-pageViewer',
+                        'cbGrid': 'libs/modules/directives/cabin-grid/cabin-grid',
                         'cbComboBox': 'libs/modules/directives/cabin-comboBox/cabin-comboBox',
                         'cbMaskNumber': 'libs/modules/directives/cabin-mask/cabin-mask-number',
                         'cbSocketStatus': 'libs/modules/directives/cabin-socketStatus/cabin-socketStatus',
@@ -616,19 +648,20 @@ module.exports = function(grunt) {
                         'cbComboBoxServ': 'libs/modules/services/cabin-comboBoxServ',
                         'cbUtils': 'libs/modules/services/cabin-utils',
                         'cbWebSocketIoServ': 'libs/modules/services/cabin-websocket-io',
-
-
                         // Modal
                         'cbSupeviseModal': 'libs/modules/modals/cabin-supeviseModal/cabin-supeviseModal',
                         'cbSupeviseRequireModal': 'libs/modules/modals/cabin-supeviseRequireModal/cabin-supeviseRequireModal',
-
-
-                        //'deviceAgent' : 'libs/modules/services/cabin-deviceAgent/libs/deviceagent',
                         'cbDeviceAgent': 'libs/modules/services/cabin-deviceAgent/cabin-deviceAgent',
+                        'cbValidationServ': 'libs/modules/services/cabin-validation',
+                        'cbCommonModal': 'libs/modules/modals/cabin-commonModal/cabin-commonModal',
+                        'cbEjContextModal': 'libs/modules/modals/cabin-ejContextModal/cabin-ejContextModal',
+                        'cbOpenTxnModal': 'libs/modules/modals/cabin-openTxnModal/cabin-openTxnModal',
+
                         //for poc
                         'iBranchServ': 'scripts/services/iBranchServ',
                         'userServ': 'scripts/services/userServ',
                         'cbTest': 'libs/modules/directives/cabin-test/cabin-test',
+                        'txn-validations': 'scripts/validations',
                         //mock test
                         'last': '../test/_httpMock/last',
                         'queryMenu': '../test/_httpMock/queryMenu',
@@ -648,7 +681,7 @@ module.exports = function(grunt) {
 
 
         grunt.task.run([
-            'string-replace',
+            'string-replace:kit',
             'clean:server',
             'concurrent:server',
             'configureProxies',
@@ -687,10 +720,12 @@ module.exports = function(grunt) {
         'concat',
         'copy:poc',
         'cdnify',
+        'string-replace',
         'requirejs',
         'ngmin',
         'cssmin',
         'uglify:poc',
+        'uglify:distLib',
         'uglify:pocScript',
         'rev',
         'usemin'
@@ -704,6 +739,7 @@ module.exports = function(grunt) {
 
 
         grunt.task.run([
+            'string-replace:kit',
             'clean:server',
             'concurrent:server',
             'configureProxies',

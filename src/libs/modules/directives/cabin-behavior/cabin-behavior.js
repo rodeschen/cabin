@@ -226,43 +226,54 @@ define(['cabin'], function(cabin) {
                 };
             }
         ]],
-        ['directive', 'cbMaxlength', ['$filter', '$parse', 'cbUtils',
-            function($filter, $parse, cbUtils) {
+        ['directive', 'cbMaxlength', ['$filter', '$parse', 'cbUtils', '$timeout',
+            function($filter, $parse, cbUtils, $timeout) {
                 return {
                     require: 'ngModel',
                     restrict: 'A',
                     priority: 1,
                     link: function(scope, element, attrs, ngModel) {
 
-                        var maxLenght = parseInt(attrs['cbMaxlength'], 10);
+                        var maxLength = parseInt(attrs['cbMaxlength'], 10);
+                        var maxLengthDouble = parseInt((attrs['cbMaxlengthDouble']) || (maxLength), 10);
                         var oldValue;
                         var charPos = 0;
                         var which = 0;
                         element.on("keydown", function(e) {
                             which = e.which;
                             //fix: alaways to parse
-                            if (which !== 9 && which !== 13) {
-                                ngModel.$setViewValue("");
-                            }
+                            // if (which !== 9 && which !== 13) {
+                            //     ngModel.$setViewValue("");
+                            // }
+                            //console.log(e);
                             oldValue = element.val();
                             var currentPos = cbUtils.getCaretPosition(this);
                             charPos = this.value.length - currentPos;
+                            $timeout(function() {
+                                var value = ngModel.$viewValue || "";
+                                var checkLength = (value.getDouble() || []).length ? maxLengthDouble : maxLength;
+                                if (value.countLength() > checkLength) {
+                                    while (value.length > checkLength) {
+                                        value = value.replace(/.$/, '');
+                                    }
+                                    ngModel.$setViewValue(value);
+                                    element.val(value);
+                                }
+                            }, 50);
                         });
 
-                        function parse(viewValue) {
-                            if (!viewValue)
-                                return viewValue;
-                            //rodes fix input method issue
-                            if (which != 229 && viewValue.countLength() > maxLenght) {
-                                viewValue = oldValue;
-                                element.val(oldValue);
-                            }
-                            which = -1;
-                            // ngModel.$commitViewValue();
-                            return viewValue;
-                        }
+                        // function parse(viewValue) {
+                        //     if (!viewValue)
+                        //         return viewValue;
+                        //     //rodes fix input method issue
 
-                        ngModel.$parsers.unshift(parse);
+
+                        //     which = -1;
+                        //     // ngModel.$commitViewValue();
+                        //     return viewValue;
+                        // }
+
+                        // ngModel.$parsers.unshift(parse);
                     }
                 };
             }
@@ -298,8 +309,8 @@ define(['cabin'], function(cabin) {
             function($timeout) {
                 return {
                     restrict: 'AC',
-                    link: function(scope, element, attrs) {
-;                        scope.$watch(attrs.cbFocus,
+                    link: function(scope, element, attrs) {;
+                        scope.$watch(attrs.cbFocus,
                             function(v) {
                                 $timeout(function() {
                                     v && element.focus();

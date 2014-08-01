@@ -36,6 +36,7 @@ require.config({
         'cbBehavior': ['libs', 'cabin'],
         'cbSplitter': ['libs', 'cabin'],
         'cbNotify': ['libs', 'cabin'],
+        'cbComboBox': ['libs', 'cabin'],
         'cbModule': ['libs', 'cabin'],
         'cbTopMenuBar': ['libs', 'cabin'],
         'cbPageViewer': ['libs', 'cabin'],
@@ -44,6 +45,7 @@ require.config({
         'cbTxnRouterLoaderServ': ['libs', 'cabin'],
         'cbLazyRegisterServ': ['libs', 'cabin'],
         'cbValidationServ': ['libs', 'cabin'],
+        'cbComboBoxServ' : ['libs', 'cabin'],
         //modal
         'cbSupeviseModal': ['libs', 'cabin'],
         'cbSupeviseRequireModal': ['libs', 'cabin'],
@@ -76,9 +78,10 @@ define('cabin-libs', ['libs', 'cabin', 'cbLazyRegisterServ', 'cbModule',
     'cbSupeviseModal',
     'cbSupeviseRequireModal'
 ], function(libs, cabin) {
-    for (var index = 2; index < arguments.length; index++) {
-        var modules = arguments[index];
-        if (modules[0] && modules[0].constructor === String) {
+    var args = $.makeArray(arguments).slice(0);
+    for (var index = 2; index < args.length; index++) {
+        var modules = args[index];
+        if (modules && modules[0] && modules[0].constructor === String) {
             modules = [modules];
         }
         angular.forEach(modules, function(value, key) {

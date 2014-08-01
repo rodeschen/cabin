@@ -37,7 +37,7 @@ define(['cabin'], function(cabin) {
                     name: '交易日期',
                     width: 70,
                     formatter: function(value) {
-                        if (value && value.length != 8) {
+                        if (!value || value.length != 8) {
                             return;
                         }
                         return cbUtils.formatDate(cbUtils.convertAdAndTw(value), true);
@@ -50,7 +50,7 @@ define(['cabin'], function(cabin) {
                     width: 70,
                 }, {
                     name: '批號',
-                    width: 100
+                    width: 400
                 }, {
                     name: '交易序號',
                     width: 70

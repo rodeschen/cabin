@@ -7,13 +7,17 @@ define(['cabin'], function(cabin) {
             $.extend(String.prototype, {
                 // 計算有幾個全型字、中文字... 或英數字混雜
                 countLength: function(type) {
-                    var c = this.match(/[^ -~]/g);
+                    var c = this.getDouble();
                     if (type == 'B') { // big5
                         // +2
                         return this.length + (c ? c.length : 0);
                     } else { // 預設UTF-8 +3
                         return this.length + (c ? c.length * 2 : 0);
                     }
+                },
+
+                getDouble: function() {
+                    return this.match(/[^ -~]/g);
                 },
 
                 /* 半型字符範圍：33-126;全型字符範圍：65281-65374:對應關係是相差：65248;全型空格：12288;半型空格：32* */

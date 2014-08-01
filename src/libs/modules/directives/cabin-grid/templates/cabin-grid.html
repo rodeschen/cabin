@@ -2,14 +2,14 @@
     <div class="cabin-grid-header" ng-style="getHeaderStyle()">
         <table class="grid-header">
             <tr>
-                <th ng-repeat="column in columns" ng-style="getHeaderColumnStyle(column)">{{column.name}}</th>
+                <th ng-repeat="column in columns" ng-style="getHeaderColumnStyle(column,$index,$last)">{{column.name}}</th>
             </tr>
         </table>
     </div>
     <div class="cabin-grid-body" ng-style="getBodyStyle()">
         <table class="grid-body">
-            <tr ng-repeat="data in gridData" ng-dblclick="s.dblclick(data)" ng-click="s.click(data)">
-                <td ng-repeat="column in columns track by $index" ng-style="getColumnStyle(columns[$index],$index)" title="{{columns[$index].formatter && columns[$index].formatter(data[$index],data) || data[$index] || '&nbsp;'}}" ng-bind-html="columns[$index].formatter && columns[$index].formatter(data[$index],data) || data[$index] || '&nbsp;'" ng-click="columns[$index].click(data[$index],data)" ng-dblclick="columns[$index].dblclick(data[$index],data)"></td>
+            <tr ng-repeat="data in iGridData" ng-dblclick="s.dblclick(data)" ng-click="s.click(data)">
+                <td ng-repeat="column in columns track by $index" ng-style="getColumnStyle(columns[$index],$index, $last)" title="{{columns[$index].formatter && columns[$index].formatter(data[$index],data) || data[$index] || '&nbsp;'}}" ng-bind-html="columns[$index].formatter && columns[$index].formatter(data[$index],data) || data[$index] || '&nbsp;'" ng-click="columns[$index].click(data[$index],data)" ng-dblclick="columns[$index].dblclick(data[$index],data)"></td>
             </tr>
         </table>
     </div>

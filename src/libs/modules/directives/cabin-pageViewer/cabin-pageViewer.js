@@ -56,7 +56,9 @@ define(['cabin'], function(cabin) {
                             }
                         });
                         scope.$on(receiveEvent + '-lock', function(event, data) {
-                            if (data.endTxn == true && scope.settings.endLock) {
+                            if (data && data.endTxn == true && scope.settings.endLock) {
+                                scope.lock();
+                            }else{
                                 scope.lock();
                             }
                         });
@@ -82,7 +84,9 @@ define(['cabin'], function(cabin) {
                                 scope.data = scope.data || {};
                                 scope.data.hiddenData = "hiddenData";
                                 scope.lock();
-                                iBranchServ.send(txnId, scope.data).then(function(res) {}, function() {
+                                iBranchServ.send(txnId, scope.data).then(function(res) {
+                                    scope.unlock();
+                                }, function() {
                                     scope.unlock();
                                 });
                             } else {
