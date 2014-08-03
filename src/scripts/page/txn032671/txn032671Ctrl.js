@@ -26,25 +26,25 @@ define(['cabin'], function(cabin) {
                     name: '帳戶號碼',
                     width: 70
                 }, {
-                    name: '120606',
+                    name: '黃金存摺列印',
                     width: 70,
                     formatter: function(value, allValue) {
-                        return $sce.trustAsHtml("<div href=\"\">120606</div>");
+                        return $sce.trustAsHtml("連動120606交易");
                     },
                     click: function(value, allValue) {
                         $state.go('txnInit', {
                             'id': '120606',
                             'data': btoa(angular.toJson({
-                                'ACNO_SA': allValue[1],
+                                //'ACNO_SA': allValue[1],
                                 'IDNO': $scope.data.INP_DATA
                             }))
                         });
                     }
                 }, {
-                    name: '000045',
+                    name: '轉帳',
                     width: 70,
                     formatter: function(value, allValue) {
-                        return $sce.trustAsHtml("<div >000045</div>");
+                        return $sce.trustAsHtml("連動000045交易");
                     },
                     click: function(value, allValue) {
                         $state.go('txnInit', {

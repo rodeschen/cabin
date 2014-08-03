@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['service', 'cbDeviceAgentSrv', ['$rootScope', 'properties', '$q', '$timeout', 'cbCommonModal',
-        function($rootScope, properties, $q, $timeout, cbCommonModal) {
+    return ['service', 'cbDeviceAgentSrv', ['$rootScope', 'properties', '$q', '$timeout', 'cbCommonModal', '$document',
+        function($rootScope, properties, $q, $timeout, cbCommonModal, $document) {
             // var alias = {
             //     /* Methods from MnmMoMBean */
             //     "initXmlRpcService": "tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.initXmlRpcService",
@@ -202,7 +202,7 @@ define(['cabin'], function(cabin) {
                                 allAction.releaseSession(sessionId, deferred, "", prefix);
                             }
                         }).error(function(xhr) {
-                            modal.deactivate();
+                            //modal.deactivate();
                             console.error("deviceAgent print error");
                             //relase
                             allAction.releaseSession(sessionId, deferred, "", prefix);
@@ -228,6 +228,7 @@ define(['cabin'], function(cabin) {
                             deferred.reject("deviceAgent returnSession error");
                         }
                     });
+                    angular.element($document).off('keydown.decode');
                 },
                 printWebPrinter: function(url, prompt, prefix) {
                     var deferred = $q.defer();
@@ -246,6 +247,7 @@ define(['cabin'], function(cabin) {
                             //deferred.reject("deviceAgent print error");
                         });
                     }).error(function(xhr) {
+                        modal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         //relase
                         deferred.reject("deviceAgent obtainSession error");
@@ -255,8 +257,17 @@ define(['cabin'], function(cabin) {
                 decode: function(eject, prompt, prefix) {
                     var deferred = $q.defer();
                     //obtainSession
+                    var modId;
                     deviceAction(methods.obtainSession, []).success(function(data) {
                         allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."), true);
+                        // angular.element($document).on('keydown.decode', function(e) {
+                        //     $rootScope.$apply(function() {
+                        //         if (e.which == 27) {
+                        //             allAction.releaseSession(sessionId, deferred, data, prefix);
+                        //             //cbCommonModal.deactivate(allAction.modalId);
+                        //         }
+                        //     });
+                        // });
                         var sessionId = data;
                         //decode
                         deviceAction(methods.decode, [sessionId, "", 2, eject]).success(function(data) {
@@ -270,6 +281,7 @@ define(['cabin'], function(cabin) {
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
+                        modal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         deferred.reject("deviceAgent obtainSession error");
                     });
@@ -293,6 +305,7 @@ define(['cabin'], function(cabin) {
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
+                        modal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         deferred.reject("deviceAgent obtainSession error");
                     });
@@ -302,9 +315,9 @@ define(['cabin'], function(cabin) {
                     console.log(message)
                     try {
                         cbCommonModal.deactivate(allAction.modalId);
-                        allAction.modal = null;
+                        allAction.modalId = null;
                     } catch (e) {
-                        console.error('close error',e)
+                        console.error('close error', e)
                     }
                     $rootScope.$broadcast('notify', {
                         event: 'notify',
@@ -312,13 +325,13 @@ define(['cabin'], function(cabin) {
                         message: message
                     });
                     if (openModal) {
-                        allAction.modal = cbCommonModal.activate({
+                        allAction.modalId = cbCommonModal.activate({
                             message: message,
-                            closeByEsc : false
+                            closeByEsc: false
                         });
                     }
 
-                    return allAction.modal;
+                    return allAction.modalId;
                 },
             };
             return allAction;

@@ -16,6 +16,7 @@
     <base href="/" target="_blank" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>cabin-富邦POC</title>
     <!-- build:css({.tmp,src}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -45,7 +46,7 @@
                         <a href="" class="icon icon-booklet" ui-sref="txn({id:'000001'})"></a>
                     </li>
                     <li class="hint--bottom" data-hint="授權">
-                        <a href="" class="icon icon-security">
+                        <a href="" class="icon icon-security" ng-click="openSupModal()">
                             <div ng-class="{'sup-notify': hasOV}"></div>
                         </a>
                     </li>

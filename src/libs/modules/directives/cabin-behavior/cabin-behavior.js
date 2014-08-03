@@ -235,7 +235,7 @@ define(['cabin'], function(cabin) {
                     link: function(scope, element, attrs, ngModel) {
 
                         var maxLength = parseInt(attrs['cbMaxlength'], 10);
-                        var maxLengthDouble = parseInt((attrs['cbMaxlengthDouble']) || (maxLength), 10);
+                        var maxLengthDouble = maxLength; //parseInt((attrs['cbMaxlengthDouble']) || (maxLength), 10);
                         var oldValue;
                         var charPos = 0;
                         var which = 0;
@@ -253,9 +253,10 @@ define(['cabin'], function(cabin) {
                                 var value = ngModel.$viewValue || "";
                                 var checkLength = (value.getDouble() || []).length ? maxLengthDouble : maxLength;
                                 if (value.countLength() > checkLength) {
-                                    while (value.length > checkLength) {
+                                    while (value.countLength() > checkLength) {
                                         value = value.replace(/.$/, '');
                                     }
+
                                     ngModel.$setViewValue(value);
                                     element.val(value);
                                 }

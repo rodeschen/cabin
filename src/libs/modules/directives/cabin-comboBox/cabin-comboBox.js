@@ -287,18 +287,18 @@ define(['cabin'], function() {
                             }
                         }, 50);
                     });
-                    var maxHeight = 0;
-                    $scope.$watch('showList', function(nVal) {
-                        if (maxHeight > 0)
-                            return;
-                        $timeout(function() {
-                            var itemHeight = listContent.find('li:first').outerHeight(true);
-                            if (itemHeight) {
-                                maxHeight = (itemHeight * $scope.comboViewItems) + 8;
-                                listContent.css('maxHeight', maxHeight);
-                            }
-                        }, 50);
-                    });
+                    // var maxHeight = 0;
+                    // $scope.$watch('showList', function(nVal) {
+                    //     if (maxHeight > 0)
+                    //         return;
+                    //     $timeout(function() {
+                    //         var itemHeight = listContent.find('li:first').outerHeight(true);
+                    //         if (itemHeight) {
+                    //             maxHeight = (itemHeight * $scope.comboViewItems) + 8;
+                    //             listContent.css('maxHeight', maxHeight);
+                    //         }
+                    //     }, 50);
+                    // });
 
                 }
             };

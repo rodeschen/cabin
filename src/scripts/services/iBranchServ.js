@@ -233,7 +233,7 @@ define(['cabin'], function(cabin) {
                     $timeout(querySup, 10000);
                 };
 
-            }) //();
+            })();
             return funcs;
         }
     ]];

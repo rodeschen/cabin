@@ -174,7 +174,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                         case 13:
                             $rootScope.$broadcast("keydown.enter");
                         case 84:
-                            if (e.ctrlKey) {
+                            if (e.ctrlKey && e.altKey) {
                                 cbOpenTxnModal.open();
                             }
                             break;

@@ -10,13 +10,13 @@
         </div>
         <div class="col-2">
             <!-- validator="focus-readMsr" -->
-            <input ng-model="data.110320_ACNO_SA" type="text" required ng-readonly="data.110320_PB_LINE" validator="focus-readMsr" />
+            <input ng-model="data.110320_ACNO_SA" type="text" required ng-readonly="data.110320_PB_LINE" validator="focus-readMsr" autocomplete="off" cb-focus="true"/>
         </div>
         <div class="col-2">
             <span class="title">戶　　名</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.110320_NAME1" disabled="disabled" type="text" validator/>
+            <input ng-model="data.110320_NAME1" disabled="disabled" type="text" validator autocomplete="off"/>
         </div>
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
             <span class="title">轉帳金額</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.AMT1" type="text" cb-mask-number required validator/>
+            <input ng-model="data.AMT1" type="text" cb-mask-number required validator autocomplete="off"/>
         </div>
         <div ng-show="data.110320_PB_NO">
             <div class="col-2">
@@ -32,7 +32,7 @@
             </div>
 
             <div class="col-2">
-                <input ng-model="data.110320_PB_NO" disabled="disabled" type="text" validator/>
+                <input ng-model="data.110320_PB_NO" disabled="disabled" type="text" validator autocomplete="off"/>
                <!--  <input ng-model="data.110320_PB_LINE"  type="text" validator/> -->
             </div>
         </div>
@@ -42,7 +42,7 @@
             <span class="title">提款密碼輸入註記</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.110320_WD_PWD_FLG" type="text" required cb-combo-box combo-key="txn110320.WD_PWD_FLG" validator/>
+            <input ng-model="data.110320_WD_PWD_FLG" type="text" required cb-combo-box combo-key="txn110320.WD_PWD_FLG" validator autocomplete="off"/>
         </div>
         <div ng-show="data.110320_WD_PWD_FLG == '1' || data.110320_WD_PWD_FLG == '2'">
             <div class="col-2">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="col-1">
-                <input ng-model="data.110320_WD_PSW" maxlength="4" ng-required="data.110320_WD_PWD_FLG != '3'" type="password" validator/>
+                <input ng-model="data.110320_WD_PSW" maxlength="4" ng-required="data.110320_WD_PWD_FLG != '3'" type="password" validator autocomplete="off"/>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
             <span class="title">項　　目</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.110320_ITEM" type="text" cb-combo-box combo-key="txn110320.ITEM" validator/>
+            <input ng-model="data.110320_ITEM" type="text" cb-combo-box combo-key="txn110320.ITEM" validator autocomplete="off"/>
         </div>
     </div>
     <div class="row">
@@ -67,42 +67,10 @@
             <span class="title">轉出附註</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.110320_REF" type="text" cb-maxlength="16" cb-maxlength-double="7" validator maxlength="16"/>{{data.110320_REF}}
+            <input ng-model="data.110320_REF" type="text" cb-maxlength="16" cb-maxlength-double="7" validator maxlength="16" autocomplete="off"/>
         </div>
     </div>
 
-    <!--  <div class="hidden row">
-        <div class="col-2">
-            <span class="title">存摺餘額</span>
-        </div>
-        <div class="col-3">
-            <input ng-model="data.110320_PB_BAL" class="large" cb-mask-number type="text" validator/>
-        </div>
-        <div class="col-2">
-            <span class="title">交易摘要</span>
-        </div>
-        <div class="col-2">
-            <input ng-model="data.110320_MEMO" type="text" validator/>
-        </div>
-        <div class="col-2">
-            <span class="title">存摺行數</span>
-        </div>
-        <div class="col-5">
-            <input ng-model="data.110320_PB_LINE" type="text" class="large" validator/>
-        </div>
-        <div class="col-2">
-            <span class="title">轉帳代碼</span>
-        </div>
-        <div class="col-5">
-            <input ng-model="data.110320_TRN_CODE" type="text" validator/>
-        </div>
-        <div class="col-2">
-            <span class="title">摺 號</span>
-        </div>
-        <div class="col-2">
-            <input ng-model="data.110320_PB_NO" type="text" validator/>
-        </div>
-    </div> -->
     <div class="row">
         &nbsp;
     </div>
@@ -117,13 +85,13 @@
             <span class="title">轉入帳號</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.110220_ACNO_SA" required type="text" validator="ACNOVal,txn000045ACNOVal" maxlength="12" />
+            <input ng-model="data.110220_ACNO_SA" required type="text" validator="ACNOVal,txn000045ACNOVal" maxlength="12"   autocomplete="off"/>
         </div>
         <div class="col-2">
             <span class="title">戶　　名</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.110220_NAME1" disabled="disabled" type="text" validator/>
+            <input ng-model="data.110220_NAME1" disabled="disabled" type="text" validator autocomplete="off"/>
         </div>
     </div>
     <div class="row">
@@ -131,7 +99,7 @@
             <span class="title">轉入附註</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.110220_REF" type="text" validator/>
+            <input ng-model="data.110220_REF" type="text" validator autocomplete="off"/>
         </div>
     </div>
 
@@ -140,7 +108,7 @@
             <span class="title">起 息 日</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.INT_DATE" ng-init="data.INT_DATE=getToday()" required class="medium" cb-mask-tw-date convert-to-ad="true" type="text" validator/>
+            <input ng-model="data.INT_DATE" ng-init="data.INT_DATE=getToday()" required class="medium" cb-mask-tw-date convert-to-ad="true" type="text" validator autocomplete="off"/>
         </div>
     </div>
     <div class="row">
@@ -148,7 +116,7 @@
             <span class="title">關懷提問</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.110220_CARE_ASK" type="text" cb-combo-box combo-key="txn110320.ITEM" validator/>
+            <input ng-model="data.110220_TA_REMARK1" type="text" cb-combo-box combo-key="txn110220.CARE_ASK" validator autocomplete="off"/>
         </div>
     </div>
 </div>

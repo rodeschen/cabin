@@ -557,4 +557,16 @@ header {
   cursor: pointer;
 }
 
+.visibleoff{
+  visibility: hidden;
+}
+
+.hidden-submit{
+  position: absolute;
+  z-index: -100;
+  left:-10000px;
+  top:-10000px;
+
+}
+
 @import "append";
