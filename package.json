@@ -46,7 +46,9 @@
     "node.extend": "1.0.9",
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-ngmin": "~0.0.3",
-    "grunt-string-replace" : "~0.2.7"
+    "grunt-string-replace" : "~0.2.7",
+    "grunt-contrib-compress": "0.10.0",
+    "grunt-ftp-push" : "0.2.4"
   },
   "engines": {
     "node": ">=0.8.0"

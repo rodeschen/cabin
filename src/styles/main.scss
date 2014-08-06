@@ -25,6 +25,11 @@
   @include box-sizing(border-box);
 }
 
+//remove ie clear button
+::-ms-clear {
+  display: none;
+}
+
 /*
  Keep in mind that you want to combine both CSS
  classes together to avoid any CSS-specificity
@@ -48,6 +53,7 @@ hide unready
 html {
   height: 100%;
 }
+
 body * {
   font-family: "Noto Sans T Chinese", "FontAwesome", "Lato", sans-serif !important;
 }
@@ -58,7 +64,6 @@ body {
   &.is-login {
     background-color: #bac1c8;
   }
-  
   min-width: 1024px;
   @include at-breakpoint($mobile) {
     font-size: 12px;
@@ -371,7 +376,6 @@ header {
   }
 }
 
-
 .btn_120606 {
   @include isolate(2);
   @include span-columns(5);
@@ -403,7 +407,7 @@ header {
       background: url(../images/120606.png) no-repeat;
       background-size: 40px;
       left: -44px;
-      top:-12px;
+      top: -12px;
     }
   }
 }
@@ -445,7 +449,7 @@ header {
       background: url(../images/000045.png) no-repeat;
       background-size: 40px;
       left: -44px;
-      top:-12px;
+      top: -12px;
     }
   }
 }
@@ -456,8 +460,6 @@ header {
   color: #ffffff;
   text-decoration: none;
 }
-
-
 
 .btn_032671 {
   @include isolate(2);
@@ -489,7 +491,7 @@ header {
       background: url(../images/032671.png) no-repeat;
       background-size: 40px;
       left: -44px;
-      top:-12px;
+      top: -12px;
     }
   }
 }
@@ -531,7 +533,7 @@ header {
       background: url(../images/092654.png) no-repeat;
       background-size: 40px;
       left: -44px;
-      top:-12px;
+      top: -12px;
     }
   }
 }
@@ -557,16 +559,15 @@ header {
   cursor: pointer;
 }
 
-.visibleoff{
+.visibleoff {
   visibility: hidden;
 }
 
-.hidden-submit{
+.hidden-submit {
   position: absolute;
   z-index: -100;
-  left:-10000px;
-  top:-10000px;
-
+  left: -10000px;
+  top: -10000px;
 }
 
 @import "append";

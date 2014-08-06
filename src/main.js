@@ -28,7 +28,8 @@ var properties = {
     txnViewRootPath: 'scripts/page/',
     txnScriptRootPath: 'scripts/page/',
     comboBoxCache: false,
-    defWebSocketURI: 'http://' + window.location.hostname + ':9092'
+    defWebSocketURI: 'http://' + window.location.hostname + ':9092',
+    deviceAgentHost: '10.204.1.67:9980'
 };
 
 require.config({
@@ -93,6 +94,10 @@ if (!Array.prototype.reduce) {
 
         return rv;
     };
+}
+
+if (!window.location.origin) {
+    window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
 }
 
 if (!window.console) {

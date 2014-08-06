@@ -12,7 +12,7 @@ define(['cabin'], function(cabin) {
 
                         var messages = [];
                         if ($scope.ovMsg) {
-                            messages.push($scope.ovMsg.replace(/<br\/?>/g, ""));
+                            messages = messages.concat($scope.ovMsg.replace(/<br\/?>/g, "").split(","));
                         }
                         if ($scope.txnMsg) {
                             messages.push($scope.txnMsg.replace(/<br\/?>/g, ""));

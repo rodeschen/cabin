@@ -595,6 +595,33 @@ module.exports = function(grunt) {
                 }
             }
         },
+        compress: {
+            poc: {
+                options: {
+                    mode: 'tar',
+                    archive: 'archive/cabin.tar'
+                },
+                expand: true,
+                cwd: '<%= yeoman.dist %>/',
+                src: ['**/*']
+            }
+        },
+        'ftp_push': {
+            poc: {
+                options: {
+                    username: "root",
+                    password: "root",
+                    host: "172.16.240.6",
+                    dest: "/WebSphere/IISI/installedApps/IISIode01Cell/iBranchApp.ear/iBranchApp.war/",
+                    port: 21
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'archive/',
+                    src: ['cabin.tar']
+                }]
+            }
+        },
         requirejs: {
             compile: {
                 options: {
@@ -749,6 +776,12 @@ module.exports = function(grunt) {
         ]);
         //
     });
+
+    grunt.registerTask('buildpocpush', [
+        'buildpoc',
+        'compress:poc',
+        'ftp_push:poc'
+    ]);
 
     grunt.registerTask('default', [
         'jshint',

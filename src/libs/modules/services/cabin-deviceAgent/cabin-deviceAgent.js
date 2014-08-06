@@ -68,7 +68,9 @@ define(['cabin'], function(cabin) {
             //       console.log("Error")
             //     }
             // });
-            var url = "http://10.204.1.63:9980/deviceagent/xmlrpc";
+            //var url = "http://10.204.1.63:9980/deviceagent/xmlrpc";
+            //var url = "http://127.0.0.1:9980/deviceagent/xmlrpc";
+            var url = "http://" + properties.deviceAgentHost + "/deviceagent/xmlrpc";
             // var url = "http://192.168.221.111:9980/deviceagent/xmlrpc";
             // var url = "http://192.168.221.129:9980/deviceagent/xmlrpc";
             // $.xmlrpc(url, {
@@ -209,7 +211,7 @@ define(['cabin'], function(cabin) {
                             //deferred.reject("deviceAgent print error");
                         });
                     }).error(function(xhr) {
-                        modal.deactivate();
+                        cbCommonModal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         //relase
                         deferred.reject("deviceAgent obtainSession error");
@@ -237,7 +239,8 @@ define(['cabin'], function(cabin) {
                         allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
                         var sessionId = data;
                         //print
-                        deviceAction(methods.print, [sessionId, "[PDF]http://10.204.1.63" + url, "", "12", "5"]).success(function() {
+                        //console.log("XXXX" , "[PDF]" + window.location.origin + url);
+                        deviceAction(methods.print, [sessionId, "[PDF]" + window.location.origin + url, "", "12", "5"]).success(function() {
                             //relase
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         }).error(function(xhr) {
@@ -247,7 +250,7 @@ define(['cabin'], function(cabin) {
                             //deferred.reject("deviceAgent print error");
                         });
                     }).error(function(xhr) {
-                        modal.deactivate();
+                        cbCommonModal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         //relase
                         deferred.reject("deviceAgent obtainSession error");
@@ -281,7 +284,7 @@ define(['cabin'], function(cabin) {
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
-                        modal.deactivate();
+                        cbCommonModal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         deferred.reject("deviceAgent obtainSession error");
                     });
@@ -305,7 +308,7 @@ define(['cabin'], function(cabin) {
                             allAction.releaseSession(sessionId, deferred, "", prefix);
                         });
                     }).error(function(xhr) {
-                        modal.deactivate();
+                        cbCommonModal.deactivate();
                         console.error("deviceAgent obtainSession error");
                         deferred.reject("deviceAgent obtainSession error");
                     });

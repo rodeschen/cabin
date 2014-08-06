@@ -8,7 +8,8 @@ define(['cabin'], function(cabin) {
                 priority: 2,
                 link: function(scope, element, attrs, ngModel) {
                     // var negative =
-                    var fraction = parseInt(attrs.fraction || 4);
+                    var integer = parseInt(attrs.integer || 13)
+                    var fraction = parseInt(attrs.fraction || 0);
                     var charPos = 0;
                     var currentPos = 0;
                     var negative = attrs.negative === 'Y'
@@ -45,10 +46,11 @@ define(['cabin'], function(cabin) {
                             return false;
                         }
 
+
                         if (189 == e.which && (!negative || currentPos != 0 || /^-/.test(val))) {
                             return false;
                         }
-                        if (e.which === 190 && this.value.indexOf(".") > 0) {
+                        if (e.which === 190 && (this.value.indexOf(".") > 0 || fraction == 0)) {
                             return false;
                         }
                         //fix: alaways to parse 修正重復輸入時不會執行format資料
@@ -93,7 +95,7 @@ define(['cabin'], function(cabin) {
                         }
                         var currencyValue,
                             dotSplit = clean.split('.');
-                            // todo: refactor, this is ugly
+                        // todo: refactor, this is ugly
                         if (clean[clean.length - 1] === '.') {
                             currencyValue = /*'$' +*/ $filter('number')(parseFloat(clean, 10)) + '.';
                         } else if (clean.indexOf('.') != -1 && dotSplit[dotSplit.length - 1].length) {

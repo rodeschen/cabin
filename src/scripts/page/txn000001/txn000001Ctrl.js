@@ -48,15 +48,21 @@ define(['cabin'], function(cabin) {
                 }, {
                     name: '交易代號',
                     width: 70,
+                    formatter: function(value) {
+                        if (value == '110000') {
+                            return '110220';
+                        }
+                        return value;
+                    }
                 }, {
                     name: '批號',
-                    width: 400
+                    width: 70
                 }, {
                     name: '交易序號',
                     width: 70
                 }, {
                     name: '帳號(ID)',
-                    width: 70
+                    width: 100
                 }, {
                     name: '交易金額',
                     width: 70,

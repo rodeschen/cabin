@@ -10,7 +10,8 @@
         </div>
         <div class="col-2">
             <!-- validator="focus-readMsr" -->
-            <input ng-model="data.110320_ACNO_SA" type="text" required ng-readonly="data.110320_PB_LINE" validator="focus-readMsr" autocomplete="off" cb-focus="true"/>
+            <!-- <input ng-model="data.110320_ACNO_SA" type="text" required ng-readonly="data.110320_PB_LINE" validator="focus-readMsr,ACNOVal,txn000045ACNOVal" autocomplete="off"  maxlength="12"  cb-focus="true" /> -->
+            <input ng-model="data.110320_ACNO_SA" type="text" required ng-readonly="data.110320_PB_LINE" validator="focus-readMsr,ACNOVal,txn000045ACNOVal" autocomplete="off"  maxlength="12"  cb-focus="true" />
         </div>
         <div class="col-2">
             <span class="title">戶　　名</span>
@@ -67,7 +68,7 @@
             <span class="title">轉出附註</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.110320_REF" type="text" cb-maxlength="16" cb-maxlength-double="7" validator maxlength="16" autocomplete="off"/>
+            <input ng-model="data.110320_REF" cb-mask-to-full  type="text" cb-maxlength="16" cb-maxlength-double="7" validator maxlength="16" autocomplete="off"/>
         </div>
     </div>
 
@@ -99,7 +100,7 @@
             <span class="title">轉入附註</span>
         </div>
         <div class="col-5">
-            <input ng-model="data.110220_REF" type="text" validator autocomplete="off"/>
+            <input ng-model="data.110220_REF" cb-mask-to-full  type="text" validator autocomplete="off"/>
         </div>
     </div>
 
