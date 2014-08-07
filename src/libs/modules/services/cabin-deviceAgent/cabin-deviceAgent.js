@@ -144,6 +144,8 @@ define(['cabin'], function(cabin) {
                 decode: "tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.decode",
                 // param ['sessionId',":20016801378622373500000054595000112340","",2,eject(true or false)]                
                 encode: "tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.encode",
+                // param ['sessionId']                
+                abort: "tw.com.iisi.deviceagent.xmlrpc.pbprinter.PbPrinterServiceInterface.abort"
             };
 
             //create Service
@@ -257,21 +259,32 @@ define(['cabin'], function(cabin) {
                     });
                     return deferred.promise;
                 },
+                abort: function(sessionId, deferred, prefix) {
+                    deviceAction(methods.abort, [sessionId]).success(function(data) {
+                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
+                        allAction.releaseSession(sessionId, deferred, "", prefix);
+                    }).error(function(xhr) {
+                        cbCommonModal.deactivate();
+                        console.error("deviceAgent abort error");
+                        //relase
+                        deferred.reject("deviceAgent abort error");
+                    });
+                },
                 decode: function(eject, prompt, prefix) {
                     var deferred = $q.defer();
                     //obtainSession
                     var modId;
                     deviceAction(methods.obtainSession, []).success(function(data) {
                         allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入存褶..."), true);
-                        // angular.element($document).on('keydown.decode', function(e) {
-                        //     $rootScope.$apply(function() {
-                        //         if (e.which == 27) {
-                        //             allAction.releaseSession(sessionId, deferred, data, prefix);
-                        //             //cbCommonModal.deactivate(allAction.modalId);
-                        //         }
-                        //     });
-                        // });
                         var sessionId = data;
+                        angular.element($document).on('keydown.decode', function(e) {
+                            $rootScope.$apply(function() {
+                                if (e.which == 27) {
+                                    allAction.abort(sessionId, deferred, prefix);
+                                    angular.element($document).off('keydown.decode');
+                                }
+                            });
+                        });
                         //decode
                         deviceAction(methods.decode, [sessionId, "", 2, eject]).success(function(data) {
                             console.log('decodeData', data)

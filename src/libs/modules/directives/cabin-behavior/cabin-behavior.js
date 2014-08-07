@@ -315,7 +315,7 @@ define(['cabin'], function(cabin) {
                             function(v) {
                                 $timeout(function() {
                                     v && element.focus();
-                                }, 400);
+                                }, 700);
                             });
                     }
                 };

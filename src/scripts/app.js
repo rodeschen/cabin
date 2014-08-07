@@ -53,8 +53,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                     url: '^/txn/{id:[^/]+}/{data:[^/]+}',
                     resolve: {
                         userServ: ['userServ',
-                            function(user) {
-                            }
+                            function(user) {}
                         ]
                     },
                     controller: ['$stateParams', '$scope',
@@ -129,7 +128,9 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                         'response': function(response) {
                             var url = response.config.url;
                             if (url == '/iBranchApp/json') {
-                                console.log('response', response);
+                                if (response.config.data.indexOf("OVQUERY") != -1) {
+                                    console.log('response', response);
+                                }
                                 if (angular.isArray(response.data)) {
                                     response.data = response.data[0].poc;
                                     //如果交易狀態為2及 reject 交易

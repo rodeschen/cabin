@@ -42,7 +42,7 @@
             <nav class="buttons">
                 <ul>
                     <li class="hint--bottom" data-hint="日誌">
-                        <a href="" class="icon icon-booklet" ui-sref="txn({id:'000001'})"></a>
+                        <a href="" class="icon icon-booklet" ui-sref="txn({id:'000001'})"><div class="calender">{{currentTime | date:'dd'}}</div></a>
                     </li>
                     <li class="hint--bottom" data-hint="授權">
                         <a href="" class="icon icon-security" ng-click="hasOV && openSupModal()">
