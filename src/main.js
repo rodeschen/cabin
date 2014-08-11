@@ -31,7 +31,7 @@ var properties = {
     defWebSocketURI: 'http://' + window.location.hostname + ':9092',
     deviceAgentHost: '10.204.1.67:9980'
     //deviceAgentHost: '127.0.0.1:9980'
-    // deviceAgentHost: '10.204.1.63:9980'
+    //deviceAgentHost: '10.204.1.63:9980'
 };
 
 require.config({
@@ -59,6 +59,7 @@ require(['libs', 'cabin', 'cabin-libs', 'app', 'txn-validations', 'http-mock'], 
     var cabin = arguments[arguments.length - 1];
     angular.bootstrap(window.document, ['cabin']);
     console.log('app Initialized');
+    
 });
 
 

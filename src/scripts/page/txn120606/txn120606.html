@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-2">
-            <span class="title">身份証號</span>
+            <span class="title">身分證號</span>
         </div>
         <div class="col-2">
             <input ng-model="data.IDNO" required type="text" cb-mask-to-upper-case validator="taiwanId" maxlength="10" autocomplete="off"/>
@@ -18,7 +18,7 @@
     </div>
     <div class="row">
         <div class="col-2">
-            <span class="title">列印分行</span>
+            <span class="title">列 印 別</span>
         </div>
         <div class="col-2">
             <input ng-model="data.PRT_FLG" type="text" cb-combo-box combo-key="txn120606.PRT_FLG" edit="true" combo-view-items="3" validator autocomplete="off"/>
@@ -71,7 +71,7 @@
     </div>
     <div class="row">
         <div class="col-2">
-            <span class="title">印錄文件</span>
+            <span class="title">印錄文字</span>
         </div>
         <div class="col-2">
             <input ng-model="data.P_WORD" type="text" required cb-mask-to-upper-case cb-combo-box combo-key="txn120606.P_WORD" edit="true" validator autocomplete="off"/>
@@ -162,7 +162,7 @@
             <span class="title">戶　　名</span>
         </div>
         <div class="col-5">
-            <input type="text" ng-model="data.NAME" cb-mask-to-full validator autocomplete="off"/>
+            <input type="text" ng-model="data.NAME" disabled="disabeld" cb-mask-to-full validator autocomplete="off"/>
         </div>
 
     </div>

@@ -1,5 +1,5 @@
 <div class="page-context loginPage" ng-controller="txn000001Ctrl">
-    <h6>EJ查詢(000001)</h6>
+    <h6>電子日誌查詢(000001)</h6>
     <div class="row">
         <div class="col-2">
             <span class="title">交易行</span>
@@ -11,7 +11,7 @@
             <span class="title">交易狀態</span>
         </div>
         <div class="col-2">
-            <input ng-model="data.TxnStatus" type="text" validator autocomplete="off"/>
+            <input ng-model="data.TxnStatus" type="text" validator autocomplete="off" cb-combo-box combo-key="txn000001.TxnStatus"/>
         </div>
         <div class="col-2">
             <span class="title">金　　額</span>
@@ -25,7 +25,7 @@
             <span class="title">員工編號</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.UserID" type="text" validator="" autocomplete="off"/>
+            <input ng-model="data.UserID" type="text" validator="" ng-init="data.UserID=user.userId" autocomplete="off"/>
         </div>
         <div class="col-2">
             <span class="title">主管編號</span>

@@ -26,7 +26,7 @@ define(['cabin'], function(cabin) {
                     name: '帳戶號碼',
                     width: 70
                 }, {
-                    name: '黃金存摺列印',
+                    name: '黃金存摺餘額證明列印',
                     width: 70,
                     formatter: function(value, allValue) {
                         return $sce.trustAsHtml("連動120606交易");

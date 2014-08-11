@@ -46,7 +46,7 @@ $top-menu-font-color-ative: white !default;
     }
     &.buttons {
       @include isolate(1);
-      @include span-columns(4);
+      @include span-columns(6);
       overflow: inherit;
       float: right;
       right: 50px;

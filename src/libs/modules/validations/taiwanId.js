@@ -14,9 +14,11 @@ define(['cabin'], function(cabin) {
                     sum += value.substr(i, 1) * (9 - i);
                 }
                 var res = (((checkNum == 0) && checkNum == (sum % 10)) || ((checkNum != 0) && ((10 - (sum % 10)) == checkNum)));
+            }else{
+                return "輸請入 8 或 10 位";
             }
             if (!res) {
-                return "身分証字號錯誤";
+                return "身分證錯誤";
             }
             return true;
         }

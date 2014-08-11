@@ -178,6 +178,12 @@ define(['cabin'], function(cabin) {
                         function parse(viewValue, noRender) {
                             //rodes fix input method issue
                             if (viewValue) {
+                                if (!/^[0-9]{7}$/.test(viewValue)) {
+                                    ngModel.$setValidity('cbTwDateFormat', false);
+                                    return viewValue;
+                                } else {
+                                    ngModel.$setValidity('cbTwDateFormat', true);
+                                }
                                 ngModel.$setValidity('cbTwDate', cbUtils.validDate(viewValue, true));
                                 viewValue = viewValue.replace(/\//g, "");
                                 if (convertToAd) {
@@ -187,6 +193,7 @@ define(['cabin'], function(cabin) {
                                     ngModel.$render();
 
                                 which = -1;
+
                             }
                             return viewValue;
                         }

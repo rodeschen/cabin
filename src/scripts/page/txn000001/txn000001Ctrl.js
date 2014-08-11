@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['controller', 'txn000001Ctrl', ['$scope', 'txn000001Serv', '$q', '$timeout', '$resource', '$filter', 'iBranchServ', 'cbUtils', 'cbEjContextModal',
-        function($scope, serv, $q, $timeout, $resource, $filter, iBranchServ, cbUtils, cbEjContextModal) {
+    return ['controller', 'txn000001Ctrl', ['$scope', 'txn000001Serv', '$q', '$timeout', '$resource', '$filter', 'iBranchServ', 'cbUtils', 'cbEjContextModal', 'userServ',
+        function($scope, serv, $q, $timeout, $resource, $filter, iBranchServ, cbUtils, cbEjContextModal, userServ) {
             angular.extend($scope, {
                 getToday: function() {
                     return $filter('date')(new Date, 'yyyyMMdd');
@@ -14,6 +14,7 @@ define(['cabin'], function(cabin) {
                 }
             });
 
+            $scope.user = userServ.getUser();
 
             $scope.gridSettings = {
                 height: 250,
@@ -61,7 +62,7 @@ define(['cabin'], function(cabin) {
                     name: '交易序號',
                     width: 70
                 }, {
-                    name: '帳號(ID)',
+                    name: '帳號',
                     width: 100
                 }, {
                     name: '交易金額',
@@ -73,7 +74,18 @@ define(['cabin'], function(cabin) {
                     }
                 }, {
                     name: '交易狀態',
-                    width: 70
+                    width: 70,
+                    formatter: function(value) {
+                        switch (value) {
+                            case 'NC':
+                                return '未完成';
+                            case 'RJ':
+                                return '失敗';
+                            case 'AC':
+                                return '成功';
+                        }
+                        return value;
+                    }
                 }, {
                     name: '授權主管代號',
                     width: 100

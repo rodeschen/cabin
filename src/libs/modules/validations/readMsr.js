@@ -3,7 +3,7 @@ define(['cabin'], function(cabin) {
     return ['validation', ['value', 'ngModel', 'allValue', 'cbDeviceAgentSrv', 'element',
         function(value, ngModel, allValue, cbDeviceAgentSrv, element) {
             if (value) return true;
-            cbDeviceAgentSrv.decode(true, "", "").then(function(data) {
+            cbDeviceAgentSrv.decode(false, "", "").then(function(data) {
                 console.log('msrRed:', data);
                 var x = data;
                 if (x.indexOf("A") != -1) {

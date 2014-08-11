@@ -20,16 +20,17 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                             function(user) {}
                         ]
                     },
-                    controller: ['$scope', '$timeout',
-                        function($scope, $timeout) {
-                            $timeout(function() {
-                                $scope.$emit('broadcast', {
-                                    event: 'pageViewer',
-                                    page: {
-                                        url: 'favorite'
-                                    }
-                                });
-                            }, 0);
+                    controller: ['$scope', '$timeout', 'cbDeviceAgentSrv',
+                        function($scope, $timeout, cbDeviceAgentSrv) {
+                            cbDeviceAgentSrv.eject();
+                            // $timeout(function() {
+                            //     $scope.$emit('broadcast', {
+                            //         event: 'pageViewer',
+                            //         page: {
+                            //             url: 'favorite'
+                            //         }
+                            //     });
+                            // }, 0);
                         }
                     ]
                 }).state('txn', {
@@ -39,8 +40,9 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                             function(user) {}
                         ]
                     },
-                    controller: ['$stateParams', '$scope',
-                        function($stateParams, $scope) {
+                    controller: ['$stateParams', '$scope', 'cbDeviceAgentSrv',
+                        function($stateParams, $scope, cbDeviceAgentSrv) {
+                            cbDeviceAgentSrv.eject();
                             $scope.$emit('broadcast', {
                                 event: 'pageViewer',
                                 page: {
@@ -128,7 +130,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                         'response': function(response) {
                             var url = response.config.url;
                             if (url == '/iBranchApp/json') {
-                                if (response.config.data.indexOf("OVQUERY") != -1) {
+                                if (response.config.data.indexOf("OVQUERY") == -1) {
                                     console.log('response', response);
                                 }
                                 if (angular.isArray(response.data)) {
@@ -156,8 +158,8 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 }
             ]);
         }
-    ]).run(['$rootScope', '$window', '$http', 'properties', 'cbWebSocketIoServ', 'cbDeviceAgentSrv', '$document', 'cbOpenTxnModal',
-        function($rootScope, $window, $http, properties, cbWebSocketIoServ, cbDeviceAgentSrv, $document, cbOpenTxnModal) {
+    ]).run(['$rootScope', '$window', '$http', 'properties', 'cbWebSocketIoServ', 'cbDeviceAgentSrv', '$document', 'cbOpenTxnModal', '$state',
+        function($rootScope, $window, $http, properties, cbWebSocketIoServ, cbDeviceAgentSrv, $document, cbOpenTxnModal, $state) {
             $rootScope.$on('broadcast', function(ev, args) {
                 //console.log('broadcast', args);
                 $rootScope.$broadcast(args.event, args);
@@ -174,11 +176,17 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                             break;
                         case 13:
                             $rootScope.$broadcast("keydown.enter");
+                            break;
                         case 84:
                             if (e.ctrlKey && e.altKey) {
                                 cbOpenTxnModal.open();
                             }
                             break;
+                        case 81:
+                            if (e.ctrlKey && e.altKey) {
+                                $state.go('index');
+                            }
+
                     }
                 });
             });

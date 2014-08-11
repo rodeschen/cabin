@@ -35,7 +35,7 @@ define(['cabin'], function(cabin) {
                     });
 
                     http.then(function(xhr) {
-                        console.log(txnId, "response", xhr.data);
+                        //console.log(txnId, "response", xhr.data);
                         var respData = xhr.data;
                         funcs.txnSuccess(respData, sendData);
                     }, function(xhr) {
@@ -139,7 +139,7 @@ define(['cabin'], function(cabin) {
                             console.log("sCONFIRM");
                             var modal = $injector.get('cbCommonModal');
                             modal.activate({
-                                message: "客戶有待辦事項，是否需要列印?",
+                                message: "客戶有待辦事項，是否需要列印?<br/><pre>" + job.DATA + "</pre>",
                                 deferred: job.deferred,
                                 buttons: [{
                                     name: '取消',
@@ -173,8 +173,10 @@ define(['cabin'], function(cabin) {
                             return cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId);
                             break;
                         case 'MSR':
-                            console.log("sMSR");
-                            return cbDeviceAgentSrv.encode(job.DATA, true, job.PROMPT, job.txnId)
+                            defer.resolve();
+                            return defer.promise;
+                            // console.log("sMSR");
+                            // return cbDeviceAgentSrv.encode(job.DATA, true, job.PROMPT, job.txnId)
                             break;
                         case 'PDF':
                             console.log("sPDF");
@@ -227,10 +229,10 @@ define(['cabin'], function(cabin) {
                             $rootScope.hasOV = false;
                         }
                     }).finally(function() {
-                        $timeout(querySup, 10000);
+                        $timeout(querySup, 5000);
                     });
                 } else {
-                    $timeout(querySup, 10000);
+                    $timeout(querySup, 5000);
                 };
 
             })();

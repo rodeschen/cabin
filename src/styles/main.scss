@@ -314,7 +314,7 @@ $top-menu-font-color-ative: white !default;
     }
     &.buttons {
       @include isolate(1);
-      @include span-columns(5);
+      @include span-columns(6);
       overflow: inherit;
       float: right;
       right: 50px;
@@ -379,7 +379,7 @@ header {
 .btn_120606 {
   @include isolate(2);
   @include span-columns(5);
-  background-color: #455a64;
+  background-color: #d84315;//#455a64;
   //background: #5ad8f8;
   // background-image: -webkit-linear-gradient(top, #5ad8f8, #0c7ba4);
   // background-image: -moz-linear-gradient(top, #5ad8f8, #0c7ba4);
@@ -414,7 +414,7 @@ header {
 
 .btn_120606:hover {
   //background: #2371ad;
-  background-color: #546e7a;
+  background-color: #f4511e;//#546e7a;
   color: #ffffff;
   text-decoration: none;
 }
@@ -464,7 +464,7 @@ header {
 .btn_032671 {
   @include isolate(2);
   @include span-columns(5);
-  background-color: #00695c;
+  background-color: #827717;//#00695c;
   color: #FFF;
   //background: #6ef7c8;
   // background-image: -webkit-linear-gradient(top, #6ef7c8, #22c19d);
@@ -498,7 +498,7 @@ header {
 
 .btn_032671:hover {
   //background: #21b080;
-  background-color: #00796b;
+  background-color: #9e9d24;//#00796b;
   color: #ffffff;
   text-decoration: none;
 }
@@ -506,7 +506,7 @@ header {
 .btn_092654 {
   @include isolate(1);
   @include span-columns(5);
-  background-color: #d84315;
+  background-color: #827717;//#d84315;
   color: #FFF;
   //background: #6ef7c8;
   // background-image: -webkit-linear-gradient(top, #6ef7c8, #22c19d);
@@ -540,7 +540,7 @@ header {
 
 .btn_092654:hover {
   //background: #21b080;
-  background-color: #f4511e;
+  background-color: #9e9d24;//#f4511e;
   color: #ffffff;
   text-decoration: none;
 }
@@ -548,6 +548,8 @@ header {
 .favorite {
   .table {
     height: 400px;
+    width: 90%;
+    margin: 0px auto;
   }
 }
 

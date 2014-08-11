@@ -172,6 +172,16 @@ define(['cabin'], function(cabin) {
                 }, {
                     'key': '3',
                     'value': '不輸入'
+                }],
+                'txn000001.TxnStatus': [{
+                    'key': 'AC',
+                    'value': '成功'
+                }, {
+                    'key': 'RJ',
+                    'value': '失敗'
+                }, {
+                    'key': 'NC',
+                    'value': '未完成'
                 }]
             }
 

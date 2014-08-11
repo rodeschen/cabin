@@ -88,9 +88,9 @@ define(['cabin'], function(cabin) {
                                 scope.data.hiddenData = "hiddenData";
                                 scope.lock();
                                 iBranchServ.send(txnId, scope.data).then(function(res) {
-                                    scope.unlock();
+                                    //scope.unlock();
                                 }, function() {
-                                    scope.unlock();
+                                    //scope.unlock();
                                 });
                             } else {
                                 console.log(dataForm)
