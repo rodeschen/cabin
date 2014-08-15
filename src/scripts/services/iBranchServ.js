@@ -1,11 +1,11 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['service', 'iBranchServ', ['$rootScope', '$http', '$q', '$injector', '$timeout', 'cbDeviceAgentSrv', '$filter',
-        function($rootScope, $http, $q, $injector, $timeout, cbDeviceAgentSrv, $filter) {
+    return ['service', 'iBranchServ', ['$rootScope', '$http', '$q', '$injector', '$timeout', 'cbDeviceAgentSrv', '$filter', 'localStorageService',
+        function($rootScope, $http, $q, $injector, $timeout, cbDeviceAgentSrv, $filter, localStorageService) {
             //cbDeviceAgentSrv, cbSupeviseRequireModal
             var funcs = {
                 send: function(txnId, data, headerData) {
-                    var testOV = "Y";
+                    var testOV = "N";
                     //remove empty data
                     for (var key in data) {
                         if (data[key] == "") {
@@ -33,13 +33,21 @@ define(['cabin'], function(cabin) {
                         },
                         data: angular.toJson(sendData) // $.param(sendData)
                     });
-
+                    if (txnId != 'OVQUERY') {
+                        localStorageService.set($filter("date")(new Date(), "yyyy/MM/dd,hh:mm:ss") + ':send:' +txnId+ ':' , sendData);
+                    }
                     http.then(function(xhr) {
                         //console.log(txnId, "response", xhr.data);
+                        console.log(xhr);
                         var respData = xhr.data;
+                        var sd = angular.fromJson(xhr.config.data);
+                        if (sd.txnId != "OVQUERY") {
+                            localStorageService.set($filter("date")(new Date(), "yyyy/MM/dd,hh:mm:ss") + ':respppp:'+sd.txnId+':', respData);
+                        }
                         funcs.txnSuccess(respData, sendData);
                     }, function(xhr) {
                         console.log(xhr.data)
+                        localStorageService.set('resp:txnId:error:' + $filter("date")(new Date(), "yyyy/MM/dd,hh:mm:ss"), xhr.data);
                         funcs.sendMessage('error', "[" + txnId + "] " + xhr.data.txnMessage);
                         console.error("send " + txnId + " error :" + xhr.data.txnMessage || "System Error");
                         $rootScope.$broadcast('pageViewer-unlock');
@@ -235,7 +243,7 @@ define(['cabin'], function(cabin) {
                     $timeout(querySup, 5000);
                 };
 
-            })();
+            })//();
             return funcs;
         }
     ]];

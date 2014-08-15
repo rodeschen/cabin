@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$rootScope', '$scope', '$http', '$timeout', '$state', '$interval', 'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ', '$filter', '$injector',
-        function($rootScope, $scope, $http, $timeout, $state, $interval, cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ, $filter, $injector) {
+    return ['$rootScope', '$scope', '$http', '$timeout', '$state', '$interval', 'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ', '$filter', '$injector', 'localStorageService',
+        function($rootScope, $scope, $http, $timeout, $state, $interval, cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ, $filter, $injector, localStorageService) {
             $http.get('basehandler/queryMenu').success(function(data) {
                 $timeout(function() {
                     $scope.$emit('broadcast', {
@@ -95,6 +95,9 @@ define(['cabin'], function(cabin) {
                             type: msgType,
                             message: "ADFADFADSF " + ran
                         });
+                    },
+                    clearLocal: function() {
+                        localStorageService.clearAll();
                     },
                     lock: false,
                     clearMessage: function() {

@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li class="hint--bottom" data-hint="代辦">
-                        <a href="" class="icon icon-compose"></a>
+                        <a href="" class="icon icon-compose" ng-click="clearLocal()"></a>
                     </li>
                     <li class="hint--bottom" data-hint="櫃員帳務查詢">
                         <a href="" class="icon icon-browser" ui-sref="txn({id:'092654'})"></a>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="$state.is('txn') || $state.is('txnInit')" class="toggle" cb-module="cbPageViewer" init-path="favorite" receive-event="pageViewer"></div>
+            <div ng-show="$state.is('txn') || $state.is('txnInit')" class="toggle" cb-module="cbPageViewer" init-path="" receive-event="pageViewer"></div>
         </div>
         <div ng-if="isLogin != undefined && !isLogin" class="slide-top">
             <div class="login">

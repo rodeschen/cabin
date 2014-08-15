@@ -29,9 +29,9 @@ var properties = {
     txnScriptRootPath: 'scripts/page/',
     comboBoxCache: false,
     defWebSocketURI: 'http://' + window.location.hostname + ':9092',
-    deviceAgentHost: '10.204.1.67:9980'
+    //deviceAgentHost: '10.204.1.67:9980'
     //deviceAgentHost: '127.0.0.1:9980'
-    //deviceAgentHost: '10.204.1.63:9980'
+    deviceAgentHost: '10.204.1.63:9980'
 };
 
 require.config({

@@ -7,7 +7,7 @@ define(['cabin'], function(cabin) {
                     'required': '此欄位必填',
                     'cbComboBox': '請選擇正確選項',
                     'cbTwDate': '日期錯誤',
-                    'cbTwDateFormat' : '輸入格式 YYTMMDD'
+                    'cbTwDateFormat' : '輸入格式 YYYMMDD'
                 };
 
                 var validations = defaultValidations;

@@ -36,7 +36,8 @@ define(['cabin'], function(cabin) {
                             'id': '120606',
                             'data': btoa(angular.toJson({
                                 //'ACNO_SA': allValue[1],
-                                'IDNO': $scope.data.INP_DATA
+                                'IDNO': $scope.data.INP_DATA,
+                                'NAME' : encodeURI($scope.name)
                             }))
                         });
                     }
@@ -50,7 +51,8 @@ define(['cabin'], function(cabin) {
                         $state.go('txnInit', {
                             'id': '000045',
                             'data': btoa(angular.toJson({
-                                '110320_ACNO_SA': allValue[1]
+                                '110320_ACNO_SA': allValue[1],
+                                '110320_NAME1' : encodeURI($scope.name)
                             }))
                         });
                     }

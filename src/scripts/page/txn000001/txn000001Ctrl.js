@@ -57,7 +57,7 @@ define(['cabin'], function(cabin) {
                     }
                 }, {
                     name: '批號',
-                    width: 70
+                    width: 50
                 }, {
                     name: '交易序號',
                     width: 70
@@ -92,6 +92,38 @@ define(['cabin'], function(cabin) {
                 }, {
                     name: 'EJ',
                     width: 70
+                }, {
+                    name: '幣別',
+                    width: 70,
+                    formatter: function() {
+                        return '台幣';
+                    }
+                }, {
+                    name: '交易型態',
+                    width: 70,
+                    formatter: function(value, allValue) {
+                        switch (allValue[4]) {
+                            case '110000':
+                                return '轉收';
+                            case '000045':
+                                return '轉帳';
+                            case '110320':
+                                return '轉支';
+                            case '120606':
+                                return '現收';
+                            case '0110':
+                                return '一般';
+                            case '0220':
+                                return '一般';
+                            case '032671':
+                                return '查詢';
+                            case '092661':
+                                return '查詢';
+                            case '092654':
+                                return '查詢';
+                        }
+                        return '';
+                    }
                 }]
             }
 

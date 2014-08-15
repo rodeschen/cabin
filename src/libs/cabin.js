@@ -15,7 +15,8 @@ define('cabin', ['libs'], function() {
         'ui.utils',
         //'validation',
         'btford.socket-io',
-        'btford.modal'
+        'btford.modal',
+        'LocalStorageModule'
     ];
     if (properties.testMode) {
         otherModule = otherModule.concat(['ngMockE2E']);

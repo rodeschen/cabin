@@ -32,10 +32,12 @@
             <div class="col-2">
                 <span class="title">摺　　號</span>
             </div>
-
             <div class="col-2">
                 <input ng-model="data.110320_PB_NO" disabled="disabled" type="text" validator autocomplete="off" />
                 <!--  <input ng-model="data.110320_PB_LINE"  type="text" validator/> -->
+            </div>
+            <div class="col-1">
+                <input ng-model="data.110320_PB_LINE" type="text" validator/>
             </div>
         </div>
     </div>
@@ -112,7 +114,7 @@
             <span class="title">關懷提問</span>
         </div>
         <div class="col-3">
-            <input ng-model="data.110220_TA_REMARK1" type="text" cb-combo-box combo-key="txn110220.CARE_ASK" validator autocomplete="off" />
+            <input ng-model="data.110220_TA_REMARK1" ng-required='data.AMT1>=30000' type="text" cb-combo-box combo-key="txn110220.CARE_ASK" validator autocomplete="off" />
         </div>
     </div>
 </div>

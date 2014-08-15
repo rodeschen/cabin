@@ -51,7 +51,10 @@ define(['cabin'], function(cabin) {
                             scope.includeUrl = "";
                             if (data && data.page && data.page.url) {
                                 scope.isLock = false;
-                                scope.data = angular.fromJson(data.page.data || '{}');
+                                var recData = angular.fromJson(data.page.data || '{}');
+                                recData['110320_NAME1'] && (recData['110320_NAME1'] = decodeURI(recData['110320_NAME1']));
+                                recData['NAME'] && (recData['NAME'] = decodeURI(recData['NAME']));
+                                scope.data = recData;
                                 openPage(data.page.url);
                             }
                         });

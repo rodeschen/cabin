@@ -17,6 +17,7 @@ require.config({
         //'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
 
         'angular-modal': 'libs/components-fixed/angular-modal',
+        'angular-local-storage': 'libs/components/angular-local-storage/angular-local-storage',
 
         //poc
         //deviceAgent
@@ -37,6 +38,7 @@ require.config({
         'angular-ui-utils-hiv': ['angular'],
         'angular-validation' :['angular'],
         'angular-modal': ['angular'],
+        'angular-local-storage' : ['angular'],
        // 'tether': ['tether-utils'],
         //'angular-tooltip': ['angular', 'tether'],
         'xmlRPC': ['jquery']
@@ -56,6 +58,7 @@ define('libs', ['jquery',
     'angular-ui-utils',
     'angular-ui-utils-hiv',
     'angular-validation',
+    'angular-local-storage',
     // 'tether-utils',
     // 'tether',
     //'angular-tooltip',

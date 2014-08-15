@@ -184,42 +184,50 @@ define(['cabin'], function(cabin) {
                 modalId: null,
                 print: function(printData, eject, prompt, prefix) {
                     var deferred = $q.defer();
-                    var modal = null;;
-                    //obtainSession
-                    deviceAction(methods.obtainSession, []).success(function(data) {
-                        modal = allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
-                        sessionId = data;
-                        //print
-                        deviceAction(methods.print, [sessionId, printData, "", "12", "5"]).success(function() {
-                            if (eject) {
-                                modal = allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + "列印中...", true);
-                                //eject
-                                deviceAction(methods.eject, [sessionId]).success(function() {
-                                    //relase
-                                    allAction.releaseSession(sessionId, deferred, "", prefix);
-                                }).error(function(xhr) {
-                                    console.error("deviceAgent returnSession error");
-                                    deferred.reject("deviceAgent returnSession error");
-                                    allAction.releaseSession(sessionId, deferred, "", prefix);
-                                });
-                                decode = false;
-                            } else {
-                                //relase
-                                allAction.releaseSession(sessionId, deferred, "", prefix);
-                            }
-                        }).error(function(xhr) {
-                            //modal.deactivate();
-                            console.error("deviceAgent print error");
-                            //relase
-                            allAction.releaseSession(sessionId, deferred, "", prefix);
-                            //deferred.reject("deviceAgent print error");
-                        });
-                    }).error(function(xhr) {
-                        cbCommonModal.deactivate();
-                        console.error("deviceAgent obtainSession error");
-                        //relase
-                        deferred.reject("deviceAgent obtainSession error");
-                    });
+                    //     var modal = null;;
+                    //     //obtainSession
+                    //     deviceAction(methods.obtainSession, []).success(function(data) {
+                    //         modal = allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
+                    //         sessionId = data;
+                    //         //print
+                    //         deviceAction(methods.print, [sessionId, printData, "", "12", "5"]).success(function() {
+                    //             if (eject) {
+                    //                 modal = allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + "列印中...", true);
+                    //                 //eject
+                    //                 deviceAction(methods.eject, [sessionId]).success(function() {
+                    //                     //relase
+                    //                     allAction.releaseSession(sessionId, deferred, "", prefix);
+                    //                 }).error(function(xhr) {
+                    //                     console.error("deviceAgent returnSession error");
+                    //                     deferred.reject("deviceAgent returnSession error");
+                    //                     allAction.releaseSession(sessionId, deferred, "", prefix);
+                    //                 });
+                    //                 decode = false;
+                    //             } else {
+                    //                 //relase
+                    //                 allAction.releaseSession(sessionId, deferred, "", prefix);
+                    //             }
+                    //         }).error(function(xhr) {
+                    //             //modal.deactivate();
+                    //             console.error("deviceAgent print error");
+                    //             //relase
+                    //             allAction.releaseSession(sessionId, deferred, "", prefix);
+                    //             //deferred.reject("deviceAgent print error");
+                    //         });
+                    //     }).error(function(xhr) {
+                    //         cbCommonModal.deactivate();
+                    //         console.error("deviceAgent obtainSession error");
+                    //         //relase
+                    //         deferred.reject("deviceAgent obtainSession error");
+                    //     });
+                    //for one demo
+                    allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
+                    $timeout(function(){
+                      cbCommonModal.deactivate(allAction.modalId);
+                      deferred.reject("deviceAgent obtainSession error");
+                    },3000);
+                    //cbCommonModal.deactivate(allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true));
+
                     return deferred.promise;
                 },
 
@@ -239,26 +247,33 @@ define(['cabin'], function(cabin) {
                 printWebPrinter: function(url, prompt, prefix) {
                     var deferred = $q.defer();
                     //obtainSession
-                    deviceAction(methods.obtainSession, []).success(function(data) {
-                        allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
-                        sessionId = data;
-                        //print
-                        //console.log("XXXX" , "[PDF]" + window.location.origin + url);
-                        deviceAction(methods.print, [sessionId, "[PDF]" + window.location.origin + url, "", "12", "5"]).success(function() {
-                            //relase
-                            allAction.releaseSession(sessionId, deferred, "", prefix);
-                        }).error(function(xhr) {
-                            console.error("deviceAgent print error");
-                            //relase
-                            allAction.releaseSession(sessionId, deferred, "", prefix);
-                            //deferred.reject("deviceAgent print error");
-                        });
-                    }).error(function(xhr) {
-                        cbCommonModal.deactivate();
-                        console.error("deviceAgent obtainSession error");
-                        //relase
-                        deferred.reject("deviceAgent obtainSession error");
-                    });
+                    // deviceAction(methods.obtainSession, []).success(function(data) {
+                    //     allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
+                    //     sessionId = data;
+                    //     //print
+                    //     //console.log("XXXX" , "[PDF]" + window.location.origin + url);
+                    //     deviceAction(methods.print, [sessionId, "[PDF]" + window.location.origin + url, "", "12", "5"]).success(function() {
+                    //         //relase
+                    //         allAction.releaseSession(sessionId, deferred, "", prefix);
+                    //     }).error(function(xhr) {
+                    //         console.error("deviceAgent print error");
+                    //         //relase
+                    //         allAction.releaseSession(sessionId, deferred, "", prefix);
+                    //         //deferred.reject("deviceAgent print error");
+                    //     });
+                    // }).error(function(xhr) {
+                    //     cbCommonModal.deactivate();
+                    //     console.error("deviceAgent obtainSession error");
+                    //     //relase
+                    //     deferred.reject("deviceAgent obtainSession error");
+                    // });
+                    // for one demo
+                    allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
+                    $timeout(function(){
+                      cbCommonModal.deactivate(allAction.modalId);
+                      deferred.reject("deviceAgent obtainSession error");
+                    },3000);
+                    //cbCommonModal.deactivate(allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true));
                     return deferred.promise;
                 },
                 abort: function(sessionId, deferred, prefix) {
