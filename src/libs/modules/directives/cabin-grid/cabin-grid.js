@@ -15,14 +15,15 @@ define(['cabin'], function(cabin) {
                     $scope.actions = $scope.gridSettings.actions || {};
                     $scope.iGridData = [];
                     var columnWidth = 0,
-                        parentWidth = iElement.outerWidth(),
+                        parentWidth = iElement.outerWidth() - 18,
                         usePercent = false,
-                        table = iElement.find('table'),
                         headerTable = iElement.find('.cabin-grid-header'),
                         bodyTable = iElement.find('.cabin-grid-body');
                     angular.forEach($scope.columns, function(e) {
                         columnWidth += e.width || 10
                     });
+
+
 
                     $scope.$watch("gridData", function(v) {
                         $scope.iGridData = [];
@@ -54,22 +55,24 @@ define(['cabin'], function(cabin) {
 
                     if (columnWidth < parentWidth) {
                         usePercent = true;
-                        table.css('width', parentWidth);
+                        headerTable.children().css('width', parentWidth + 18);
+                        bodyTable.children().css('width', parentWidth);
                     } else {
-                        table.css('width', columnWidth);
+                        headerTable.children().css('width', columnWidth + 18);
+                        bodyTable.children().css('width', columnWidth);
                     }
                     $scope.getColumnStyle = function(column, index, isLast) {
                         var width = usePercent ? ((((column.width) * parentWidth) / columnWidth)) : column.width;
                         return {
                             textAlign: column.align || 'center',
-                            width: isLast ? (width - 20) : width
+                            width: width
                         };
                     }
 
                     $scope.getHeaderColumnStyle = function(column, index, isLast) {
                         var width = usePercent ? ((((column.width) * parentWidth) / columnWidth)) : column.width;
                         return {
-                            width: isLast ? (width - 20) : width
+                            width: width
                         };
                     }
 

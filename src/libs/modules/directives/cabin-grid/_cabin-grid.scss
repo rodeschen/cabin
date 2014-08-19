@@ -1,12 +1,12 @@
-$grid-border-color : #ECF0F1 !default;
-$grid-hover-bg-color: #6CBCEE !default;
-$grid-header-bg-color : #0088AA !default;
-$grid-header-color: #FFF;
-$grid-body-bg-color: #FFFFFF !default;
-$grid-body-color : #000;
+$grid-border-color: #ecf0f1 !default;
+$grid-hover-bg-color: #6cbcee !default;
+$grid-header-bg-color: #0088aa !default;
+$grid-header-color: white;
+$grid-body-bg-color: white !default;
+$grid-body-color: black;
 
 .cabin-grid {
-  @include box-shadow(0 2px 5px 0 rgba(0,0,0,.26));
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
   border: 1px #ECF0F1 solid;
   td,th {
     border-right: 1px $grid-border-color solid;
@@ -17,24 +17,39 @@ $grid-body-color : #000;
     display: inline-block;
     overflow: hidden;
   }
+  .cabin-grid-column {
+    padding: 5px 0px !important;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px $grid-border-color solid;
+    border-bottom: 1px $grid-border-color solid;
+  }
   .cabin-grid-header {
     overflow: hidden;
-    .grid-header {
-      color : $grid-header-color;
+    .cabin-grid-row {
+      color: $grid-header-color;
       background-color: $grid-header-bg-color;
+      .cabin-grid-column {
+        
+      }
     }
   }
   .cabin-grid-body {
     height: 200;
-    overflow: auto;
-    .grid-body {
-      color : $grid-body-color;
-      background-color : $grid-body-bg-color;
-      tr {
-        cursor: pointer;
-        &:hover {
+    overflow-y: scroll;
+    overflow-x: auto;
+    .cabin-grid-row {
+      color: $grid-body-color;
+      background-color: $grid-body-bg-color;
+      //tr {
+      cursor: pointer;
+      &:hover {
+        .cabin-grid-column {
           background-color: $grid-hover-bg-color;
         }
+      }
+      //}
+      .cabin-grid-column {
       }
     }
   }
