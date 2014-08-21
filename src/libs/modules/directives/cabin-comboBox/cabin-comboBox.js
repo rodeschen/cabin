@@ -168,10 +168,11 @@ define(['cabin'], function() {
                         }
                     });
 
-                    var keys = [40, 38, 18, 9, 27, 13];
+                    var keys = [40, 38, 18, 9, 27, 13],isIME = false;
                     //up(38) / down(40), enter(13) and tab(9), esc(27)
                     iElm.on('keydown', function(e) {
                         var key = e.which;
+                        isIME = key === 229;
                         if (key === 40 || $scope.isOpen() && keys.indexOf(key) > -1) {
                             if (key === 40) {
                                 $scope.activeIdx++;
@@ -202,9 +203,8 @@ define(['cabin'], function() {
                             e.preventDefault();
                         }
                     }).on('keyup', function(e) {
-
                         var key = e.which;
-                        if (keys.indexOf(key) === -1) {
+                        if ((isIME && key == 13) || keys.indexOf(key) === -1) {
                             if (!$scope.isOpen() && $scope.getNgModelValue()) {
                                 $scope.open();
                             }
