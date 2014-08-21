@@ -14,7 +14,8 @@ define(['cabin'], function() {
                     'comboList': '=',
                     'dymanicKey': '@',
                     'comboType': '@',
-                    'edit': '@'
+                    'edit': '@',
+                    'checkInList' : '@'
                 },
                 link: function($scope, iElm, iAttrs, controller) {
                     var isRequired = iElm.is('[required]');
@@ -102,7 +103,7 @@ define(['cabin'], function() {
                                 $scope.matchs = $scope.items;
                             }
                             $scope.indexIdx = ($scope.matchs.length ? 0 : -1);
-                            $scope.checkValid();
+                            //$scope.checkValid();
                         },
                         isEdit: function() {
                             return $scope.edit !== 'false';
@@ -117,24 +118,26 @@ define(['cabin'], function() {
                                 $scope.close();
                                 iElm.focus();
                             }
-                            $scope.checkValid();
+                           // $scope.checkValid();
                         },
                         checkValid: function() {
                             //暫解
-                            $timeout(function() {
+                           // $timeout(function() {
                                 var val = $scope.getNgModelValue();
                                 for (var i = 0; i < $scope.items.length; i++) {
                                     if (val == $scope.items[i].key) {
                                         controller.$setValidity('cbComboBox', true);
-                                        return
+                                        return;
                                     }
                                 }
                                 if(!isRequired && !val){
                                     controller.$setValidity('cbComboBox', true);    
-                                }else{
+                                }else if(val && $scope.checkInList === 'false'){
+                                    controller.$setValidity('cbComboBox', true);
+                                }else {
                                     controller.$setValidity('cbComboBox', false);
                                 }
-                            }, 60);
+                            //}, 60);
 
                         },
                         showStyle: function(data) {
@@ -197,7 +200,9 @@ define(['cabin'], function() {
                                 $scope.close();
                             }
                             $scope.$digest();
-                            e.preventDefault();
+                            if(key !== 9){
+                                e.preventDefault();
+                            }
                         }
                         if (!$scope.isEdit() && keys.indexOf(key) === -1) {
                             e.preventDefault();
@@ -227,7 +232,10 @@ define(['cabin'], function() {
                         iElm.closest('[cb-combo-box]').removeClass('cb-focus');
                     });
 
-                    $scope.$watch('getNgModelValue()', $scope.formatter);
+                    $scope.$watch('getNgModelValue()', function(v){
+                        $scope.checkValid();
+                        $scope.formatter(v);
+                    });
 
 
 
