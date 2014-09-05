@@ -1,6 +1,6 @@
  'use strict';
- define(['cabin'], function(cabin) {
-     return ['directive', 'cbSideMenu', ['$location', 'cabinModulePath', '$http', '$timeout',
+ define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+     cabinDirectivesModule.directive('cbSideMenu', ['$location', 'cabinModulePath', '$http', '$timeout',
          function($location, cabinModulePath, $http, $timeout) {
              return {
                  templateUrl: cabinModulePath + 'directives/cabin-sideMenu/templates/sideMenu.html',
@@ -44,5 +44,5 @@
                  }
              };
          }
-     ]];
+     ]);
  });

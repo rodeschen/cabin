@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['directive', 'cbNotify', ['$timeout', '$window', 'cabinModulePath',
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbNotify', ['$timeout', '$window', 'cabinModulePath',
         function($timeout, $window, cabinModulePath) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-notify/templates/notify.html',
@@ -8,7 +8,7 @@ define(['cabin'], function(cabin) {
                 scope: {
                     'cbNotify': "@",
                     'receiveEvent': '@',
-                    'clearEvent' : '@',
+                    'clearEvent': '@',
                     'maxNotify': '@'
                 },
                 link: function(scope, iElement) {
@@ -81,5 +81,5 @@ define(['cabin'], function(cabin) {
                 }
             };
         }
-    ]];
+    ]);
 });

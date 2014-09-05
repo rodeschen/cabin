@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['service', 'iBranchServ', ['$rootScope', '$http', '$q', '$injector', '$timeout', 'cbDeviceAgentSrv', '$filter', 'localStorageService',
+define(['custModule'], function(custModule) {
+    custModule.service('iBranchServ', ['$rootScope', '$http', '$q', '$injector', '$timeout', 'cbDeviceAgentSrv', '$filter', 'localStorageService',
         function($rootScope, $http, $q, $injector, $timeout, cbDeviceAgentSrv, $filter, localStorageService) {
             //cbDeviceAgentSrv, cbSupeviseRequireModal
             var funcs = {
@@ -34,7 +34,7 @@ define(['cabin'], function(cabin) {
                         data: angular.toJson(sendData) // $.param(sendData)
                     });
                     if (txnId != 'OVQUERY') {
-                        localStorageService.set($filter("date")(new Date(), "yyyy/MM/dd,hh:mm:ss") + ':send:' +txnId+ ':' , sendData);
+                        localStorageService.set($filter("date")(new Date(), "yyyy/MM/dd,hh:mm:ss") + ':send:' + txnId + ':', sendData);
                     }
                     http.then(function(xhr) {
                         //console.log(txnId, "response", xhr.data);
@@ -42,7 +42,7 @@ define(['cabin'], function(cabin) {
                         var respData = xhr.data;
                         var sd = angular.fromJson(xhr.config.data);
                         if (sd.txnId != "OVQUERY") {
-                            localStorageService.set($filter("date")(new Date(), "yyyy/MM/dd,hh:mm:ss") + ':respppp:'+sd.txnId+':', respData);
+                            localStorageService.set($filter("date")(new Date(), "yyyy/MM/dd,hh:mm:ss") + ':respppp:' + sd.txnId + ':', respData);
                         }
                         funcs.txnSuccess(respData, sendData);
                     }, function(xhr) {
@@ -243,8 +243,8 @@ define(['cabin'], function(cabin) {
                     $timeout(querySup, 5000);
                 };
 
-            })//();
+            }) //();
             return funcs;
         }
-    ]];
+    ]);
 });

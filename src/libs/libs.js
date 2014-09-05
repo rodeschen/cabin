@@ -1,7 +1,7 @@
 require.config({
     paths: {
-        'jquery': 'libs/components/jquery/jquery',
-        'socket-io': 'libs/components/socket.io-client/dist/socket.io',
+        'jquery': 'libs/components/jquery/dist/jquery',
+        'socket-io': 'libs/components/socket.io-client/socket.io',
         'angular': 'libs/components/angular/angular',
         'angular-animate': 'libs/components/angular-animate/angular-animate',
         'angular-resource': 'libs/components/angular-resource/angular-resource',
@@ -13,8 +13,9 @@ require.config({
         'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/ui-utils-ieshiv.min',
         // 'tether-utils': 'libs/components/tether/js/utils',
         // 'tether': 'libs/components/tether/js/tether',
-        'angular-validation' : 'libs/components/angular-validation/dist/angular-validation',
+        'angular-validation': 'libs/components/angular-validation/dist/angular-validation',
         //'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
+        'oc-lazy-load': 'libs/components/ocLazyLoad/dist/ocLazyLoad',
 
         'angular-modal': 'libs/components-fixed/angular-modal',
         'angular-local-storage': 'libs/components/angular-local-storage/angular-local-storage',
@@ -24,6 +25,7 @@ require.config({
         //'xmlRPC': 'libs/modules/services/cabin-deviceAgent/libs/vcXMLRPC',
         //'xmlRPC' : 'libs/components/mimic',
         //'xmlRPC': 'libs/components/mimic',
+
         'xmlRPC': 'libs/components/jquery-xmlrpc/jquery.xmlrpc',
     },
     shim: {
@@ -36,10 +38,11 @@ require.config({
         'angular-ui-bootstrap': ['angular'],
         'angular-ui-utils': ['angular'],
         'angular-ui-utils-hiv': ['angular'],
-        'angular-validation' :['angular'],
+        'angular-validation': ['angular'],
         'angular-modal': ['angular'],
-        'angular-local-storage' : ['angular'],
-       // 'tether': ['tether-utils'],
+        'angular-local-storage': ['angular'],
+        'oc-lazy-load': ['angular'],
+        // 'tether': ['tether-utils'],
         //'angular-tooltip': ['angular', 'tether'],
         'xmlRPC': ['jquery']
     }
@@ -59,6 +62,7 @@ define('libs', ['jquery',
     'angular-ui-utils-hiv',
     'angular-validation',
     'angular-local-storage',
+    'oc-lazy-load',
     // 'tether-utils',
     // 'tether',
     //'angular-tooltip',

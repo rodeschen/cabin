@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['controller', 'txn032671Ctrl', ['$scope', 'iBranchServ', '$sce', '$state',
-        function($scope, iBranchServ, $sce, $state) {
+    return ['controller', 'txn032671Ctrl', ['$scope', '$sce', '$state', 'iBranchServ',
+        function($scope, $sce, $state, iBranchServ) {
 
             angular.extend($scope, {
                 send: function(data) {
@@ -37,7 +37,7 @@ define(['cabin'], function(cabin) {
                             'data': btoa(angular.toJson({
                                 //'ACNO_SA': allValue[1],
                                 'IDNO': $scope.data.INP_DATA,
-                                'NAME' : encodeURI($scope.name)
+                                'NAME': encodeURI($scope.name)
                             }))
                         });
                     }
@@ -52,7 +52,7 @@ define(['cabin'], function(cabin) {
                             'id': '000045',
                             'data': btoa(angular.toJson({
                                 '110320_ACNO_SA': allValue[1],
-                                '110320_NAME1' : encodeURI($scope.name)
+                                '110320_NAME1': encodeURI($scope.name)
                             }))
                         });
                     }

@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['directive', 'cbPageViewer', ['$rootScope', '$compile', '$timeout', '$q', 'properties', 'cbLazyRegisterServ', 'cabinModulePath', 'iBranchServ',
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbPageViewer', ['$rootScope', '$compile', '$timeout', '$q', 'properties', 'cbLazyRegisterServ', 'cabinModulePath', 'iBranchServ',
         function($rootScope, $compile, $timeout, $q, properties, cbLazyRegister, cabinModulePath, iBranchServ) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-pageViewer/templates/pageViewer.html',
@@ -14,7 +14,6 @@ define(['cabin'], function(cabin) {
                 },
                 link: function(scope, iElement) {
                     scope.isLock = false;
-
                     angular.extend(scope, {
                         includeUrl: '',
                         isLock: false,
@@ -61,7 +60,7 @@ define(['cabin'], function(cabin) {
                         scope.$on(receiveEvent + '-lock', function(event, data) {
                             if (data && data.endTxn == true && scope.settings.endLock) {
                                 scope.lock();
-                            }else if(!data){
+                            } else if (!data) {
                                 scope.lock();
                             }
                             // else if(data.endTxn == true &&  scope.settings.endLock){
@@ -209,5 +208,5 @@ define(['cabin'], function(cabin) {
                 }
             };
         }
-    ]];
+    ]);
 });

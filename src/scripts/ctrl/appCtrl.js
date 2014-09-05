@@ -1,7 +1,7 @@
 'use strict';
 define(['cabin'], function(cabin) {
-    return ['$rootScope', '$scope', '$http', '$timeout', '$state', '$interval', 'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ', '$filter', '$injector', 'localStorageService',
-        function($rootScope, $scope, $http, $timeout, $state, $interval, cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ, $filter, $injector, localStorageService) {
+    cabin.controller('appCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$state', '$interval', '$filter', '$injector', 'localStorageService', /*'cbSupeviseModal', 'cbSupeviseRequireModal', 'userServ', 'iBranchServ',*/
+        function($rootScope, $scope, $http, $timeout, $state, $interval, $filter, $injector, localStorageService /* cbSupeviseModal, cbSupeviseRequireModal, userServ, iBranchServ,*/ ) {
             $http.get('basehandler/queryMenu').success(function(data) {
                 $timeout(function() {
                     $scope.$emit('broadcast', {
@@ -110,5 +110,5 @@ define(['cabin'], function(cabin) {
 
             });
         }
-    ];
+    ]);
 });

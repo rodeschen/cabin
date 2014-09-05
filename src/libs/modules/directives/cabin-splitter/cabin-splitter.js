@@ -1,6 +1,7 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['directive', 'cbSplitter', [
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbSplitter', [
+
         function() {
             return {
                 restrict: 'AC',
@@ -52,5 +53,5 @@ define(['cabin'], function(cabin) {
                 }
             };
         }
-    ]];
+    ]);
 });

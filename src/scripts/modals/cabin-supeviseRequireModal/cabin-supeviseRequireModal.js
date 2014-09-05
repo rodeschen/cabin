@@ -1,13 +1,13 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['factory', 'cbSupeviseRequireModal', ['btfModal', 'cabinModulePath', 'iBranchServ',
+define(['custModule'], function(custModule) {
+    custModule.factory('cbSupeviseRequireModal', ['btfModal', 'cabinModulePath', 'iBranchServ',
         function(btfModal, cabinModulePath, iBranchServ) {
             return btfModal({
                 //duplicate: true,
                 controllerAs: 'modal',
                 closeByEsc: false,
                 opacity: 0,
-                templateUrl: cabinModulePath + 'modals/cabin-supeviseRequireModal/templates/cabin-supeviseRequireModal.html',
+                templateUrl: 'scripts/modals/cabin-supeviseRequireModal/templates/cabin-supeviseRequireModal.html',
                 controller: ['$scope', 'cbSupeviseRequireModal',
                     function($scope, modal) {
                         $scope.data = {
@@ -80,5 +80,5 @@ define(['cabin'], function(cabin) {
                 ]
             });
         }
-    ]];
+    ]);
 });

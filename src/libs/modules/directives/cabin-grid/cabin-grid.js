@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['directive', 'cbGrid', ['$location', 'cabinModulePath', '$http', '$rootScope', '$window', '$timeout',
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbGrid', ['$location', 'cabinModulePath', '$http', '$rootScope', '$window', '$timeout',
         function($location, cabinModulePath, $http, $rootScope, $window, $timeout) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-grid/templates/cabin-grid.html',
@@ -93,5 +93,5 @@ define(['cabin'], function(cabin) {
                 }
             };
         }
-    ]];
+    ]);
 });

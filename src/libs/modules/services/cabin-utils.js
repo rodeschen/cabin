@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['service', 'cbUtils', [
+define(['cabinServicesModule'], function(cabinServicesModule) {
+    cabinServicesModule.service('cbUtils', [
 
         function() {
             // add String method
@@ -134,5 +134,5 @@ define(['cabin'], function(cabin) {
             };
             return utils;
         }
-    ]];
+    ]);
 });

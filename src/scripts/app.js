@@ -1,6 +1,39 @@
 'use strict';
-define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
-    return cabin.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'cbLazyRegisterServProvider', 'cbTxnRouterLoaderServProvider', '$locationProvider',
+define('app', ['cabin'], function(cabin) {
+    return cabin.config(['$ocLazyLoadProvider',
+        function($ocLazyLoadProvider) {
+            $ocLazyLoadProvider.config({
+                loadedModules: ['cabin'],
+                jsLoader: requirejs,
+                events: true,
+                debug: true,
+                cache: true
+            });
+        }
+    ]).run(['$ocLazyLoad', 'cbLazyInitialServ',
+        function($ocLazyLoad, cbLazyInitialServ) {
+
+            $ocLazyLoad.load([{
+                name: 'cabin-modals',
+                files: ['cabin-modals']
+            }]).then(function() {}, function() {});
+
+            var serviceDefer = cbLazyInitialServ.add("loadServices");
+            $ocLazyLoad.load([{
+                name: 'cabin-services',
+                files: ['cabin-services']
+            }]).then(function() {
+                serviceDefer.resolve();
+            }, function() {});
+            var defer = cbLazyInitialServ.add("loadDirectives");
+            $ocLazyLoad.load([{
+                name: 'cabin-directives',
+                files: ['cabin-directives']
+            }]).then(function() {
+                defer.resolve();
+            }, function() {});
+        }
+    ]).config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', 'cbLazyRegisterServProvider', 'cbTxnRouterLoaderServProvider', '$locationProvider',
         function($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, lazyRegisterProvider, txnRouterLoaderSrv, $locationProvider) {
             lazyRegisterProvider.setRegisters({
                 controller: $controllerProvider.register,
@@ -15,34 +48,26 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             $stateProvider
                 .state('index', {
                     url: '/index',
-                    resolve: {
-                        userServ: ['userServ',
-                            function(user) {}
-                        ]
-                    },
+                    // resolve: {
+                    //     userServ: ['userServ',
+                    //         function(user) {}
+                    //     ]
+                    // },
                     controller: ['$scope', '$timeout', 'cbDeviceAgentSrv',
                         function($scope, $timeout, cbDeviceAgentSrv) {
-                            cbDeviceAgentSrv.eject();
-                            // $timeout(function() {
-                            //     $scope.$emit('broadcast', {
-                            //         event: 'pageViewer',
-                            //         page: {
-                            //             url: 'favorite'
-                            //         }
-                            //     });
-                            // }, 0);
+                            // cbDeviceAgentSrv.eject();
                         }
                     ]
                 }).state('txn', {
                     url: '/txn/{id:[^/]+}',
-                    resolve: {
-                        userServ: ['userServ',
-                            function(user) {}
-                        ]
-                    },
-                    controller: ['$stateParams', '$scope', 'cbDeviceAgentSrv',
+                    // resolve: {
+                    //     userServ: ['userServ',
+                    //         function(user) {}
+                    //     ]
+                    // },
+                    controller: ['$stateParams', '$scope', /*'cbDeviceAgentSrv',*/
                         function($stateParams, $scope, cbDeviceAgentSrv) {
-                            cbDeviceAgentSrv.eject();
+                            // cbDeviceAgentSrv.eject();
                             $scope.$emit('broadcast', {
                                 event: 'pageViewer',
                                 page: {
@@ -53,11 +78,11 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                     ]
                 }).state('txnInit', {
                     url: '^/txn/{id:[^/]+}/{data:[^/]+}',
-                    resolve: {
-                        userServ: ['userServ',
-                            function(user) {}
-                        ]
-                    },
+                    // resolve: {
+                    //     userServ: ['userServ',
+                    //         function(user) {}
+                    //     ]
+                    // },
                     controller: ['$stateParams', '$scope',
                         function($stateParams, $scope) {
                             var decode = atob($stateParams.data);
@@ -89,16 +114,7 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                         }
                     ]
                 });
-
-            // state('group', {
-            //     url: '/:group'
-            // }).state('group.page', {
-            //     url: '/:page'
-            // });
-            // .state('group', txnRouterLoaderSrv.setRoute('/:group'))
-            // .state('group.Page', txnRouterLoaderSrv.setRoute('^/:group/:page'));
-            $locationProvider.html5Mode(false);
-
+            $locationProvider.html5Mode(true);
         }
 
     ]).config(['$httpProvider',
@@ -109,18 +125,12 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                     return {
                         // optional method
                         'request': function(config) {
-                            //console.log('httpConfig', config);
-                            // do something on success
                             return config;
                         },
 
                         // optional method
                         'requestError': function(rejection) {
                             console.log('requestError', rejection);
-                            // do something on error
-                            // if (canRecover(rejection)) {
-                            //     return responseOrNewPromise
-                            // }
                             return $q.reject(rejection);
                         },
 
@@ -148,18 +158,14 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                         // optional method
                         'responseError': function(rejection) {
                             console.log('responseError', rejection);
-                            // do something on error
-                            // if (canRecover(rejection)) {
-                            //     return responseOrNewPromise
-                            // }
                             return $q.reject(rejection);
                         }
                     };
                 }
             ]);
         }
-    ]).run(['$rootScope', '$window', '$http', 'properties', 'cbWebSocketIoServ', 'cbDeviceAgentSrv', '$document', 'cbOpenTxnModal', '$state',
-        function($rootScope, $window, $http, properties, cbWebSocketIoServ, cbDeviceAgentSrv, $document, cbOpenTxnModal, $state) {
+    ]).run(['$rootScope', '$window', '$http', 'properties', '$document', '$state',
+        function($rootScope, $window, $http, properties, $document, $state /*, cbOpenTxnModal,cbWebSocketIoServ, cbDeviceAgentSrv,*/ ) {
             $rootScope.$on('broadcast', function(ev, args) {
                 //console.log('broadcast', args);
                 $rootScope.$broadcast(args.event, args);
@@ -177,11 +183,11 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                         case 13:
                             $rootScope.$broadcast("keydown.enter");
                             break;
-                        case 84:
-                            if (e.ctrlKey && e.altKey) {
-                                cbOpenTxnModal.open();
-                            }
-                            break;
+                            // case 84:
+                            //     if (e.ctrlKey && e.altKey) {
+                            //         cbOpenTxnModal.open();
+                            //     }
+                            //     break;
                         case 81:
                             if (e.ctrlKey && e.altKey) {
                                 $state.go('index');
@@ -197,9 +203,8 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
             //     })
             // });
         }
-    ]).controller('appCtrl', appCtrl).run(['$rootScope', '$window', 'userServ', '$state', '$stateParams', '$timeout',
-        function($rootScope, $window, userServ, $state, $stateParams, cbDeviceAgentSrv, $timeout) {
-
+    ]).run(['$rootScope', '$window', '$state', '$stateParams', '$timeout', 'userServ',
+        function($rootScope, $window, $state, $stateParams, $timeout, userServ) {
             $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams) {});
             userServ.then(function(data) {
@@ -209,55 +214,10 @@ define('app', ['cabin', 'appCtrl'], function(cabin, appCtrl) {
                 $state.go('index');
                 $rootScope.isLogin = false;
             });
+            $rootScope.user = userServ.getUser();
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
-            $rootScope.user = userServ.getUser();
-            console.log($rootScope.user, 'user');
 
-        }
-    ]).run(['$timeout', 'iBranchServ', 'cbDeviceAgentSrv', '$injector',
-        function($timeout, iBranchServ, cbDeviceAgentSrv, $injector) {
-            // cbDeviceAgentSrv.printWebPrinter("/iBranchApp/seal1.pdf", "xdfdfdfd...", "XXX");
-            //test code
-            //  cbDeviceAgentSrv.print("adfafadsf<ff>")
-            //console.log("FFFFFFFFFFFFFFFFF",cbDeviceAgentSrv.decode(true))
-            $timeout(function() {
-                // cbDeviceAgentSrv.decode(true).then(function(data) {
-                //     alert("success:" + data)
-                // }, function(data) {
-                //     alert("error" + data);
-                // });
-                // cbDeviceAgentSrv.encode(":20016801378622373500000054595000112340", true).then(function(data) {
-                //     alert("success:" + data)
-                // }, function(data) {
-                //     alert("error" + data);
-                // });
-            }, 1000);
-
-            // iBranchServ.queryEjContext(3);
-            // var modal = $injector.get('cbCommonModal');
-            // var job = {};
-            // modal.activate({
-            //     message: job.DATA || "SSSS",
-            //     deferred: job.deferred,
-            //     buttons: [{
-            //         name: '列印',
-            //         type: 'primary',
-            //         action: function() {
-            //             cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {
-            //                 deferred.resolve();
-            //             });
-            //         }
-            //     }, {
-            //         name: '取消',
-            //         type: 'danger',
-            //         action: function() {
-            //             cbDeviceAgentSrv.print(job.DATA, true, job.PROMPT, job.txnId).then(function() {
-            //                 deferred.reject();
-            //             });
-            //         }
-            //     }]
-            // });
         }
     ]);
 });

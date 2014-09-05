@@ -5,8 +5,14 @@ require.config({
     }
 });
 
-define('cabin', ['libs'], function() {
+define('cabin', ['libs', 'cabinCoreModule', 'cabinServicesModule','cabinModalsModule'], function() {
     var otherModule = [
+        'oc.lazyLoad',
+        //cabin
+        'cabin-core',
+        'cabin-services',
+        'cabin-modals',
+        'cabin-cust',
         'ngAnimate',
         'ui.router',
         'ngResource',
@@ -17,6 +23,7 @@ define('cabin', ['libs'], function() {
         'btford.socket-io',
         'btford.modal',
         'LocalStorageModule'
+
     ];
     if (properties.testMode) {
         otherModule = otherModule.concat(['ngMockE2E']);

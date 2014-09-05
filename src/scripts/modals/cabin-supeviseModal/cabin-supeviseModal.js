@@ -1,12 +1,12 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['factory', 'cbSupeviseModal', ['btfModal', 'cabinModulePath',
+define(['custModule'], function(custModule) {
+    custModule.factory('cbSupeviseModal', ['btfModal', 'cabinModulePath',
         function(btfModal, cabinModulePath) {
             return btfModal({
                 //duplicate: true,
                 controllerAs: 'modal',
                 closeByEsc: false,
-                templateUrl: cabinModulePath + 'modals/cabin-supeviseModal/templates/cabin-supeviseModal.html',
+                templateUrl: 'scripts/modals/cabin-supeviseModal/templates/cabin-supeviseModal.html',
                 controller: ['$scope', 'cbSupeviseModal', 'iBranchServ', '$rootScope',
                     function($scope, modal, iBranchServ, $rootScope) {
                         $scope.ovTxnId = "/txn" + $scope.txnId;
@@ -51,5 +51,5 @@ define(['cabin'], function(cabin) {
                 ]
             });
         }
-    ]];
+    ]);
 });

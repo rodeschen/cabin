@@ -1,12 +1,12 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['factory', 'cbEjContextModal', ['btfModal', 'cabinModulePath',
+define(['custModule'], function(custModule) {
+    custModule.factory('cbEjContextModal', ['btfModal', 'cabinModulePath',
         function(btfModal, cabinModulePath) {
             return btfModal({
                 //duplicate: true,
                 controllerAs: 'modal',
                 closeByEsc: false,
-                templateUrl: cabinModulePath + 'modals/cabin-ejContextModal/templates/cabin-ejContextModal.html',
+                templateUrl: 'scripts/modals/cabin-ejContextModal/templates/cabin-ejContextModal.html',
                 controller: ['$scope', 'cbSupeviseModal', 'iBranchServ', '$rootScope', 'cbCommonModal',
                     function($scope, modal, iBranchServ, $rootScope, cbCommonModal) {
 
@@ -32,5 +32,5 @@ define(['cabin'], function(cabin) {
                 ]
             });
         }
-    ]];
+    ]);
 });

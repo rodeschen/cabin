@@ -1,13 +1,13 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['provider', 'cbLazyRegisterServ', function() {
+define(['cabinCoreModule'], function(cabinCoreModule) {
+    cabinCoreModule.provider('cbLazyRegisterServ', function() {
         var register = {
             'controller': undefined,
             'directive': undefined,
             'filter': undefined,
             'factory': undefined,
             'service': undefined,
-            'provider':undefined
+            'provider': undefined
         };
 
         var registered = {};
@@ -60,5 +60,5 @@ define(['cabin'], function(cabin) {
             return this;
         }
 
-    }];
+    });
 });

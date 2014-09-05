@@ -1,6 +1,7 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['provider', 'cbTxnRouterLoaderServ', [
+define(['cabinCoreModule'], function(cabinCoreModule) {
+    cabinCoreModule.provider('cbTxnRouterLoaderServ', [
+
         function() {
             var lazyRegisterProvider;
             this.$get = function() {
@@ -116,5 +117,5 @@ define(['cabin'], function(cabin) {
             };
             return this;
         }
-    ]];
+    ]);
 });

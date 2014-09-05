@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['directive', 'cbMaskNumber', ['$filter', '$parse', 'cbUtils',
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbMaskNumber', ['$filter', '$parse', 'cbUtils',
         function($filter, $parse, cbUtils) {
             return {
                 require: 'ngModel',
@@ -111,5 +111,5 @@ define(['cabin'], function(cabin) {
                 }
             };
         }
-    ]];
+    ]);
 });

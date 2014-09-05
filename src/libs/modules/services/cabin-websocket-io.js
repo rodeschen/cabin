@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['service', 'cbWebSocketIoServ', ['$rootScope', 'socketFactory', 'cbLazyRegisterServ',
+define(['cabinServicesModule'], function(cabinServicesModule) {
+    cabinServicesModule.service('cbWebSocketIoServ', ['$rootScope', 'socketFactory', 'cbLazyRegisterServ',
         function($rootScope, socketFactory, cbLazyRegisterServ) {
 
             var pool = {};
@@ -38,5 +38,5 @@ define(['cabin'], function(cabin) {
                 }
             }
         }
-    ]];
+    ]);
 });

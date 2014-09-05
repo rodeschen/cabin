@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['directive', 'cbTopMenu', ['$location', 'cabinModulePath', '$http', '$rootScope',
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbTopMenu', ['$location', 'cabinModulePath', '$http', '$rootScope',
         function($location, cabinModulePath, $http, $rootScope) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-topMenu/templates/topMenu.html',
@@ -36,5 +36,5 @@ define(['cabin'], function(cabin) {
                 }
             };
         }
-    ]];
+    ]);
 });

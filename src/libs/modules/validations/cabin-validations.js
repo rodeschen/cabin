@@ -1,15 +1,16 @@
+'use strict';
 require.config({
     paths: {
         'taiwanId': 'libs/modules/validations/taiwanId',
         'txnValidaions': ''
     },
     shim: {
-        //'taiwanId': ['cabin']
+        'taiwanId': ['cabin']
     }
 });
 
-define('txn-validations', [
-    'taiwanId'
-], function() {
-    console.log('default validations Initialized');
+define('cabin-libs', [
+
+], function(libs, cabin) {
+    console.log('cabin-core-libs Initialized');
 });

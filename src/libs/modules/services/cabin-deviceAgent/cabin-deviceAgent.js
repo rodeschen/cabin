@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['service', 'cbDeviceAgentSrv', ['$rootScope', 'properties', '$q', '$timeout', 'cbCommonModal', '$document',
+define(['cabinServicesModule'], function(cabinServicesModule) {
+    cabinServicesModule.service('cbDeviceAgentSrv', ['$rootScope', 'properties', '$q', '$timeout', 'cbCommonModal', '$document',
         function($rootScope, properties, $q, $timeout, cbCommonModal, $document) {
             // var alias = {
             //     /* Methods from MnmMoMBean */
@@ -222,10 +222,10 @@ define(['cabin'], function(cabin) {
                     //     });
                     //for one demo
                     allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
-                    $timeout(function(){
-                      cbCommonModal.deactivate(allAction.modalId);
-                      deferred.reject("deviceAgent obtainSession error");
-                    },3000);
+                    $timeout(function() {
+                        cbCommonModal.deactivate(allAction.modalId);
+                        deferred.reject("deviceAgent obtainSession error");
+                    }, 3000);
                     //cbCommonModal.deactivate(allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true));
 
                     return deferred.promise;
@@ -269,10 +269,10 @@ define(['cabin'], function(cabin) {
                     // });
                     // for one demo
                     allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true);
-                    $timeout(function(){
-                      cbCommonModal.deactivate(allAction.modalId);
-                      deferred.reject("deviceAgent obtainSession error");
-                    },3000);
+                    $timeout(function() {
+                        cbCommonModal.deactivate(allAction.modalId);
+                        deferred.reject("deviceAgent obtainSession error");
+                    }, 3000);
                     //cbCommonModal.deactivate(allAction.sendMessage("normal", (prefix ? '[' + prefix + '] ' : "") + (prompt || "請放入紙張..."), true));
                     return deferred.promise;
                 },
@@ -399,5 +399,5 @@ define(['cabin'], function(cabin) {
             };
             return allAction;
         }
-    ]];
+    ]);
 });

@@ -1,7 +1,7 @@
 'use strict';
 //txn120606ACNOVal
 define(['cabin'], function(cabin) {
-    return ['validation', ['value', 'allValue', 'ngModel',
+    return ['value', 'allValue', 'ngModel',
         function(value, allValue, ngModel) {
             //var depart = !value ? "" : value.substring(3, 6);
             var depart2 = !value ? "" : value.substring(3, 5);
@@ -10,5 +10,5 @@ define(['cabin'], function(cabin) {
             }
             return true;
         }
-    ]];
+    ];
 });

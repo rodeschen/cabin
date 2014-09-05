@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function() {
-    return [['directive', 'cbComboBox', ['$rootScope', '$compile', '$timeout', '$parse', 'cabinModulePath',
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbComboBox', ['$rootScope', '$compile', '$timeout', '$parse', 'cabinModulePath',
         function($rootScope, $compile, $timeout, $parse, cabinModulePath) {
             return {
                 //priority: 0,
@@ -15,7 +15,7 @@ define(['cabin'], function() {
                     'dymanicKey': '@',
                     'comboType': '@',
                     'edit': '@',
-                    'checkInList' : '@'
+                    'checkInList': '@'
                 },
                 link: function($scope, iElm, iAttrs, controller) {
                     var isRequired = iElm.is('[required]');
@@ -26,8 +26,8 @@ define(['cabin'], function() {
                     if (iAttrs.autofocus !== undefined) {
                         iElm.focus();
                     }
-                    if(iAttrs.placeholder){
-                        iElm.attr('placeholder',iAttrs.placeholder);    
+                    if (iAttrs.placeholder) {
+                        iElm.attr('placeholder', iAttrs.placeholder);
                     }
                     iElm.addClass(iAttrs.class || '').attr(iAttrs.css || '');
 
@@ -98,7 +98,7 @@ define(['cabin'], function() {
 
                                 });
                                 $scope.matchs = _matchs;
-                                
+
                             } else {
                                 $scope.matchs = $scope.items;
                             }
@@ -118,25 +118,25 @@ define(['cabin'], function() {
                                 $scope.close();
                                 iElm.focus();
                             }
-                           // $scope.checkValid();
+                            // $scope.checkValid();
                         },
                         checkValid: function() {
                             //暫解
-                           // $timeout(function() {
-                                var val = $scope.getNgModelValue();
-                                for (var i = 0; i < $scope.items.length; i++) {
-                                    if (val == $scope.items[i].key) {
-                                        controller.$setValidity('cbComboBox', true);
-                                        return;
-                                    }
-                                }
-                                if(!isRequired && !val){
-                                    controller.$setValidity('cbComboBox', true);    
-                                }else if(val && $scope.checkInList === 'false'){
+                            // $timeout(function() {
+                            var val = $scope.getNgModelValue();
+                            for (var i = 0; i < $scope.items.length; i++) {
+                                if (val == $scope.items[i].key) {
                                     controller.$setValidity('cbComboBox', true);
-                                }else {
-                                    controller.$setValidity('cbComboBox', false);
+                                    return;
                                 }
+                            }
+                            if (!isRequired && !val) {
+                                controller.$setValidity('cbComboBox', true);
+                            } else if (val && $scope.checkInList === 'false') {
+                                controller.$setValidity('cbComboBox', true);
+                            } else {
+                                controller.$setValidity('cbComboBox', false);
+                            }
                             //}, 60);
 
                         },
@@ -171,7 +171,8 @@ define(['cabin'], function() {
                         }
                     });
 
-                    var keys = [40, 38, 18, 9, 27, 13],isIME = false;
+                    var keys = [40, 38, 18, 9, 27, 13],
+                        isIME = false;
                     //up(38) / down(40), enter(13) and tab(9), esc(27)
                     iElm.on('keydown', function(e) {
                         var key = e.which;
@@ -200,7 +201,7 @@ define(['cabin'], function() {
                                 $scope.close();
                             }
                             $scope.$digest();
-                            if(key !== 9){
+                            if (key !== 9) {
                                 e.preventDefault();
                             }
                         }
@@ -232,7 +233,7 @@ define(['cabin'], function() {
                         iElm.closest('[cb-combo-box]').removeClass('cb-focus');
                     });
 
-                    $scope.$watch('getNgModelValue()', function(v){
+                    $scope.$watch('getNgModelValue()', function(v) {
                         $scope.checkValid();
                         $scope.formatter(v);
                     });
@@ -242,7 +243,7 @@ define(['cabin'], function() {
                 }
             };
         }
-    ]], ['directive', 'cbComboBoxDropDown', ['cabinModulePath', 'cbComboBoxServ', '$timeout',
+    ]).directive('cbComboBoxDropDown', ['cabinModulePath', 'cbComboBoxServ', '$timeout',
         function(cabinModulePath, comboBoxServ, $timeout) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-comboBox/templates/cabin-comboBox-dropdown.html',
@@ -311,5 +312,75 @@ define(['cabin'], function() {
                 }
             };
         }
-    ]]];
+    ]).factory('cbComboBoxServ', ['$resource', '$timeout', 'properties',
+        function($resource, $timeout, properties) {
+            var isCache = (properties.comboBoxCache === false) ? false : true;
+            var cacheData = {};
+            var queryQueue = [];
+
+            var lastTime = undefined;
+            var resource = $resource('basehandler/querybombobox', {}, {
+                query: {
+                    method: 'POST'
+                }
+            });
+
+            var size = 0;
+            var queryPromise = null;
+
+            function query() {
+                if (queryPromise) {
+                    $timeout.cancel(queryPromise);
+                }
+                queryPromise = $timeout(function() {
+                    var size = queryQueue.length;
+                    var keys = [];
+                    var dymanicKeys = [];
+                    var _queue = [];
+                    for (var i = 0; i < size; i++) {
+                        var o = queryQueue.shift();
+                        //ignore cache
+                        if (cacheData[o.key]) {
+                            //console.log("get cache", o.key)
+                            o.fn(cacheData[o.key]);
+                        } else {
+                            if (o.isDymanic) {
+                                dymanicKeys.push(o.key);
+                            } else {
+                                keys.push(o.key);
+                            }
+                            _queue.push(o);
+                        }
+                    }
+                    if (_queue.length) {
+                        resource.query({
+                            keys: keys,
+                            dymanicKeys: dymanicKeys
+                        }, function(res) {
+                            var i = 0;
+                            for (var i = 0; i < size; i++) {
+                                var o = _queue.shift();
+                                o.fn(res[o.key] || []);
+                                if (isCache) {
+                                    cacheData[o.key] = res[o.key] || "";
+                                }
+                            }
+                        });
+                    }
+                }, 40);
+            }
+
+
+            return {
+                addKey: function(key, isDymanic, fn) {
+                    queryQueue.push({
+                        key: key,
+                        isDymanic: isDymanic,
+                        fn: fn
+                    });
+                    query();
+                }
+            };
+        }
+    ]);
 });

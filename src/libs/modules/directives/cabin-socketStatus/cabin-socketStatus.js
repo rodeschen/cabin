@@ -1,6 +1,6 @@
 'use strict';
-define(['cabin'], function(cabin) {
-    return ['directive', 'cbSocketStatus', ['$location', 'cabinModulePath', '$http', '$rootScope', 'gSocket',
+define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
+    cabinDirectivesModule.directive('cbSocketStatus', ['$location', 'cabinModulePath', '$http', '$rootScope', 'gSocket',
         function($location, cabinModulePath, $http, $rootScope, gSocket) {
             return {
                 templateUrl: cabinModulePath + 'directives/cabin-socketStatus/templates/socketStatus.html',
@@ -62,10 +62,10 @@ define(['cabin'], function(cabin) {
                     }
 
                     $scope.getDesc = function() {
-                        return ['','已連線','連線中','連線錯誤，點擊後重試'][$scope.status];
+                        return ['', '已連線', '連線中', '連線錯誤，點擊後重試'][$scope.status];
                     }
                 }
             };
         }
-    ]];
+    ]);
 });

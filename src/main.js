@@ -4,25 +4,24 @@ var properties = {
     contentRoot: '/',
     //testMode: false,
     //contentRoot: '/cap-web',
-    useCabinLibs: [
-        'cbBehavior',
-        'cbUtils',
-        'cbComboBox',
-        'cbSplitter',
-        'cbMaskNumber',
-        'cbTxnRouterLoaderServ',
-        'cbComboBoxServ',
-        'cbWebSocketIoServ',
-        //for poc
-        'cbDeviceAgent',
-        'iBranchServ',
-        'userServ',
-        //modal 
-        'cbSupeviseModal',
-        'cbSupeviseRequireModal'
-
-
-    ],
+    // useCabinLibs: [
+    //     'cbBehavior',
+    //     'cbUtils',
+    //     'cbComboBox',
+    //     'cbSplitter',
+    //     'cbMaskNumber',
+    //     'cbTxnRouterLoaderServ',
+    //     'cbComboBoxServ',
+    //     'cbWebSocketIoServ',
+    //     'cbPageViewer',
+    //     //for poc
+    //     'cbDeviceAgent',
+    //     'iBranchServ',
+    //     'userServ',
+    //     //modal 
+    //     'cbSupeviseModal',
+    //     'cbSupeviseRequireModal'
+    // ],
     cabinModulePath: 'libs/modules/',
     //txnViewRootPath: 'views/',
     txnViewRootPath: 'scripts/page/',
@@ -40,26 +39,35 @@ require.config({
     paths: {
         'libs': 'libs/libs',
         'cabin': 'libs/cabin',
-        'cabin-libs': 'libs/cabin-libs',
-        'txn-validations': 'scripts/validations',
+        'cabin-core': 'libs/modules/core/cabin-core',
+        'cabin-directives': 'libs/modules/directives/cabin-directives',
+        'cabin-modals': 'libs/modules/modals/cabin-modals',
+        'cabin-services': 'libs/modules/services/cabin-services',
+        'cabin-validations': 'libs/modules/validations/cabin-validations',
+        'cabin-cust': 'scripts/customize-libs',
         'app': 'scripts/app',
         'http-mock': '../_httpMock/define',
         //customize
         'appCtrl': 'scripts/ctrl/appCtrl'
     },
     shim: {
-        'cabin-libs': ['libs'],
-        'app': ['libs', 'cabin', 'cabin-libs'],
-        'txn-validations': ['libs', 'cabin', 'cabin-libs', 'app'],
-        'http-mock': ['libs', 'cabin', 'cabin-libs', 'app']
+        'cabin-core': ['libs'],
+        'cabin-services': ['cabin-core'],
+        'cabin-modals': ['cabin-services'],
+        'cabin-validations': ['cabin-modals'],
+        'cabin-cust': ['cabin-validations'],
+        'cabin': ['cabin-cust'],
+        'app': ['cabin', 'appCtrl'],
+        //'txn-validations': ['libs', 'cabin', 'cabin-libs', 'app'],
+        'http-mock': ['app']
     }
 });
 
-require(['libs', 'cabin', 'cabin-libs', 'app', 'txn-validations', 'http-mock'], function() {
+require(['libs', 'cabin-core', 'cabin-services', 'cabin-directives', 'cabin-validations', 'cabin-cust', 'cabin', 'app', /*'txn-validations',*/ 'http-mock'], function() {
     var cabin = arguments[arguments.length - 1];
     angular.bootstrap(window.document, ['cabin']);
     console.log('app Initialized');
-    
+
 });
 
 
