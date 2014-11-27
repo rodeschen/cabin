@@ -10,6 +10,7 @@ require.config({
 });
 
 define([
+	'cabinModalsModule',
     'cbCommonModal'
 ], function() {
     console.log('cabin-modals-libs Initialized');

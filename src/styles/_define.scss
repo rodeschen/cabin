@@ -1,3 +1,4 @@
+//susy1
 // $total-columns : 12;
 // $column-width  : 4em;
 // $gutter-width  : 1em;
@@ -10,14 +11,28 @@
 // $grid-padding  : 0px;
 
 
-$total-columns : 12;
-$column-width  : 7.4111%;
-$gutter-width  : 1%;
-$grid-padding  : 0px;
+// $total-columns : 12;
+// $column-width  : 7.4111%;
+// $gutter-width  : 1%;
+// $grid-padding  : 0px;
 
-$pad  : 768px 12 959px;
-$pc : 960px 12;
-$mobile: 12 767px;
+// $pad  : 768px 12 959px;
+// $pc : 960px 12;
+// $mobile: 12 767px;
+
+//susy2
+$susy: (
+  columns: 12,
+  gutters: 1/4,
+  math: fluid,
+  output: float,
+  gutter-position: split,
+  global-box-sizing: border-box,
+  debug:(image:show)
+);
+//$pc : min-width 960px;
+$pad  : max-width 959px;
+$mobile: max-width 767px;
 
 //$grid-columns:              12;
 //$grid-gutter-width:         30px;

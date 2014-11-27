@@ -18,7 +18,7 @@ var properties = {
     //     'cbDeviceAgent',
     //     'iBranchServ',
     //     'userServ',
-    //     //modal 
+    //     //modal
     //     'cbSupeviseModal',
     //     'cbSupeviseRequireModal'
     // ],
@@ -46,7 +46,7 @@ require.config({
         'cabin-validations': 'libs/modules/validations/cabin-validations',
         'cabin-cust': 'scripts/customize-libs',
         'app': 'scripts/app',
-        'http-mock': '../_httpMock/define',
+        'http-mock': '_httpMock/define',
         //customize
         'appCtrl': 'scripts/ctrl/appCtrl'
     },
@@ -63,11 +63,19 @@ require.config({
     }
 });
 
-require(['libs', 'cabin-core', 'cabin-services', 'cabin-directives', 'cabin-validations', 'cabin-cust', 'cabin', 'app', /*'txn-validations',*/ 'http-mock'], function() {
+require(['libs', 'cabin-core', 'cabin-services', 'cabin-modals', 'cabin-directives', 'cabin-validations', 'cabin-cust', 'cabin', 'appCtrl', 'app', /*'txn-validations',*/ 'http-mock'], function() {
     var cabin = arguments[arguments.length - 1];
     angular.bootstrap(window.document, ['cabin']);
     console.log('app Initialized');
-
+    $(document).ready(function() {
+        $("body").on("copy", function(e) {
+            console.log("copy", e);
+        }).on("cut", function(e) {
+            console.log('cut', e)
+        }).on("paste", function(e) {
+            console.log('paste', e)
+        })
+    })
 });
 
 

@@ -1,6 +1,6 @@
 aside {
     @include isolate(2);
-    @include span-columns(2);
+    @include span(2);
     min-height: 80%;
     color: #FFF;
     nav{

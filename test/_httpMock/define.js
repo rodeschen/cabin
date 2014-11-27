@@ -2,10 +2,10 @@
 require.config({
     'paths': {
         'angular-mocks': 'libs/components/angular-mocks/angular-mocks',
-        'last': '../_httpMock/last',
-        'queryMenu': '../_httpMock/queryMenu',
-        'queryComboBox': '../_httpMock/queryComboBox',
-        'iBranchTest': '../_httpMock/iBranchTest'
+        'last': '_httpMock/last',
+        'queryMenu': '_httpMock/queryMenu',
+        'queryComboBox': '_httpMock/queryComboBox',
+        'iBranchTest': '_httpMock/iBranchTest'
     },
     'shim': {
         'angular-mocks': ['libs'],

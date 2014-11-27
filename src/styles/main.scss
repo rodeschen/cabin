@@ -6,6 +6,7 @@
 
 @import "flat-ui";
 @import "susy";
+@import "breakpoint";
 @import "icons";
 
 //@import 'components/bootstrap-sass/lib/bootstrap';
@@ -21,9 +22,11 @@
 @import "modules/ng-animation";
 @import "modules";
 
-*, *:before, *:after {
-  @include box-sizing(border-box);
-}
+// *, *:before, *:after {
+//   @include box-sizing(border-box);
+// }
+
+@include border-box-sizing;
 
 //remove ie clear button
 ::-ms-clear {
@@ -41,7 +44,8 @@
 }
 
 .page-content {
-  @include container($total-columns, $mobile, $pad, $pc);
+  //@include container($total-columns, $mobile, $pad, $pc);
+  @include container;
   //  @include susy-grid-background;
 }
 
@@ -65,7 +69,7 @@ body {
     background-color: #bac1c8;
   }
   min-width: 1024px;
-  @include at-breakpoint($mobile) {
+  @include susy-breakpoint($mobile, $susy) {
     font-size: 12px;
     width: 100%;
   }
@@ -88,16 +92,12 @@ $sample-navbar-width: 150px;
 $sample-navbar-hdie-left: -146px;
 
 .sample-navbar {
-  width: 100px;
-  @include at-breakpoint($mobile) {
+  width: $sample-navbar-width;
+  @include susy-breakpoint($mobile, $susy) {
     width: $sample-navbar-width / 3 * 2;
   }
 
-  @include at-breakpoint($pad) {
-    width: $sample-navbar-width;
-  }
-
-  @include at-breakpoint($pc) {
+  @include susy-breakpoint($pad, $susy) {
     width: $sample-navbar-width;
   }
 
@@ -119,7 +119,7 @@ $sample-navbar-hdie-left: -146px;
         &:hover,
         &.active {
           background: #DDD;
-          >a {
+          > a {
             color: #555;
           }
         }
@@ -160,7 +160,7 @@ $sample-navbar-hdie-left: -146px;
 //normal.html
 .main-body {
   section {
-    @include span-columns(8);
+    @include span(8);
     @include isolate(4);
   }
   height: 100%;
@@ -168,7 +168,7 @@ $sample-navbar-hdie-left: -146px;
 }
 
 //customer socketStatus
-.top-menu  .socket-status {
+.top-menu .socket-status {
   padding: 10px;
 }
 
@@ -288,7 +288,7 @@ $top-menu-font-color-ative: white !default;
   //box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
   nav {
     @include isolate(2);
-    @include span-columns(6);
+    @include span(6);
     @include clearfix;
     ul {
       background-color: $top-menu-background-color;
@@ -314,7 +314,7 @@ $top-menu-font-color-ative: white !default;
     }
     &.buttons {
       @include isolate(1);
-      @include span-columns(6);
+      @include span(6);
       overflow: inherit;
       float: right;
       right: 50px;
@@ -338,7 +338,7 @@ header {
   @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
   .banner {
     @include isolate(1);
-    @include span-columns(3);
+    @include span(3);
     .img {
       background: url(../images/logo.jpg) no-repeat;
       width: 240px;
@@ -351,7 +351,7 @@ header {
     }
   }
   // .info {
-  //   @include span-columns(3);
+  //   @include span(3);
   //   >div {
   //     line-height: 20px;
   //     width: 300px;
@@ -377,9 +377,14 @@ header {
 }
 
 .btn_120606 {
-  @include isolate(2);
-  @include span-columns(5);
-  background-color: #d84315;//#455a64;
+  @include span(5);
+  margin-left : isolate(2);
+  @include susy-breakpoint($pad, 12) {
+    @include span(10);
+    margin-left : isolate(2);
+  }
+  background-color: #d84315;
+  //#455a64;
   //background: #5ad8f8;
   // background-image: -webkit-linear-gradient(top, #5ad8f8, #0c7ba4);
   // background-image: -moz-linear-gradient(top, #5ad8f8, #0c7ba4);
@@ -414,14 +419,18 @@ header {
 
 .btn_120606:hover {
   //background: #2371ad;
-  background-color: #f4511e;//#546e7a;
+  background-color: #f4511e;
+  //#546e7a;
   color: #ffffff;
   text-decoration: none;
 }
 
 .btn_000045 {
-  @include isolate(1);
-  @include span-columns(5);
+  @include span(5);
+  @include susy-breakpoint($pad, 12) {
+    @include span(10);
+    margin-left : isolate(2);
+  }
   background-color: #6a1b9a;
   color: #FFF;
   //background: #6ef7c8;
@@ -462,9 +471,15 @@ header {
 }
 
 .btn_032671 {
-  @include isolate(2);
-  @include span-columns(5);
-  background-color: #827717;//#00695c;
+  
+  @include span(5);
+  margin-left : isolate(2);
+  @include susy-breakpoint($pad, 12) {
+    @include span(10);
+    margin-left : isolate(2);
+  }
+  background-color: #827717;
+  //#00695c;
   color: #FFF;
   //background: #6ef7c8;
   // background-image: -webkit-linear-gradient(top, #6ef7c8, #22c19d);
@@ -498,15 +513,20 @@ header {
 
 .btn_032671:hover {
   //background: #21b080;
-  background-color: #9e9d24;//#00796b;
+  background-color: #9e9d24;
+  //#00796b;
   color: #ffffff;
   text-decoration: none;
 }
 
 .btn_092654 {
-  @include isolate(1);
-  @include span-columns(5);
-  background-color: #827717;//#d84315;
+  @include span(5);
+  @include susy-breakpoint($pad, 12) {
+    @include span(10);
+    margin-left : isolate(2);
+  }
+  background-color: #827717;
+  //#d84315;
   color: #FFF;
   //background: #6ef7c8;
   // background-image: -webkit-linear-gradient(top, #6ef7c8, #22c19d);
@@ -540,7 +560,8 @@ header {
 
 .btn_092654:hover {
   //background: #21b080;
-  background-color: #9e9d24;//#f4511e;
+  background-color: #9e9d24;
+  //#f4511e;
   color: #ffffff;
   text-decoration: none;
 }

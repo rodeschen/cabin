@@ -1,11 +1,11 @@
- @import 'flexbox';
+ @import 'compass/css3/flexbox';
  @import 'compass/css3/user-interface';
 $splitter-border-size : 5px !default;
 $splitter-color : #EFEFEF !default;
 
 
 @mixin flex($flex : 1) {
-	@include box-flex(1);
+	//@include box-flex(1);
 	-webkit-flex : 1;
 	-ms-flex : 1;
 	-moz-flex : 1;
@@ -32,8 +32,10 @@ $splitter-color : #EFEFEF !default;
 	}
 	@include display-flex();
 	&.column{
-		@include box-orient(vertica);
-		@include flex-direction(column);
+		@include flexbox((
+			box-orient : vertica,
+			box-direction : column
+		));
 	}
 
 	[direction]{

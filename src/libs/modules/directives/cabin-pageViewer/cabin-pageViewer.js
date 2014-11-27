@@ -58,7 +58,7 @@ define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
                             }
                         });
                         scope.$on(receiveEvent + '-lock', function(event, data) {
-                            if (data && data.endTxn == true && scope.settings.endLock) {
+                            if (data && data.endTxn == true && scope.settings && scope.settings.endLock) {
                                 scope.lock();
                             } else if (!data) {
                                 scope.lock();

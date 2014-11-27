@@ -1,3 +1,0 @@
-1. combobox module - chrome
-                         can't close list box by esc
-                         chinese can't insert

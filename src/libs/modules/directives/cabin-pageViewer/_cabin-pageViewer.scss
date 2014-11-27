@@ -1,6 +1,6 @@
 .page-viewer {
   //@include isolate(1);
-  //@include span-columns(12);
+  //@include span(12);
   width: 96%;
   margin-left: 2%;
   margin-right: 2%;
@@ -33,67 +33,67 @@
       padding: 4px 0;
     }
     .col-1 {
-      @include span-columns(1);
+      @include span(1);
     }
     .col-2 {
-      @include span-columns(2);
+      @include span(2);
     }
     .col-3 {
-      @include span-columns(3);
+      @include span(3);
     }
     .col-4 {
-      @include span-columns(4);
+      @include span(4);
     }
     .col-5 {
-      @include span-columns(5);
+      @include span(5);
     }
     .col-6 {
-      @include span-columns(6);
+      @include span(6);
     }
     .col-7 {
-      @include span-columns(7);
+      @include span(7);
     }
     .col-8 {
-      @include span-columns(8);
+      @include span(8);
     }
     .col-9 {
-      @include span-columns(9);
+      @include span(9);
     }
     .col-10 {
-      @include span-columns(10);
+      @include span(10);
     }
     .col-11 {
-      @include span-columns(11);
+      @include span(11);
     }
     .col-12 {
-      @include span-columns(12);
+      @include span(12);
     }
     .col-13 {
-      @include span-columns(13);
+      @include span(13);
     }
     .col-14 {
-      @include span-columns(14);
+      @include span(14);
     }
     .col-15 {
-      @include span-columns(15);
+      @include span(15);
     }
     .col-16 {
-      @include span-columns(16);
+      @include span(16);
     }
     .col-17 {
-      @include span-columns(17);
+      @include span(17);
     }
     .col-18 {
-      @include span-columns(18);
+      @include span(18);
     }
     .col-19 {
-      @include span-columns(19);
+      @include span(19);
     }
     .col-20 {
-      @include span-columns(20);
+      @include span(20);
     }
     .col-21 {
-      @include span-columns(21);
+      @include span(21);
     }
     .offset-1 {
       @include isolate(1);
