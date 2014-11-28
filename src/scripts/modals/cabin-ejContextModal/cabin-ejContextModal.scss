@@ -18,8 +18,8 @@
      // @include border-radius(5px);
       .page-viewer-content {
         // padding-top: 80px;
-        @include isolate(0);
-        @include span-columns(12);
+        @include span(12);
+        margin-left : isolate(2);
         position: static;
         margin-left: 0px;
         margin: 0px 0px;

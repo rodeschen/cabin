@@ -62,7 +62,7 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                 scope.modalId = modalId;
                 element = angular.element(html);
 
-                container.prepend(element);
+                
                 scope.closeModal = deactivate;
                 scope.close = deactivate;
                 overlay = _overlay.clone();
@@ -86,7 +86,8 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                         });
                     }
                 }
-                container.prepend(overlay);
+                container.append(overlay);
+                container.append(element);
                 var _locals = duplicate ? angular.copy(locals) : locals;
                 if (locals) {
                     for (var prop in _locals) {
@@ -100,8 +101,8 @@ factory('btfModal', ['$compile', '$rootScope', '$controller', '$q', '$http', '$t
                     scope[controllerAs] = ctrl;
                 }
                 $compile(element)(scope);
-                $animate.enter(overlay, container);
-                $animate.enter(element, container);
+                $animate.enter(overlay, container, overlay.prev());
+                $animate.enter(element, container, element.prev());
             }
 
             function deactivate(modalId) {
