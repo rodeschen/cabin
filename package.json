@@ -63,7 +63,11 @@
         "gulp-htmlmin" : "latest",
         "gulp-ngmin" : "latest",
         "gulp-uglify" : "latest",
+        "gulp-minify-html" : "latest",
+        "gulp-minify-css" : "latest",
         "gulp-callback": "latest",
+        "gulp-usemin" : "latest",
+        "gulp-rev" : "latest",
         "q" : "latest",
         "browser-sync" : "latest",
         "connect-history-api-fallback": "latest"

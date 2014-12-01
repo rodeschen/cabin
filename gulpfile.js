@@ -27,6 +27,20 @@ gulp.task('clean', function() {
     }));
 });
 
+
+gulp.task('usemin', function() {
+    return gulp.src(['dist/**/*.html'], {
+            base: 'dist'
+        }).pipe($.usemin({
+            css: [$.minifyCss(), 'concat'],
+            html: [$.minifyHtml({
+                empty: true
+            })],
+            js: [$.uglify(), $.rev()]
+        }))
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task("htmlmin", function() {
     return gulp.src("src/*.html", {
         base: 'src'
@@ -45,9 +59,12 @@ gulp.task("ngmin", function() {
     }).pipe($.ngmin({
 
     })).pipe(gulp.dest("dist"));
-})
+});
 
-gulp.task('compass', function() {
+var compassFunc = function(isDist) {
+
+    var destFolder = '.tmp'; //isDist ? "dist" : '.tmp';
+
     return gulp.src(["./src/styles/*.scss"], {
             base: 'src'
         }) /*.pipe($.plumber())*/ .pipe($.compass({
@@ -77,47 +94,20 @@ gulp.task('compass', function() {
             // , sass: 'source/styles'
             // , css: 'source/build/styles'
             // , font: 'source/fonts'
-        })).pipe(gulp.dest(".tmp"))
+        })).pipe(gulp.dest(destFolder))
         .pipe(browserSync.reload({
             stream: true
         }));
+}
+
+gulp.task('compass', function() {
+    return compassFunc();
 });
 
 
 gulp.task('compassDist', function() {
-    return gulp.src(["./src/styles/*.scss"], {
-            base: 'src'
-        }) /*.pipe($.plumber())*/ .pipe($.compass({
-            'require': ['susy', 'breakpoint', 'animate', 'compass-flexbox'],
-            //'project': path.join(__dirname),
-            'css': 'src/build/styles',
-            'sass': 'src/styles',
-            'scss': 'src/styles',
-            'generated_images_dir': '.tmp/images/generated',
-            'image': 'src/images',
-            'javascript': 'src/scripts',
-            'font': 'src/styles/fonts',
-            'import_path': ['src/libs', 'src/scripts'],
-            'http_images_path': 'src/images',
-            'http_generated_images_path': 'src/images/generated',
-            'http_fonts_path': 'src/styles/fonts',
-            // 'line_comments': true,
-            'time': true,
-            'comments': true,
-            'force': true,
-            // 'relativeAssets': false,
-            'debug': true,
-            // 'config_file': 'config.rb'
-            // 'bundle_exec': true
-            // ,debug: true
-            // , project: path.join(__dirname)
-            // , sass: 'source/styles'
-            // , css: 'source/build/styles'
-            // , font: 'source/fonts'
-        })).pipe(gulp.dest("dist"))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+    return compassFunc(true);
+
 });
 
 gulp.task('copy', function() {
@@ -130,9 +120,6 @@ gulp.task('copy', function() {
         'src/libs/components/requirejs/require.js',
         'src/libs/components/font-awesome/**/*',
         'src/fonts/**/*'
-        //,
-        // 'src/styles/fonts/*'
-        //'src/.htaccess',
     ], {
         base: "src"
     }).pipe(gulp.dest(config.dist));
@@ -154,7 +141,6 @@ gulp.task('requirejs', function() {
             'angular-resource': 'libs/components/angular-resource/angular-resource',
             'angular-sanitize': 'libs/components/angular-sanitize/angular-sanitize',
             'angular-socket-io': 'libs/components/angular-socket-io/socket',
-            // 'angular-mocks': 'libs/components/angular-mocks/angular-mocks',
             'angular-ui-router': 'libs/components/angular-ui-router/release/angular-ui-router',
             'angular-ui-bootstrap': 'libs/components/angular-bootstrap/ui-bootstrap',
             'angular-ui-utils': 'libs/components/angular-ui-utils/ui-utils',
@@ -164,7 +150,6 @@ gulp.task('requirejs', function() {
             'oc-lazy-load': 'libs/components/ocLazyLoad/dist/ocLazyLoad',
             'tether-utils': 'libs/components/tether/js/utils',
             'tether': 'libs/components/tether/js/tether',
-            //'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
             'angular-modal': 'libs/components-fixed/angular-modal',
             //deviceAgent
             'xmlRPC': 'libs/components/jquery-xmlrpc/jquery.xmlrpc',
@@ -248,114 +233,6 @@ gulp.task('requirejs', function() {
         })
         .pipe($['requirejsOptimize'](options))
         .pipe(gulp.dest('dist'));
-
-
-    // var deferred = Q.defer();
-    //    $.requirejs({
-    //            baseUrl: 'src',
-    //            name: "main", // assumes a production build using almond
-    //            out: 'main.js',
-    //            optimize: 'none',
-    //            paths: {
-    //                'jquery': 'libs/components/jquery/dist/jquery',
-    //                'socket-io': 'libs/components/socket.io-client/socket.io',
-    //                'angular': 'libs/components/angular/angular',
-    //                'angular-animate': 'libs/components/angular-animate/angular-animate',
-    //                'angular-resource': 'libs/components/angular-resource/angular-resource',
-    //                'angular-sanitize': 'libs/components/angular-sanitize/angular-sanitize',
-    //                'angular-socket-io': 'libs/components/angular-socket-io/socket',
-    //                // 'angular-mocks': 'libs/components/angular-mocks/angular-mocks',
-    //                'angular-ui-router': 'libs/components/angular-ui-router/release/angular-ui-router',
-    //                'angular-ui-bootstrap': 'libs/components/angular-bootstrap/ui-bootstrap',
-    //                'angular-ui-utils': 'libs/components/angular-ui-utils/ui-utils',
-    //                'angular-ui-utils-hiv': 'libs/components/angular-ui-utils/ui-utils-ieshiv.min',
-    //                'angular-validation': 'libs/components/angular-validation/dist/angular-validation',
-    //                'angular-local-storage': 'libs/components/angular-local-storage/angular-local-storage',
-    //                'oc-lazy-load': 'libs/components/ocLazyLoad/dist/ocLazyLoad',
-    //                'tether-utils': 'libs/components/tether/js/utils',
-    //                'tether': 'libs/components/tether/js/tether',
-    //                //'angular-tooltip': 'libs/components/angular-tooltip/src/angular-tooltip',
-    //                'angular-modal': 'libs/components-fixed/angular-modal',
-    //                //deviceAgent
-    //                'xmlRPC': 'libs/components/jquery-xmlrpc/jquery.xmlrpc',
-
-
-    //                'libs': 'libs/libs',
-    //                'cabin': 'libs/cabin',
-    //                'cabin-core': 'libs/modules/core/cabin-core',
-    //                'cabin-directives': 'libs/modules/directives/cabin-directives',
-    //                'cabin-modals': 'libs/modules/modals/cabin-modals',
-    //                'cabin-services': 'libs/modules/services/cabin-services',
-    //                'cabin-validations': 'libs/modules/validations/cabin-validations',
-    //                'cabin-cust': 'scripts/customize-libs',
-    //                'app': 'scripts/app',
-
-    //                //customize
-    //                'appCtrl': 'scripts/ctrl/appCtrl',
-
-    //                'cabinCoreModule': 'libs/modules/core/module',
-    //                'cbLazyInitialServ': 'libs/modules/core/cabin-lazyInitialServ',
-    //                'cbModule': 'libs/modules/core/cabin-module',
-    //                'cbTxnRouterLoaderServ': 'libs/modules/core/cabin-txnRouterLoaderServ',
-    //                'cbLazyRegisterServ': 'libs/modules/core/cabin-lazyRegisterServ',
-
-
-    //                // Directives
-    //                'cabinDirectivesModule': 'libs/modules/directives/module',
-    //                'cbBehavior': 'libs/modules/directives/cabin-behavior/cabin-behavior',
-    //                'cbSplitter': 'libs/modules/directives/cabin-splitter/cabin-splitter',
-    //                'cbNotify': 'libs/modules/directives/cabin-notify/cabin-notify',
-    //                'cbTopMenu': 'libs/modules/directives/cabin-topMenu/cabin-topMenu',
-    //                'cbSideMenu': 'libs/modules/directives/cabin-sideMenu/cabin-sideMenu',
-    //                'cbPageViewer': 'libs/modules/directives/cabin-pageViewer/cabin-pageViewer',
-    //                'cbGrid': 'libs/modules/directives/cabin-grid/cabin-grid',
-    //                'cbComboBox': 'libs/modules/directives/cabin-comboBox/cabin-comboBox',
-    //                'cbMaskNumber': 'libs/modules/directives/cabin-mask/cabin-mask-number',
-    //                'cbSocketStatus': 'libs/modules/directives/cabin-socketStatus/cabin-socketStatus',
-    //                'cabinModalsModule': 'libs/modules/modals/module',
-    //                'cbCommonModal': 'libs/modules/modals/cabin-commonModal/cabin-commonModal',
-    //                'cabinServicesModule': 'libs/modules/services/module',
-    //                'cbUtils': 'libs/modules/services/cabin-utils',
-    //                'cbWebSocketIoServ': 'libs/modules/services/cabin-websocket-io',
-    //                'cbDeviceAgent': 'libs/modules/services/cabin-deviceAgent/cabin-deviceAgent',
-    //                'cbValidationServ': 'libs/modules/services/cabin-validation',
-    //                'taiwanId': 'libs/modules/validations/taiwanId',
-    //                //append cust
-
-
-    //                //cust
-    //                'custModule': 'scripts/module',
-    //                //services
-    //                'iBranchServ': 'scripts/services/iBranchServ',
-    //                'userServ': 'scripts/services/userServ',
-    //                //modals
-    //                'cbEjContextModal': 'scripts/modals/cabin-ejContextModal/cabin-ejContextModal',
-    //                'cbOpenTxnModal': 'scripts/modals/cabin-openTxnModal/cabin-openTxnModal',
-    //                'cbSupeviseModal': 'scripts/modals/cabin-supeviseModal/cabin-supeviseModal',
-    //                'cbSupeviseRequireModal': 'scripts/modals/cabin-supeviseRequireModal/cabin-supeviseRequireModal',
-    //                //validations
-    //                'ACNOVal': 'scripts/validations/common/ACNOVal',
-    //                'readMsr': 'scripts/validations/common/readMsr',
-    //                'txn000045ACNOVal': 'scripts/validations/txn000045/txn000045ACNOVal',
-    //                'txn120606ACNOVal': 'scripts/validations/txn120606/txn120606ACNOVal',
-    //                'txn120606COPY': 'scripts/validations/txn120606/txn120606COPY',
-
-    //                //mock package will add ../
-    //                'angular-mocks': 'libs/components/angular-mocks/angular-mocks',
-    //                'http-mock': '../test/_httpMock/define',
-    //                'last': '../test/_httpMock/last',
-    //                'queryMenu': '../test/_httpMock/queryMenu',
-    //                'queryComboBox': '../test/_httpMock/queryComboBox',
-    //                'iBranchTest': '../test/_httpMock/iBranchTest'
-
-
-    //            }
-    //        })
-    //        .pipe(gulp.dest('dist')).pipe($.callback(function(){
-    //          deferred.resolve("ok");
-    //        }));
-
-    //        return deferred.promise;
 });
 
 gulp.task('watch', function() {
@@ -381,7 +258,7 @@ gulp.task('default', function() {
 
 
 gulp.task('build', function() {
-    return runSequence('clean', 'compassDist', 'imagemin', 'htmlmin', 'copy', 'requirejs', function() {
+    return runSequence('clean', 'compassDist', 'imagemin', 'htmlmin', 'copy', 'requirejs', 'usemin', function() {
         browserSync({
             server: {
                 baseDir: ["dist", "test"],
