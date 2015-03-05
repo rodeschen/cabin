@@ -49,6 +49,8 @@
         "node.extend": "1.0.9",
         "time-grunt": "~0.1.0",
 
+
+        "gulp-install" : "latest",
         "gulp-load-plugins": "latest",
         "gulp-util": "latest",
         "gulp-clean": "latest",
