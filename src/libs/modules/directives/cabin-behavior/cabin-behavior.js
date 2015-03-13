@@ -117,7 +117,7 @@ define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
 
                     function parse(viewValue, noRender) {
                         viewValue = viewValue.replace(/\//g, "");
-                        ngModel.$setValidity('cbDate', viewValue.length === 8);
+                        ngModel.$setValidity('cbDate', viewValue.length === 8 || viewValue.length === 0);
                         which = -1;
                         return viewValue;
                     }
@@ -190,6 +190,9 @@ define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
 
                             which = -1;
 
+                        }else{
+                            ngModel.$setValidity('cbTwDateFormat', true);
+                            ngModel.$setValidity('cbTwDate', true);
                         }
                         return viewValue;
                     }
