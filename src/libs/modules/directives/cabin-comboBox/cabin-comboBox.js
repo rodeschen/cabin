@@ -261,6 +261,7 @@ define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
                             $scope.items = items || [];
                             $scope.match($scope.getNgModelValue());
                             $scope.formatter();
+                            $scope.checkValid();
                         });
                     }
                     $scope.$watch('activeIdx', function(nVal, oVal) {
