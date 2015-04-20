@@ -1,0 +1,60 @@
+<div class="page-context loginPage" ng-controller="txn075350Ctrl">
+    <h6>廣播發送(075350)</h6>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">分行別</span>
+        </div>
+        <div class="col-1"> </div>
+        <div class="col-3">
+            <input ng-model="data['branchNo']" required cb-combo-box combo-list="branchlist" combo-key="txn075350.banks" validator autocomplete="off" cb-focus="true" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">角　色</span>
+        </div>
+        <div class="col-1"> </div>
+        <div class="col-3">
+            <input ng-model="data['role']" required cb-combo-box combo-list="rolelist" validator autocomplete="off" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1"> </div>
+        <div class="col-2">
+            <button class="cabin-button button-blue">選取</button><br/>
+            <button class="cabin-button button-blue">移除</button>    
+        </div>
+        <div class="col-7" cb-grid="gridbranch" grid-data="resultbranch"></div>                    
+    </div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-2">
+            發送訊息
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <input style="height:60px;" ng-model="data['sendmessage']" type="text" />
+        </div>
+        <button class="cabin-button button-blue">送出</button>
+    </div>
+    <div class="row">
+        <div class="col-1">   </div> 
+        <div class="col-2">
+            <input ng-model="data['send']" type="radio" value="send" name="message">已發送訊息</input>
+        </div>
+        <div class="col-4">
+            <input ng-model="data['accept']" type="radio" value="accept" name="message">已接收訊息</input>
+        </div>
+        <div class="col-1"></div>
+        <div>
+            <button class="cabin-button button-blue">刪除</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">   </div> 
+        <div class="col-10" cb-grid="gridmes" grid-data="resultmes"></div>
+    </div>
+</div>

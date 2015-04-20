@@ -1,0 +1,36 @@
+<div class="page-context loginPage" ng-controller="txn075351Ctrl">
+    <h6>廣播接收(075351)</h6>
+    <br/>
+    <div class="row">
+        <div class="col-1">   </div> 
+        <div class="col-2">
+            <input ng-model="data['send']" type="radio" value="send" name="message"> 已發送訊息</input>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-2">
+            <input ng-model="data['accept']" type="radio" value="accept" name="message"> 已接收訊息</input>
+        </div>
+    </div>
+    
+    <!--        <div class="col-2">
+            <span class="title">主機櫃員代號</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.hId" type="text" />
+        </div>
+        <div class="col-2">
+            <span class="title">主機櫃員名稱</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="data.hName"  type="text" />
+        </div> -->
+    
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10" cb-grid="gridSettings" grid-data="result"></div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-2"><button class="cabin-button button-blue">刪除</button></div>
+    </div>
+</div>

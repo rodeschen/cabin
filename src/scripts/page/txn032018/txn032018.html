@@ -1,0 +1,403 @@
+<div class="page-context loginPage" ng-controller="txn032018Ctrl">
+    <h6>分行日結查詢回應畫面(032018)</h6>
+    <div class="row">
+        <div class="col-1">
+            <span >分行別</span>
+        </div>
+        <div class="col-2">
+            <input name="func" ng-disabled="true" ng-model="bankNo" ng-init="bankNo=11" type="text"  edit="true" autocomplete="off" class="medium"  cb-focus="true"/>
+        </div>
+         <div class="col-1">
+            <span >日　期</span>
+        </div>
+        <div class="col-2">
+            <input name="func" ng-disabled="true" cb-mask-tw-date convert-to-ad="true"  ng-model="date" type="text" ng-init="date='1040418'" edit="true" autocomplete="off" class="medium" cb-focus="true"/>
+        </div>
+         <div class="col-1">
+            <span >時　間</span>
+        </div>
+        <div class="col-2">
+            <input name="func" ng-disabled="true" ng-model="time" type="text"   edit="true"  autocomplete="off" ng-init="time='17:12'" class="medium" cb-focus="true"/>
+        </div>
+    </div>
+   <br><br>
+    <div class="row">
+        <div class="col-1">
+            <span>收　入</span>
+        </div>
+        <div class="col-2">
+             <span>筆　數</span>
+        </div>
+         <div class="col-2">
+             <span>金　額</span>
+        </div>
+         <div class="col-1">
+             <span>支　出</span>
+        </div>
+         <div class="col-2">
+             <span>筆　數</span>
+        </div>
+         <div class="col-2">
+             <span >金　額</span>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-1">
+            <span >現　金</span>
+        </div>
+         <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+            <input ng-model="cash1 | currency" type="text" ng-disabled="true"  maxlength="20" ng-init="cash1=14368526" />
+        </div>
+          <div class="col-1">
+            <span >現　金</span>
+        </div>
+         <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+            <input ng-model="cash2 | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="cash2=-10341514" />
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-1">
+            <span >轉　帳</span>
+        </div>
+         <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+            <input ng-model="ref1 | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="ref1=11308646" />
+        </div>
+          <div class="col-1">
+            <span >轉　帳</span>
+        </div>
+         <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+           <input ng-model="ref2 | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="ref2=-11303666" />
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-1">
+            <span >撥　收</span>
+        </div>
+         <div class="col-2">
+           <input ng-model="acpt1qu" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="acpt1qu=0" />
+        </div>
+        <div class="col-2">
+             <input ng-model="acpt1cash | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="acpt1cash=0" />
+        </div>
+          <div class="col-1">
+            <span >撥　付</span>
+        </div>
+         <div class="col-2">
+            <input ng-model="acpt2qu" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="acpt2qu=0" />
+        </div>
+        <div class="col-2">
+            <input ng-model="acpt2cash | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="acpt2cash=0" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >櫃員餘額</span>
+        </div>
+         <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+           <input ng-model="memberCash | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="memberCash=4027012" />
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-1">
+            <span >繳　庫</span>
+        </div>
+         <div class="col-2">
+             <input ng-model="givequ" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="givequ=0" />
+        </div>
+        <div class="col-2">
+            <input ng-model="givecash | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="givecash=0" />
+        </div>
+          <div class="col-1">
+            <span >領　庫</span>
+        </div>
+         <div class="col-2">
+             <input ng-model="takequ" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="takequ=0" />
+        </div>
+        <div class="col-2">
+            <input ng-model="takecash | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="takecash=0" />
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-1">
+            <span >金庫餘額</span>
+        </div>
+         <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+             <input ng-model="goldCash | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="goldCash=611220810" />
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-1">
+            <span >分行總計</span>
+        </div>
+         <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+           <input ng-model="bankCash | currency" type="text" ng-disabled="true"  maxlength="20" autocomplete="off" ng-init="bankCash=615247822" />
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-2">
+            <span >本日庫存現金明細</span>
+        </div>
+      
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >紙幣種類</span>
+        </div>
+        <div class="col-2">
+          <span>綑　數</span>
+        </div>
+        <div class="col-2">
+            <span >紮　數</span>
+        </div>
+        <div class="col-2">
+            <span >細　數</span>
+        </div>
+        <div class="col-2">
+            <span >小　計</span>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-1">
+            <span >貳千元券</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >壹千元券</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >伍佰元券</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >貳佰元券</span>
+        </div>
+         <div class="col-2">
+            <input   type="text" maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >壹佰元券</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text" maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >硬幣種類</span>
+        </div>
+        <div class="col-2">
+          <span>袋　數</span>
+        </div>
+        <div class="col-2">
+            <span >包　數</span>
+        </div>
+        <div class="col-2">
+            <span >細　數</span>
+        </div>
+        <div class="col-2">
+            <span >小　計</span>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-1">
+            <span >伍拾元硬幣</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >貳拾元硬幣</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >壹拾元硬幣</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >伍元　硬幣</span>
+        </div>
+         <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >壹元　硬幣</span>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span >合　計</span>
+        </div>
+        <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+            <input   type="text"  maxlength="12" autocomplete="off"/>
+        </div>
+    </div>
+    
+   
+    <div class="row">
+        <div class="col-1">
+           
+        </div>
+        <div class="col-2">
+           
+        </div>
+        <div class="col-2">
+           
+        </div>
+        <div class="col-3">
+          <button class="cabin-button button-blue" ng-click="">關閉分行金庫</button>
+            <button class="cabin-button button-blue" ng-click="">開起分行金庫</button>
+        </div>
+      
+    </div>
+</div>

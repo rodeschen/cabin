@@ -1,0 +1,291 @@
+<div class="page-context loginPage" ng-controller="txn032060Ctrl">
+    <h6>櫃員日截查詢回應畫面(032060)</h6>
+    <!-- <br/>ACNO_SA:{{data.110320_ACNO_SA}}
+    <br/>PB_NO:{{data.110320_PB_NO}}
+    <br/>PB_BAL:{{data.110320_PB_BAL}}
+    <br/>PB_LONE:{{data.110320_PB_LINE}} -->
+    <div class="row">
+        <div class="col-1">
+            <span class="title">分行別</span>
+        </div>
+        <div class="col-1">
+            <input ng-model="cbank" type="text" disabled="disabled"/>
+        </div>
+        <div class="col-1">
+            <span class="title">員工編號</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="empid" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span class="title">交易日期</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="tdate" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span class="title">交易時間</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="ttime" disabled="disabled" type="text" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1">
+            <span class="title">收入</span>
+        </div>
+        <div class="col-1">
+            <span class="title">金額</span>
+        </div>
+        <div class="col-4">
+            <span class="title"></span>
+        </div>
+        <div class="col-1">
+            <span >支出</span>
+        </div>
+        <div class="col-1">
+            <span class="title">金額</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1">
+            <span class="title">現金</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="imoney" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >現收傳票序號</span>
+        </div>
+        <div class="col-2">
+            <input  disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >現金</span>
+        </div>
+        <div class="col-2">
+            <input disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >現支傳票序號</span>
+        </div>
+        <div class="col-2">
+            <input  disabled="disabled" type="text" />
+        </div>
+    </div>
+
+
+        <div class="row">
+        <div class="col-1">
+            <span class="title">轉帳</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="itmoney" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span class="title"></span>
+        </div>
+        <div class="col-2">
+            <input  disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >轉帳</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="otmoney" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >轉帳傳票序號</span>
+        </div>
+        <div class="col-2">
+            <input disabled="disabled" type="text" />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-1">
+            <span class="title">撥收</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="ibmoney" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >撥收序號</span>
+        </div>
+        <div class="col-2">
+            <input disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >撥付</span>
+        </div>
+        <div class="col-2">
+            <input  ng-model="obmoney" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >撥付序號</span>
+        </div>
+        <div class="col-2">
+            <input disabled="disabled" type="text" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1">
+            <span class="title">昨日餘額</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="yrmoney" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span class="title"></span>
+        </div>
+        <div class="col-2">
+            <input disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >本日結餘</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="trmoney" disabled="disabled" type="text" />
+        </div>
+        <div class="col-1">
+            <span >端末餘額</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="tellermoney" disabled="disabled" type="text" />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-1">
+            <span class="title">本日庫存現金明細</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1">
+            <span class="title">貳仟元券</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >張</span>
+        </div>
+        <div class="col-1">
+            <span class="title">伍拾元硬幣</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >個</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span class="title">壹仟元券</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >張</span>
+        </div>
+        <div class="col-1">
+            <span class="title">貳拾元硬幣</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >個</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span class="title">伍佰元券</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >張</span>
+        </div>
+        <div class="col-1">
+            <span class="title">壹拾元硬幣</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >個</span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span class="title">貳佰元券</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >張</span>
+        </div>
+        <div class="col-1">
+            <span class="title">伍 元硬幣</span>
+        </div>
+        <div class="col-1">
+            <input type="text" />
+        </div>
+        <div class="col-1">
+        <span >個</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span class="title">壹佰元券</span>
+        </div>
+        <div class="col-1">
+            <input type="text"  />
+        </div>
+        <div class="col-1">
+        <span >張</span>
+        </div>
+        <div class="col-1">
+            <span class="title">壹 元硬幣</span>
+        </div>
+        <div class="col-1">
+            <input type="text"  />
+        </div>
+        <div class="col-1">
+        <span >個</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <span class="title">櫃員小計</span>
+        </div>
+        <div class="col-1"/>
+        <div class="col-2">
+            <input disabled="disabled" type="text"  />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3"/>
+        <div class="col-1">
+        <button class="cabin-button button-blue" >更新端末餘額</button>
+        </div>
+        <div class="col-1">
+        <button class="cabin-button button-blue" >開啟小銀箱</button>
+        </div>
+        <div class="col-1">
+        <button class="cabin-button button-red" >關閉小銀箱</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="page-context loginPage" ng-controller="txn075120Ctrl">
+    <h6>自行人員代理設定(075120)</h6>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">被代理人員編</span>
+        </div>
+        <div class="col-2">
+            <input ng-model="askmemberid"  type="text" cb-combo-box  validator  autocomplete="off" combo-list="memberInfo"/>
+        </div>
+       
+      
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">代理人員編</span>
+        </div>
+          <div class="col-2">
+            <input  ng-model="replacememberid" type="text" validator autocomplete="off"  cb-combo-box combo-list="memberInfo" >
+        </div>
+     
+      
+    </div>
+    <div class="row">
+     
+        <div class="col-2">
+       
+            <span class="title">  <input type="checkbox" style="width:20px; height:20px;"> 即時生效</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <span class="title">起始日期</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.StartDate" style="width:224px" type="text"  class="ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-touched" cb-mask-tw-date convert-to-ad="true" validator ng-init="data.StartDate=getToday()" autocomplete="off"/>
+        </div>
+        <div class="col-2">
+            <span class="title">結束日期</span>
+        </div>
+        <div class="col-3">
+            <input ng-model="data.EndTime" cb-mask-tw-date convert-to-ad="true" style="width:224px" class="ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-touched" type="text" validator autocomplete="off"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+        </div>
+        <div class="col-6" >
+            <button class="cabin-button button-blue" ng-click="send(data)">查詢</button>
+            <button class="cabin-button button-blue" ng-click="send(data)">設定代理</button>
+            <button class="cabin-button button-blue" ng-click="send(data)">刪除代理</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div cb-grid="gridSettings" grid-data="result"></div>
+    </div>
+</div>
