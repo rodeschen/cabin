@@ -3,7 +3,8 @@
         <div class="msg-title" ng-class="{'msg-notify':hasNotify}" ng-click="toggleNotify()">交易訊息&nbsp;
             <i class="msg-close-btn fa {{isOpen?'fa-angle-double-down':'fa-angle-double-up'}} icon-large"></i>
         </div>
-        <div class="msg-last-msg msg-type-{{events[events.length-1].type}}" ng-show="!isOpen && events[events.length-1]" title="{{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}"><i class="fa fa-comments"></i> {{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}</div>
+        <!-- <div class="msg-last-msg msg-type-{{events[events.length-1].type}}" ng-show="true || !isOpen && events[events.length-1]" title="{{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}"><i class="fa fa-comments"></i> {{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}</div> -->
+        <div class="msg-last-msg msg-type-{{events[events.length-1].type}}" ng-show="!isOpen" title="{{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}"><i class="fa fa-comments"></i> {{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}</div>
     </div>
     <div id="msg-body" class="msg-body">
         <div class="msg-wrapper">

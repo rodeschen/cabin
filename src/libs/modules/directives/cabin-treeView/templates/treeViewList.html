@@ -1,0 +1,4 @@
+<li ng-repeat="el in els">
+    <div cb-tree-view-node='el' tree-filter="ft"></div>
+    <span ng-if="el.children.length && el.open" cb-sub-tree-view='el' tree-filter="ft"></span>
+</li>

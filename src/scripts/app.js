@@ -217,7 +217,28 @@ define('app', ['cabin'], function(cabin) {
             $rootScope.user = userServ.getUser();
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
+            // catch all keydown
 
+            var allowKeys = [
+                '9' // tab
+            ];
+            angular.element($window).on("keydown", function(event) {
+                var keyCode = event.which;
+                
+                if(keyCode == 115){
+                    var controller = angular.element(event.target).controller('ngModel');
+                    controller.$setViewValue("SS", event);
+                    controller.$render()
+
+
+                    console.log(controller.$name)
+                }
+                
+                if (allowKeys.indexOf(event.which) != -1) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            });
         }
     ]);
 });

@@ -1,0 +1,81 @@
+$tree-view-gap: 10px !default;
+$tree-view-folder-color: #EDD190;
+$tree-view-file-color: #E8D6A8;
+$tree-view-selected-color: #EFCF91;
+$tree-view-selected-border: 1px solid #D1A154;
+
+[cb-tree-view].tree-view {
+  background-color: #EAEF0F;
+  position: absolute;
+  background: #FFF;
+  width: 235px;
+  bottom: 57px;
+  /* height: 100%; */
+  top: 109px;
+  padding-top: 10px;
+  z-index: 1000;
+  border-top: 1px #aaa solid;
+  border-right: 1px #aaa solid;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .fa-file {
+    color: $tree-view-file-color;
+  }
+  .fa-folder {
+    color: $tree-view-folder-color;
+  }
+  .fa-caret-right,
+  .fa-caret-down {
+    width: 15px;
+  }
+  ul {
+    white-space: nowrap;
+    li {
+      line-height: 25px;
+      i {
+        padding: 0px 5px;
+        cursor: pointer;
+      }
+    }
+    a {
+      color: #000;
+      span {
+        padding: 3px;
+        cursor: pointer;
+      }
+      // &.actived > span {
+      //   border: $tree-view-selected-border;
+      //   background-color: $tree-view-selected-color;
+      // }
+    }
+  }
+  > ul > li li {
+    padding-left: 27px;
+  }
+  > ul {
+    padding-left: $tree-view-gap * 0;
+  }
+  > ul > li > ul {
+    padding-left: $tree-view-gap * 1;
+  }
+  > ul > li > ul > li > ul {
+    padding-left: $tree-view-gap * 2;
+  }
+}
+
+[cb-tree-view].tree-view {
+
+  & a.actived > span {
+    border: #AAA dotted 1px;
+    background-color: #EEE;
+  }
+
+
+  &:focus a.actived > span {
+    border: $tree-view-selected-border;
+    background-color: $tree-view-selected-color;
+  }
+
+
+
+}

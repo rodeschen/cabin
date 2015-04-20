@@ -1,0 +1,5 @@
+<a ng-class="{'actived': el.selected}">
+    <i ng-if="el.type=='folder'" ng-click="toggleFolder($event, el)" class="fa" ng-class="{'fa-caret-down' : el.open,'fa-caret-right' : !el.open}"></i>
+    <i class="fa" ng-class="{'fa-folder': el.type == 'folder','fa-file': el.type=='file'}"></i>
+    <span ng-bind-html="el.txn + ' ' + el.title" title="{{el.txn + ' ' + el.title}}" ng-click="selectNode($event,el)" ng-dblclick="cblClickNode($event, el)"></span>
+</a>

@@ -66,11 +66,11 @@ body {
   line-height: 1.231;
   //background-color: #16A085;
   &.is-login {
-    background-color: #bac1c8;
+    background: #C7DDE3;
   }
   min-width: 1024px;
   @include susy-breakpoint($mobile, $susy) {
-    font-size: 12px;
+    //font-size: 12px;
     width: 100%;
   }
 

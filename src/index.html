@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>cabin-富邦POC</title>
+    <title>富邦銀行端末系統</title>
     <!-- build:css({.tmp,src}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
@@ -44,13 +44,18 @@
                     <li class="hint--bottom" data-hint="日誌">
                         <a href="" class="icon icon-booklet" ui-sref="txn({id:'000001'})"><div class="calender">{{currentTime | date:'dd'}}</div></a>
                     </li>
+                    <li class="hint--bottom" data-hint="印鑑">
+                        <a href="" class="icon icon-stamp"></a>
+                    </li>
                     <li class="hint--bottom" data-hint="授權">
                         <a href="" class="icon icon-security" ng-click="hasOV && openSupModal()">
-                            <div ng-class="{'sup-notify': hasOV}"></div>
+                            <!-- <div class="sup-notify" ng-class="{'sup-notify': hasOV}"></div> -->
                         </a>
                     </li>
-                    <li class="hint--bottom" data-hint="代辦">
-                        <a href="" class="icon icon-compose" ng-click="clearLocal()"></a>
+                    <li class="hint--bottom" data-hint="訊息">
+                        <a href="" class="icon icon-compose" ng-click="clearLocal()">
+                            <div  ng-class="{'sup-notify': hasOV}"></div>
+                        </a>
                     </li>
                     <li class="hint--bottom" data-hint="櫃員帳務查詢">
                         <a href="" class="icon icon-browser" ui-sref="txn({id:'092654'})"></a>
@@ -65,24 +70,42 @@
             </nav>
 
         </div>
+<!--         <table ><tr><td Width="300">交易代號:</td><td >
+        <form ng-submit="submitTxn()"><input type="text" style=" width: 150px;" ng-model="inputTxn" ng-keyup="hotkey.setEvent($event);hotkey.increaseCount()"  ></form></td>
+        <td ><div class="toggle" cb-module="cbMarquee"></div></td></tr></table>
+ -->
+        <form style="background-color:#C7DDE3;"ng-submit="submitTxn()">
+               <span style="width:100px">
+                    <b style="font-size:16px;padding: 0px 5px 0 5px;">交易代號:</b>
+                    <input type="text" style=" width: 150px; " ng-model="inputTxn" ng-keyup="hotkey.setEvent($event);hotkey.increaseCount()"  >
+               </span>
+               <span  style="display:inline-block;width:calc(100% - 237px)" class="toggle" cb-module="cbMarquee" ></span>  
+        </form> 
+       
     </header>
+    <div ng-show="(!$state.is('txn') && !$state.is('txnInit')) && isLogin" cb-module="cbTreeView" class="toggle"></div>
     <div class="main-body ng-cloak page-content">
         <div ng-hide="!isLogin || isLock" class="toggle">
             <div class="toggle favorite" ng-show="$state.is('index')">
+                <div style="text-align:center;font-size:32px;margin-top: 20px;margin-left: 474px;display: inline-block;background-color: #D1C4E9;padding: 10px 27px;border-radius: 31px;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);">
+公　告　事　項
+</div>
                 <div class="table">
                     <div class="table-cell v-middle">
                         <div class="row">
-                                <a class="btn_032671" ui-sref="txn({id:'032671'})"><span>歸戶查詢(032671)</span></a>
+  <!--                               <a class="btn_032671" ui-sref="txn({id:'032671'})"><span>歸戶查詢(032671)</span></a>
                                 <a class="btn_000045" ui-sref="txn({id:'000045'})"><span>轉帳交易 (000045)</span></a>
                         </div>
                         <br/>
                          <div class="row">
                                 <a class="btn_120606" ui-sref="txn({id:'120606'})"><span>黃金存摺餘額 / 存額證明列印 (120606)</span></a>
                             
-                                <a class="btn_092654" ui-sref="txn({id:'092654'})"><span>櫃員帳務查詢(000002)</span></a>
+                                <a class="btn_092654" ui-sref="txn({id:'092654'})"><span>櫃員帳務查詢(000002)</span></a> -->
+
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div ng-show="$state.is('txn') || $state.is('txnInit')" class="toggle" cb-module="cbPageViewer" init-path="" receive-event="pageViewer"></div>
         </div>
@@ -110,6 +133,8 @@
     <!-- <footer ng-show="isLogin" class="slide-top">
     </footer> -->
     <!-- <div ng-show="isLogin" class="toggle" cb-module="cbNotify"></div> -->
-    <div class="toggle" cb-module="cbNotify"></div>
+    <div class="toggle" cb-module="cbPhrase" ng-hide="true"></div>
+    <div class="toggle" cb-module="cbNotify" ng-show="isLogin"></div>
+    <div class="toggle" cb-module="cbCaller" ng-show="isLogin"></div>
     <div ui-view></div>
 </body>

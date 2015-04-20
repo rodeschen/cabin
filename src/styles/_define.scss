@@ -28,7 +28,10 @@ $susy: (
   output: float,
   gutter-position: split,
   global-box-sizing: border-box,
-  debug:(image:show)
+  use-custom: (
+    box-sizing: false,
+  )
+ // debug:(image:show)
 );
 //$pc : min-width 960px;
 $pad  : max-width 959px;

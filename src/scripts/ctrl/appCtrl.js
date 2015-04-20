@@ -93,7 +93,7 @@ define(['cabin'], function(cabin) {
                         $scope.$emit('broadcast', {
                             event: 'notify',
                             type: msgType,
-                            message: "ADFADFADSF " + ran
+                            message: "測試 " + msgType + "  " + ran
                         });
                     },
                     clearLocal: function() {
@@ -105,10 +105,26 @@ define(['cabin'], function(cabin) {
                         $scope.$emit('broadcast', {
                             event: ('pageViewer-' + ($scope.lock ? 'lock' : 'unlock'))
                         });
+                    },
+                    // fix later
+                    submitTxn: function() {
+                        $state.go('txn', {
+                            id: $scope.inputTxn
+                        });
+                        $scope.inputTxn = '';
                     }
                 });
+                $rootScope.$on("dblClick.tree", function(event, data) {
+                    $state.go('txn', {
+                        'id': data.el.txn
+                    });
+                });
+
+
 
             });
         }
-    ]);
+
+        //fix later
+    ])
 });

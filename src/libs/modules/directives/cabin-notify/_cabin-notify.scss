@@ -6,12 +6,13 @@
 @include animate-flash-color-customer(notify-flash-normal, background, #FFFFFF, #95A5A6 , 20% , 30%);
 
 .msg-area {
-  @include calc(width, 100% - 10%);
-  left: 5%;
+  //@include calc(width, 100% - 10%);
+  //left: 5%;
+  width: 100%;  
   min-width: 900px;
   margin: auto;
   position: fixed;
-  bottom: 0px;
+  bottom: 29px;
   height: auto;
   color: #FFF;
   vertical-align: middle;

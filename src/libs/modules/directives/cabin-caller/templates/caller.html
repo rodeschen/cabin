@@ -1,0 +1,23 @@
+<div class="caller-body">
+<table class="tbstyle" style="width:100%">
+    <tbody>
+        <tr>
+            <td style="width: 5%; text-align : center ;border-right: #AAA 1px solid;" class="type-btn" ng-class="{'selected' : index == 1}" ng-click="selectta()" class="">台幣收付</td>
+            <td style="width: 5%; text-align : center ;border-right: #AAA 1px solid;" class="type-btn" ng-class="{'selected' : index == 2}" ng-click="selectou()" class="">外幣收付</td>
+            <td style="width: 5%; text-align : center ;border-right: #AAA 1px solid;" class="type-btn" ng-class="{'selected' : index == 3}" ng-click="selectno()" class="">一般收付</td>
+            <td style="width: 25%;padding-left: 10px;"> 　現在號碼: <span style="color:red">{{nownum}}</span>
+            <button class="btnnext" ng-click="next()">下一位</button>
+                <button class="btnnext" ng-click="recal()">重新叫號</button></td>
+            <td style="width: 6%;" class="ng-binding"></td>
+            <td style="width: 20%">
+                
+                指定叫號 ： <input style="width:100px;margin-left:10px" type="text" ng-model="calnumber " class="ng-pristine ng-valid ng-touched">
+                  <button class="btnnext" ng-click="calnum()" ng-disabled="!calnumber">確定</button>
+            </td>
+            <td style="width: 14%; padding-left: 65px;">
+                <button class="btnout"> 結束服務</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div>
