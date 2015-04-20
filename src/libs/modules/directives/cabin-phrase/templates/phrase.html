@@ -1,24 +1,4 @@
-<!-- <div class="msg-area msg-{{ isOpen?'open':'close' }}" ng-click="hasNotify = false">
-    <div style="width:100%"> 
-        <div class="msg-title" ng-class="{'msg-notify':hasNotify}" ng-click="toggleNotify()">交易訊息&nbsp;
-            <i class="msg-close-btn fa {{isOpen?'fa-angle-double-down':'fa-angle-double-up'}} icon-large"></i>
-        </div>
-        <div class="msg-last-msg msg-type-{{events[events.length-1].type}}" ng-show="!isOpen && events[events.length-1]" title="{{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}"><i class="fa fa-comments"></i> {{events[events.length-1].time| date:'yyyy-MM-dd HH:mm:ss'}} : {{events[events.length-1].message}}</div>
-    </div>
-    <div id="msg-body" class="msg-body">
-        <div class="msg-wrapper">
-            <div class="msg msg-type-{{event.type}}" ng-repeat="event in events">
-                <i ng-class="addIcon(event.type)"></i> 
-                <span class="msg-event-title"></span>
-                <span class="msg-event-time">{{event.time| date:'yyyy-MM-dd HH:mm:ss'}}</span>:
-                <div class="msg-event-message" ng-bind-html="event.message"></div>
-            </div>
-        </div>
-    </div>
-</div>
- -->
-
-<div class="phr-area">
+<div class="phr-area toggle ng-hide" ng-show="ngModelCtrl">
     <div  class="phr-title">片語選擇</div>
 
     <div class="phr-subtitle">片語代號</div>
@@ -26,12 +6,12 @@
     <div class="phr-subtitle">類別</div>
     <div class="phr-content">
         <table class="phr-table">
-        <tr ng-repeat="class in classes" class="phr-tr"><td class="phr-td">{{class.item}}</td></tr>
+        <tr ng-click="chooseGroup(data)" ng-repeat="data in datas" class="phr-tr" ng-class="{isselected:selectedGroup==data}"><td class="phr-td">{{data.key}}</td></tr>
     </table></div>
     <div class="phr-subtitle">片語</div>
     <div class="phr-content"><table class="phr-table">
-        <tr ng-repeat="city in cities" class="phr-tr" ng-click="choosePhrase($index)" ng-class="{isselected:selectedIdx==$index}" ><td class="phr-td">{{city.city}}</td></tr>
+        <tr ng-repeat="data in selectedGroup.values" class="phr-tr" ng-click="choosePhrase(data,$index)" ng-class="{isselected:selectedPhrase == data}" ><td class="phr-td">{{data.key + ' ' + data.value}}</td></tr>
     </table></div>
-    <button  class="phr-button phr-button-blue" ng-click="phraseSubmit()">確定</button>
-    <button  class="phr-button phr-button-red">取消</button>
+    <button  class="phr-button phr-button-blue" ng-click="setValue()">確定</button>
+    <button  class="phr-button phr-button-red" ng-click="close()">取消</button>
 </div>

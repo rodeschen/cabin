@@ -236,8 +236,8 @@ gulp.task('requirejs', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(['src/styles/**/*.scss'], ['compass']);
-    gulp.watch(['src/scripts/**/*.js'], reload);
+    gulp.watch(['src/styles/**/*.scss', 'src/libs/modules/**/*.scss'], ['compass']);
+    gulp.watch(['src/scripts/**/*.js','src/libs/modules/**/*.js'], reload);
 });
 
 gulp.task('default', function() {

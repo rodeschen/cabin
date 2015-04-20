@@ -203,8 +203,8 @@ define('app', ['cabin'], function(cabin) {
             //     })
             // });
         }
-    ]).run(['$rootScope', '$window', '$state', '$stateParams', '$timeout', 'userServ',
-        function($rootScope, $window, $state, $stateParams, $timeout, userServ) {
+    ]).run(['$rootScope', '$window', '$state', '$stateParams', '$timeout', 'userServ','$injector',
+        function($rootScope, $window, $state, $stateParams, $timeout, userServ, $injector) {
             $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams) {});
             userServ.then(function(data) {
@@ -227,11 +227,8 @@ define('app', ['cabin'], function(cabin) {
                 
                 if(keyCode == 115){
                     var controller = angular.element(event.target).controller('ngModel');
-                    controller.$setViewValue("SS", event);
-                    controller.$render()
-
-
-                    console.log(controller.$name)
+                     var serv  = $injector.get('cbPhraseServ');
+                     serv.open(controller);
                 }
                 
                 if (allowKeys.indexOf(event.which) != -1) {
