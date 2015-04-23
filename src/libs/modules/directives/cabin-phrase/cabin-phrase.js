@@ -27,7 +27,7 @@ define(['cabinDirectivesModule'], function(cabinDirectivesModule) {
                     };
 
                     scope.setValue = function() {
-                        scope.ngModelCtrl.$setViewValue(scope.ngModelCtrl.$viewValue + scope.selectedPhrase.value);
+                        scope.ngModelCtrl.$setViewValue((scope.ngModelCtrl.$viewValue || '') + scope.selectedPhrase.value);
                         scope.ngModelCtrl.$render();
                         scope.ngModelCtrl = null;
                     }

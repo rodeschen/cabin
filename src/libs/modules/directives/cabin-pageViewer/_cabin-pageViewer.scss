@@ -1,164 +1,96 @@
-.page-viewer {
-  //@include isolate(1);
-  //@include span(12);
-  width: 96%;
-  margin-left: 2%;
-  margin-right: 2%;
-  background-color: #ECF0F1;
-  display: block;
-  margin-top: 20px;
-  //min-height: 420px;
-  min-height: 520px;
-  position: relative;
-  border: 5px #2C3E50 solid;
-  @include border-radius(5px);
-  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
-  .row {
-    &:before, &:after {
-      content: " ";
-      display: table;
-      clear: both;
+$pageViewer: (columns: 80, gutters: 1 / 4, math: fluid, output: float, gutter-position: split, global-box-sizing: border-box, use-custom: (box-sizing: false), debug: (image: show));
+
+@include with-layout($pageViewer) {
+  .page-viewer {
+    //@include isolate(1);
+    //@include span(12);
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: #ECF0F1;
+    display: block;
+    margin-top: 20px;
+    //min-height: 420px;
+    min-height: 520px;
+    position: relative;
+    border: 5px #2C3E50 solid;
+    @include border-radius(5px);
+    @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
+    .row {
+      &:before, &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
     }
-  }
-  .page-context {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    //position: absolute;
-    margin: 20px;
-    height: 100%;
-    //background-color: #FFF;
-    [class*=col] {
-      padding: 4px 0;
-    }
-    .col-1 {
-      @include span(1);
-    }
-    .col-2 {
-      @include span(2);
-    }
-    .col-3 {
-      @include span(3);
-    }
-    .col-4 {
-      @include span(4);
-    }
-    .col-5 {
-      @include span(5);
-    }
-    .col-6 {
-      @include span(6);
-    }
-    .col-7 {
-      @include span(7);
-    }
-    .col-8 {
-      @include span(8);
-    }
-    .col-9 {
-      @include span(9);
-    }
-    .col-10 {
-      @include span(10);
-    }
-    .col-11 {
-      @include span(11);
-    }
-    .col-12 {
-      @include span(12);
-    }
-    .col-13 {
-      @include span(13);
-    }
-    .col-14 {
-      @include span(14);
-    }
-    .col-15 {
-      @include span(15);
-    }
-    .col-16 {
-      @include span(16);
-    }
-    .col-17 {
-      @include span(17);
-    }
-    .col-18 {
-      @include span(18);
-    }
-    .col-19 {
-      @include span(19);
-    }
-    .col-20 {
-      @include span(20);
-    }
-    .col-21 {
-      @include span(21);
-    }
-    .offset-1 {
-      @include isolate(1);
-    }
-    .offset-2 {
-      @include isolate(2);
-    }
-    .offset-3 {
-      @include isolate(3);
-    }
-    .offset-4 {
-      @include isolate(4);
-    }
-    .offset-5 {
-      @include isolate(5);
-    }
-    .offset-6 {
-      @include isolate(6);
-    }
-    .offset-7 {
-      @include isolate(7);
-    }
-    .offset-8 {
-      @include isolate(8);
-    }
-    .title {
-      font-size: 1.1em;
-      display: block;
-      line-height: 2em;
-      text-align: right;
-      padding: 0 1em;
-      font-weight: 500;
-    }
-    .title-left {
-      @extend .title;
-      text-align: left;
-    }
-    .title-center {
-      @extend .title;
-      text-align: center;
+    .page-context {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      //position: absolute;
+      margin: 20px;
+      height: 100%;
+      //background-color: #FFF;
+      [class*=col] {
+        padding: 4px 0;
+      }
+      // generate col and offset
+      @for $i from 1 through 80 {
+        .col-#{$i} {
+          @include span($i);
+        }
+      }
+      @for $i from 1 through 80 {
+        .offset-#{$i} {
+          @include isolate($i);
+        }
+      }
+      .title {
+        font-size: 1.1em;
+        display: block;
+        line-height: 2em;
+        text-align: right;
+        padding: 0 1em;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .title-left {
+        @extend .title;
+        text-align: left;
+      }
+      .title-center {
+        @extend .title;
+        text-align: center;
+      }
     }
   }
 }
 
-input[type].extra-large,[cb-combo-box].extra-large {
+
+input[type].extra-large, [cb-combo-box].extra-large {
   width: 300px;
 }
 
-input[type].large,[cb-combo-box].large {
+input[type].large, [cb-combo-box].large {
   width: 200px;
 }
 
-input[type].normal,[cb-combo-box].normal {
+input[type].normal, [cb-combo-box].normal {
   width: 120px;
 }
 
-input[type].medium,[cb-combo-box].medium {
+input[type].medium, [cb-combo-box].medium {
   width: 100px;
 }
 
-input[type].small,[cb-combo-box].small {
+input[type].small, [cb-combo-box].small {
   width: 50px;
 }
 
-input[type].extra-small,[cb-combo-box].extra-small {
+input[type].extra-small, [cb-combo-box].extra-small {
   width: 30px;
 }
 
@@ -251,22 +183,23 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {
   border-color: #1abc9c;
+  background-color: $focus-background-color;
 }
 
-input[type="text"][disabled],input[type="text"][readonly],
-input[type="password"][disabled],input[type="password"][readonly],
-input[type="datetime"][disabled],input[type="datetime"][readonly],
-input[type="datetime-local"][disabled],input[type="datetime-local"][readonly],
-input[type="date"][disabled],input[type="date"][readonly],
-input[type="month"][disabled],input[type="month"][readonly],
-input[type="time"][disabled],input[type="time"][readonly],
-input[type="week"][disabled],input[type="week"][readonly],
-input[type="number"][disabled],input[type="number"][readonly],
-input[type="email"][disabled],input[type="email"][readonly],
-input[type="url"][disabled],input[type="url"][readonly],
-input[type="search"][disabled],input[type="search"][readonly],
-input[type="tel"][disabled],input[type="tel"][readonly],
-input[type="color"][disabled],input[type="color"][readonly],
+input[type="text"][disabled], input[type="text"][readonly],
+input[type="password"][disabled], input[type="password"][readonly],
+input[type="datetime"][disabled], input[type="datetime"][readonly],
+input[type="datetime-local"][disabled], input[type="datetime-local"][readonly],
+input[type="date"][disabled], input[type="date"][readonly],
+input[type="month"][disabled], input[type="month"][readonly],
+input[type="time"][disabled], input[type="time"][readonly],
+input[type="week"][disabled], input[type="week"][readonly],
+input[type="number"][disabled], input[type="number"][readonly],
+input[type="email"][disabled], input[type="email"][readonly],
+input[type="url"][disabled], input[type="url"][readonly],
+input[type="search"][disabled], input[type="search"][readonly],
+input[type="tel"][disabled], input[type="tel"][readonly],
+input[type="color"][disabled], input[type="color"][readonly],
 .uneditable-input {
   background-color: #ECF0F1;
 }
@@ -308,7 +241,7 @@ input.ng-invalid,
 }
 
 .btn.btn-red {
-  color:#FFF;
+  color: #FFF;
   background-color: #b0120a;
   &:hover {
     background-color: #c41411;
@@ -316,7 +249,7 @@ input.ng-invalid,
 }
 
 .btn.btn-blue {
-  color:#FFF;
+  color: #FFF;
   background-color: #2a36b1;
   &:hover {
     background-color: #3b50ce;

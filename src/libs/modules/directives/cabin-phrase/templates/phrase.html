@@ -2,7 +2,7 @@
     <div  class="phr-title">片語選擇</div>
 
     <div class="phr-subtitle">片語代號</div>
-    <div align="center"><input type = "text" class="phr-text"></div>
+    <div align="center"><input ng-model="filterKey" cb-mask-to-upper-case type = "text" class="phr-text"></div>
     <div class="phr-subtitle">類別</div>
     <div class="phr-content">
         <table class="phr-table">
@@ -10,7 +10,7 @@
     </table></div>
     <div class="phr-subtitle">片語</div>
     <div class="phr-content"><table class="phr-table">
-        <tr ng-repeat="data in selectedGroup.values" class="phr-tr" ng-click="choosePhrase(data,$index)" ng-class="{isselected:selectedPhrase == data}" ><td class="phr-td">{{data.key + ' ' + data.value}}</td></tr>
+        <tr ng-repeat="data in selectedGroup.values | filter:filterKey" class="phr-tr" ng-click="choosePhrase(data,$index)" ng-class="{isselected:selectedPhrase == data}" ><td class="phr-td">{{data.key + ' ' + data.value}}</td></tr>
     </table></div>
     <button  class="phr-button phr-button-blue" ng-click="setValue()">確定</button>
     <button  class="phr-button phr-button-red" ng-click="close()">取消</button>

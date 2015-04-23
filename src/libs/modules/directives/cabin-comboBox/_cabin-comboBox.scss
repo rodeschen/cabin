@@ -8,6 +8,8 @@ div[cb-combo-box] {
   &.cb-focus {
     .combo-box-wrapper {
       border-color: #1abc9c;
+      background-color: $focus-background-color;
+
     }
   }
 }
